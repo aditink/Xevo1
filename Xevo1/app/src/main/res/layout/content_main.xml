@@ -14,25 +14,31 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/quick_hit_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Button" />
+            android:background="@android:color/holo_orange_light"
+            android:text="Quick Hit"
+            android:onClick="openQuickHitPage"/>
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/talk_about_it_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Button" />
+            android:background="@android:color/holo_green_light"
+            android:text="Lets Talk About It"
+            android:onClick="openTalkAboutItPage"/>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/professional_opinion_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Button" />
+            android:background="@android:color/holo_purple"
+            android:text="Professional Opinion"
+            android:onClick="openProfessionalOpinionPage"/>
 
     </LinearLayout>
 
