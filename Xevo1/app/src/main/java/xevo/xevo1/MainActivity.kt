@@ -17,27 +17,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+//        fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show()
+//        }
     }
 
     fun openQuickHitPage(view: View) {
         val intent = Intent(this, QuickHit::class.java)
-        startActivity(intent);
+        startActivity(intent)
     }
 
 
     fun openTalkAboutItPage(view: View) {
         val intent = Intent(this, TalkAboutIt::class.java)
-        startActivity(intent);
+        startActivity(intent)
     }
 
 
     fun openProfessionalOpinionPage(view: View) {
         val intent = Intent(this, ProfessionalOpinion::class.java)
-        startActivity(intent);
+        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
