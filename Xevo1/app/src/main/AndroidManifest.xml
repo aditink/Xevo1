@@ -19,6 +19,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".QuickHit"
+            android:label="@string/title_activity_quick_hit"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProfessionalOpinion"
+            android:label="@string/title_activity_professional_opinion"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TalkAboutIt"
+            android:label="@string/title_activity_talk_about_it"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
