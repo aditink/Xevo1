@@ -35,8 +35,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private var mAuthTask: UserLoginTask? = null
-    private var context = this
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -268,7 +267,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             showProgress(false)
 
             if (success!!) {
-                val intent = Intent(context, MainActivity::class.java)
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
             } else {
                 password.error = getString(R.string.error_incorrect_password)
