@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="xevo.xevo1.ChooseQuestion"
+    tools:showIn="@layout/app_bar_choose_question">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/quick_hit_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/holo_orange_light"
+                android:text="Quick Hit"
+                android:onClick="openQuickHitPage"/>
+
+            <Button
+                android:id="@+id/talk_about_it_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/holo_green_light"
+                android:text="Lets Talk About It"
+                android:onClick="openTalkAboutItPage"/>
+
+            <Button
+                android:id="@+id/professional_opinion_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/holo_purple"
+                android:text="Professional Opinion"
+                android:onClick="openProfessionalOpinionPage"/>
+
+        </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>
