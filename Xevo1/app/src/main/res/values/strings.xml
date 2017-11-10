@@ -4,4 +4,7 @@
     <string name="title_activity_quick_hit">QuickHit</string>
     <string name="title_activity_professional_opinion">ProfessionalOpinion</string>
     <string name="title_activity_talk_about_it">TalkAboutIt</string>
+    <string name="whats_up">What\'s Up?</string>
+    <string name="short_description">Short Description</string>
+    <string name="attach_photo">Attach Photo</string>
 </resources>
