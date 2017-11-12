@@ -20,7 +20,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/colorBeige"
-                android:fontFamily="@font/avenir"
+                android:fontFamily="@font/avenir_regular"
                 android:text="Quick Hit"
                 android:onClick="openQuickHitPage"/>
 
@@ -30,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/colorLightBeige"
-                android:fontFamily="@font/avenir"
+                android:fontFamily="@font/avenir_regular"
                 android:text="Lets Talk About It"
                 android:onClick="openTalkAboutItPage"/>
 
@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorBeige"
                 android:layout_weight="1"
-                android:fontFamily="@font/avenir"
+                android:fontFamily="@font/avenir_regular"
                 android:text="Professional Opinion"
                 android:onClick="openProfessionalOpinionPage"/>
 

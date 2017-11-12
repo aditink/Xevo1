@@ -39,11 +39,13 @@
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/avenir"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
+                    android:fontFamily="@font/avenir_regular"
                     android:singleLine="true" />
+
+
 
             </android.support.design.widget.TextInputLayout>
 
@@ -56,13 +58,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
-                    android:fontFamily="@font/avenir"
                     android:imeActionId="6"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
+                    android:fontFamily="@font/avenir_regular"
                     android:singleLine="true" />
+
+
 
             </android.support.design.widget.TextInputLayout>
 
@@ -72,9 +76,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/avenir"
                 android:text="@string/action_sign_in"
                 android:background="@color/colorLightBeige"
+                android:fontFamily="@font/avenir_regular"
                 android:textStyle="bold" />
 
         </LinearLayout>
