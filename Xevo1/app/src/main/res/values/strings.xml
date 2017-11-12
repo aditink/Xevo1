@@ -28,4 +28,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="optional">(optional)</string>
+    <string name="relevantInfo">Relevant Info</string>
+    <string name="whatMakesThisDifficult">What Makes This Difficult</string>
 </resources>
