@@ -267,7 +267,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             showProgress(false)
 
             if (success!!) {
-                val intent = Intent(this@LoginActivity, ChooseQuestion::class.java)
+                val intent = Intent(this@LoginActivity, Home::class.java)
                 startActivity(intent)
             } else {
                 password.error = getString(R.string.error_incorrect_password)

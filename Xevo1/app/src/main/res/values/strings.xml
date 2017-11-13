@@ -30,4 +30,10 @@
     <string name="optional">(optional)</string>
     <string name="relevantInfo">Relevant Info</string>
     <string name="whatMakesThisDifficult">What Makes This Difficult</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_ask_a_question">Ask a Question</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_settings">Settings</string>
 </resources>

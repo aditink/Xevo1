@@ -43,6 +43,9 @@
             android:name=".ChooseQuestion"
             android:label="@string/title_activity_choose_question"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Home"
+            android:label="@string/title_activity_home"></activity>
     </application>
 
 </manifest>
