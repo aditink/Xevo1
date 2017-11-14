@@ -2,12 +2,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorLightBeige"
     tools:context="xevo.xevo1.ChooseQuestionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical" >
 
-</FrameLayout>
+        <Button
+            android:id="@+id/quick_hit_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorBeige"
+            android:fontFamily="@font/avenir_regular"
+            android:text="Quick Hit"
+            android:onClick="openQuickHitPage"/>
+
+        <Button
+            android:id="@+id/talk_about_it_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorLightBeige"
+            android:fontFamily="@font/avenir_regular"
+            android:text="Lets Talk About It"
+            android:onClick="openTalkAboutItPage"/>
+
+        <Button
+            android:id="@+id/professional_opinion_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBeige"
+            android:layout_weight="1"
+            android:fontFamily="@font/avenir_regular"
+            android:text="Professional Opinion"
+            android:onClick="openProfessionalOpinionPage"/>
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>
+
+    </FrameLayout>

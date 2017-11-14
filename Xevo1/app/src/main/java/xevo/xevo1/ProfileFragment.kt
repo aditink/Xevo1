@@ -1,7 +1,6 @@
 package xevo.xevo1
 
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,12 +12,12 @@ import android.view.ViewGroup
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [ChooseQuestionFragment.OnFragmentInteractionListener] interface
+ * [ProfileFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [ChooseQuestionFragment.newInstance] factory method to
+ * Use the [ProfileFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ChooseQuestionFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -37,7 +36,7 @@ class ChooseQuestionFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_choose_question, container, false)
+        return inflater!!.inflate(R.layout.fragment_profile, container, false)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -87,11 +86,11 @@ class ChooseQuestionFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ChooseQuestionFragment.
+         * @return A new instance of fragment ProfileFragment.
          */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String, param2: String): ChooseQuestionFragment {
-            val fragment = ChooseQuestionFragment()
+        fun newInstance(param1: String, param2: String): ProfileFragment {
+            val fragment = ProfileFragment()
             val args = Bundle()
             args.putString(ARG_PARAM1, param1)
             args.putString(ARG_PARAM2, param2)
@@ -99,5 +98,4 @@ class ChooseQuestionFragment : Fragment() {
             return fragment
         }
     }
-
 }// Required empty public constructor
