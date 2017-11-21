@@ -24,6 +24,8 @@ import android.widget.TextView
 import java.util.ArrayList
 import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -34,10 +36,12 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
+    private var mAuth: FirebaseAuth? = null
     private var mAuthTask: UserLoginTask? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mAuth = FirebaseAuth.getInstance()
         setContentView(R.layout.activity_login)
         // Set up the login form.
         populateAutoComplete()
@@ -50,6 +54,14 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         })
 
         email_sign_in_button.setOnClickListener { attemptLogin() }
+    }
+
+    override fun onStart() {
+        //TODO @aditi figure out UI update and non-null check
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly
+        var currentUser : FirebaseUser? = mAuth?.currentUser
+        //updatUI(currentUser)
     }
 
     private fun populateAutoComplete() {

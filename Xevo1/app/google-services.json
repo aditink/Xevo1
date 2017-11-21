@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "654288468653",
+    "firebase_url": "https://xevo1-3358a.firebaseio.com",
+    "project_id": "xevo1-3358a",
+    "storage_bucket": "xevo1-3358a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654288468653:android:412ab8bafc5980e6",
+        "android_client_info": {
+          "package_name": "xevo.xevo1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654288468653-su7rlns26fcdhp6eiprj7kumthd2j1iv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "xevo.xevo1",
+            "certificate_hash": "f055412dcd6532a0246fb482a89082a706d424c6"
+          }
+        },
+        {
+          "client_id": "654288468653-82h8ngv0kvlia47qsniml09lek2vabsu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1QC3WQM9JF7XwaOC2g0KVktMCv6bq1FA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654288468653-82h8ngv0kvlia47qsniml09lek2vabsu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
