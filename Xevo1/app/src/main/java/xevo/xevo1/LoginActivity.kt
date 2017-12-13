@@ -61,6 +61,8 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly
         var currentUser : FirebaseUser? = mAuth?.currentUser
+        attemptLogin()
+
         //updatUI(currentUser)
     }
 
