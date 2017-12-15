@@ -1,36 +1,49 @@
 package xevo.xevo1
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import android.os.Handler
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import kotlinx.android.synthetic.main.activity_choose_question.*
-import kotlinx.android.synthetic.main.app_bar_choose_question.*
 
-class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+        ProfileFragment.OnFragmentInteractionListener,
+        ChooseQuestionFragment.OnFragmentInteractionListener,
+        Settings.OnFragmentInteractionListener {
+
+    lateinit var handler: Handler
+    lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_question)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        handler = Handler()
+
+        drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val navView = findViewById<NavigationView>(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        nav_view.setNavigationItemSelectedListener(this)
+        navView.setNavigationItemSelectedListener(this)
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
@@ -55,28 +68,43 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
+            R.id.nav_profile -> {
+                setFragment(ProfileFragment())
             }
-            R.id.nav_gallery -> {
 
+            R.id.nav_question -> {
+                setFragment(ChooseQuestionFragment())
             }
-            R.id.nav_slideshow -> {
 
-            }
-            R.id.nav_manage -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
+            R.id.nav_settings -> {
+                setFragment(Settings())
             }
         }
 
-        drawer_layout.closeDrawer(GravityCompat.START)
+        // drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onFragmentInteraction(uri: Uri) {
+        System.out.println(uri)
+    }
+
+    fun setFragment(frag: Fragment) {
+
+        // Open fragment with runnable to ensure that there is not
+        // lag when switching views
+        val pendingRunnable: Runnable = object:Runnable {
+            public override fun run() {
+                val fragmentTransaction = getSupportFragmentManager().beginTransaction()
+                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                fragmentTransaction.replace(R.id.main_frame, frag, "tag");
+                fragmentTransaction.commit()
+            }
+        }
+
+        drawerLayout.closeDrawers()
+        handler.post(pendingRunnable)
+
     }
 
     fun openQuickHitPage(view: View) {
