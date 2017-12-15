@@ -39,6 +39,8 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+
+        setFragment(ProfileFragment())
     }
 
     override fun onBackPressed() {
@@ -86,7 +88,7 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
 
     override fun onFragmentInteraction(uri: Uri) {
-        System.out.println(uri)
+//        System.out.println(uri)
     }
 
     fun setFragment(frag: Fragment) {
