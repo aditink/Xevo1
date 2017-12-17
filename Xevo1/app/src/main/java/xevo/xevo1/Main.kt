@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
@@ -14,7 +13,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 
-class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+class Main : AppCompatActivity(),
+        NavigationView.OnNavigationItemSelectedListener,
         ProfileFragment.OnFragmentInteractionListener,
         ChooseQuestionFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener {
@@ -22,14 +22,9 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     private lateinit var handler: Handler
     private lateinit var drawerLayout: DrawerLayout
 
-    // tags
-    private final var TAG_PROFILE = "profile"
-    private final var TAG_QUESTION = "question"
-    private final var TAG_SETTINGS = "settings" // should this be a fragment??
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_choose_question)
+        setContentView(R.layout.activity_main)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -92,7 +87,6 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
 
     override fun onFragmentInteraction(msg: String) {
-//        println("Fragment Interaction: " + msg)
     }
 
     private fun setFragment(frag: XevoFragment) {
@@ -112,28 +106,11 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             fragmentTransaction.replace(R.id.main_frame, frag, frag.fragmentTag)
             fragmentTransaction.commit()
         }
-        
+
         supportActionBar!!.setTitle(frag.title)
 
         drawerLayout.closeDrawers()
         handler.post(pendingRunnable)
 
-    }
-
-    fun openQuickHitPage(view: View) {
-        val intent = Intent(this, QuickHit::class.java)
-        startActivity(intent)
-    }
-
-
-    fun openTalkAboutItPage(view: View) {
-        val intent = Intent(this, TalkAboutIt::class.java)
-        startActivity(intent)
-    }
-
-
-    fun openProfessionalOpinionPage(view: View) {
-        val intent = Intent(this, ProfessionalOpinion::class.java)
-        startActivity(intent)
     }
 }

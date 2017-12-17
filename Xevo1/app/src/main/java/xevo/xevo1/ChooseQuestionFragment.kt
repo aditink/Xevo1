@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import kotlinx.android.synthetic.main.fragment_choose_question.view.*
 
 
 /**
@@ -26,6 +28,7 @@ class ChooseQuestionFragment : XevoFragment() {
     private var titleId : Int? = null
 
     private var mListener: OnFragmentInteractionListener? = null
+    private var mContext: Context? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +40,33 @@ class ChooseQuestionFragment : XevoFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_choose_question, container, false)
+        val v = inflater!!.inflate(R.layout.fragment_choose_question, container, false)
+
+        // setup button listeners
+        val quickHitButton = v.quick_hit_button
+        quickHitButton.setOnClickListener {
+            val intent = Intent(mContext, QuickHit::class.java)
+            startActivity(intent)
+        }
+
+        val talkAboutItButton = v.talk_about_it_button
+        talkAboutItButton.setOnClickListener {
+            val intent = Intent(mContext, TalkAboutIt::class.java)
+            startActivity(intent)
+        }
+
+        val professionalOpinionButton = v.professional_opinion_button
+        professionalOpinionButton.setOnClickListener {
+            val intent = Intent(mContext, ProfessionalOpinion::class.java)
+            startActivity(intent)
+        }
+        return v
     }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
+            mContext = context
             mListener = context
             context.onFragmentInteraction("hi there")
         } else {
