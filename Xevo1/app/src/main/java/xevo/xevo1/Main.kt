@@ -86,7 +86,7 @@ class Main : AppCompatActivity(),
         return true
     }
 
-    override fun onFragmentInteraction(msg: String) {
+    override fun onFragmentInteraction() {
     }
 
     private fun setFragment(frag: XevoFragment) {
