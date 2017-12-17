@@ -20,8 +20,13 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         ChooseQuestionFragment.OnFragmentInteractionListener,
         Settings.OnFragmentInteractionListener {
 
-    lateinit var handler: Handler
-    lateinit var drawerLayout: DrawerLayout
+    private lateinit var handler: Handler
+    private lateinit var drawerLayout: DrawerLayout
+
+    // tags
+    private final var TAG_PROFILE = "profile"
+    private final var TAG_QUESTION = "question"
+    private final var TAG_SETTINGS = "settings" // should this be a fragment??
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +45,7 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         navView.setNavigationItemSelectedListener(this)
 
-        setFragment(ProfileFragment())
+        setFragment(ProfileFragment(), "profile")
     }
 
     override fun onBackPressed() {
@@ -71,15 +76,15 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_profile -> {
-                setFragment(ProfileFragment())
+                setFragment(ProfileFragment(), "profile")
             }
 
             R.id.nav_question -> {
-                setFragment(ChooseQuestionFragment())
+                setFragment(ChooseQuestionFragment(), "question")
             }
 
             R.id.nav_settings -> {
-                setFragment(Settings())
+                setFragment(Settings(), "settings")
             }
         }
 
@@ -88,20 +93,24 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
 
     override fun onFragmentInteraction(uri: Uri) {
-//        System.out.println(uri)
     }
 
-    fun setFragment(frag: Fragment) {
+    private fun setFragment(frag: Fragment, tag: String) {
+
+        for (f in supportFragmentManager.fragments) {
+            if (f.tag.equals(tag)) {
+                drawerLayout.closeDrawers()
+                return
+            }
+        }
 
         // Open fragment with runnable to ensure that there is not
         // lag when switching views
-        val pendingRunnable: Runnable = object:Runnable {
-            public override fun run() {
-                val fragmentTransaction = getSupportFragmentManager().beginTransaction()
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                fragmentTransaction.replace(R.id.main_frame, frag, "tag");
-                fragmentTransaction.commit()
-            }
+        val pendingRunnable = Runnable {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+            fragmentTransaction.replace(R.id.main_frame, frag, tag)
+            fragmentTransaction.commit()
         }
 
         drawerLayout.closeDrawers()
