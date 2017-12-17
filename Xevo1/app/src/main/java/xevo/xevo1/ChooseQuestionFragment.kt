@@ -18,19 +18,19 @@ import android.view.ViewGroup
  * Use the [ChooseQuestionFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ChooseQuestionFragment : Fragment() {
+class ChooseQuestionFragment : XevoFragment() {
 
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
+    public override val title: Int = R.string.nav_question
+    public override val fragmentTag: String = "question"
+
+    private var titleId : Int? = null
 
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            mParam1 = arguments.getString(ARG_PARAM1)
-            mParam2 = arguments.getString(ARG_PARAM2)
+            titleId = arguments.getInt(TITLE_ID)
         }
     }
 
@@ -40,17 +40,11 @@ class ChooseQuestionFragment : Fragment() {
         return inflater!!.inflate(R.layout.fragment_choose_question, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null) {
-            mListener!!.onFragmentInteraction(uri)
-        }
-    }
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             mListener = context
+            context.onFragmentInteraction("hi there")
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
@@ -72,14 +66,13 @@ class ChooseQuestionFragment : Fragment() {
      */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        fun onFragmentInteraction(msg: String)
     }
 
     companion object {
         // TODO: Rename parameter arguments, choose names that match
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private val ARG_PARAM1 = "param1"
-        private val ARG_PARAM2 = "param2"
+        private val TITLE_ID = "titleId"
 
         /**
          * Use this factory method to create a new instance of
@@ -90,11 +83,10 @@ class ChooseQuestionFragment : Fragment() {
          * @return A new instance of fragment ChooseQuestionFragment.
          */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String, param2: String): ChooseQuestionFragment {
+        fun newInstance(title_id: Int): ChooseQuestionFragment {
             val fragment = ChooseQuestionFragment()
             val args = Bundle()
-            args.putString(ARG_PARAM1, param1)
-            args.putString(ARG_PARAM2, param2)
+            args.putInt(TITLE_ID, title_id)
             fragment.arguments = args
             return fragment
         }

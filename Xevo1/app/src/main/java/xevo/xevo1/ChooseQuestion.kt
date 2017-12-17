@@ -1,7 +1,6 @@
 package xevo.xevo1
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.NavigationView
@@ -18,7 +17,7 @@ import android.view.View
 class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
         ProfileFragment.OnFragmentInteractionListener,
         ChooseQuestionFragment.OnFragmentInteractionListener,
-        Settings.OnFragmentInteractionListener {
+        SettingsFragment.OnFragmentInteractionListener {
 
     private lateinit var handler: Handler
     private lateinit var drawerLayout: DrawerLayout
@@ -45,7 +44,7 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         navView.setNavigationItemSelectedListener(this)
 
-        setFragment(ProfileFragment(), "profile")
+        setFragment(ProfileFragment())
     }
 
     override fun onBackPressed() {
@@ -76,15 +75,15 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_profile -> {
-                setFragment(ProfileFragment(), "profile")
+                setFragment(ProfileFragment())
             }
 
             R.id.nav_question -> {
-                setFragment(ChooseQuestionFragment(), "question")
+                setFragment(ChooseQuestionFragment())
             }
 
             R.id.nav_settings -> {
-                setFragment(Settings(), "settings")
+                setFragment(SettingsFragment())
             }
         }
 
@@ -92,13 +91,14 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         return true
     }
 
-    override fun onFragmentInteraction(uri: Uri) {
+    override fun onFragmentInteraction(msg: String) {
+//        println("Fragment Interaction: " + msg)
     }
 
-    private fun setFragment(frag: Fragment, tag: String) {
+    private fun setFragment(frag: XevoFragment) {
 
         for (f in supportFragmentManager.fragments) {
-            if (f.tag.equals(tag)) {
+            if (f.tag.equals(frag.fragmentTag)) {
                 drawerLayout.closeDrawers()
                 return
             }
@@ -109,9 +109,11 @@ class ChooseQuestion : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         val pendingRunnable = Runnable {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-            fragmentTransaction.replace(R.id.main_frame, frag, tag)
+            fragmentTransaction.replace(R.id.main_frame, frag, frag.fragmentTag)
             fragmentTransaction.commit()
         }
+        
+        supportActionBar!!.setTitle(frag.title)
 
         drawerLayout.closeDrawers()
         handler.post(pendingRunnable)

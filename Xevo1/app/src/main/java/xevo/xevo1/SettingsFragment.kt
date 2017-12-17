@@ -12,18 +12,21 @@ import android.view.ViewGroup
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [Settings.OnFragmentInteractionListener] interface
+ * [SettingsFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [Settings.newInstance] factory method to
+ * Use the [SettingsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Settings : Fragment() {
+class SettingsFragment : XevoFragment() {
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
     private var mParam2: String? = null
 
     private var mListener: OnFragmentInteractionListener? = null
+
+    public override val title: Int = R.string.nav_settings
+    public override val fragmentTag: String = "settings"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,17 +42,11 @@ class Settings : Fragment() {
         return inflater!!.inflate(R.layout.fragment_settings, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null) {
-            mListener!!.onFragmentInteraction(uri)
-        }
-    }
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             mListener = context
+            context.onFragmentInteraction("settings")
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
@@ -71,7 +68,7 @@ class Settings : Fragment() {
      */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        fun onFragmentInteraction(msg: String)
     }
 
     companion object {
@@ -86,11 +83,11 @@ class Settings : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Settings.
+         * @return A new instance of fragment SettingsFragment.
          */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String, param2: String): Settings {
-            val fragment = Settings()
+        fun newInstance(param1: String, param2: String): SettingsFragment {
+            val fragment = SettingsFragment()
             val args = Bundle()
             args.putString(ARG_PARAM1, param1)
             args.putString(ARG_PARAM2, param2)
