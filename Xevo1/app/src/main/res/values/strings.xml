@@ -24,6 +24,7 @@
         completions."
     </string>
     <string name="title_activity_choose_question">ChooseQuestion</string>
+    <string name="register">register new account</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -37,7 +38,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_settings">Settings</string>
 
-    <!-- Strings for ecperimental login -->
+    <!-- Strings for experimental login -->
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="first_name">First Name</string>
@@ -57,4 +58,5 @@
     <string name="professional_opinion">Professional Opinion</string>
 
     <string name="title_activity_login_firebase">LoginFirebase</string>
+    <string name="title_activity_register">Register</string>
 </resources>

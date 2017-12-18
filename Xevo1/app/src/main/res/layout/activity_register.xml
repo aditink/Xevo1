@@ -8,8 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorBeige"
-    tools:context="xevo.xevo1.LoginActivity">
+    tools:context="xevo.xevo1.RegisterActivity">
 
     <!-- Login progress -->
     <ProgressBar
@@ -42,10 +41,7 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:fontFamily="@font/avenir_regular"
                     android:singleLine="true" />
-
-
 
             </android.support.design.widget.TextInputLayout>
 
@@ -63,10 +59,7 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:fontFamily="@font/avenir_regular"
                     android:singleLine="true" />
-
-
 
             </android.support.design.widget.TextInputLayout>
 
@@ -77,23 +70,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
-                android:background="@color/colorLightBeige"
-                android:fontFamily="@font/avenir_regular"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/register_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/register"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorLightBeige"
-                android:fontFamily="@font/avenir_regular"
                 android:textStyle="bold" />
 
         </LinearLayout>
-
-
     </ScrollView>
 </LinearLayout>
