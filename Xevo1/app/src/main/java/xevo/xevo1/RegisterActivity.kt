@@ -249,12 +249,12 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
 
         private var mDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
-        private var mDatabaseReference: DatabaseReference = mDatabase!!.reference!!.child("Users")
+        // Code to update user profile information: private var mDatabaseReference: DatabaseReference = mDatabase!!.reference!!.child("Users")
         private var mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
 
         override fun doInBackground(vararg params: Void): Boolean? {
             // TODO: attempt authentication against a network service.
-
+            var isSuccessful: Boolean = false
             try {
                     mAuthFirebase!!
                             .createUserWithEmailAndPassword(mEmail!!, mPassword!!)
@@ -263,13 +263,13 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "createUserWithEmail:success")
                                     val userId = mAuthFirebase!!.currentUser!!.uid
-                                    //Verify Email
-//                            verifyEmail();
-                                    //update user profile information
-                                    val currentUserDb = mDatabaseReference!!.child(userId)
-//                            currentUserDb.child("firstName").setValue(firstName)
-//                            currentUserDb.child("lastName").setValue(lastName)
-//                            updateUserInfoAndUI()
+                                    //TODO: Verify Email
+                                    //Code to update user profile information
+                                    //val currentUserDb = mDatabaseReference!!.child(userId)
+                                    //currentUserDb.child("firstName").setValue(firstName)
+                                    //currentUserDb.child("lastName").setValue(lastName)
+                                    //updateUserInfoAndUI()
+                                    isSuccessful = true
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
@@ -280,15 +280,7 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             } catch (e: InterruptedException) {
                 return false
             }
-
-            return DUMMY_CREDENTIALS
-                    .map { it.split(":") }
-                    .firstOrNull { it[0] == mEmail }
-                    ?.let {
-                        // Account exists, return true if the password matches.
-                        it[1] == mPassword
-                    }
-                    ?: true
+            return isSuccessful
         }
 
         override fun onPostExecute(success: Boolean?) {
@@ -317,11 +309,5 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
          * Id to identity READ_CONTACTS permission request.
          */
         private val REQUEST_READ_CONTACTS = 0
-
-        /**
-         * A dummy authentication store containing known user names and passwords.
-         * TODO: remove after connecting to a real authentication system.
-         */
-        private val DUMMY_CREDENTIALS = arrayOf("foo@example.com:hello", "bar@example.com:world")
     }
 }

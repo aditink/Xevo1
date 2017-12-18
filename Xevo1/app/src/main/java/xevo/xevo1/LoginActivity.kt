@@ -307,41 +307,27 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
 
         private var mDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
+        //Code for data access
         private var mDatabaseReference: DatabaseReference = mDatabase!!.reference!!.child("Users")
         private var mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
 
         override fun doInBackground(vararg params: Void): Boolean? {
-            // TODO: attempt authentication against a network service.
-
             try {
-//                createUserWithEmail()
-                signInUserWithEmail()
-                //for testing  : username@test.com, password.
-                // Simulate network access.
+                return signInUserWithEmail()
                 //mAuthFirebase.signOut()
-//                createUserWithEmail()
             } catch (e: InterruptedException) {
                 return false
             }
-
-            return DUMMY_CREDENTIALS
-                    .map { it.split(":") }
-                    .firstOrNull { it[0] == mEmail }
-                    ?.let {
-                        // Account exists, return true if the password matches.
-                        it[1] == mPassword
-                    }
-                    ?: true
         }
 
-        fun signInUserWithEmail() {
+        fun signInUserWithEmail() : Boolean {
+            var isSuccessful : Boolean = false
             mAuthFirebase!!.signInWithEmailAndPassword(mEmail!!, mPassword!!)
                     .addOnCompleteListener(this@LoginActivity) { task ->
-//                        mProgressBar!!.hide()
                         if (task.isSuccessful) {
                             // Sign in success, update UI with signed-in user's information
                             Log.d(TAG, "signInWithEmail:success")
-//                            updateUI()
+                            isSuccessful = true
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.e(TAG, "signInWithEmail:failure", task.exception)
@@ -349,31 +335,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                                     Toast.LENGTH_SHORT).show()
                         }
                     }
-        }
-
-        fun createUserWithEmail() {
-            mAuthFirebase!!
-                    .createUserWithEmailAndPassword(mEmail!!, mPassword!!)
-                    .addOnCompleteListener(this@LoginActivity) { task ->
-//                        mProgressBar!!.hide()
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success")
-                            val userId = mAuthFirebase!!.currentUser!!.uid
-                            //Verify Email
-//                            verifyEmail();
-                            //update user profile information
-                            val currentUserDb = mDatabaseReference!!.child(userId)
-//                            currentUserDb.child("firstName").setValue(firstName)
-//                            currentUserDb.child("lastName").setValue(lastName)
-//                            updateUserInfoAndUI()
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                            Toast.makeText(this@LoginActivity, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show()
-                        }
-                    }
+            return isSuccessful
         }
 
         override fun onPostExecute(success: Boolean?) {
@@ -402,11 +364,5 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
          * Id to identity READ_CONTACTS permission request.
          */
         private val REQUEST_READ_CONTACTS = 0
-
-        /**
-         * A dummy authentication store containing known user names and passwords.
-         * TODO: remove after connecting to a real authentication system.
-         */
-        private val DUMMY_CREDENTIALS = arrayOf("foo@example.com:hello", "bar@example.com:world")
     }
 }
