@@ -21,8 +21,7 @@
             android:layout_weight="1"
             android:background="@color/colorBeige"
             android:fontFamily="@font/avenir_regular"
-            android:text="Quick Hit"
-            android:onClick="openQuickHitPage"/>
+            android:text="@string/quick_hit" />
 
         <Button
             android:id="@+id/talk_about_it_button"
@@ -31,18 +30,16 @@
             android:layout_weight="1"
             android:background="@color/colorLightBeige"
             android:fontFamily="@font/avenir_regular"
-            android:text="Lets Talk About It"
-            android:onClick="openTalkAboutItPage"/>
+            android:text="@string/lets_talk_aboutit" />
 
         <Button
             android:id="@+id/professional_opinion_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBeige"
             android:layout_weight="1"
+            android:background="@color/colorBeige"
             android:fontFamily="@font/avenir_regular"
-            android:text="Professional Opinion"
-            android:onClick="openProfessionalOpinionPage"/>
+            android:text="@string/professional_opinion" />
 
     </LinearLayout>
 

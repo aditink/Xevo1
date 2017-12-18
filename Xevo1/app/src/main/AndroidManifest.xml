@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivityBob"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -40,7 +40,7 @@
             android:label="@string/title_activity_talk_about_it"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ChooseQuestion"
+            android:name=".Main"
             android:label="@string/title_activity_choose_question"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

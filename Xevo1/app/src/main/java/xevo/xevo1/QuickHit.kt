@@ -8,6 +8,9 @@ import android.view.View
 
 import kotlinx.android.synthetic.main.activity_quick_hit.*
 
+/**
+ * Minimal Activity for Quick Hit
+ */
 class QuickHit : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
