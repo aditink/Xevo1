@@ -1,12 +1,16 @@
 package xevo.xevo1
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_settings.view.*
 
 
 /**
@@ -20,6 +24,7 @@ import android.view.ViewGroup
 class SettingsFragment : XevoFragment() {
 
     private var mListener: OnFragmentInteractionListener? = null
+    private var mContext: Context? = null
 
     public override val title: Int = R.string.nav_settings
     public override val fragmentTag: String = "settings"
@@ -31,13 +36,23 @@ class SettingsFragment : XevoFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_settings, container, false)
+        val v = inflater!!.inflate(R.layout.fragment_settings, container, false)
+        val logOutButton = v.logOutButton
+        logOutButton.setOnClickListener {
+            val mFireBaseAuth = FirebaseAuth.getInstance()
+            mFireBaseAuth.signOut()
+            val intent = Intent(mContext, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
+        }
+        return v
     }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             mListener = context
+            mContext = context
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
