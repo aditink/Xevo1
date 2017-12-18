@@ -24,88 +24,38 @@ import android.widget.TextView
 import java.util.ArrayList
 import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
-import android.os.PersistableBundle
-import android.support.annotation.NonNull
-import android.support.v4.app.ActivityCompat.requestPermissions
-import android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale
 import android.util.Log
 import android.widget.Toast
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-import kotlinx.android.synthetic.main.activity_login.*
-import xevo.xevo1.R.id.login_form
-import xevo.xevo1.R.id.login_progress
+import kotlinx.android.synthetic.main.activity_register.*
 
 /**
  * A login screen that offers login via email/password.
  */
-class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
+class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private var mAuth: UserLoginTask? = null
-    private val TAG = "LoginActivity"
+    private var mAuthTask: UserLoginTask? = null
+    private val TAG = "RegisterActivity"
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//    }
-
-//    override fun onStart() {
-//        super.onStart()
-//    }
-      override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        //Check if already signed in
-        var mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
-        val currentUser = mAuthFirebase?.currentUser
-        if (currentUser != null) {
-            Log.d(TAG, currentUser.toString())
-            Log.d(TAG, "user already signed in")
-            val intent = Intent(this@LoginActivity, Home::class.java)
-            startActivity(intent)
-            finish()
-        }
-        else {
-            // Set up the login form.
-            Log.d(TAG, "user not signed in")
-
-            val registerButton = register_button
-            registerButton.setOnClickListener {
-                val intent = Intent(this, RegisterActivity::class.java)
-                startActivity(intent)
+        setContentView(R.layout.activity_register)
+        // Set up the login form.
+        populateAutoComplete()
+        password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
+            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                attemptLogin()
+                return@OnEditorActionListener true
             }
+            false
+        })
 
-            populateAutoComplete()
-            password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin()
-                    return@OnEditorActionListener true
-                }
-                false
-            })
-
-            email_sign_in_button.setOnClickListener { attemptLogin() }
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        //Check again if user has already signed in (if returning from register)
-        var mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
-        val currentUser = mAuthFirebase?.currentUser
-        if (currentUser != null) {
-//            Log.d(TAG, currentUser.toString())
-//            Log.d(TAG, "user already signed in")
-//            val intent = Intent(this@LoginActivity, Home::class.java)
-//            startActivity(intent)
-            finish()
-        }
+        email_sign_in_button.setOnClickListener { attemptLogin() }
     }
 
     private fun populateAutoComplete() {
@@ -152,7 +102,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * errors are presented and no actual login attempt is made.
      */
     private fun attemptLogin() {
-        if (mAuth != null) {
+        if (mAuthTask != null) {
             return
         }
 
@@ -193,8 +143,8 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true)
-            mAuth = UserLoginTask(emailStr, passwordStr)
-            mAuth!!.execute(null as Void?)
+            mAuthTask = UserLoginTask(emailStr, passwordStr)
+            mAuthTask!!.execute(null as Void?)
         }
     }
 
@@ -206,13 +156,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     private fun isPasswordValid(password: String): Boolean {
         //TODO: Replace this with your own logic
         return password.length > 4
-    }
-
-    /**
-     * Open activity that allows new user to register.
-     */
-    private fun openRegister() {
-        //TODO @aditi
     }
 
     /**
@@ -285,7 +228,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
     private fun addEmailsToAutoComplete(emailAddressCollection: List<String>) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
-        val adapter = ArrayAdapter(this@LoginActivity,
+        val adapter = ArrayAdapter(this@RegisterActivity,
                 android.R.layout.simple_dropdown_item_1line, emailAddressCollection)
 
         email.setAdapter(adapter)
@@ -305,7 +248,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      */
     inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
 
-
         private var mDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
         private var mDatabaseReference: DatabaseReference = mDatabase!!.reference!!.child("Users")
         private var mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
@@ -314,12 +256,27 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             // TODO: attempt authentication against a network service.
 
             try {
-//                createUserWithEmail()
-                signInUserWithEmail()
-                //for testing  : username@test.com, password.
-                // Simulate network access.
-                //mAuthFirebase.signOut()
-//                createUserWithEmail()
+                    mAuthFirebase!!
+                            .createUserWithEmailAndPassword(mEmail!!, mPassword!!)
+                            .addOnCompleteListener(this@RegisterActivity) { task ->
+                                if (task.isSuccessful) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "createUserWithEmail:success")
+                                    val userId = mAuthFirebase!!.currentUser!!.uid
+                                    //Verify Email
+//                            verifyEmail();
+                                    //update user profile information
+                                    val currentUserDb = mDatabaseReference!!.child(userId)
+//                            currentUserDb.child("firstName").setValue(firstName)
+//                            currentUserDb.child("lastName").setValue(lastName)
+//                            updateUserInfoAndUI()
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                                    Toast.makeText(this@RegisterActivity, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show()
+                                }
+                }
             } catch (e: InterruptedException) {
                 return false
             }
@@ -334,54 +291,12 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                     ?: true
         }
 
-        fun signInUserWithEmail() {
-            mAuthFirebase!!.signInWithEmailAndPassword(mEmail!!, mPassword!!)
-                    .addOnCompleteListener(this@LoginActivity) { task ->
-//                        mProgressBar!!.hide()
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success")
-//                            updateUI()
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.e(TAG, "signInWithEmail:failure", task.exception)
-                            Toast.makeText(this@LoginActivity, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show()
-                        }
-                    }
-        }
-
-        fun createUserWithEmail() {
-            mAuthFirebase!!
-                    .createUserWithEmailAndPassword(mEmail!!, mPassword!!)
-                    .addOnCompleteListener(this@LoginActivity) { task ->
-//                        mProgressBar!!.hide()
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success")
-                            val userId = mAuthFirebase!!.currentUser!!.uid
-                            //Verify Email
-//                            verifyEmail();
-                            //update user profile information
-                            val currentUserDb = mDatabaseReference!!.child(userId)
-//                            currentUserDb.child("firstName").setValue(firstName)
-//                            currentUserDb.child("lastName").setValue(lastName)
-//                            updateUserInfoAndUI()
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                            Toast.makeText(this@LoginActivity, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show()
-                        }
-                    }
-        }
-
         override fun onPostExecute(success: Boolean?) {
-            mAuth = null
+            mAuthTask = null
             showProgress(false)
 
             if (success!!) {
-                val intent = Intent(this@LoginActivity, Home::class.java)
+                val intent = Intent(this@RegisterActivity, Home::class.java)
                 startActivity(intent)
                 finish()
             } else {
@@ -391,7 +306,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         }
 
         override fun onCancelled() {
-            mAuth = null
+            mAuthTask = null
             showProgress(false)
         }
     }
