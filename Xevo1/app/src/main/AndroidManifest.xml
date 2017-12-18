@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivityBob"
+            android:name=".Main"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -40,19 +40,8 @@
             android:label="@string/title_activity_talk_about_it"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Main"
-            android:label="@string/title_activity_choose_question"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Home"
-            android:label="@string/title_activity_home" />
-        <activity
-            android:name=".LoginFirebase"
-            android:label="@string/title_activity_login_firebase"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".RegisterActivity"
-            android:label="@string/title_activity_register"></activity>
+            android:label="@string/title_activity_register" />
     </application>
 
 </manifest>

@@ -58,6 +58,5 @@
     <string name="lets_talk_aboutit">Lets Talk About It</string>
     <string name="professional_opinion">Professional Opinion</string>
 
-    <string name="title_activity_login_firebase">LoginFirebase</string>
     <string name="title_activity_register">Register</string>
 </resources>
