@@ -1,6 +1,5 @@
 package xevo.xevo1
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.NavigationView
@@ -11,8 +10,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 
+/**
+ * Main Activity. We go here after the login screen and this handles
+ * all of the basic navigation and basic screens. The other screens are
+ * fragments that we load into the frame view with FragmentManager. All
+ * fragments must be subclasses of XevoFragment.
+ */
 class Main : AppCompatActivity(),
         NavigationView.OnNavigationItemSelectedListener,
         ProfileFragment.OnFragmentInteractionListener,
@@ -39,7 +43,7 @@ class Main : AppCompatActivity(),
 
         navView.setNavigationItemSelectedListener(this)
 
-        setFragment(ProfileFragment())
+        setFragment(ProfileFragment.newInstance())
     }
 
     override fun onBackPressed() {
@@ -70,19 +74,18 @@ class Main : AppCompatActivity(),
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_profile -> {
-                setFragment(ProfileFragment())
+                setFragment(ProfileFragment.newInstance())
             }
 
             R.id.nav_question -> {
-                setFragment(ChooseQuestionFragment())
+                setFragment(ChooseQuestionFragment.newInstance())
             }
 
             R.id.nav_settings -> {
-                setFragment(SettingsFragment())
+                setFragment(SettingsFragment.newInstance())
             }
         }
 
-        // drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
 
@@ -90,7 +93,7 @@ class Main : AppCompatActivity(),
     }
 
     private fun setFragment(frag: XevoFragment) {
-
+        // if frag is already being shown, don't do anything
         for (f in supportFragmentManager.fragments) {
             if (f.tag.equals(frag.fragmentTag)) {
                 drawerLayout.closeDrawers()
@@ -107,6 +110,7 @@ class Main : AppCompatActivity(),
             fragmentTransaction.commit()
         }
 
+        // change the activity title to match the fragment title
         supportActionBar!!.setTitle(frag.title)
 
         drawerLayout.closeDrawers()

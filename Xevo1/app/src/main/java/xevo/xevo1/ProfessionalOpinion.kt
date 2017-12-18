@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity
 
 import kotlinx.android.synthetic.main.activity_professional_opinion.*
 
+/**
+ * Minimal Activity for ProfessionalOpinion.
+ */
 class ProfessionalOpinion : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity
 
 import kotlinx.android.synthetic.main.activity_talk_about_it.*
 
+/**
+ * Minimal Activity for Talk About It
+ */
 class TalkAboutIt : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

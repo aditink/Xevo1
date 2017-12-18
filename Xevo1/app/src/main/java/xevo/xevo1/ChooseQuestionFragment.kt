@@ -3,7 +3,6 @@ package xevo.xevo1
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,10 @@ import kotlinx.android.synthetic.main.fragment_choose_question.view.*
 
 
 /**
- * A simple [Fragment] subclass.
+ * A [XevoFragment] subclass.
  * Activities that contain this fragment must implement the
  * [ChooseQuestionFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
+ * to allow for communication from Fragment to the Activity.
  * Use the [ChooseQuestionFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
@@ -80,6 +79,21 @@ class ChooseQuestionFragment : XevoFragment() {
      */
     interface OnFragmentInteractionListener {
         fun onFragmentInteraction()
+    }
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @return A new instance of fragment ChooseQuestionFragment.
+         */
+        fun newInstance(): ChooseQuestionFragment {
+            val fragment = ChooseQuestionFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
 }// Required empty public constructor

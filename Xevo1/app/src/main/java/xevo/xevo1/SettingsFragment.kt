@@ -10,10 +10,10 @@ import android.view.ViewGroup
 
 
 /**
- * A simple [Fragment] subclass.
+ * A [XevoFragment] subclass.
  * Activities that contain this fragment must implement the
  * [SettingsFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
+ * to allow for communication from Fragment to the Activity.
  * Use the [SettingsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
@@ -55,7 +55,22 @@ class SettingsFragment : XevoFragment() {
      * activity.
      */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         fun onFragmentInteraction()
     }
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @return A new instance of fragment SettingsFragment.
+         */
+        fun newInstance(): SettingsFragment {
+            val fragment = SettingsFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
 }// Required empty public constructor

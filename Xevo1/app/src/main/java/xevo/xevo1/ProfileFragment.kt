@@ -10,10 +10,10 @@ import android.view.ViewGroup
 
 
 /**
- * A simple [Fragment] subclass.
+ * A [XevoFragment] subclass.
  * Activities that contain this fragment must implement the
  * [ProfileFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
+ * to allow for communication from Fragment to the Activity.
  * Use the [ProfileFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
@@ -57,4 +57,20 @@ class ProfileFragment : XevoFragment() {
     interface OnFragmentInteractionListener {
         fun onFragmentInteraction()
     }
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @return A new instance of fragment ProfileFragment.
+         */
+        fun newInstance(): ProfileFragment {
+            val fragment = ProfileFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
 }// Required empty public constructor

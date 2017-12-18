@@ -3,7 +3,9 @@ package xevo.xevo1
 import android.support.v4.app.Fragment
 
 /**
- * Created by samthomas on 12/17/17.
+ * XevoFragment. Subclass of [Fragment] and adds the title
+ * field and the fragmentTag field to the Fragment class
+ * so that it is easier to display Fragments in Main.
  */
 abstract class XevoFragment : Fragment() {
     public abstract val title : Int
