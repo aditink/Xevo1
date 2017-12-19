@@ -28,6 +28,8 @@ import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
@@ -115,12 +117,16 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         // Store values at the time of the login attempt.
         val emailStr = email.text.toString()
         val passwordStr = password.text.toString()
-
+        
         var cancel = false
         var focusView: View? = null
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(passwordStr) && !isPasswordValid(passwordStr)) {
+        if (TextUtils.isEmpty(passwordStr)) {
+            password.error = getString(R.string.error_field_required)
+            focusView = password
+            cancel = true
+        } else if (!isPasswordValid(passwordStr)) {
             password.error = getString(R.string.error_invalid_password)
             focusView = password
             cancel = true
@@ -166,10 +172,15 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                            if (task.exception is FirebaseAuthUserCollisionException) {
+                                email.error = getString(R.string.error_user_already_exists)
+                                email.requestFocus()
+                            } else if (task.exception is FirebaseAuthWeakPasswordException) {
+                                password.error = getString(R.string.error_invalid_password)
+                                password.requestFocus()
+                            }
                             Toast.makeText(this@RegisterActivity, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show()
-                            password.error = getString(R.string.error_incorrect_password)
-                            password.requestFocus()
                         }
                         mAuthTask = null
                     }

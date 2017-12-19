@@ -26,6 +26,7 @@
     <string name="title_activity_choose_question">ChooseQuestion</string>
     <string name="register">register new account</string>
     <string name="error_invalid_credentials">Invalid credentials. Login failed</string>
+    <string name="error_user_already_exists">A user with this email address already exists</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
