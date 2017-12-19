@@ -30,8 +30,6 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -160,11 +158,11 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                             Log.d(TAG, "createUserWithEmail:success")
                             val userId = FirebaseAuth.getInstance().currentUser!!.uid
                             //TODO: Verify Email
-                            //Code to update user profile information
-                            //val currentUserDb = mDatabaseReference!!.child(userId)
-                            //currentUserDb.child("firstName").setValue(firstName)
-                            //currentUserDb.child("lastName").setValue(lastName)
-                            //updateUserInfoAndUI()
+                            // Code to update user profile information
+                            // val currentUserDb = mDatabaseReference!!.child(userId)
+                            // currentUserDb.child("firstName").setValue(firstName)
+                            // currentUserDb.child("lastName").setValue(lastName)
+                            // updateUserInfoAndUI()
                             val intent = Intent(this@RegisterActivity, Main::class.java)
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)

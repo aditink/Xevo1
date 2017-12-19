@@ -11,7 +11,6 @@ import android.content.CursorLoader
 import android.content.Loader
 import android.database.Cursor
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -47,8 +46,8 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         // Check if already signed in
-        var mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
-        val currentUser = mAuthFirebase?.currentUser
+        val mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
+        val currentUser = mAuthFirebase.currentUser
         if (currentUser != null) {
             Log.d(TAG, currentUser.toString())
             Log.d(TAG, "user already signed in")
@@ -202,13 +201,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     }
 
     /**
-     * Open activity that allows new user to register.
-     */
-    private fun openRegister() {
-        //TODO @aditi
-    }
-
-    /**
      * Shows the progress UI and hides the login form.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
@@ -273,11 +265,10 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     }
 
     override fun onLoaderReset(cursorLoader: Loader<Cursor>) {
-
     }
 
     private fun addEmailsToAutoComplete(emailAddressCollection: List<String>) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
+        // Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         val adapter = ArrayAdapter(this@LoginActivity,
                 android.R.layout.simple_dropdown_item_1line, emailAddressCollection)
 
