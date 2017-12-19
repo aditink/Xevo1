@@ -117,7 +117,7 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         // Store values at the time of the login attempt.
         val emailStr = email.text.toString()
         val passwordStr = password.text.toString()
-        
+
         var cancel = false
         var focusView: View? = null
 
