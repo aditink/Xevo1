@@ -14,7 +14,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -24,6 +24,9 @@
         completions."
     </string>
     <string name="title_activity_choose_question">ChooseQuestion</string>
+    <string name="register">register new account</string>
+    <string name="error_invalid_credentials">Invalid credentials. Login failed</string>
+    <string name="error_user_already_exists">A user with this email address already exists</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -37,6 +40,14 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_settings">Settings</string>
 
+    <!-- Strings for experimental login -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="login_title">Login</string>
+    <string name="create_act">Create Account</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -48,7 +59,5 @@
     <string name="lets_talk_aboutit">Lets Talk About It</string>
     <string name="professional_opinion">Professional Opinion</string>
 
-    <string-array name="nav_titles">
-        <item>Profile</item>
-    </string-array>
+    <string name="title_activity_register">Register</string>
 </resources>

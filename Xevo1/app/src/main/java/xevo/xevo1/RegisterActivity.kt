@@ -28,55 +28,35 @@ import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_register.*
 
 /**
  * A login screen that offers login via email/password.
  */
-class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
-
+class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private var mAuth: Task<AuthResult>? = null
-    private val TAG = "LoginActivity"
+    private var mAuthTask: Task<AuthResult>? = null
+    private val TAG = "RegisterActivity"
 
-      override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        // Check if already signed in
-        val mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
-        val currentUser = mAuthFirebase.currentUser
-        if (currentUser != null) {
-            Log.d(TAG, currentUser.toString())
-            Log.d(TAG, "user already signed in")
-            val intent = Intent(this@LoginActivity, Main::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            finish()
-        }
-        else {
-            // Set up the login form.
-            Log.d(TAG, "user not signed in")
-
-            val registerButton = register_button
-            registerButton.setOnClickListener {
-                val intent = Intent(this, RegisterActivity::class.java)
-                startActivity(intent)
+        setContentView(R.layout.activity_register)
+        // Set up the login form.
+        populateAutoComplete()
+        password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
+            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                attemptLogin()
+                return@OnEditorActionListener true
             }
+            false
+        })
 
-            populateAutoComplete()
-            password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin()
-                    return@OnEditorActionListener true
-                }
-                false
-            })
-
-            email_sign_in_button.setOnClickListener { attemptLogin() }
-        }
+        email_sign_in_button.setOnClickListener { attemptLogin() }
     }
 
     private fun populateAutoComplete() {
@@ -123,7 +103,8 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * errors are presented and no actual login attempt is made.
      */
     private fun attemptLogin() {
-        if (mAuth != null) {
+        if (mAuthTask != null) {
+            Log.d(TAG, "Already an Authentication Task")
             return
         }
 
@@ -168,24 +149,38 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true)
-            mAuth = FirebaseAuth.getInstance().signInWithEmailAndPassword(emailStr, passwordStr)
-                    .addOnCompleteListener(this@LoginActivity) { task ->
+            mAuthTask = FirebaseAuth.getInstance()!!
+                    .createUserWithEmailAndPassword(emailStr, passwordStr)
+                    .addOnCompleteListener(this@RegisterActivity) { task ->
                         showProgress(false)
                         if (task.isSuccessful) {
-                            // Sign in success, update UI with signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success")
-                            val intent = Intent(this@LoginActivity, Main::class.java)
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success")
+                            val userId = FirebaseAuth.getInstance().currentUser!!.uid
+                            //TODO: Verify Email
+                            // Code to update user profile information
+                            // val currentUserDb = mDatabaseReference!!.child(userId)
+                            // currentUserDb.child("firstName").setValue(firstName)
+                            // currentUserDb.child("lastName").setValue(lastName)
+                            // updateUserInfoAndUI()
+                            val intent = Intent(this@RegisterActivity, Main::class.java)
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)
                             finish()
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.e(TAG, "signInWithEmail:failure", task.exception)
-                            Toast.makeText(this@LoginActivity, "Authentication failed.",
+                            Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                            if (task.exception is FirebaseAuthUserCollisionException) {
+                                email.error = getString(R.string.error_user_already_exists)
+                                email.requestFocus()
+                            } else if (task.exception is FirebaseAuthWeakPasswordException) {
+                                password.error = getString(R.string.error_invalid_password)
+                                password.requestFocus()
+                            }
+                            Toast.makeText(this@RegisterActivity, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show()
-                            password.error = getString(R.string.error_incorrect_password)
-                            password.requestFocus()
                         }
+                        mAuthTask = null
                     }
         }
     }
@@ -265,11 +260,12 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     }
 
     override fun onLoaderReset(cursorLoader: Loader<Cursor>) {
+
     }
 
     private fun addEmailsToAutoComplete(emailAddressCollection: List<String>) {
-        // Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
-        val adapter = ArrayAdapter(this@LoginActivity,
+        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
+        val adapter = ArrayAdapter(this@RegisterActivity,
                 android.R.layout.simple_dropdown_item_1line, emailAddressCollection)
 
         email.setAdapter(adapter)
