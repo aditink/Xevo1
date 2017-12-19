@@ -24,22 +24,13 @@ import android.widget.TextView
 import java.util.ArrayList
 import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
-import android.os.PersistableBundle
-import android.support.annotation.NonNull
-import android.support.v4.app.ActivityCompat.requestPermissions
-import android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale
 import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
 import kotlinx.android.synthetic.main.activity_login.*
-import xevo.xevo1.R.id.login_form
-import xevo.xevo1.R.id.login_progress
 
 /**
  * A login screen that offers login via email/password.
@@ -52,23 +43,17 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     private var mAuth: Task<AuthResult>? = null
     private val TAG = "LoginActivity"
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//    }
-
-//    override fun onStart() {
-//        super.onStart()
-//    }
       override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        //Check if already signed in
+        // Check if already signed in
         var mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
         val currentUser = mAuthFirebase?.currentUser
         if (currentUser != null) {
             Log.d(TAG, currentUser.toString())
             Log.d(TAG, "user already signed in")
             val intent = Intent(this@LoginActivity, Main::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             finish()
         }
@@ -92,20 +77,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             })
 
             email_sign_in_button.setOnClickListener { attemptLogin() }
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        //Check again if user has already signed in (if returning from register)
-        val mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
-        val currentUser = mAuthFirebase?.currentUser
-        if (currentUser != null) {
-//            Log.d(TAG, currentUser.toString())
-//            Log.d(TAG, "user already signed in")
-//            val intent = Intent(this@LoginActivity, Home::class)
-            startActivity(intent)
-            finish()
         }
     }
 
@@ -154,6 +125,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      */
     private fun attemptLogin() {
         if (mAuth != null) {
+            Log.d(TAG, "Already an Authentication Task")
             return
         }
 
@@ -201,6 +173,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                             // Sign in success, update UI with signed-in user's information
                             Log.d(TAG, "signInWithEmail:success")
                             val intent = Intent(this@LoginActivity, Main::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)
                             finish()
                         } else {

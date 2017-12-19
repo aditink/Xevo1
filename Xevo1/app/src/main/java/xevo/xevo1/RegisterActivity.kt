@@ -11,7 +11,6 @@ import android.content.CursorLoader
 import android.content.Loader
 import android.database.Cursor
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -160,6 +159,7 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                             //currentUserDb.child("lastName").setValue(lastName)
                             //updateUserInfoAndUI()
                             val intent = Intent(this@RegisterActivity, Main::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)
                             finish()
                         } else {
