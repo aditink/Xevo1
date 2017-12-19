@@ -45,10 +45,11 @@ import xevo.xevo1.R.id.login_progress
  * A login screen that offers login via email/password.
  */
 class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private var mAuth: UserLoginTask? = null
+    private var mAuth: Task<AuthResult>? = null
     private val TAG = "LoginActivity"
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,13 +98,13 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     override fun onStart() {
         super.onStart()
         //Check again if user has already signed in (if returning from register)
-        var mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
+        val mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
         val currentUser = mAuthFirebase?.currentUser
         if (currentUser != null) {
 //            Log.d(TAG, currentUser.toString())
 //            Log.d(TAG, "user already signed in")
-//            val intent = Intent(this@LoginActivity, Home::class.java)
-//            startActivity(intent)
+//            val intent = Intent(this@LoginActivity, Home::class)
+            startActivity(intent)
             finish()
         }
     }
@@ -193,8 +194,24 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true)
-            mAuth = UserLoginTask(emailStr, passwordStr)
-            mAuth!!.execute(null as Void?)
+            mAuth = FirebaseAuth.getInstance().signInWithEmailAndPassword(emailStr, passwordStr)
+                    .addOnCompleteListener(this@LoginActivity) { task ->
+                        showProgress(false)
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success")
+                            val intent = Intent(this@LoginActivity, Main::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.e(TAG, "signInWithEmail:failure", task.exception)
+                            Toast.makeText(this@LoginActivity, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show()
+                            password.error = getString(R.string.error_incorrect_password)
+                            password.requestFocus()
+                        }
+                    }
         }
     }
 
@@ -297,65 +314,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                 ContactsContract.CommonDataKinds.Email.IS_PRIMARY)
         val ADDRESS = 0
         val IS_PRIMARY = 1
-    }
-
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
-
-
-        private var mDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
-        //Code for data access
-        private var mDatabaseReference: DatabaseReference = mDatabase!!.reference!!.child("Users")
-        private var mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
-
-        override fun doInBackground(vararg params: Void): Boolean? {
-            try {
-                return signInUserWithEmail()
-                //mAuthFirebase.signOut()
-            } catch (e: InterruptedException) {
-                return false
-            }
-        }
-
-        fun signInUserWithEmail() : Boolean {
-            var isSuccessful : Boolean = false
-            mAuthFirebase!!.signInWithEmailAndPassword(mEmail!!, mPassword!!)
-                    .addOnCompleteListener(this@LoginActivity) { task ->
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success")
-                            isSuccessful = true
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.e(TAG, "signInWithEmail:failure", task.exception)
-                            Toast.makeText(this@LoginActivity, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show()
-                        }
-                    }
-            return isSuccessful
-        }
-
-        override fun onPostExecute(success: Boolean?) {
-            mAuth = null
-            showProgress(false)
-
-            if (success!!) {
-                val intent = Intent(this@LoginActivity, Main::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                password.error = getString(R.string.error_incorrect_password)
-                password.requestFocus()
-            }
-        }
-
-        override fun onCancelled() {
-            mAuth = null
-            showProgress(false)
-        }
     }
 
     companion object {

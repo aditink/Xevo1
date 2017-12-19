@@ -26,6 +26,8 @@ import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -39,7 +41,7 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private var mAuthTask: UserLoginTask? = null
+    private var mAuthTask: Task<AuthResult>? = null
     private val TAG = "RegisterActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,8 +145,33 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true)
-            mAuthTask = UserLoginTask(emailStr, passwordStr)
-            mAuthTask!!.execute(null as Void?)
+            mAuthTask = FirebaseAuth.getInstance()!!
+                    .createUserWithEmailAndPassword(emailStr, passwordStr)
+                    .addOnCompleteListener(this@RegisterActivity) { task ->
+                        showProgress(false)
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success")
+                            val userId = FirebaseAuth.getInstance().currentUser!!.uid
+                            //TODO: Verify Email
+                            //Code to update user profile information
+                            //val currentUserDb = mDatabaseReference!!.child(userId)
+                            //currentUserDb.child("firstName").setValue(firstName)
+                            //currentUserDb.child("lastName").setValue(lastName)
+                            //updateUserInfoAndUI()
+                            val intent = Intent(this@RegisterActivity, Main::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                            Toast.makeText(this@RegisterActivity, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show()
+                            password.error = getString(R.string.error_incorrect_password)
+                            password.requestFocus()
+
+                        }
+                    }
         }
     }
 
@@ -240,67 +267,6 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                 ContactsContract.CommonDataKinds.Email.IS_PRIMARY)
         val ADDRESS = 0
         val IS_PRIMARY = 1
-    }
-
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
-
-        private var mDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
-        // Code to update user profile information: private var mDatabaseReference: DatabaseReference = mDatabase!!.reference!!.child("Users")
-        private var mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
-
-        override fun doInBackground(vararg params: Void): Boolean? {
-            // TODO: attempt authentication against a network service.
-            var isSuccessful: Boolean = false
-            try {
-                    mAuthFirebase!!
-                            .createUserWithEmailAndPassword(mEmail!!, mPassword!!)
-                            .addOnCompleteListener(this@RegisterActivity) { task ->
-                                if (task.isSuccessful) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "createUserWithEmail:success")
-                                    val userId = mAuthFirebase!!.currentUser!!.uid
-                                    //TODO: Verify Email
-                                    //Code to update user profile information
-                                    //val currentUserDb = mDatabaseReference!!.child(userId)
-                                    //currentUserDb.child("firstName").setValue(firstName)
-                                    //currentUserDb.child("lastName").setValue(lastName)
-                                    //updateUserInfoAndUI()
-                                    isSuccessful = true
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                                    Toast.makeText(this@RegisterActivity, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show()
-                                }
-                }
-            } catch (e: InterruptedException) {
-                return false
-            }
-            return isSuccessful
-        }
-
-        override fun onPostExecute(success: Boolean?) {
-            mAuthTask = null
-            showProgress(false)
-
-            if (success!!) {
-                val intent = Intent(this@RegisterActivity, Main::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                password.error = getString(R.string.error_incorrect_password)
-                password.requestFocus()
-            }
-        }
-
-        override fun onCancelled() {
-            mAuthTask = null
-            showProgress(false)
-        }
     }
 
     companion object {
