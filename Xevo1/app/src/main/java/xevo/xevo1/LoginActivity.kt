@@ -125,7 +125,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      */
     private fun attemptLogin() {
         if (mAuth != null) {
-            Log.d(TAG, "Already an Authentication Task")
             return
         }
 

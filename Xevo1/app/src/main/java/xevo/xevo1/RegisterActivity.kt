@@ -104,6 +104,7 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      */
     private fun attemptLogin() {
         if (mAuthTask != null) {
+            Log.d(TAG, "Already an Authentication Task")
             return
         }
 
@@ -169,8 +170,8 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                                     Toast.LENGTH_SHORT).show()
                             password.error = getString(R.string.error_incorrect_password)
                             password.requestFocus()
-
                         }
+                        mAuthTask = null
                     }
         }
     }
