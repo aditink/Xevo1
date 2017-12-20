@@ -20,16 +20,25 @@ import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-import java.util.ArrayList
 import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
+import android.support.v4.app.ActivityCompat.requestPermissions
+import android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale
+import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
 import android.widget.Toast
+import com.facebook.*
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 
 import kotlinx.android.synthetic.main.activity_login.*
+import xevo.xevo1.R.id.login_form
+import xevo.xevo1.R.id.login_progress
+import java.util.*
 
 /**
  * A login screen that offers login via email/password.
@@ -41,11 +50,13 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      */
     private var mAuth: Task<AuthResult>? = null
     private val TAG = "LoginActivity"
+    private val callbackManager = CallbackManager.Factory.create();
 
       override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         // Check if already signed in
+          val loggedIn : Boolean = AccessToken.getCurrentAccessToken() == null;
         val mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
         val currentUser = mAuthFirebase.currentUser
         if (currentUser != null) {
@@ -64,7 +75,25 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             registerButton.setOnClickListener {
                 val intent = Intent(this, RegisterActivity::class.java)
                 startActivity(intent)
+                LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
             }
+
+            val loginButton = login_button
+            loginButton.setReadPermissions("email");
+            // Callback registration
+            loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+
+                }
+
+                override fun onCancel() {
+
+                }
+
+                override fun onError(error: FacebookException) {
+
+                }
+            });
 
             populateAutoComplete()
             password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
@@ -73,6 +102,62 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                     return@OnEditorActionListener true
                 }
                 false
+            })
+
+            LoginManager.getInstance().registerCallback(callbackManager!!,
+                    object : FacebookCallback<LoginResult> {
+                override fun onSuccess(result: LoginResult) {
+                    val accessToken = AccessToken.getCurrentAccessToken()
+                    val request = GraphRequest.newMeRequest(accessToken) { `object`, response ->
+                        var SfacebookID = ""
+                        var Sname = ""
+                        var Semail = ""
+                        var Sgender = ""
+                        var Surl = ""
+                        val Sphone = ""
+
+                        try {
+
+                            if (`object`.has("id")) {
+                                SfacebookID = `object`.getString("id")
+                            }
+
+                            if (`object`.has("name")) {
+                                Sname = `object`.getString("name")
+                            }
+
+                            if (`object`.has("email")) {
+                                Semail = `object`.getString("email")
+                            }
+
+                            if (`object`.has("gender")) {
+                                Sgender = `object`.getString("gender")
+                            }
+
+                            if (`object`.has("picture")) {
+                                Surl = `object`.getJSONObject("picture").getJSONObject("data").getString("url")
+                            }
+
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+                    val parameters = Bundle()
+                    parameters.putString("fields", "id,name,link,email,picture,gender, birthday")
+                    request.parameters = parameters
+                    request.executeAsync()
+
+                }
+
+                override fun onCancel() {
+                    //TODO Auto-generated method stub
+                    Toast.makeText(this@LoginActivity, "Cancel", Toast.LENGTH_LONG).show()
+                }
+
+                override fun onError(error: FacebookException) {
+                    //TODO Auto-generated method stub
+                    Toast.makeText(this@LoginActivity, "Error", Toast.LENGTH_LONG).show()
+                }
             })
 
             email_sign_in_button.setOnClickListener { attemptLogin() }
@@ -281,6 +366,11 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                 ContactsContract.CommonDataKinds.Email.IS_PRIMARY)
         val ADDRESS = 0
         val IS_PRIMARY = 1
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     companion object {
