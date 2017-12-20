@@ -17,6 +17,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.nav_header_choose_question.*
 import xevo.xevo1.models.Profile
+import android.support.annotation.NonNull
+import android.content.Intent
+
+
 
 /**
  * Main Activity. We go here after the login screen and this handles
@@ -139,5 +143,15 @@ class Main : AppCompatActivity(),
         drawerLayout.closeDrawers()
         handler.post(pendingRunnable)
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val fragments = supportFragmentManager.fragments
+        if (fragments != null) {
+            for (f in fragments) {
+                (f as? XevoFragment)?.onActivityResult(requestCode, resultCode, data)
+            }
+        }
     }
 }
