@@ -10,6 +10,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.nav_header_choose_question.*
+import xevo.xevo1.models.Profile
 
 /**
  * Main Activity. We go here after the login screen and this handles
@@ -42,6 +49,7 @@ class Main : AppCompatActivity(),
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+        updateNavViewData()
 
         setFragment(ProfileFragment.newInstance())
     }
@@ -90,6 +98,21 @@ class Main : AppCompatActivity(),
     }
 
     override fun onFragmentInteraction() {
+    }
+
+    private fun updateNavViewData() {
+        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+        val mUserData = FirebaseDatabase.getInstance().reference!!.child("Users").child(userId)
+        mUserData.addListenerForSingleValueEvent( object: ValueEventListener {
+            public override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val userData  = dataSnapshot.getValue(Profile::class.java)
+                nav_user_name.text = "%s %s".format(userData?.firstName, userData?.lastName)
+                nav_email.text = FirebaseAuth.getInstance().currentUser!!.email
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        })
     }
 
     private fun setFragment(frag: XevoFragment) {

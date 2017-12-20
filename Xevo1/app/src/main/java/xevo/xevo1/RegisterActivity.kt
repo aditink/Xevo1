@@ -30,6 +30,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.google.firebase.database.FirebaseDatabase
 
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -113,11 +114,15 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         password.error = null
 
         // Store values at the time of the login attempt.
+        val firstNameStr = first_name.text.toString()
+        val lastNameStr = last_name.text.toString()
         val emailStr = email.text.toString()
         val passwordStr = password.text.toString()
 
         var cancel = false
         var focusView: View? = null
+
+        //TODO: make sure that firstName and lastName are not empty
 
         // Check for a valid password, if the user entered one.
         if (TextUtils.isEmpty(passwordStr)) {
@@ -159,9 +164,9 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                             val userId = FirebaseAuth.getInstance().currentUser!!.uid
                             //TODO: Verify Email
                             // Code to update user profile information
-                            // val currentUserDb = mDatabaseReference!!.child(userId)
-                            // currentUserDb.child("firstName").setValue(firstName)
-                            // currentUserDb.child("lastName").setValue(lastName)
+                             val currentUserDb = FirebaseDatabase.getInstance().reference!!.child("Users").child(userId)
+                             currentUserDb.child("firstName").setValue(firstNameStr)
+                             currentUserDb.child("lastName").setValue(lastNameStr)
                             // updateUserInfoAndUI()
                             val intent = Intent(this@RegisterActivity, Main::class.java)
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
