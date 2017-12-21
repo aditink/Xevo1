@@ -22,6 +22,7 @@ import android.widget.TextView
 
 import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
+import android.support.annotation.NonNull
 import android.support.v4.app.ActivityCompat.requestPermissions
 import android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale
 import android.support.v4.content.ContextCompat.startActivity
@@ -31,9 +32,9 @@ import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.*
 
 import kotlinx.android.synthetic.main.activity_login.*
 import xevo.xevo1.R.id.login_form
@@ -51,21 +52,23 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     private var mAuth: Task<AuthResult>? = null
     private val TAG = "LoginActivity"
     private val callbackManager = CallbackManager.Factory.create();
+    private var mAuthFirebase : FirebaseAuth? = null;
 
       override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         // Check if already signed in
           val loggedIn : Boolean = AccessToken.getCurrentAccessToken() == null;
-        val mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
-        val currentUser = mAuthFirebase.currentUser
+        mAuthFirebase= FirebaseAuth.getInstance()
+        val currentUser = mAuthFirebase?.currentUser
         if (currentUser != null) {
             Log.d(TAG, currentUser.toString())
             Log.d(TAG, "user already signed in")
-            val intent = Intent(this@LoginActivity, Main::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            finish()
+            //let control go to onStart
+//            val intent = Intent(this@LoginActivity, Main::class.java)
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+//            startActivity(intent)
+//            finish()
         }
         else {
             // Set up the login form.
@@ -75,23 +78,29 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             registerButton.setOnClickListener {
                 val intent = Intent(this, RegisterActivity::class.java)
                 startActivity(intent)
-                LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+//                LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
             }
 
             val loginButton = login_button
-            loginButton.setReadPermissions("email");
+            loginButton.setReadPermissions("email", "public_profile");
+            loginButton.setOnClickListener {
+//                LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+            }
             // Callback registration
             loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult) {
-
+                    Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                    handleFacebookAccessToken(loginResult.getAccessToken());
                 }
 
                 override fun onCancel() {
-
+                    Log.d(TAG, "facebook:onCancel");
+                    // ...
                 }
 
                 override fun onError(error: FacebookException) {
-
+                    Log.d(TAG, "facebook:onError", error);
+                    // ...
                 }
             });
 
@@ -104,63 +113,79 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                 false
             })
 
-            LoginManager.getInstance().registerCallback(callbackManager!!,
-                    object : FacebookCallback<LoginResult> {
-                override fun onSuccess(result: LoginResult) {
-                    val accessToken = AccessToken.getCurrentAccessToken()
-                    val request = GraphRequest.newMeRequest(accessToken) { `object`, response ->
-                        var SfacebookID = ""
-                        var Sname = ""
-                        var Semail = ""
-                        var Sgender = ""
-                        var Surl = ""
-                        val Sphone = ""
-
-                        try {
-
-                            if (`object`.has("id")) {
-                                SfacebookID = `object`.getString("id")
-                            }
-
-                            if (`object`.has("name")) {
-                                Sname = `object`.getString("name")
-                            }
-
-                            if (`object`.has("email")) {
-                                Semail = `object`.getString("email")
-                            }
-
-                            if (`object`.has("gender")) {
-                                Sgender = `object`.getString("gender")
-                            }
-
-                            if (`object`.has("picture")) {
-                                Surl = `object`.getJSONObject("picture").getJSONObject("data").getString("url")
-                            }
-
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
-                    val parameters = Bundle()
-                    parameters.putString("fields", "id,name,link,email,picture,gender, birthday")
-                    request.parameters = parameters
-                    request.executeAsync()
-
-                }
-
-                override fun onCancel() {
-                    //TODO Auto-generated method stub
-                    Toast.makeText(this@LoginActivity, "Cancel", Toast.LENGTH_LONG).show()
-                }
-
-                override fun onError(error: FacebookException) {
-                    //TODO Auto-generated method stub
-                    Toast.makeText(this@LoginActivity, "Error", Toast.LENGTH_LONG).show()
-                }
-            })
+//            LoginManager.getInstance().registerCallback(callbackManager!!,
+//                    object : FacebookCallback<LoginResult> {
+//                override fun onSuccess(result: LoginResult) {
+//                    val accessToken = AccessToken.getCurrentAccessToken()
+//                    val request = GraphRequest.newMeRequest(accessToken) { `object`, response ->
+//                        var SfacebookID = ""
+//                        var Sname = ""
+//                        var Semail = ""
+//                        var Sgender = ""
+//                        var Surl = ""
+//                        val Sphone = ""
+//
+//                        try {
+//
+//                            if (`object`.has("id")) {
+//                                SfacebookID = `object`.getString("id")
+//                            }
+//
+//                            if (`object`.has("name")) {
+//                                Sname = `object`.getString("name")
+//                            }
+//
+//                            if (`object`.has("email")) {
+//                                Semail = `object`.getString("email")
+//                            }
+//
+//                            if (`object`.has("gender")) {
+//                                Sgender = `object`.getString("gender")
+//                            }
+//
+//                            if (`object`.has("picture")) {
+//                                Surl = `object`.getJSONObject("picture").getJSONObject("data").getString("url")
+//                            }
+//
+//                        } catch (e: Exception) {
+//                            e.printStackTrace()
+//                        }
+//                    }
+//                    val parameters = Bundle()
+//                    parameters.putString("fields", "id,name,link,email,picture,gender, birthday")
+//                    request.parameters = parameters
+//                    request.executeAsync()
+//
+//                }
+//
+//                override fun onCancel() {
+//                    //TODO Auto-generated method stub
+//                    Toast.makeText(this@LoginActivity, "Cancel", Toast.LENGTH_LONG).show()
+//                }
+//
+//                override fun onError(error: FacebookException) {
+//                    //TODO Auto-generated method stub
+//                    Toast.makeText(this@LoginActivity, "Error", Toast.LENGTH_LONG).show()
+//                }
+//            })
 
             email_sign_in_button.setOnClickListener { attemptLogin() }
+        }
+    }
+
+    override fun onStart() {
+    super.onStart();
+    // Check if user is signed in (non-null) and update UI accordingly.
+        mAuthFirebase = FirebaseAuth.getInstance()
+        val currentUser = mAuthFirebase?.currentUser
+        if (currentUser != null) {
+            Log.d(TAG, currentUser.toString())
+            Log.d(TAG, "user already signed in")
+//            val intent = Intent(this@LoginActivity, Main::class.java)
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+//            startActivity(intent)
+//            finish()
+            updateUI(currentUser)
         }
     }
 
@@ -198,6 +223,45 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             if (grantResults.size == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 populateAutoComplete()
             }
+        }
+    }
+
+    /**
+     * Actions to take after facebook access token received.
+     */
+    private fun handleFacebookAccessToken(token : AccessToken) {
+        Log.d(TAG, "handleFacebookAccessToken:" + token);
+        val credential : AuthCredential = FacebookAuthProvider.getCredential(token.getToken())
+        mAuthFirebase!!.signInWithCredential(credential)
+                .addOnCompleteListener(this, object : OnCompleteListener<AuthResult> {
+                    override fun onComplete(task : Task<AuthResult> ) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            val user : FirebaseUser? = mAuthFirebase!!.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(this@LoginActivity, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
+    /**
+     * When user has logged in, start new activity
+     */
+    fun updateUI(user : FirebaseUser?) {
+        if (user != null) {
+            val intent = Intent(this@LoginActivity, Main::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -369,12 +433,12 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
+        // Pass the activity result back to the Facebook SDK
+        callbackManager.onActivityResult(requestCode, resultCode, data)
     }
 
     companion object {
-
         /**
          * Id to identity READ_CONTACTS permission request.
          */
