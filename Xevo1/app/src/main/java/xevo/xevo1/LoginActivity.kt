@@ -249,11 +249,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                         if (task.isSuccessful) {
                             // Sign in success, update UI with signed-in user's information
                             Log.d(TAG, "signInWithEmail:success")
-                            val intent = Intent(this@LoginActivity, Main::class.java)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                                    Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                            startActivity(intent)
-                            finish()
+                            updateUI(mAuthFirebase.currentUser)
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.e(TAG, "signInWithEmail:failure", task.exception)
