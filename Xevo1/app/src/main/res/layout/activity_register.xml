@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorBeige"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -38,6 +39,7 @@
                     android:id="@+id/first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenir_regular"
                     android:hint="@string/prompt_firstname" />
 
             </android.support.design.widget.TextInputLayout>
@@ -50,6 +52,7 @@
                     android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/avenir_regular"
                     android:hint="@string/prompt_lastname" />
             </android.support.design.widget.TextInputLayout>
 
@@ -63,6 +66,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
+                    android:fontFamily="@font/avenir_regular"
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -80,6 +84,7 @@
                     android:imeActionId="6"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
+                    android:fontFamily="@font/avenir_regular"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -92,6 +97,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@color/colorLightBeige"
+                android:fontFamily="@font/avenir_regular"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
