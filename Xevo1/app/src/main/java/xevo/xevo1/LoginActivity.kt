@@ -22,23 +22,13 @@ import android.widget.TextView
 
 import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
-import android.support.annotation.NonNull
-import android.support.v4.app.ActivityCompat.requestPermissions
-import android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale
-import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
 import android.widget.Toast
 import com.facebook.*
-import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.facebook.login.widget.LoginButton
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 
 import kotlinx.android.synthetic.main.activity_login.*
-import xevo.xevo1.R.id.login_form
-import xevo.xevo1.R.id.login_progress
 import java.util.*
 
 /**
@@ -46,21 +36,17 @@ import java.util.*
  */
 class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private var mAuth: Task<AuthResult>? = null
     private val TAG = "LoginActivity"
     private val callbackManager = CallbackManager.Factory.create()
-    private var mAuthFirebase : FirebaseAuth = FirebaseAuth.getInstance()
+    private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
       override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         // Check if already signed in
           val loggedIn : Boolean = AccessToken.getCurrentAccessToken() == null;
-        mAuthFirebase= FirebaseAuth.getInstance()
-        val currentUser = mAuthFirebase.currentUser
+        mAuth = FirebaseAuth.getInstance()
+        val currentUser = mAuth.currentUser
         if (currentUser != null) {
             Log.d(TAG, currentUser.toString())
             Log.d(TAG, "user already signed in")
@@ -110,8 +96,8 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     override fun onStart() {
     super.onStart();
     // Check if user is signed in (non-null) and update UI accordingly.
-        mAuthFirebase = FirebaseAuth.getInstance()
-        val currentUser = mAuthFirebase.currentUser
+        mAuth = FirebaseAuth.getInstance()
+        val currentUser = mAuth.currentUser
         updateUI(currentUser)
     }
 
@@ -159,13 +145,13 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     private fun handleFacebookAccessToken(token : AccessToken) {
         Log.d(TAG, "handleFacebookAccessToken:" + token.token);
         val credential: AuthCredential = FacebookAuthProvider.getCredential(token.token)
-        mAuthFirebase.signInWithCredential(credential)
+        mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this) { task ->
                     showProgress(false)
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
-                        val user: FirebaseUser? = mAuthFirebase.currentUser;
+                        val user: FirebaseUser? = mAuth.currentUser;
                         updateUI(user);
                     } else {
                         // If sign in fails, display a message to the user.
@@ -198,10 +184,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * errors are presented and no actual login attempt is made.
      */
     private fun attemptLogin() {
-        if (mAuth != null) {
-            return
-        }
-
         // Reset errors.
         email.error = null
         password.error = null
@@ -243,13 +225,13 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true)
-            mAuth = FirebaseAuth.getInstance().signInWithEmailAndPassword(emailStr, passwordStr)
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(emailStr, passwordStr)
                     .addOnCompleteListener(this@LoginActivity) { task ->
                         showProgress(false)
                         if (task.isSuccessful) {
                             // Sign in success, update UI with signed-in user's information
                             Log.d(TAG, "signInWithEmail:success")
-                            updateUI(mAuthFirebase.currentUser)
+                            updateUI(mAuth.currentUser)
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.e(TAG, "signInWithEmail:failure", task.exception)
