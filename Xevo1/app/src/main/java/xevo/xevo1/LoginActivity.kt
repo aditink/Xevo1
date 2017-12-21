@@ -230,33 +230,31 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * Actions to take after facebook access token received.
      */
     private fun handleFacebookAccessToken(token : AccessToken) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
-        val credential : AuthCredential = FacebookAuthProvider.getCredential(token.getToken())
+        Log.d(TAG, "handleFacebookAccessToken:" + token.token);
+        val credential: AuthCredential = FacebookAuthProvider.getCredential(token.token)
         mAuthFirebase!!.signInWithCredential(credential)
-                .addOnCompleteListener(this, object : OnCompleteListener<AuthResult> {
-                    override fun onComplete(task : Task<AuthResult> ) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            val user : FirebaseUser? = mAuthFirebase!!.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(this@LoginActivity, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-
-                        // ...
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithCredential:success");
+                        val user: FirebaseUser? = mAuthFirebase!!.currentUser;
+                        updateUI(user);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.d(TAG, "signInWithCredential:failure");
+                        Log.w(TAG, "signInWithCredential:failure", task.exception);
+                        Toast.makeText(this@LoginActivity, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                        updateUI(null);
                     }
-                });
+                }
     }
 
     /**
      * When user has logged in, start new activity
      */
     fun updateUI(user : FirebaseUser?) {
+        Log.d(TAG, "updateUI");
         if (user != null) {
             val intent = Intent(this@LoginActivity, Main::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
