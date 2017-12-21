@@ -60,4 +60,5 @@
     <string name="professional_opinion">Professional Opinion</string>
 
     <string name="title_activity_register">Register</string>
+    <string name="title_activity_consultant_questions">ConsultantQuestions</string>
 </resources>
