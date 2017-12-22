@@ -71,6 +71,7 @@ class ProfileFragment : XevoFragment() {
                 this,
                 { imageUri ->
                     profile_image.setImageURI(imageUri)
+                    mListener?.onProfileImageUpdated(imageUri)
                 })
                 .setWithImageCrop(1, 1)
 
@@ -112,7 +113,7 @@ class ProfileFragment : XevoFragment() {
      * activity.
      */
     interface OnFragmentInteractionListener {
-        fun onFragmentInteraction()
+        fun onProfileImageUpdated(imageUri: Uri)
     }
 
     companion object {

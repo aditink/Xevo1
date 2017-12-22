@@ -19,7 +19,8 @@ import kotlinx.android.synthetic.main.nav_header_choose_question.*
 import xevo.xevo1.models.Profile
 import android.support.annotation.NonNull
 import android.content.Intent
-
+import android.net.Uri
+import kotlinx.android.synthetic.main.nav_header_choose_question.view.*
 
 
 /**
@@ -104,6 +105,10 @@ class Main : AppCompatActivity(),
     override fun onFragmentInteraction() {
     }
 
+    override fun onProfileImageUpdated(imageUri: Uri) {
+        drawerLayout.imageView.setImageURI(imageUri)
+    }
+
     private fun updateNavViewData() {
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
         val mUserData = FirebaseDatabase.getInstance().reference!!.child("Users").child(userId)
@@ -150,7 +155,8 @@ class Main : AppCompatActivity(),
         val fragments = supportFragmentManager.fragments
         if (fragments != null) {
             for (f in fragments) {
-                (f as? XevoFragment)?.onActivityResult(requestCode, resultCode, data)
+                if (f is ProfileFragment)
+                    (f as? ProfileFragment)?.onActivityResult(requestCode, resultCode, data)
             }
         }
     }
