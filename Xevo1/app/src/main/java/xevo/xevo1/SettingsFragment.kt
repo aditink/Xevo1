@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_settings.view.*
-
+import com.facebook.login.LoginManager
 
 /**
  * A [XevoFragment] subclass.
@@ -33,14 +33,14 @@ class SettingsFragment : XevoFragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val v = inflater!!.inflate(R.layout.fragment_settings, container, false)
         val logOutButton = v.logOutButton
         logOutButton.setOnClickListener {
-            val mFireBaseAuth = FirebaseAuth.getInstance()
-            mFireBaseAuth.signOut()
+            FirebaseAuth.getInstance().signOut()
+            LoginManager.getInstance().logOut() //facebook logout
             val intent = Intent(mContext, LoginActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
