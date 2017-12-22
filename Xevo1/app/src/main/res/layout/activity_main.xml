@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/colorBeige"
-        app:itemIconTint="@color/colorAccent"
+        app:itemIconTint="@color/colorPrimary"
         app:itemTextColor="@color/colorPrimary"
         app:itemBackground="@color/colorBeige"
         android:fitsSystemWindows="true"
