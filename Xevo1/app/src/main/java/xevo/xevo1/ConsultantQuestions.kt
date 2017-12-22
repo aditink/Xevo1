@@ -1,9 +1,13 @@
 package xevo.xevo1
 
+import android.app.Fragment
+import android.app.FragmentManager
+import android.app.FragmentTransaction
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import android.widget.Spinner
 
 import kotlinx.android.synthetic.main.activity_consultant_questions.*
@@ -26,12 +30,20 @@ class ConsultantQuestions : AppCompatActivity() {
         //Eventually get from database
         var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
         updateCategorySpinner(categoryList)
+
+        var testFragment : QuestionFragment = QuestionFragment.newInstance()
     }
 
     private fun updateCategorySpinner(categories : List<String>) {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
+    }
+
+    private fun addQuestion(question : Fragment) {
+        val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.add(questionsLayout.id, question)
+        fragmentTransaction.commit()
     }
 
 }
