@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/colorBeige"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="xevo.xevo1.ConsultantQuestions"
     tools:showIn="@layout/activity_consultant_questions">
 
-    <Spinner
-        android:id="@+id/spinner"
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/category"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="6dp" />
+        android:textAlignment="center"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.AppCompatSpinner>
 
     <ScrollView
-        android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/question_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    </LinearLayout>
+        <!-- Linear layout that houses question fragments -->
+        <LinearLayout
+            android:id="@+id/questionsLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+        </LinearLayout>
     </ScrollView>
-</android.support.constraint.LinearLayout>
+</LinearLayout>
