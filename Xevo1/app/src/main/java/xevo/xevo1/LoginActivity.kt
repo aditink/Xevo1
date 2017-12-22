@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         if (currentUser != null) {
             Log.d(TAG, currentUser.toString())
             Log.d(TAG, "user already signed in")
-            //let control go to onStart
+            // Let control go to onStart
         }
         else {
             // Set up the login form.
