@@ -1,5 +1,7 @@
 package xevo.xevo1
 
+import android.content.ContentResolver
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.NavigationView
@@ -20,6 +22,11 @@ import xevo.xevo1.models.Profile
 import android.support.annotation.NonNull
 import android.content.Intent
 import android.net.Uri
+import android.util.AttributeSet
+import android.util.Log
+import android.view.View
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header_choose_question.view.*
 
 
@@ -34,6 +41,8 @@ class Main : AppCompatActivity(),
         ProfileFragment.OnFragmentInteractionListener,
         ChooseQuestionFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener {
+
+    private val TAG = "MainActivity"
 
     private lateinit var handler: Handler
     private lateinit var drawerLayout: DrawerLayout
@@ -54,7 +63,8 @@ class Main : AppCompatActivity(),
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
-        updateNavViewData()
+
+        updateNavViewData(navView.getHeaderView(0))
 
         setFragment(ProfileFragment.newInstance())
     }
@@ -105,23 +115,28 @@ class Main : AppCompatActivity(),
     override fun onFragmentInteraction() {
     }
 
-    override fun onProfileImageUpdated(imageUri: Uri) {
-        drawerLayout.imageView.setImageURI(imageUri)
+    override fun onProfileImageUpdated() {
+        val user = FirebaseAuth.getInstance().currentUser!!
+        Glide.with(this).load(user.photoUrl).into(imageView)
     }
 
-    private fun updateNavViewData() {
-        val userId = FirebaseAuth.getInstance().currentUser!!.uid
-        val mUserData = FirebaseDatabase.getInstance().reference!!.child("Users").child(userId)
-        mUserData.addListenerForSingleValueEvent( object: ValueEventListener {
-            public override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val userData  = dataSnapshot.getValue(Profile::class.java)
-                nav_user_name.text = "%s %s".format(userData?.firstName, userData?.lastName)
-                nav_email.text = FirebaseAuth.getInstance().currentUser!!.email
-            }
+    private fun updateNavViewData(view: View) {
+        val user = FirebaseAuth.getInstance().currentUser!!
+        view.nav_user_name.text = user.displayName
+        view.nav_email.text = user.email
+        if (user.photoUrl != null) {
+            Glide.with(this).load(user.photoUrl).into(view.imageView)
+        } else {
+            view.imageView.setImageURI(drawableToUri(R.drawable.ic_menu_camera))
+        }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-            }
-        })
+    }
+
+    private fun drawableToUri(drawableId: Int): Uri {
+        return Uri.parse("%s://%s/%s/%s".format(ContentResolver.SCHEME_ANDROID_RESOURCE,
+                resources.getResourcePackageName(drawableId),
+                resources.getResourceTypeName(drawableId),
+                resources.getResourceEntryName(drawableId)))
     }
 
     private fun setFragment(frag: XevoFragment) {

@@ -26,10 +26,7 @@ import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.google.firebase.auth.*
 import com.google.firebase.database.FirebaseDatabase
 
 import kotlinx.android.synthetic.main.activity_register.*
@@ -157,25 +154,18 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             mAuthTask = FirebaseAuth.getInstance()!!
                     .createUserWithEmailAndPassword(emailStr, passwordStr)
                     .addOnCompleteListener(this@RegisterActivity) { task ->
-                        showProgress(false)
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success")
-                            val userId = FirebaseAuth.getInstance().currentUser!!.uid
                             //TODO: Verify Email
                             // Code to update user profile information
-                             val currentUserDb = FirebaseDatabase.getInstance().reference!!.child("Users").child(userId)
-                             currentUserDb.child("firstName").setValue(firstNameStr)
-                             currentUserDb.child("lastName").setValue(lastNameStr)
-                            // updateUserInfoAndUI()
-                            val intent = Intent(this@RegisterActivity, Main::class.java)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                            startActivity(intent)
-                            finish()
+                            addDisplayNameAndFinish("%s %s".format(firstNameStr, lastNameStr))
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                            if (task.exception is FirebaseAuthUserCollisionException) {
+                            showProgress(false)
+                            if (task.exception is FirebaseAuthUserCollisionException?) {
                                 email.error = getString(R.string.error_user_already_exists)
                                 email.requestFocus()
                             } else if (task.exception is FirebaseAuthWeakPasswordException) {
@@ -198,6 +188,25 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     private fun isPasswordValid(password: String): Boolean {
         //TODO: Replace this with your own logic
         return password.length > 4
+    }
+
+    private fun addDisplayNameAndFinish(displayName: String) {
+        val user = FirebaseAuth.getInstance().currentUser!!
+
+        val profileUpdates = UserProfileChangeRequest.Builder()
+                .setDisplayName(displayName)
+                .build()
+
+        user.updateProfile(profileUpdates).addOnCompleteListener { task ->
+            showProgress(false)
+            if (task.isSuccessful) {
+                Log.d(TAG, "User profile updated.")
+                val intent = Intent(this@RegisterActivity, Main::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 
     /**

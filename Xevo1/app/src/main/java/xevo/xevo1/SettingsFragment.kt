@@ -33,10 +33,10 @@ class SettingsFragment : XevoFragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val v = inflater!!.inflate(R.layout.fragment_settings, container, false)
+        val v = inflater.inflate(R.layout.fragment_settings, container, false)
         val logOutButton = v.logOutButton
         logOutButton.setOnClickListener {
             val mFireBaseAuth = FirebaseAuth.getInstance()

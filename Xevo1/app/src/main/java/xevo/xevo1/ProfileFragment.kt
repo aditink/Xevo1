@@ -21,12 +21,9 @@ import kotlinx.android.synthetic.main.fragment_profile.view.*
 import xevo.xevo1.models.Profile
 import xevo.xevo1.R.id.imageView
 import com.myhexaville.smartimagepicker.ImagePicker
-import android.support.annotation.NonNull
 import android.content.Intent
-
-
-
-
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.UserProfileChangeRequest
 
 /**
  * A [XevoFragment] subclass.
@@ -49,34 +46,29 @@ class ProfileFragment : XevoFragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
-        val userId = FirebaseAuth.getInstance().currentUser!!.uid
-        val mUserData = FirebaseDatabase.getInstance().reference!!.child("Users").child(userId)
-        mUserData.addListenerForSingleValueEvent( object:ValueEventListener {
-            public override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val userData  = dataSnapshot.getValue(Profile::class.java)
-                user_name.text = "%s %s".format(userData?.firstName, userData?.lastName)
-            }
+        val user = FirebaseAuth.getInstance().currentUser!!
 
-            override fun onCancelled(databaseError: DatabaseError) {
-            }
-        })
+        val v = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        val v = inflater!!.inflate(R.layout.fragment_profile, container, false)
+        v.user_name.text = user.displayName!!
 
         imagePicker = ImagePicker(this.activity,
                 this,
                 { imageUri ->
-                    profile_image.setImageURI(imageUri)
-                    mListener?.onProfileImageUpdated(imageUri)
+                    updateProfileImage(imageUri)
                 })
                 .setWithImageCrop(1, 1)
 
         v.profile_image!!.setOnClickListener { _ ->
             imagePicker?.choosePicture(true)
+        }
+
+        if (user.photoUrl != null) {
+            Glide.with(this).load(user.photoUrl).into(v.profile_image)
         }
 
         return v
@@ -106,6 +98,23 @@ class ProfileFragment : XevoFragment() {
         imagePicker?.handlePermission(requestCode, grantResults)
     }
 
+    private fun updateProfileImage(imageUri: Uri) {
+        profile_image.setImageURI(imageUri)
+
+        val user = FirebaseAuth.getInstance().currentUser!!
+        val profileUpdates = UserProfileChangeRequest.Builder()
+                .setPhotoUri(imageUri)
+                .build()
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        mListener?.onProfileImageUpdated()
+                        Log.d(TAG, "Updated profile image successfully")
+                    }
+                }
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -113,7 +122,7 @@ class ProfileFragment : XevoFragment() {
      * activity.
      */
     interface OnFragmentInteractionListener {
-        fun onProfileImageUpdated(imageUri: Uri)
+        fun onProfileImageUpdated()
     }
 
     companion object {
