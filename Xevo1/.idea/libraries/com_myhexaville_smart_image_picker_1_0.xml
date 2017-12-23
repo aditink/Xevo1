@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.myhexaville:smart-image-picker-1.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/smart-image-picker-1.0.aar/836c85fb2c03134794780d8050f7d0c7/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/smart-image-picker-1.0.aar/836c85fb2c03134794780d8050f7d0c7/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.myhexaville/smart-image-picker/1.0/957549c4814bbd3811dc27f54604a4437fe6dd09/smart-image-picker-1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

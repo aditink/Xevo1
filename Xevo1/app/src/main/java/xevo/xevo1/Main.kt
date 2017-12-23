@@ -1,5 +1,6 @@
 package xevo.xevo1
 
+import android.content.ContentResolver
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.NavigationView
@@ -10,6 +11,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.nav_header.*
+import android.content.Intent
+import android.net.Uri
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.nav_header.view.*
+
 
 /**
  * Main Activity. We go here after the login screen and this handles
@@ -22,6 +30,8 @@ class Main : AppCompatActivity(),
         ProfileFragment.OnFragmentInteractionListener,
         ChooseQuestionFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener {
+
+    private val TAG = "MainActivity"
 
     private lateinit var handler: Handler
     private lateinit var drawerLayout: DrawerLayout
@@ -42,6 +52,17 @@ class Main : AppCompatActivity(),
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+
+        // Load profile information into the NavigationDrawer
+        val user = FirebaseAuth.getInstance().currentUser!!
+        val view = navView.getHeaderView(0)
+        view.nav_user_name.text = user.displayName
+        view.nav_email.text = user.email
+        if (user.photoUrl != null) {
+            Glide.with(this).load(user.photoUrl).into(view.imageView)
+        } else {
+            view.imageView.setImageURI(drawableToUri(R.drawable.ic_menu_camera))
+        }
 
         setFragment(ProfileFragment.newInstance())
     }
@@ -92,6 +113,32 @@ class Main : AppCompatActivity(),
     override fun onFragmentInteraction() {
     }
 
+    /**
+     * Called from [ProfileFragment] when the user
+     * has changed their profile image. This is used
+     * to change the ProfileImage in the NavigationDrawer.
+     */
+    override fun onProfileImageUpdated() {
+        val user = FirebaseAuth.getInstance().currentUser!!
+        Glide.with(this).load(user.photoUrl).into(imageView)
+    }
+
+    /**
+     * Takes a drawable resource id and converts it
+     * to a URI.
+     */
+    private fun drawableToUri(drawableId: Int): Uri {
+        return Uri.parse("%s://%s/%s/%s".format(ContentResolver.SCHEME_ANDROID_RESOURCE,
+                resources.getResourcePackageName(drawableId),
+                resources.getResourceTypeName(drawableId),
+                resources.getResourceEntryName(drawableId)))
+    }
+
+    /**
+     * Loads a given [XevoFragment] instance into the
+     * frame view and sets the title of the view to
+     * [XevoFragment.title].
+     */
     private fun setFragment(frag: XevoFragment) {
         // if frag is already being shown, don't do anything
         for (f in supportFragmentManager.fragments) {
@@ -115,6 +162,21 @@ class Main : AppCompatActivity(),
 
         drawerLayout.closeDrawers()
         handler.post(pendingRunnable)
+    }
 
+    /**
+     * Calls the same method in [ProfileFragment] to
+     * handle choosing a profile picture. This currently
+     * causes a crash so this will probably need to be changed.
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val fragments = supportFragmentManager.fragments
+        if (fragments != null) {
+            for (f in fragments) {
+                if (f is ProfileFragment)
+                    (f as? ProfileFragment)?.onActivityResult(requestCode, resultCode, data)
+            }
+        }
     }
 }
