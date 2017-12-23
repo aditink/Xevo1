@@ -39,7 +39,7 @@
         </LinearLayout>
 
         <!-- These weights set by fibonacci sequence, so hopefully golden ratio -->
-        <android.support.v7.widget.AppCompatTextView
+        <TextView
             android:id="@+id/question_details_view"
             style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="match_parent"

@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.text.method.ScrollingMovementMethod
+import kotlinx.android.synthetic.main.fragment_question.*
 
 
 /**
@@ -44,6 +46,11 @@ class ProfileAndString : Fragment() {
         if (mListener != null) {
             mListener!!.onFragmentInteraction(uri)
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        question_details_view.setMovementMethod(ScrollingMovementMethod())
     }
 
     override fun onAttach(context: Context?) {
