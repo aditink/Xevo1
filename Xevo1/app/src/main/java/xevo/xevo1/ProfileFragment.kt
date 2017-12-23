@@ -1,25 +1,15 @@
 package xevo.xevo1
 
-import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_profile.*
-import android.content.ContentValues.TAG
-import android.os.Build
 import android.util.Log
-import com.google.firebase.database.DatabaseError
 import kotlinx.android.synthetic.main.fragment_profile.view.*
-import xevo.xevo1.models.Profile
-import xevo.xevo1.R.id.imageView
 import com.myhexaville.smartimagepicker.ImagePicker
 import android.content.Intent
 import com.bumptech.glide.Glide
@@ -48,14 +38,19 @@ class ProfileFragment : XevoFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
 
         val user = FirebaseAuth.getInstance().currentUser!!
 
+        // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_profile, container, false)
 
+        // Load user data (photo and displayName)
         v.user_name.text = user.displayName!!
+        if (user.photoUrl != null) {
+            Glide.with(this).load(user.photoUrl).into(v.profile_image)
+        }
 
+        // Create the image picker
         imagePicker = ImagePicker(this.activity,
                 this,
                 { imageUri ->
@@ -65,10 +60,6 @@ class ProfileFragment : XevoFragment() {
 
         v.profile_image!!.setOnClickListener { _ ->
             imagePicker?.choosePicture(true)
-        }
-
-        if (user.photoUrl != null) {
-            Glide.with(this).load(user.photoUrl).into(v.profile_image)
         }
 
         return v
@@ -98,6 +89,11 @@ class ProfileFragment : XevoFragment() {
         imagePicker?.handlePermission(requestCode, grantResults)
     }
 
+    /**
+     * Updates the profileImage that is displayed
+     * and updates the photoUrl for the user stored
+     * with Firebase.
+     */
     private fun updateProfileImage(imageUri: Uri) {
         profile_image.setImageURI(imageUri)
 
