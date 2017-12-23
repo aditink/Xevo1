@@ -7,13 +7,18 @@ import android.support.v4.app.FragmentManager
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.util.AttributeSet
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.Spinner
 
 import kotlinx.android.synthetic.main.activity_consultant_questions.*
 import kotlinx.android.synthetic.main.content_consultant_questions.*
+
 
 class ConsultantQuestions : AppCompatActivity(),
         QuestionFragment.OnFragmentInteractionListener,
@@ -52,6 +57,7 @@ class ConsultantQuestions : AppCompatActivity(),
 
     private fun addQuestion(question : QuestionFragment) {
         Log.d(TAG, "adding fragment");
+
         supportFragmentManager
                 .beginTransaction()
                 .add(questionsLayout.id, question, question.tag)

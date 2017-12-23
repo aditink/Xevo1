@@ -11,16 +11,22 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
+        <item name="android:spinnerDropDownItemStyle">
+            @style/spinnerDropDownItemStyle
+        </item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <!-- Used in experimental login page. -->
-    <style name="viewCustom">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">8dp</item>
+    <style name="spinnerItemStyle">
+        <item name="android:gravity">center</item>
     </style>
+
+    <style name="spinnerDropDownItemStyle">
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

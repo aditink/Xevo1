@@ -3,17 +3,23 @@ package xevo.xevo1
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 
 /**
  * QuestionFragment. Subclass of [Fragment].
  * Card that represents essential information of a question
  * Used while presenting a list of questions
  */
-class QuestionFragment : Fragment() {
-    // Unique ID of question in database
+class QuestionFragment : XevoFragment() {
+
+    public override val fragmentTag = "test"
+    public override val title: Int = R.string.question_fragment
     lateinit var questionId : String
     private var mListener: OnFragmentInteractionListener? = null
 

@@ -2,28 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="11" >
+    android:layout_margin="@dimen/text_margin"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="11" >
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="8"
         android:elevation="@dimen/text_margin"
-        android:backgroundTint="@color/colorBeige">
+        android:backgroundTint="@color/colorLightBeige">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:weightSum="14">
             
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/profile_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_menu_camera"
+                android:layout_weight="3"
                 app:civ_border_color="@color/colorAccent"
                 app:civ_border_width="2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/avenir_regular"
+                android:layout_weight="11"
+                android:textAlignment="center"
+                android:text="username" />
 
         </LinearLayout>
 
@@ -46,11 +62,11 @@
             android:ellipsize="end"
             android:fontFamily="@font/avenir_regular"
             android:textStyle="bold"
-            android:maxLines="1" />
+            android:maxLines="2" />
 
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/questio_details_view"
+            android:id="@+id/question_details_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/text_margin"
@@ -59,8 +75,15 @@
             android:maxLines="3"
             android:fontFamily="@font/avenir_regular"
             android:text="This is what the question is about and blah blah blah blah blah question is about and blah blah blah blah blah question is about and blah blah blah blah blah"
-             />
+            />
     </LinearLayout>
 
+    </LinearLayout>
+
+    <!-- Add a line at end if it looks good in actual color scheme -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorBeige" />
 
 </LinearLayout>
