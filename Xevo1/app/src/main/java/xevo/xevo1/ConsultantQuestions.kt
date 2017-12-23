@@ -50,8 +50,8 @@ class ConsultantQuestions : AppCompatActivity(),
     }
 
     private fun updateCategorySpinner(categories : List<String>) {
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        val adapter = ArrayAdapter(this, R.layout.spinner_item, categories)
+        adapter.setDropDownViewResource(R.layout.spinner_item);
         categorySpinner.setAdapter(adapter);
     }
 
