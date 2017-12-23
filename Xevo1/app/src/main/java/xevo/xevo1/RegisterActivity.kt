@@ -188,6 +188,10 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         return password.length > 4
     }
 
+    /**
+     * Sets the displayName in Firebase and launches the next
+     * activity.
+     */
     private fun addDisplayNameAndFinish(displayName: String) {
         val user = FirebaseAuth.getInstance().currentUser!!
 
@@ -272,7 +276,6 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     }
 
     override fun onLoaderReset(cursorLoader: Loader<Cursor>) {
-
     }
 
     private fun addEmailsToAutoComplete(emailAddressCollection: List<String>) {
