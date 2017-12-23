@@ -24,7 +24,7 @@
         app:itemTextColor="@color/colorPrimary"
         app:itemBackground="@color/colorBeige"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_choose_question"
+        app:headerLayout="@layout/nav_header"
         app:menu="@menu/activity_choose_question_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

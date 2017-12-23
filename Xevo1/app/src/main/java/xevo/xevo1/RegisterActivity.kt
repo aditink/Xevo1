@@ -27,7 +27,6 @@ import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
-import com.google.firebase.database.FirebaseDatabase
 
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -93,7 +92,6 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             }
         }
     }
-
 
     /**
      * Attempts to sign in or register the account specified by the login form.
