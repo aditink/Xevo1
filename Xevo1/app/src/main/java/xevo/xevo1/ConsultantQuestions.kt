@@ -45,7 +45,7 @@ class ConsultantQuestions : AppCompatActivity(),
         var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
         updateCategorySpinner(categoryList)
 
-        var testFragment : QuestionFragment = QuestionFragment.newInstance()
+        var testFragment : QuestionFragment = QuestionFragment.newInstance("test")
         addQuestion(testFragment)
     }
 
@@ -57,7 +57,6 @@ class ConsultantQuestions : AppCompatActivity(),
 
     private fun addQuestion(question : QuestionFragment) {
         Log.d(TAG, "adding fragment");
-
         supportFragmentManager
                 .beginTransaction()
                 .add(questionsLayout.id, question, question.tag)

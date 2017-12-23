@@ -1,6 +1,7 @@
 package xevo.xevo1
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -9,18 +10,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.LinearLayout
+import kotlinx.android.synthetic.main.content_quick_hit.*
+import kotlinx.android.synthetic.main.fragment_question.*
 
 /**
  * QuestionFragment. Subclass of [Fragment].
  * Card that represents essential information of a question
  * Used while presenting a list of questions
  */
-class QuestionFragment : XevoFragment() {
+class QuestionFragment : XevoFragment(),
+    View.OnClickListener {
 
     public override val fragmentTag = "test"
     public override val title: Int = R.string.question_fragment
-    lateinit var questionId : String
+    var questionId : String = "placeholder"
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +53,18 @@ class QuestionFragment : XevoFragment() {
         mListener = null
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        var button : Button = question_fragment_button
+        button.setOnClickListener(this)
+    }
+
+    override fun onClick(p0: View?) {
+        val intent = Intent(activity, ReadQuestion::class.java)
+        intent.putExtra("QuestionID", questionId)
+        startActivity(intent)
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -64,8 +82,9 @@ class QuestionFragment : XevoFragment() {
          *
          * @return A new instance of fragment ProfileFragment.
          */
-        fun newInstance(): QuestionFragment {
+        fun newInstance(questionID : String): QuestionFragment {
             val fragment = QuestionFragment()
+            fragment.questionId = questionID
             val args = Bundle()
             fragment.arguments = args
             return fragment
