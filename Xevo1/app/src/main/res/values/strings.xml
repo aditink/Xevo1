@@ -28,6 +28,10 @@
     <string name="error_invalid_credentials">Invalid credentials. Login failed</string>
     <string name="error_user_already_exists">A user with this email address already exists</string>
 
+    <!-- Facebook login -->
+    <string name="facebook_app_id">387972564985103</string>
+    <string name="fb_login_protocol_scheme">fb387972564985103</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="optional">(optional)</string>
@@ -47,9 +51,6 @@
     <string name="last_name">Last Name</string>
     <string name="login_title">Login</string>
     <string name="create_act">Create Account</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--Navigation Related Strings-->
     <string name="nav_profile">Profile</string>

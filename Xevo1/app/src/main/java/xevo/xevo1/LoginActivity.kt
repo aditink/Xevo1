@@ -20,43 +20,36 @@ import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-import java.util.ArrayList
 import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
+import com.facebook.*
+import com.facebook.login.LoginResult
+import com.google.firebase.auth.*
 
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.*
 
 /**
  * A login screen that offers login via email/password.
  */
 class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private var mAuth: Task<AuthResult>? = null
     private val TAG = "LoginActivity"
+    private val callbackManager = CallbackManager.Factory.create()
+    private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
-      override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        // Check if already signed in
-        val mAuthFirebase: FirebaseAuth = FirebaseAuth.getInstance()
-        val currentUser = mAuthFirebase.currentUser
+        mAuth = FirebaseAuth.getInstance()
+        val currentUser = mAuth.currentUser
         if (currentUser != null) {
             Log.d(TAG, currentUser.toString())
             Log.d(TAG, "user already signed in")
-            val intent = Intent(this@LoginActivity, Main::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            finish()
-        }
-        else {
+            // Let control go to onStart
+        } else {
             // Set up the login form.
             Log.d(TAG, "user not signed in")
 
@@ -76,7 +69,33 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             })
 
             email_sign_in_button.setOnClickListener { attemptLogin() }
+            val loginButton = login_button
+            loginButton.setReadPermissions("email", "public_profile");
+            // Callback registration
+            loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+                    showProgress(true)
+                    Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                    handleFacebookAccessToken(loginResult.accessToken);
+                }
+                override fun onCancel() {
+                    Log.d(TAG, "facebook:onCancel");
+                    // ...
+                }
+                override fun onError(error: FacebookException) {
+                    Log.d(TAG, "facebook:onError", error);
+                    // ...
+                }
+            })
         }
+    }
+
+    override fun onStart() {
+    super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        mAuth = FirebaseAuth.getInstance()
+        val currentUser = mAuth.currentUser
+        updateUI(currentUser)
     }
 
     private fun populateAutoComplete() {
@@ -116,6 +135,45 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         }
     }
 
+    /**
+     * After facebook access token (token) received,
+     * use credentials to sign into firebase.
+     */
+    private fun handleFacebookAccessToken(token : AccessToken) {
+        Log.d(TAG, "handleFacebookAccessToken:" + token.token);
+        val credential: AuthCredential = FacebookAuthProvider.getCredential(token.token)
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this) { task ->
+                    showProgress(false)
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithCredential:success");
+                        val user: FirebaseUser? = mAuth.currentUser;
+                        updateUI(user);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithCredential:failure", task.exception);
+                        Toast.makeText(this@LoginActivity, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                        updateUI(null);
+                    }
+                }
+    }
+
+    /**
+     * When user has logged in, start new activity
+     */
+    fun updateUI(user : FirebaseUser?) {
+        Log.d(TAG, "updateUI");
+        if (user != null) {
+            val intent = Intent(this@LoginActivity, Main::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finish()
+        }
+    }
+
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -123,10 +181,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * errors are presented and no actual login attempt is made.
      */
     private fun attemptLogin() {
-        if (mAuth != null) {
-            return
-        }
-
         // Reset errors.
         email.error = null
         password.error = null
@@ -168,16 +222,13 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true)
-            mAuth = FirebaseAuth.getInstance().signInWithEmailAndPassword(emailStr, passwordStr)
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(emailStr, passwordStr)
                     .addOnCompleteListener(this@LoginActivity) { task ->
                         showProgress(false)
                         if (task.isSuccessful) {
                             // Sign in success, update UI with signed-in user's information
                             Log.d(TAG, "signInWithEmail:success")
-                            val intent = Intent(this@LoginActivity, Main::class.java)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                            startActivity(intent)
-                            finish()
+                            updateUI(mAuth.currentUser)
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.e(TAG, "signInWithEmail:failure", task.exception)
@@ -197,7 +248,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
     private fun isPasswordValid(password: String): Boolean {
         //TODO: Replace this with your own logic
-        return password.length > 4
+        return password.length > 6
     }
 
     /**
@@ -245,8 +296,8 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                         ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
 
                 // Select only email addresses.
-                ContactsContract.Contacts.Data.MIMETYPE + " = ?", arrayOf(ContactsContract.CommonDataKinds.Email
-                .CONTENT_ITEM_TYPE),
+                ContactsContract.Contacts.Data.MIMETYPE + " = ?", arrayOf(
+                ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE),
 
                 // Show primary email addresses first. Note that there won't be
                 // a primary email address if the user hasn't specified one.
@@ -283,8 +334,13 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         val IS_PRIMARY = 1
     }
 
-    companion object {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        super.onActivityResult(requestCode, resultCode, data)
+        // Pass the activity result back to the Facebook SDK
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
 
+    companion object {
         /**
          * Id to identity READ_CONTACTS permission request.
          */
