@@ -12,6 +12,7 @@ import android.util.Log
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import com.myhexaville.smartimagepicker.ImagePicker
 import android.content.Intent
+import android.widget.ArrayAdapter
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.UserProfileChangeRequest
 
@@ -27,6 +28,7 @@ class ProfileFragment : XevoFragment() {
 
     private val TAG = "ProfileFragment"
     private var mListener: OnFragmentInteractionListener? = null
+    private var mContext: Context? = null
     private var imagePicker: ImagePicker? = null
 
     public override val title: Int = R.string.nav_profile
@@ -62,6 +64,36 @@ class ProfileFragment : XevoFragment() {
             imagePicker?.choosePicture(true)
         }
 
+        // load list
+        var listItems: Array<String> = Array<String>(20) { id ->
+            when (id) {
+                0 -> "Zero"
+                1 -> "One"
+                2 -> "two"
+                3 -> "three"
+                4 -> "four"
+                5 -> "five"
+                6 -> "six"
+                7 -> "seven"
+                8 -> "eight"
+                9 -> "nine"
+                10 -> "Zero"
+                11 -> "One"
+                12 -> "two"
+                13 -> "three"
+                14 -> "four"
+                15 -> "five"
+                16 -> "six"
+                17 -> "seven"
+                18 -> "eight"
+                19 -> "nine"
+                else -> "something else"
+            }
+        }
+
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, listItems)
+        v.caseList.adapter = adapter
+
         return v
     }
 
@@ -69,6 +101,7 @@ class ProfileFragment : XevoFragment() {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             mListener = context
+            mContext = context
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
