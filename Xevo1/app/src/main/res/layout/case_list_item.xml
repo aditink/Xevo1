@@ -33,7 +33,7 @@
         android:layout_marginStart="16dp">
 
         <TextView
-            android:id="@+id/case_list_primary"
+            android:id="@+id/caseListTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceListItem"
@@ -42,7 +42,7 @@
             tools:text="string/item_title" />
 
         <TextView
-            android:id="@+id/case_list_secondary"
+            android:id="@+id/caseListDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"

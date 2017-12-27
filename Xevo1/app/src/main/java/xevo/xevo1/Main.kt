@@ -39,6 +39,7 @@ class Main : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -153,7 +154,7 @@ class Main : AppCompatActivity(),
         val pendingRunnable = Runnable {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-            fragmentTransaction.replace(R.id.main_frame, frag, frag.fragmentTag)
+            fragmentTransaction.replace(R.id.frameView, frag, frag.fragmentTag)
             fragmentTransaction.commit()
         }
 

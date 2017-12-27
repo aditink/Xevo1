@@ -12,9 +12,12 @@ import android.util.Log
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import com.myhexaville.smartimagepicker.ImagePicker
 import android.content.Intent
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.widget.ArrayAdapter
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.UserProfileChangeRequest
+import kotlinx.android.synthetic.main.app_bar_main.*
 import xevo.xevo1.models.CaseAdapter
 import xevo.xevo1.models.CaseData
 
@@ -32,6 +35,7 @@ class ProfileFragment : XevoFragment() {
     private var mListener: OnFragmentInteractionListener? = null
     private var mContext: Context? = null
     private var imagePicker: ImagePicker? = null
+//    private var recyclerView: RecyclerView? = null
 
     public override val title: Int = R.string.nav_profile
     public override val fragmentTag: String = "profile"
@@ -46,25 +50,12 @@ class ProfileFragment : XevoFragment() {
         val user = FirebaseAuth.getInstance().currentUser!!
 
         // Inflate the list_case_item for this fragment
+
+
         val v = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        // Load user data (photo and displayName)
-        v.user_name.text = user.displayName!!
-        if (user.photoUrl != null) {
-            Glide.with(this).load(user.photoUrl).into(v.profile_image)
-        }
-
-        // Create the image picker
-        imagePicker = ImagePicker(this.activity,
-                this,
-                { imageUri ->
-                    updateProfileImage(imageUri)
-                })
-                .setWithImageCrop(1, 1)
-
-        v.profile_image!!.setOnClickListener { _ ->
-            imagePicker?.choosePicture(true)
-        }
+//        v.recyclerView.setHasFixedSize(true)
+        v.recyclerView.layoutManager = LinearLayoutManager(mContext)
 
         // load list
         val listItems: List<CaseData> = List<CaseData>(20) { id: Int ->
@@ -74,8 +65,26 @@ class ProfileFragment : XevoFragment() {
             }
         }
 
-        val adapter: CaseAdapter = CaseAdapter(mContext!!, listItems)
-        v.caseList.adapter = adapter
+        val adapter = CaseAdapter(listItems) { data:CaseData -> println("%s %s".format(data.title, data.description)) }
+        v.recyclerView.adapter = adapter
+        
+        // Load user data (photo and displayName)
+//        v.user_name.text = user.displayName!!
+//        if (user.photoUrl != null) {
+//            Glide.with(this).load(user.photoUrl).into(v.profile_image)
+//        }
+
+        // Create the image picker
+        imagePicker = ImagePicker(this.activity,
+                this,
+                { imageUri ->
+                    updateProfileImage(imageUri)
+                })
+                .setWithImageCrop(1, 1)
+
+//        v.profile_image!!.setOnClickListener { _ ->
+//            imagePicker?.choosePicture(true)
+//        }
 
         return v
     }
@@ -111,7 +120,7 @@ class ProfileFragment : XevoFragment() {
      * with Firebase.
      */
     private fun updateProfileImage(imageUri: Uri) {
-        profile_image.setImageURI(imageUri)
+//        profile_image.setImageURI(imageUri)
 
         val user = FirebaseAuth.getInstance().currentUser!!
         val profileUpdates = UserProfileChangeRequest.Builder()

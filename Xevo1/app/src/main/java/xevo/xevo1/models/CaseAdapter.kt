@@ -1,35 +1,28 @@
 package xevo.xevo1.models
 
-import android.content.Context
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import kotlinx.android.synthetic.main.case_list_item.view.*
 import xevo.xevo1.R
 
-class CaseAdapter(context: Context, items: List<CaseData>) : BaseAdapter() {
+class CaseAdapter(val items: List<CaseData>, val listener: (CaseData) -> Unit): RecyclerView.Adapter<CaseAdapter.ViewHolder>() {
 
-    val mLayoutInflator: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    val mContext: Context = context
-    val mItems: List<CaseData> = items
+    // Adding a method to ViewGroup
+    private fun ViewGroup.inflate(layoutRes: Int): View = LayoutInflater.from(context).inflate(layoutRes, this, false)
 
-    override fun getItem(index: Int): CaseData {
-        return mItems[index]
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(items[position], listener)
 
-    override fun getItemId(index: Int): Long {
-        return index.toLong()
-    }
+    override fun getItemCount(): Int = items.size
 
-    override fun getCount(): Int {
-        return mItems.size
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(parent.inflate(R.layout.case_list_item))
 
-    override fun getView(index: Int, view: View?, parent: ViewGroup?): View {
-        val v = mLayoutInflator.inflate(R.layout.case_list_item, parent, false)
-        v.case_list_primary.text = mItems[index].title
-        v.case_list_secondary.text = mItems[index].description
-        return v
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(item: CaseData, listener: (CaseData) -> Unit) = with(itemView) {
+            caseListTitle.text = item.title
+            caseListDescription.text = item.description
+            setOnClickListener { listener(item) }
+        }
     }
 }
