@@ -15,6 +15,8 @@ import android.content.Intent
 import android.widget.ArrayAdapter
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.UserProfileChangeRequest
+import xevo.xevo1.models.CaseAdapter
+import xevo.xevo1.models.CaseData
 
 /**
  * A [XevoFragment] subclass.
@@ -43,7 +45,7 @@ class ProfileFragment : XevoFragment() {
 
         val user = FirebaseAuth.getInstance().currentUser!!
 
-        // Inflate the layout for this fragment
+        // Inflate the list_case_item for this fragment
         val v = inflater.inflate(R.layout.fragment_profile, container, false)
 
         // Load user data (photo and displayName)
@@ -65,33 +67,14 @@ class ProfileFragment : XevoFragment() {
         }
 
         // load list
-        var listItems: Array<String> = Array<String>(20) { id ->
+        val listItems: List<CaseData> = List<CaseData>(20) { id: Int ->
             when (id) {
-                0 -> "Zero"
-                1 -> "One"
-                2 -> "two"
-                3 -> "three"
-                4 -> "four"
-                5 -> "five"
-                6 -> "six"
-                7 -> "seven"
-                8 -> "eight"
-                9 -> "nine"
-                10 -> "Zero"
-                11 -> "One"
-                12 -> "two"
-                13 -> "three"
-                14 -> "four"
-                15 -> "five"
-                16 -> "six"
-                17 -> "seven"
-                18 -> "eight"
-                19 -> "nine"
-                else -> "something else"
+                0 -> CaseData("Title", "Description")
+                else -> CaseData("Else", "Description")
             }
         }
 
-        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, listItems)
+        val adapter: CaseAdapter = CaseAdapter(mContext!!, listItems)
         v.caseList.adapter = adapter
 
         return v

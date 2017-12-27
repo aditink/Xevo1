@@ -30,7 +30,7 @@ class ChooseQuestionFragment : XevoFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+        // Inflate the list_case_item for this fragment
         val v = inflater.inflate(R.layout.fragment_choose_question, container, false)
 
         // setup button listeners

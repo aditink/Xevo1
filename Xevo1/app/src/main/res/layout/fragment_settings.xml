@@ -7,7 +7,7 @@
     android:background="@color/colorBeige"
     tools:context="xevo.xevo1.SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragmlist_case_itemyout -->
 
     <Button
         android:id="@+id/logOutButton"
