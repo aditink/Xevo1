@@ -28,6 +28,7 @@ class SettingsFragment : XevoFragment() {
 
     public override val title: Int = R.string.nav_settings
     public override val fragmentTag: String = "settings"
+    public override val expandable: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

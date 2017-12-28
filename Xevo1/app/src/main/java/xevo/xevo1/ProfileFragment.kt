@@ -39,6 +39,7 @@ class ProfileFragment : XevoFragment() {
 
     public override val title: Int = R.string.nav_profile
     public override val fragmentTag: String = "profile"
+    public override val expandable: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +68,7 @@ class ProfileFragment : XevoFragment() {
 
         val adapter = CaseAdapter(listItems) { data:CaseData -> println("%s %s".format(data.title, data.description)) }
         v.recyclerView.adapter = adapter
-        
+
         // Load user data (photo and displayName)
 //        v.user_name.text = user.displayName!!
 //        if (user.photoUrl != null) {

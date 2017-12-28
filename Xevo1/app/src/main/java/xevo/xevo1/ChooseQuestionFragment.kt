@@ -24,6 +24,7 @@ class ChooseQuestionFragment : XevoFragment() {
 
     private var mListener: OnFragmentInteractionListener? = null
     private var mContext: Context? = null
+    public override val expandable: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -15,7 +15,9 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.nav_header.*
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header.view.*
 
 
@@ -159,7 +161,9 @@ class Main : AppCompatActivity(),
         }
 
         // change the activity title to match the fragment title
-        supportActionBar!!.setTitle(frag.title)
+        collapse_toolbar.title = getString(frag.title)
+        appbar.setExpanded(frag.expandable, true)
+        Log.d(TAG, "Frag Title: %s".format(getString(frag.title)))
 
         drawerLayout.closeDrawers()
         handler.post(pendingRunnable)
