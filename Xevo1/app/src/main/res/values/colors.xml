@@ -5,6 +5,8 @@
     <color name="colorAccent">#B02000</color>
     <color name="colorBeige">#FBFBF1</color>
     <color name="colorLightBeige">#FEFEFC</color>
+    <color name="primaryTextDark">#dd000000</color>
+    <color name="secondaryTextDark">#89000000</color>
 
     <!-- Old color scheme:
     <color name="colorPrimary">#903000</color>

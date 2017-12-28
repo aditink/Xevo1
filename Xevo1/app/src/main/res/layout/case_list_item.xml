@@ -16,7 +16,7 @@
     tools:ignore="UnusedAttribute">
 
     <ImageView
-        android:id="@+id/case_list_icon"
+        android:id="@+id/caseListIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
@@ -27,7 +27,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toEndOf="@+id/case_list_icon"
+        android:layout_toEndOf="@+id/caseListIcon"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:layout_marginStart="16dp">
@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/primaryTextDark"
             android:textSize="16sp"
             android:transitionName="text_layanan"
             tools:text="string/item_title" />
@@ -48,7 +49,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:textColor="#212121"
+            android:textColor="@color/secondaryTextDark"
             android:textSize="14sp"
             android:transitionName="text_dokter"
             tools:text="string/item_desc" />
