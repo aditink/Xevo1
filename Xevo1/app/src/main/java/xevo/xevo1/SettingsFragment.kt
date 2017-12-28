@@ -28,6 +28,7 @@ class SettingsFragment : XevoFragment() {
 
     public override val title: Int = R.string.nav_settings
     public override val fragmentTag: String = "settings"
+    public override val expandable: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +36,7 @@ class SettingsFragment : XevoFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+        // Inflate the list_case_item for this fragment
         val v = inflater.inflate(R.layout.fragment_settings, container, false)
         val logOutButton = v.logOutButton
         logOutButton.setOnClickListener {
