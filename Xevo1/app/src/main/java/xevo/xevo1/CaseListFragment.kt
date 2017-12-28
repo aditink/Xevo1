@@ -1,23 +1,13 @@
 package xevo.xevo1
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.fragment_profile.*
-import android.util.Log
-import kotlinx.android.synthetic.main.fragment_profile.view.*
-import com.myhexaville.smartimagepicker.ImagePicker
-import android.content.Intent
+import kotlinx.android.synthetic.main.fragment_case_list.view.*
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.widget.ArrayAdapter
-import com.bumptech.glide.Glide
-import com.google.firebase.auth.UserProfileChangeRequest
-import kotlinx.android.synthetic.main.app_bar_main.*
 import xevo.xevo1.models.CaseAdapter
 import xevo.xevo1.models.CaseData
 import xevo.xevo1.models.CaseType
@@ -25,19 +15,19 @@ import xevo.xevo1.models.CaseType
 /**
  * A [XevoFragment] subclass.
  * Activities that contain this fragment must implement the
- * [ProfileFragment.OnFragmentInteractionListener] interface
+ * [CaseListFragment.OnFragmentInteractionListener] interface
  * to allow for communication from Fragment to the Activity.
- * Use the [ProfileFragment.newInstance] factory method to
+ * Use the [CaseListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ProfileFragment : XevoFragment() {
+class CaseListFragment : XevoFragment() {
 
-    private val TAG = "ProfileFragment"
+    private val TAG = "CaseListFragment"
     private var mListener: OnFragmentInteractionListener? = null
     private var mContext: Context? = null
 
-    public override val title: Int = R.string.nav_profile
-    public override val fragmentTag: String = "profile"
+    public override val title: Int = R.string.nav_case_list
+    public override val fragmentTag: String = "case_list"
     public override val expandable: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +39,7 @@ class ProfileFragment : XevoFragment() {
 
         val user = FirebaseAuth.getInstance().currentUser!!
 
-        val v = inflater.inflate(R.layout.fragment_profile, container, false)
+        val v = inflater.inflate(R.layout.fragment_case_list, container, false)
 
         v.recyclerView.layoutManager = LinearLayoutManager(mContext)
 
@@ -98,10 +88,10 @@ class ProfileFragment : XevoFragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment ProfileFragment.
+         * @return A new instance of fragment CaseListFragment.
          */
-        fun newInstance(): ProfileFragment {
-            val fragment = ProfileFragment()
+        fun newInstance(): CaseListFragment {
+            val fragment = CaseListFragment()
             val args = Bundle()
             fragment.arguments = args
             return fragment

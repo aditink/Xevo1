@@ -53,7 +53,7 @@
     <string name="create_act">Create Account</string>
 
     <!--Navigation Related Strings-->
-    <string name="nav_profile">My Cases</string>
+    <string name="nav_case_list">My Cases</string>
     <string name="nav_question">Ask a Question</string>
     <string name="nav_settings">Settings</string>
     <string name="quick_hit">Quick Hit</string>

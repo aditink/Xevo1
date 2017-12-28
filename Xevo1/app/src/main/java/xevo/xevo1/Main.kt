@@ -1,6 +1,5 @@
 package xevo.xevo1
 
-import android.annotation.TargetApi
 import android.content.ContentResolver
 import android.os.Bundle
 import android.os.Handler
@@ -16,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.nav_header.*
 import android.content.Intent
 import android.net.Uri
-import android.transition.Visibility
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
@@ -33,14 +31,14 @@ import java.util.*
  */
 class Main : AppCompatActivity(),
         NavigationView.OnNavigationItemSelectedListener,
-        ProfileFragment.OnFragmentInteractionListener,
+        CaseListFragment.OnFragmentInteractionListener,
         ChooseQuestionFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener {
 
     private val TAG = "MainActivity"
     private var appBarExpanded = true // is the appbar expanded
     private var drawPlus = false // draw the plus in the toolbar
-    private var currentFragment: XevoFragment = ProfileFragment.newInstance() // fragment that is currently being shown
+    private var currentFragment: XevoFragment = CaseListFragment.newInstance() // fragment that is currently being shown
     private var fragmentStack: Stack<XevoFragment> = Stack() // keeps track of the back stack
     private lateinit var handler: Handler
     private lateinit var drawerLayout: DrawerLayout
@@ -139,7 +137,7 @@ class Main : AppCompatActivity(),
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_profile -> {
-                setFragment(ProfileFragment.newInstance(), true)
+                setFragment(CaseListFragment.newInstance(), true)
             }
 
             R.id.nav_question -> {
@@ -158,7 +156,7 @@ class Main : AppCompatActivity(),
     }
 
     /**
-     * Called from [ProfileFragment] when the user
+     * Called from [CaseListFragment] when the user
      * has changed their profile image. This is used
      * to change the ProfileImage in the NavigationDrawer.
      */
@@ -216,7 +214,7 @@ class Main : AppCompatActivity(),
     }
 
     /**
-     * Calls the same method in [ProfileFragment] to
+     * Calls the same method in [CaseListFragment] to
      * handle choosing a profile picture. This currently
      * causes a crash so this will probably need to be changed.
      */
@@ -225,8 +223,8 @@ class Main : AppCompatActivity(),
         val fragments = supportFragmentManager.fragments
         if (fragments != null) {
             for (f in fragments) {
-                if (f is ProfileFragment)
-                    (f as? ProfileFragment)?.onActivityResult(requestCode, resultCode, data)
+                if (f is CaseListFragment)
+                    (f as? CaseListFragment)?.onActivityResult(requestCode, resultCode, data)
             }
         }
     }
