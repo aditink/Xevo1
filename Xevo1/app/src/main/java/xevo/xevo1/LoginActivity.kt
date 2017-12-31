@@ -40,19 +40,16 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     private val callbackManager = CallbackManager.Factory.create()
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
-      override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        // Check if already signed in
-          val loggedIn : Boolean = AccessToken.getCurrentAccessToken() == null;
         mAuth = FirebaseAuth.getInstance()
         val currentUser = mAuth.currentUser
         if (currentUser != null) {
             Log.d(TAG, currentUser.toString())
             Log.d(TAG, "user already signed in")
             // Let control go to onStart
-        }
-        else {
+        } else {
             // Set up the login form.
             Log.d(TAG, "user not signed in")
 
@@ -79,7 +76,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                 override fun onSuccess(loginResult: LoginResult) {
                     showProgress(true)
                     Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                    handleFacebookAccessToken(loginResult.getAccessToken());
+                    handleFacebookAccessToken(loginResult.accessToken);
                 }
                 override fun onCancel() {
                     Log.d(TAG, "facebook:onCancel");
@@ -89,13 +86,13 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                     Log.d(TAG, "facebook:onError", error);
                     // ...
                 }
-            });
+            })
         }
     }
 
     override fun onStart() {
     super.onStart();
-    // Check if user is signed in (non-null) and update UI accordingly.
+        // Check if user is signed in (non-null) and update UI accordingly.
         mAuth = FirebaseAuth.getInstance()
         val currentUser = mAuth.currentUser
         updateUI(currentUser)

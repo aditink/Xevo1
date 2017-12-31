@@ -24,14 +24,15 @@ class ChooseQuestionFragment : XevoFragment() {
 
     private var mListener: OnFragmentInteractionListener? = null
     private var mContext: Context? = null
+    public override val expandable: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val v = inflater!!.inflate(R.layout.fragment_choose_question, container, false)
+        // Inflate the list_case_item for this fragment
+        val v = inflater.inflate(R.layout.fragment_choose_question, container, false)
 
         // setup button listeners
         val quickHitButton = v.quick_hit_button

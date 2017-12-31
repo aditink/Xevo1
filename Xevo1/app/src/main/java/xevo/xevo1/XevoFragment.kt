@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
  * so that it is easier to display Fragments in Main.
  */
 abstract class XevoFragment : Fragment() {
-    public abstract val title : Int
-    public abstract val fragmentTag : String
+    public abstract val title: Int
+    public abstract val fragmentTag: String
+    public abstract val expandable: Boolean
 }
