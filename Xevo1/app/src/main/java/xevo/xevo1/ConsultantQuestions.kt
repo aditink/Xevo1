@@ -21,8 +21,7 @@ import kotlinx.android.synthetic.main.content_consultant_questions.*
 
 
 class ConsultantQuestions : AppCompatActivity(),
-        QuestionFragment.OnFragmentInteractionListener,
-        ProfileFragment.OnFragmentInteractionListener {
+        QuestionFragment.OnFragmentInteractionListener {
 
     lateinit var categorySpinner : Spinner
     val TAG : String = "ConsultantQuestions"

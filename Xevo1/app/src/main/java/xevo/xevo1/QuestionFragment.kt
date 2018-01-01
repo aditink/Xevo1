@@ -28,6 +28,7 @@ class QuestionFragment : XevoFragment(),
     public override val title: Int = R.string.question_fragment
     var questionId : String = "placeholder"
     private var mListener: OnFragmentInteractionListener? = null
+    public override val expandable: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,6 +1,7 @@
 package xevo.xevo1
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,11 @@ import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_case_list.view.*
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import xevo.xevo1.models.CaseAdapter
 import xevo.xevo1.models.CaseData
 import xevo.xevo1.models.CaseType
+import java.util.*
 
 /**
  * A [XevoFragment] subclass.
@@ -30,6 +33,8 @@ class CaseListFragment : XevoFragment() {
     public override val fragmentTag: String = "case_list"
     public override val expandable: Boolean = true
 
+    var caseDetailClass : Class<*>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -46,16 +51,22 @@ class CaseListFragment : XevoFragment() {
         // load list
         val listItems: List<CaseData> = List<CaseData>(20) { id: Int ->
             when (id) {
-                0 -> CaseData(CaseType.QUICK_HIT, "What is the meaning of life?", "I need a better answer than '42'", "Super hard", null)
-                1 -> CaseData(CaseType.TALK_ABOUT_IT, "Talk About It", "Description", "Super hard", null)
-                else -> CaseData(CaseType.PROFESSIONAL, "Professional", "Description", "super easy", null)
+                0 -> CaseData(CaseType.QUICK_HIT, "What is the meaning of life?", "I need a better answer than '42'", "Super hard", null, caseId = Math.random().toInt())
+                1 -> CaseData(CaseType.TALK_ABOUT_IT, "Talk About It", "Description", "Super hard", null, caseId = Math.random().toInt())
+                else -> CaseData(CaseType.PROFESSIONAL, "Professional", "Description", "super easy", null, caseId = Math.random().toInt())
             }
         }
-
-        val adapter = CaseAdapter(listItems) { data:CaseData -> println("%s %s".format(data.title, data.description)) }
+        val adapter = CaseAdapter(listItems) { data:CaseData -> questionDetails(data) }
         v.recyclerView.adapter = adapter
 
         return v
+    }
+
+    fun questionDetails(case : CaseData) {
+        if (caseDetailClass != null) {
+            val intent = Intent(mContext, caseDetailClass)
+            startActivity(intent)
+        }
     }
 
     override fun onAttach(context: Context?) {
@@ -94,6 +105,14 @@ class CaseListFragment : XevoFragment() {
             val fragment = CaseListFragment()
             val args = Bundle()
             fragment.arguments = args
+            return fragment
+        }
+
+        fun newInstance(detailsClass : Class<*>): CaseListFragment {
+            val fragment = CaseListFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            fragment.caseDetailClass = detailsClass
             return fragment
         }
     }
