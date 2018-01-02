@@ -45,7 +45,7 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" />
-        
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -66,7 +66,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".ReadQuestion"></activity>
+        <activity android:name=".ReadQuestion" />
+        <activity android:name=".AnswerQuestionActivity"></activity>
     </application>
 
 </manifest>
