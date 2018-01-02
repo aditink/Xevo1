@@ -45,11 +45,7 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" />
-        <activity
-            android:name=".ConsultantQuestions"
-            android:label="@string/title_activity_consultant_questions"
-            android:theme="@style/AppTheme.NoActionBar" />
-
+        
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

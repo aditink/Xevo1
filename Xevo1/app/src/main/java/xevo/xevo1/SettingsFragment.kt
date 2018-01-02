@@ -46,12 +46,6 @@ class SettingsFragment : XevoFragment() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }
-
-        //For testing consultant UI
-        val consultantUiButton = v.consultantUi
-        consultantUiButton.setOnClickListener {
-            startConsultantUI()
-        }
         return v
     }
 
@@ -78,14 +72,6 @@ class SettingsFragment : XevoFragment() {
      */
     interface OnFragmentInteractionListener {
         fun onFragmentInteraction()
-    }
-
-    /**
-     * Start consultant UI for sake of testing.
-     */
-    private fun startConsultantUI() {
-        val intent = Intent(activity, ConsultantQuestions::class.java)
-        startActivity(intent)
     }
 
     companion object {

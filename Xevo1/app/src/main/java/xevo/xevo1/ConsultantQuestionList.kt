@@ -13,9 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import kotlinx.android.synthetic.main.activity_consultant_questions.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.content_consultant_questions.*
 import kotlinx.android.synthetic.main.fragment_consultant_question_list.*
 import xevo.xevo1.models.CaseData
 
