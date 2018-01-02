@@ -86,7 +86,7 @@ class ConsultantQuestionList : XevoFragment() {
         adapter.setDropDownViewResource(R.layout.spinner_item);
         categorySpinner.setAdapter(adapter);
 
-        setFragment(CaseListFragment.newInstance(ConsultantQuestions::class.java))
+        setFragment(CaseListFragment.newInstance(ReadQuestion::class.java))
     }
 
     override fun onDetach() {
