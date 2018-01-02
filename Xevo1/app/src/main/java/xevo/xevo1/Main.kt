@@ -74,7 +74,7 @@ class Main : AppCompatActivity(),
             view.imageView.setImageURI(drawableToUri(R.drawable.ic_menu_camera))
         }
 
-        var isConsultant = false //get from firebase later
+        var isConsultant = true //get from firebase later
         var menu : Menu = navView.menu
         if (isConsultant) {
             menu.setGroupVisible(R.id.is_consultant, true)
@@ -158,6 +158,14 @@ class Main : AppCompatActivity(),
 
             R.id.nav_settings -> {
                 setFragment(SettingsFragment.newInstance(), true)
+            }
+
+            R.id.nav_answer_question -> {
+                setFragment(ConsultantQuestionList.newInstance(), true)
+            }
+
+            R.id.nav_register_as_consultant -> {
+                //TODO create consultant registration form
             }
         }
 

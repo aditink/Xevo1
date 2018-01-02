@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import kotlinx.android.synthetic.main.activity_consultant_questions.*
 import kotlinx.android.synthetic.main.content_consultant_questions.*
+import kotlinx.android.synthetic.main.fragment_consultant_question_list.*
 
 
 /**
@@ -29,8 +30,8 @@ class ConsultantQuestionList : XevoFragment() {
     private var mParam1: String? = null
     private var mParam2: String? = null
 
-    public override val title: Int = R.string.nav_settings
-    public override val fragmentTag: String = "settings"
+    public override val title: Int = R.string.nav_answer_case
+    public override val fragmentTag: String = "answer_case"
     public override val expandable: Boolean = false
 
     lateinit var categorySpinner : Spinner
@@ -41,7 +42,7 @@ class ConsultantQuestionList : XevoFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        categorySpinner = category as Spinner
+//        categorySpinner = category as Spinner
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -64,6 +65,11 @@ class ConsultantQuestionList : XevoFragment() {
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        categorySpinner = category_spinner as Spinner
         //Eventually get from database
         var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
         updateCategorySpinner(categoryList)

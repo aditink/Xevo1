@@ -12,7 +12,7 @@
     tools:showIn="@layout/activity_consultant_questions">
 
     <android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/category"
+        android:id="@+id/category_spinner"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

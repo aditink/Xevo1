@@ -17,23 +17,24 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/nav_settings" />
     </group>
+
     <group
         android:checkableBehavior="single"
         android:id="@+id/is_consultant"
         android:visible="false">
         <item
-            android:id="@+id/answer_question"
+            android:id="@+id/nav_answer_question"
             android:icon="@drawable/common_full_open_on_phone"
-            android:title="@string/nav_case_list" />
+            android:title="@string/nav_answer_case" />
     </group>
     <group
         android:checkableBehavior="single"
         android:id="@+id/is_not_consultant"
         android:visible="false" >
         <item
-            android:id="@+id/register_as_consultant"
+            android:id="@+id/nav_register_as_consultant"
             android:icon="@drawable/businessman_48"
-            android:title="@string/nav_case_list" />
+            android:title="@string/nav_become_consultant" />
     </group>
 
 
