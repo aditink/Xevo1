@@ -28,6 +28,7 @@
     <!-- Spinner style -->
     <style name="spinnerItemStyle">
         <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/avenir_regular</item>
         <item name="android:textAlignment">center</item>
     </style>
 
@@ -35,6 +36,10 @@
     <style name="spinnerDropDownItemStyle">
         <item name="android:gravity">center</item>
         <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="navItemStyle">
+        <item name="android:fontFamily">@font/avenir_regular</item>
     </style>
 
 </resources>
