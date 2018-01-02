@@ -1,12 +1,18 @@
 package xevo.xevo1
 
 import android.content.Context
+import android.databinding.DataBindingUtil.setContentView
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import kotlinx.android.synthetic.main.activity_consultant_questions.*
+import kotlinx.android.synthetic.main.content_consultant_questions.*
 
 
 /**
@@ -17,20 +23,25 @@ import android.view.ViewGroup
  * Use the [ConsultantQuestionList.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ConsultantQuestionList : Fragment() {
+class ConsultantQuestionList : XevoFragment() {
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
     private var mParam2: String? = null
 
+    public override val title: Int = R.string.nav_settings
+    public override val fragmentTag: String = "settings"
+    public override val expandable: Boolean = false
+
+    lateinit var categorySpinner : Spinner
+    val TAG : String = "ConsultantQuestions"
+
+
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments!!.getString(ARG_PARAM1)
-            mParam2 = arguments!!.getString(ARG_PARAM2)
-        }
+        categorySpinner = category as Spinner
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +53,7 @@ class ConsultantQuestionList : Fragment() {
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         if (mListener != null) {
-            mListener!!.onFragmentInteraction(uri)
+            mListener!!.onFragmentInteraction()
         }
     }
 
@@ -53,6 +64,15 @@ class ConsultantQuestionList : Fragment() {
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
+        //Eventually get from database
+        var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
+        updateCategorySpinner(categoryList)
+    }
+
+    private fun updateCategorySpinner(categories : List<String>) {
+        val adapter = ArrayAdapter(activity, R.layout.spinner_item, categories)
+        adapter.setDropDownViewResource(R.layout.spinner_item);
+        categorySpinner.setAdapter(adapter);
     }
 
     override fun onDetach() {
@@ -71,7 +91,7 @@ class ConsultantQuestionList : Fragment() {
      */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        fun onFragmentInteraction()
     }
 
     companion object {
@@ -89,11 +109,9 @@ class ConsultantQuestionList : Fragment() {
          * @return A new instance of fragment ConsultantQuestionList.
          */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String, param2: String): ConsultantQuestionList {
+        fun newInstance(): ConsultantQuestionList {
             val fragment = ConsultantQuestionList()
             val args = Bundle()
-            args.putString(ARG_PARAM1, param1)
-            args.putString(ARG_PARAM2, param2)
             fragment.arguments = args
             return fragment
         }
