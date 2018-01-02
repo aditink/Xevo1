@@ -24,8 +24,7 @@
         android:layout_height="1dp"
         android:background="@color/colorPrimary" />
 
-    <fragment
-        android:name="xevo.xevo1.CaseListFragment"
+    <FrameLayout
         android:id="@+id/case_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

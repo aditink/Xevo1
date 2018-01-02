@@ -1,9 +1,11 @@
 package xevo.xevo1
 
 import android.content.Context
+import android.content.Intent
 import android.databinding.DataBindingUtil.setContentView
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,8 +14,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import kotlinx.android.synthetic.main.activity_consultant_questions.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_consultant_questions.*
 import kotlinx.android.synthetic.main.fragment_consultant_question_list.*
+import xevo.xevo1.models.CaseData
 
 
 /**
@@ -36,7 +40,7 @@ class ConsultantQuestionList : XevoFragment() {
 
     lateinit var categorySpinner : Spinner
     val TAG : String = "ConsultantQuestions"
-
+    private lateinit var handler: Handler
 
     private var mListener: OnFragmentInteractionListener? = null
 
@@ -49,6 +53,7 @@ class ConsultantQuestionList : XevoFragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_consultant_question_list, container, false)
+        handler = Handler()
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -69,6 +74,7 @@ class ConsultantQuestionList : XevoFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        handler = Handler()
         categorySpinner = category_spinner as Spinner
         //Eventually get from database
         var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
@@ -79,11 +85,25 @@ class ConsultantQuestionList : XevoFragment() {
         val adapter = ArrayAdapter(activity, R.layout.spinner_item, categories)
         adapter.setDropDownViewResource(R.layout.spinner_item);
         categorySpinner.setAdapter(adapter);
+
+        setFragment(CaseListFragment.newInstance(ConsultantQuestions::class.java))
     }
 
     override fun onDetach() {
         super.onDetach()
         mListener = null
+    }
+
+    private fun setFragment(frag: XevoFragment) {
+        // Open fragment with runnable to ensure that there is not
+        // lag when switching views
+        val pendingRunnable = Runnable {
+            fragmentManager!!.beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                    .replace(R.id.case_list, frag, frag.fragmentTag)
+                    .commit()
+        }
+        handler.post(pendingRunnable)
     }
 
     /**
