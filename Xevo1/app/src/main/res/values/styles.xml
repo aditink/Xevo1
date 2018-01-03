@@ -10,6 +10,7 @@
         <item name="android:spinnerDropDownItemStyle">
             @style/spinnerDropDownItemStyle
         </item>
+        <item name="buttonStyle">@style/buttonStyle</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -38,8 +39,18 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <!-- Navigation drawer layout style -->
     <style name="navItemStyle">
         <item name="android:fontFamily">@font/avenir_regular</item>
+    </style>
+
+    <!-- Button style -->
+    <style name="buttonStyle">
+        <item name="android:fontFamily">@font/avenir_regular</item>
+        <item name="android:background">@color/colorLightBeige</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/text_margin_large</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
 </resources>
