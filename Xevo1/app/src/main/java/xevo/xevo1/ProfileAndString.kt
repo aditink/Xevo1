@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.text.method.ScrollingMovementMethod
 import kotlinx.android.synthetic.main.fragment_profile_and_string.*
+import xevo.xevo1.R.id.question_details_view
 
 
 /**
@@ -50,7 +51,7 @@ class ProfileAndString : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        question_details_view.setMovementMethod(ScrollingMovementMethod())
+        question_details_profile_and_string.movementMethod = ScrollingMovementMethod()
     }
 
     override fun onAttach(context: Context?) {

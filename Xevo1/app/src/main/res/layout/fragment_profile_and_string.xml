@@ -40,7 +40,7 @@
 
         <!-- These weights set by fibonacci sequence, so hopefully golden ratio -->
         <TextView
-            android:id="@+id/question_details_view"
+            android:id="@+id/question_details_profile_and_string"
             style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
