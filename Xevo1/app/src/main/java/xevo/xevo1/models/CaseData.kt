@@ -12,7 +12,8 @@ data class CaseData(
         val title: String,
         val description: String,
         val difficulty: String,
-        val photoUrl: Uri?
+        val photoUrl: Uri?,
+        val caseId: Int //Unique question id
 )
 
 /**

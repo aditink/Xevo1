@@ -19,6 +19,7 @@ import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.app_bar_main.view.*
 import kotlinx.android.synthetic.main.nav_header.view.*
 import java.util.*
 
@@ -33,7 +34,8 @@ class Main : AppCompatActivity(),
         NavigationView.OnNavigationItemSelectedListener,
         CaseListFragment.OnFragmentInteractionListener,
         ChooseQuestionFragment.OnFragmentInteractionListener,
-        SettingsFragment.OnFragmentInteractionListener {
+        SettingsFragment.OnFragmentInteractionListener,
+        ConsultantQuestionList.OnFragmentInteractionListener {
 
     private val TAG = "MainActivity"
     private var appBarExpanded = true // is the appbar expanded
@@ -70,6 +72,16 @@ class Main : AppCompatActivity(),
             Glide.with(this).load(user.photoUrl).into(view.imageView)
         } else {
             view.imageView.setImageURI(drawableToUri(R.drawable.ic_menu_camera))
+        }
+
+        var isConsultant = true //get from firebase later
+        var menu : Menu = navView.menu
+        if (isConsultant) {
+            menu.setGroupVisible(R.id.is_consultant, true)
+            currentFragment = ConsultantQuestionList.newInstance()
+        }
+        else {
+            menu.setGroupVisible(R.id.is_not_consultant, true)
         }
 
         // fab listener
@@ -146,6 +158,14 @@ class Main : AppCompatActivity(),
 
             R.id.nav_settings -> {
                 setFragment(SettingsFragment.newInstance(), true)
+            }
+
+            R.id.nav_answer_question -> {
+                setFragment(ConsultantQuestionList.newInstance(), true)
+            }
+
+            R.id.nav_register_as_consultant -> {
+                //TODO create consultant registration form
             }
         }
 

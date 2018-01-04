@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="navItemStyle">
+        <item name="android:fontFamily">@font/avenir_regular</item>
+    </style>
+</resources>

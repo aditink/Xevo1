@@ -55,4 +55,5 @@
             tools:text="string/item_desc" />
 
     </LinearLayout>
+
 </RelativeLayout>
