@@ -8,7 +8,6 @@ import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.Button
 import kotlinx.android.synthetic.main.activity_read_question.*
-import kotlinx.android.synthetic.main.fragment_question.*
 
 class ReadQuestion : AppCompatActivity(),
     ProfileAndString.OnFragmentInteractionListener {
