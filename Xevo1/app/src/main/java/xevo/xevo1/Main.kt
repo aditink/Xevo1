@@ -18,8 +18,8 @@ import android.net.Uri
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.app_bar_main.view.*
 import kotlinx.android.synthetic.main.nav_header.view.*
 import java.util.*
 
@@ -44,10 +44,17 @@ class Main : AppCompatActivity(),
     private var fragmentStack: Stack<XevoFragment> = Stack() // keeps track of the back stack
     private lateinit var handler: Handler
     private lateinit var drawerLayout: DrawerLayout
+    lateinit var database : FirebaseDatabase
+    val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        database = FirebaseDatabase.getInstance()
+
+        var myRef = database.getReference("Users/"+userId)
+        //myRef.setValue(User())
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
