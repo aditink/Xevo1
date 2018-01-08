@@ -3,6 +3,8 @@ package xevo.xevo1.Database.DatabaseModels;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ServerValue;
 
+import xevo.xevo1.enums.CaseType;
+
 /**
  * Created by aditi on 1/7/18.
  */

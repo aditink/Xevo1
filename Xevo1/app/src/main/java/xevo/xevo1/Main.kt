@@ -53,7 +53,7 @@ class Main : AppCompatActivity(),
 
         database = FirebaseDatabase.getInstance()
 
-        var myRef = database.getReference("Users/"+userId)
+        var myRef = database.getReference(getString(R.string.db_users) + userId)
         //myRef.setValue(User())
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)

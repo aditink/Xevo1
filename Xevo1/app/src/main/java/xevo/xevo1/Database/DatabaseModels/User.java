@@ -1,4 +1,4 @@
-package xevo.xevo1.enums;
+package xevo.xevo1.Database.DatabaseModels;
 
 import android.net.Uri;
 

@@ -71,6 +71,12 @@
 
     <string name="prompt_answer">Enter Answer</string>
 
+    <!-- Database strings -->
+    <string name="db_users">Users/</string>
+    <string name="db_cases">Cases/</string>
+    <string name="db_cases_by_users">CasesByUsers/</string>
+    <string name="db_cases_by_subject">CasesBySubject/</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
