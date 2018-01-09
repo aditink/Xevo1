@@ -16,6 +16,7 @@ public class CaseOverview {
     private CaseType caseType;
     private String title;
     private String description;
+    private String caseId;
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -26,13 +27,15 @@ public class CaseOverview {
         caseType = CaseType.QUICK_HIT;
         title = "";
         description = "";
+        caseId = "";
     }
 
-    public CaseOverview(Object timeStamp, CaseType caseType, String title, String description) {
+    public CaseOverview(Object timeStamp, CaseType caseType, String title, String description, String caseId) {
         this.timeStamp = timeStamp;
         this.caseType = caseType;
         this.title = title;
         this.description = description;
+        this.caseId = caseId;
     }
 
     public CaseType getCaseType() {
@@ -41,6 +44,10 @@ public class CaseOverview {
 
     public Object getTimeStamp() {
         return timeStamp;
+    }
+
+    public String getCaseId() {
+        return caseId;
     }
 
     public String getDescription() {
@@ -65,5 +72,9 @@ public class CaseOverview {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setCaseId(String caseId) {
+        this.caseId = caseId;
     }
 }

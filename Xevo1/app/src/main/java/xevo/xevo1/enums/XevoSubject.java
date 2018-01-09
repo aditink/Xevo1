@@ -5,7 +5,22 @@ package xevo.xevo1.enums;
  */
 
 public enum XevoSubject {
-    MATH,
-    COMPUTER_SCIENCE,
-    PHYSICS
+    MATH {
+        @Override
+        public String toString() {
+            return "Mathematics";
+        }
+    },
+    COMPUTER_SCIENCE {
+        @Override
+        public String toString() {
+            return "Computer Science";
+        }
+    },
+    PHYSICS {
+        @Override
+        public String toString() {
+            return "Physics";
+        }
+    }
 }

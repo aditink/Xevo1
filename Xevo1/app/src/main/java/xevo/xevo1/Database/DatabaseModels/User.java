@@ -4,6 +4,9 @@ import android.net.Uri;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by aditi on 1/7/18.
  */
@@ -16,6 +19,7 @@ public class User {
     private boolean isConsultant;
     private String firstName;
     private String lastName;
+    private List<String> subjects;
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -27,6 +31,7 @@ public class User {
         isConsultant = false;
         firstName = "";
         lastName = "";
+        subjects = new ArrayList<String>();
     }
 
     /**
@@ -34,12 +39,14 @@ public class User {
      * @param username : String
      * @param email : String
      */
-    public User(String username, String email, boolean isConsultant, String firstName, String lastName) {
+    public User(String username, String email, boolean isConsultant, String firstName,
+                String lastName, List<String> subjects) {
         this.username = username;
         this.email = email;
         this.isConsultant = isConsultant;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.subjects = subjects;
     }
 
     /**
@@ -65,6 +72,7 @@ public class User {
     public boolean getIsConsultant() {
         return isConsultant;
     }
+
     /**
      * Getter for firstName: required by Firebase
      * @return firstName : String
@@ -72,11 +80,16 @@ public class User {
     public String getFirstName() {
         return firstName;
     }
+
     /**
      * Getter for lastName: required by Firebase
      * @return lastName : String
      */
     public String getLastName() {
         return lastName;
+    }
+
+    public List<String> getSubjects() {
+        return subjects;
     }
 }

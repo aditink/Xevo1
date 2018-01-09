@@ -67,6 +67,10 @@ class ProfileAndString : Fragment() {
         mListener = null
     }
 
+    public fun setText(text : String) {
+        question_details_profile_and_string.setText(text)
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

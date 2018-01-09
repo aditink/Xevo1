@@ -40,7 +40,7 @@ class Main : AppCompatActivity(),
     private val TAG = "MainActivity"
     private var appBarExpanded = true // is the appbar expanded
     private var drawPlus = false // draw the plus in the toolbar
-    private var currentFragment: XevoFragment = CaseListFragment.newInstance() // fragment that is currently being shown
+    private lateinit var currentFragment: XevoFragment // fragment that is currently being shown
     private var fragmentStack: Stack<XevoFragment> = Stack() // keeps track of the back stack
     private lateinit var handler: Handler
     private lateinit var drawerLayout: DrawerLayout
@@ -88,6 +88,7 @@ class Main : AppCompatActivity(),
             currentFragment = ConsultantQuestionList.newInstance()
         }
         else {
+            currentFragment = CaseListFragment.newInstance()
             menu.setGroupVisible(R.id.is_not_consultant, true)
         }
 
@@ -216,11 +217,11 @@ class Main : AppCompatActivity(),
         drawerLayout.closeDrawers()
 
         // if frag is already being shown, don't do anything
-        for (f in supportFragmentManager.fragments) {
-            if (f.tag.equals(frag.fragmentTag)) {
-                return
-            }
-        }
+//        for (f in supportFragmentManager.fragments) {
+//            if (f.tag.equals(frag.fragmentTag)) {
+//                return
+//            }
+//        }
 
         // Open fragment with runnable to ensure that there is not
         // lag when switching views

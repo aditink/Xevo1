@@ -13,9 +13,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_consultant_question_list.*
+import xevo.xevo1.enums.XevoSubject
 import xevo.xevo1.models.CaseData
+import java.util.*
 
 
 /**
@@ -75,7 +80,8 @@ class ConsultantQuestionList : XevoFragment() {
         handler = Handler()
         categorySpinner = category_spinner as Spinner
         //Eventually get from database
-        var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
+        var categoryList : List<String> = XevoSubject.values().map({ type -> type.toString() })
+        //var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
         updateCategorySpinner(categoryList)
     }
 
@@ -84,7 +90,11 @@ class ConsultantQuestionList : XevoFragment() {
         adapter.setDropDownViewResource(R.layout.spinner_item);
         categorySpinner.setAdapter(adapter);
 
-        setFragment(CaseListFragment.newInstance(ReadQuestion::class.java))
+        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+        var databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference(
+                getString(R.string.db_cases_by_subject))
+        //TODO: add actual subject fields
+        setFragment(CaseListFragment.newInstance(ReadQuestion::class.java, databaseReference))
     }
 
     override fun onDetach() {

@@ -28,13 +28,13 @@ open class AskQuestionActivity : AppCompatActivity() {
         var caseKey = ref.child(ctx.getString(R.string.db_cases)).push().key
 
         //add to case_data_by_user and _by_subject
-        var caseOverview : CaseOverview = CaseOverview(TIMESTAMP, caseType, title, description)
+        var caseOverview : CaseOverview = CaseOverview(TIMESTAMP, caseType, title, description, caseKey)
 
         val childUpdates = HashMap<String, Object>()
         childUpdates.put(ctx.getString(R.string.db_cases)+caseKey, caseDetails as Object)
         childUpdates.put(ctx.getString(R.string.db_cases_by_subject) + caseKey, caseOverview as Object)
-        childUpdates.put(ctx.getString(R.string.db_cases_by_users) + userId + "/" + caseKey,
-                caseOverview as Object)
+        childUpdates.put(ctx.getString(R.string.db_cases_by_users) + userId + "/" + ctx.getString(
+                R.string.db_questions)+ caseKey, caseOverview as Object)
 
         ref.updateChildren(childUpdates as Map<String, Any>)
     }
