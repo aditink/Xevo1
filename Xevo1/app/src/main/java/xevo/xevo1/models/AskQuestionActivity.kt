@@ -21,11 +21,11 @@ open class AskQuestionActivity : AppCompatActivity() {
     fun createCase(title : String, description : String, ref : DatabaseReference,
                    caseType : CaseType, userId : String, SUBJECT : XevoSubject, ctx : Context) {
         var TIMESTAMP = ServerValue.TIMESTAMP
-        var caseDetails : CaseDetails = CaseDetails(TIMESTAMP, caseType, title, description,
-                "", userId, Status.UNANSWERED, SUBJECT)
-
-        //add to case table
         var caseKey = ref.child(ctx.getString(R.string.db_cases)).push().key
+
+        //to add to case table
+        var caseDetails : CaseDetails = CaseDetails(TIMESTAMP, caseType, title, description,
+                "", userId, Status.UNANSWERED, SUBJECT, caseKey)
 
         //add to case_data_by_user and _by_subject
         var caseOverview : CaseOverview = CaseOverview(TIMESTAMP, caseType, title, description, caseKey)

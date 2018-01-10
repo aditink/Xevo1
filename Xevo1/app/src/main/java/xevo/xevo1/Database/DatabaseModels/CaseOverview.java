@@ -30,6 +30,14 @@ public class CaseOverview {
         caseId = "";
     }
 
+    public CaseOverview(CaseDetails caseDetails) {
+        timeStamp = caseDetails.getTimeStamp();
+        caseType = caseDetails.getCaseType();
+        title = caseDetails.getTitle();
+        description = caseDetails.getDescription();
+        caseId = caseDetails.getCaseId();
+    }
+
     public CaseOverview(Object timeStamp, CaseType caseType, String title, String description, String caseId) {
         this.timeStamp = timeStamp;
         this.caseType = caseType;

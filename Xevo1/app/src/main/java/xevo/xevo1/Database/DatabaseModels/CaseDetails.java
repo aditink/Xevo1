@@ -22,6 +22,8 @@ public class CaseDetails {
     private String client;
     private Status status;
     private XevoSubject subject;
+    private String answer;
+    private String caseId;
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -36,11 +38,13 @@ public class CaseDetails {
         client = "";
         status = Status.UNANSWERED;
         subject = XevoSubject.COMPUTER_SCIENCE;
+        answer = "";
+        caseId = "";
     }
 
     public CaseDetails(Object timeStamp, CaseType caseType, String title,
                        String description, String consultant, String client,
-                       Status status, XevoSubject subject) {
+                       Status status, XevoSubject subject, String caseId) {
         this.timeStamp = timeStamp;
         this.caseType = caseType;
         this.title = title;
@@ -49,7 +53,24 @@ public class CaseDetails {
         this.client = client;
         this.status = status;
         this.subject = subject;
+        this.answer = "";
+        this.caseId = caseId;
     }
+
+    public CaseDetails(Object timeStamp, CaseType caseType, String title,
+                       String description, String consultant, String client,
+                       Status status, XevoSubject subject, String answer, String caseId) {
+        this.timeStamp = timeStamp;
+        this.caseType = caseType;
+        this.title = title;
+        this.description = description;
+        this.consultant = consultant;
+        this.client = client;
+        this.status = status;
+        this.subject = subject;
+        this.answer = answer;
+    }
+
 
     public CaseType getCaseType() {
         return caseType;
@@ -83,6 +104,10 @@ public class CaseDetails {
         return subject;
     }
 
+    public String getCaseId() {
+        return caseId;
+    }
+
     public void setConsultant(String consultant) {
         this.consultant = consultant;
     }
@@ -113,5 +138,9 @@ public class CaseDetails {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setCaseId(String caseId) {
+        this.caseId = caseId;
     }
 }
