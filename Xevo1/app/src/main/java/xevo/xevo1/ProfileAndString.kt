@@ -67,6 +67,9 @@ class ProfileAndString : Fragment() {
         mListener = null
     }
 
+    /**
+     * Set text of textView in this fragment
+     */
     public fun setText(text : String) {
         question_details_profile_and_string.setText(text)
     }

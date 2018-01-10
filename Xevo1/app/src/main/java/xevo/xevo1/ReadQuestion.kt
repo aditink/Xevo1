@@ -43,11 +43,13 @@ class ReadQuestion : AppCompatActivity(),
                 var obj = dataSnapshot?.getValue(CaseDetails::class.java)
                 if (obj!= null) {
                     caseDetails = obj
+//                    question_details.setText(caseDetails.description)
                     updateUI()
                 }
             }
         }
         databaseReference.addListenerForSingleValueEvent(valueEventListener)
+        //Conversion to add singleValueEvent Listener giving weird behaviour
     }
 
     override fun onFragmentInteraction(uri: Uri) {
@@ -61,8 +63,10 @@ class ReadQuestion : AppCompatActivity(),
     }
 
     fun updateUI() {
+        val intent = Intent(this, Main::class.java)
+        var headerFragment : ProfileAndString = supportFragmentManager.findFragmentById(
+                R.id.question_title) as ProfileAndString
+        headerFragment.setText(caseDetails.title)
         question_details.setText(caseDetails.description)
-        var questionTitle = question_title
-        //TODO modify question_title
     }
 }
