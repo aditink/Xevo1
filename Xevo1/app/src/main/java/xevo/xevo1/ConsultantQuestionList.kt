@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.google.firebase.auth.FirebaseAuth
@@ -83,6 +84,15 @@ class ConsultantQuestionList : XevoFragment() {
         var categoryList : List<String> = XevoSubject.values().map({ type -> type.toString() })
         //var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
         updateCategorySpinner(categoryList)
+        categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                updateList(selectedItem)
+            } // to close the onItemSelected
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
+        }
     }
 
     private fun updateCategorySpinner(categories : List<String>) {
@@ -116,13 +126,22 @@ class ConsultantQuestionList : XevoFragment() {
     }
 
     /**
+     * Get new list of questions and display on subject change.
+     * Subject is the name of the subject in the database.
+     */
+    private fun updateList(subject: String) {
+
+    }
+
+    /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
      *
      *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
+     * See the Android Training lesson [Communicating with Other Fragments]
+     * (http://developer.android.com/training/basics/fragments/communicating.html) for more information.
      */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
