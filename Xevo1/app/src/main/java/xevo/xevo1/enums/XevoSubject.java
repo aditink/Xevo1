@@ -5,25 +5,32 @@ package xevo.xevo1.enums;
  */
 
 public enum XevoSubject {
-    MATH {
+    MATH("math/") {
         @Override
         public String toString() {
             return "Mathematics";
         }
-        public String getDbString() {return "math";}
     },
-    COMPUTER_SCIENCE {
+    COMPUTER_SCIENCE("computer_science/") {
         @Override
         public String toString() {
             return "Computer Science";
         }
-        public String getDbString() {return "computer_science";}
     },
-    PHYSICS {
+    PHYSICS("phys/") {
         @Override
         public String toString() {
             return "Physics";
         }
-        public String getDbString() {return "phys";}
+    };
+
+    public String value;
+
+    XevoSubject(String value) {
+        this.value = value;
+    }
+
+    public String getDbString() {
+        return value;
     }
 }

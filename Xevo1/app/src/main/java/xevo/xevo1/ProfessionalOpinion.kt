@@ -34,7 +34,6 @@ class ProfessionalOpinion : AskQuestionActivity() {
 
     val CASE_TYPE : CaseType = CaseType.HEAVY_LIFT
     //TODO replace with subject selection system
-    val SUBJECT : XevoSubject = XevoSubject.MATH
     val userId = FirebaseAuth.getInstance().currentUser!!.uid
     lateinit var whatsUp : EditText
     lateinit var shortDescription : EditText
@@ -58,7 +57,7 @@ class ProfessionalOpinion : AskQuestionActivity() {
 
         submitButton.setOnClickListener({view : View ->
             createCase(whatsUp.text.toString(), shortDescription.text.toString(), ref,
-                    CASE_TYPE, userId, SUBJECT, this)
+                    CASE_TYPE, userId, categorySpinner.selectedItem as XevoSubject, this)
             //go back home
             val intent = Intent(this, Main::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK

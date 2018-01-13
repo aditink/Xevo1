@@ -32,9 +32,8 @@ open class AskQuestionActivity : AppCompatActivity() {
 
         val childUpdates = HashMap<String, Object>()
         childUpdates.put(ctx.getString(R.string.db_cases)+caseKey, caseDetails as Object)
-        childUpdates.put(ctx.getString(R.string.db_cases_by_subject) + caseKey, caseOverview as Object)
-        childUpdates.put(ctx.getString(R.string.db_cases_by_users) + userId + "/" + ctx.getString(
-                R.string.db_questions)+ caseKey, caseOverview as Object)
+        childUpdates.put(ctx.getString(R.string.db_cases_by_subject) + SUBJECT.dbString + caseKey, caseOverview as Object)
+        childUpdates.put(ctx.getString(R.string.db_questions) + userId + "/" + caseKey, caseOverview as Object)
 
         ref.updateChildren(childUpdates as Map<String, Any>)
     }
