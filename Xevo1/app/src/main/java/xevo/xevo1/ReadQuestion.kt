@@ -12,6 +12,7 @@ import android.widget.EditText
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_read_question.*
 import xevo.xevo1.Database.DatabaseModels.CaseDetails
+import xevo.xevo1.enums.Status
 import java.util.HashMap
 
 class ReadQuestion : AppCompatActivity(),
@@ -58,13 +59,11 @@ class ReadQuestion : AppCompatActivity(),
 
     fun onAccept() {
         databaseReference=FirebaseDatabase.getInstance().getReference()
-        val childUpdates = HashMap<String, Object>()
-        childUpdates.put(ctx.getString(R.string.db_cases)+caseKey, caseDetails as Object)
-        childUpdates.put(ctx.getString(R.string.db_cases_by_subject) + SUBJECT.dbString + caseKey, caseOverview as Object)
-        childUpdates.put(ctx.getString(R.string.db_questions) + userId + "/" + caseKey, caseOverview as Object)
-
+        val childUpdates = HashMap<String, Object?>()
+        childUpdates.put(getString(R.string.db_cases) + caseId + "/status", Status.BEING_ANSWERED as Object)
+        childUpdates.put(getString(R.string.db_cases_by_subject) + caseDetails.subject.dbString + caseId, null)
         databaseReference.updateChildren(childUpdates as Map<String, Any>)
-        
+
         val intent = Intent(this, AnswerQuestionActivity::class.java)
         intent.putExtra("caseId", caseId)
         startActivity(intent)

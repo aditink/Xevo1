@@ -100,6 +100,10 @@ public class CaseDetails {
         return consultant;
     }
 
+    public String getAnswer() {
+        return answer;
+    }
+
     public XevoSubject getSubject() {
         return subject;
     }
@@ -143,4 +147,9 @@ public class CaseDetails {
     public void setCaseId(String caseId) {
         this.caseId = caseId;
     }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
 }

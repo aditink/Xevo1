@@ -14,12 +14,13 @@ import java.util.List;
 @IgnoreExtraProperties
 public class User {
 
-    private String username;
+    private String username; //insist on uniqueness and use in place of id?
     private String email;
     private boolean isConsultant;
     private String firstName;
     private String lastName;
     private List<String> subjects;
+    private String userId;
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -32,6 +33,7 @@ public class User {
         firstName = "";
         lastName = "";
         subjects = new ArrayList<String>();
+        userId = "";
     }
 
     /**
@@ -40,13 +42,14 @@ public class User {
      * @param email : String
      */
     public User(String username, String email, boolean isConsultant, String firstName,
-                String lastName, List<String> subjects) {
+                String lastName, List<String> subjects, String userId) {
         this.username = username;
         this.email = email;
         this.isConsultant = isConsultant;
         this.firstName = firstName;
         this.lastName = lastName;
         this.subjects = subjects;
+        this.userId = userId;
     }
 
     /**
@@ -56,6 +59,8 @@ public class User {
     public String getUsername() {
         return username;
     }
+
+    public String getUserId() {return userId; }
 
     /**
      * Getter for email

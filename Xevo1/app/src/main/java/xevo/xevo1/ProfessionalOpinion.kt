@@ -51,7 +51,7 @@ class ProfessionalOpinion : AskQuestionActivity() {
         submitButton = buttonSubmit
         categorySpinner = category_spinner as Spinner
 
-        var categoryList : List<String> = XevoSubject.values().map({ type -> type.toString() })
+        var categoryList : List<XevoSubject> = XevoSubject.values().toList()
         //var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
         updateCategorySpinner(categoryList)
 
@@ -64,11 +64,10 @@ class ProfessionalOpinion : AskQuestionActivity() {
                     or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             finish()
-
         })
     }
 
-    private fun updateCategorySpinner(categories : List<String>) {
+    private fun updateCategorySpinner(categories : List<XevoSubject>) {
         val adapter = ArrayAdapter(this, R.layout.spinner_item, categories)
         adapter.setDropDownViewResource(R.layout.spinner_item);
         categorySpinner.setAdapter(adapter);

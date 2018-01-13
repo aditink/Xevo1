@@ -99,16 +99,16 @@ class AnswerQuestionActivity : AppCompatActivity() {
      * Do all database updates necessary when question is answered
      */
     fun uploadAnswer() {
+        caseDetails!!.status = Status.ANSWERED
+        caseDetails!!.answer = answer_edit_text.text.toString()
+        caseDetails!!.consultant = userId
+
         val childUpdates = HashMap<String, Object>()
-        //TODO: Modify the caseDetails object itself and push
-        childUpdates.put(getString(R.string.db_cases)+caseId + "/consultant", userId as Object)
-//        childUpdates.put(getString(R.string.db_cases)+caseId + "/answer", answerEditText.text as Object)
-//        childUpdates.put(getString(R.string.db_cases)+caseId + "/status", Status.ANSWERED as Object)
-        var caseOverview : CaseOverview = CaseOverview(caseDetails)
-//        childUpdates.put(getString(R.string.db_cases_by_subject) + caseId, caseOverview as Object)
-        //TODO delete from  subject table by specifying null in childUpdates
-        childUpdates.put(getString(R.string.db_cases_by_users) +  userId + "/" + getString(
-                R.string.db_answers)+ caseDetails?.caseId, caseOverview as Object)
+
+        childUpdates.put(getString(R.string.db_cases) + caseId, caseDetails as Object)
+        var caseOverview: CaseOverview = CaseOverview(caseDetails)
+        childUpdates.put(getString(R.string.db_answers) + caseDetails!!.consultant + "/" + caseId,
+                caseOverview as Object)
 
         database.updateChildren(childUpdates as Map<String, Any>)
     }

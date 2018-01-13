@@ -27,8 +27,11 @@ import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 import kotlinx.android.synthetic.main.activity_register.*
+import xevo.xevo1.Database.DatabaseModels.User
 
 /**
  * A login screen that offers login via email/password.
@@ -155,6 +158,7 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success")
+                            addUserToDb()
                             //TODO: Verify Email
                             // Code to update user profile information
                             addDisplayNameAndFinish("%s %s".format(firstNameStr, lastNameStr))
@@ -186,6 +190,14 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     private fun isPasswordValid(password: String): Boolean {
         //TODO: Replace this with your own logic
         return password.length > 4
+    }
+
+    private fun addUserToDb() {
+        var user : User = User("", email.text.toString(), false, first_name.text.toString(),
+                last_name.text.toString(), null, FirebaseAuth.getInstance().currentUser!!.uid)
+        val ref : DatabaseReference = FirebaseDatabase.getInstance().getReference(
+                getString(R.string.db_users) + user.userId)
+        ref.setValue(user)
     }
 
     /**

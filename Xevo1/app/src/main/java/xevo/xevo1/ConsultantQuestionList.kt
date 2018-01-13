@@ -46,6 +46,7 @@ class ConsultantQuestionList : XevoFragment() {
     val TAG : String = "ConsultantQuestions"
     private lateinit var handler: Handler
 
+    lateinit var databaseReference : DatabaseReference
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,13 +82,12 @@ class ConsultantQuestionList : XevoFragment() {
         handler = Handler()
         categorySpinner = category_spinner as Spinner
         //Eventually get from database
-        var categoryList : List<String> = XevoSubject.values().map({ type -> type.toString() })
+        var categoryList : List<XevoSubject> = XevoSubject.values().toList()
         //var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
         updateCategorySpinner(categoryList)
         categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                val selectedItem = parent.getItemAtPosition(position).toString()
-                updateList(selectedItem)
+                updateList(categorySpinner.selectedItem as XevoSubject)
             } // to close the onItemSelected
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -95,17 +95,12 @@ class ConsultantQuestionList : XevoFragment() {
         }
     }
 
-    private fun updateCategorySpinner(categories : List<String>) {
+    private fun updateCategorySpinner(categories : List<XevoSubject>) {
         val adapter = ArrayAdapter(activity, R.layout.spinner_item, categories)
         adapter.setDropDownViewResource(R.layout.spinner_item);
         categorySpinner.setAdapter(adapter);
 
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
-        Log.d("SELECTED ITEM", categorySpinner.selectedItem as String)
-//        var databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference(
-//                getString(R.string.db_cases_by_subject) + categorySpinner.selectedItem)
-        //TODO: add actual subject fields
-//        setFragment(CaseListFragment.newInstance(ReadQuestion::class.java, databaseReference))
     }
 
     override fun onDetach() {
@@ -129,8 +124,12 @@ class ConsultantQuestionList : XevoFragment() {
      * Get new list of questions and display on subject change.
      * Subject is the name of the subject in the database.
      */
-    private fun updateList(subject: String) {
-
+    private fun updateList(item : XevoSubject) {
+        if (item != null) {
+            databaseReference = FirebaseDatabase.getInstance().getReference(
+                    getString(R.string.db_cases_by_subject) + item.dbString)
+            setFragment(CaseListFragment.newInstance(ReadQuestion::class.java, databaseReference))
+        }
     }
 
     /**
