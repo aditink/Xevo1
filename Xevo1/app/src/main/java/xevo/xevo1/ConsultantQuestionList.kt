@@ -91,10 +91,11 @@ class ConsultantQuestionList : XevoFragment() {
         categorySpinner.setAdapter(adapter);
 
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
-        var databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference(
-                getString(R.string.db_cases_by_subject))
+        Log.d("SELECTED ITEM", categorySpinner.selectedItem as String)
+//        var databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference(
+//                getString(R.string.db_cases_by_subject) + categorySpinner.selectedItem)
         //TODO: add actual subject fields
-        setFragment(CaseListFragment.newInstance(ReadQuestion::class.java, databaseReference))
+//        setFragment(CaseListFragment.newInstance(ReadQuestion::class.java, databaseReference))
     }
 
     override fun onDetach() {

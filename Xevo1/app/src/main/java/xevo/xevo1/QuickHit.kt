@@ -3,8 +3,10 @@ package xevo.xevo1
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -28,6 +30,7 @@ class QuickHit : AskQuestionActivity() {
     lateinit var whatsUp : EditText
     lateinit var shortDescription : EditText
     lateinit var submitButton : Button
+    lateinit var categorySpinner : Spinner
     private val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference();
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +41,11 @@ class QuickHit : AskQuestionActivity() {
         whatsUp = whatsupEditText
         shortDescription = shortDescEditText
         submitButton = buttonSubmit
+        categorySpinner = category_spinner as Spinner
+
+        var categoryList : List<String> = XevoSubject.values().map({ type -> type.toString() })
+        //var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
+        updateCategorySpinner(categoryList)
 
         submitButton.setOnClickListener({view : View ->
             createCase(whatsUp.text.toString(), shortDescription.text.toString(), ref,
@@ -50,5 +58,11 @@ class QuickHit : AskQuestionActivity() {
             finish()
 
         })
+    }
+
+    private fun updateCategorySpinner(categories : List<String>) {
+        val adapter = ArrayAdapter(this, R.layout.spinner_item, categories)
+        adapter.setDropDownViewResource(R.layout.spinner_item);
+        categorySpinner.setAdapter(adapter);
     }
 }
