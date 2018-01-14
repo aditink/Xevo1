@@ -57,8 +57,7 @@ class CaseListFragment : XevoFragment() {
 
         if (database == null) {
             database = FirebaseDatabase.getInstance().getReference(
-                    getString(R.string.db_cases_by_users) + userId + "/" +
-                            getString(R.string.db_questions))
+                            getString(R.string.db_questions) + userId)
         }
         v.recyclerView.layoutManager = LinearLayoutManager(mContext)
 

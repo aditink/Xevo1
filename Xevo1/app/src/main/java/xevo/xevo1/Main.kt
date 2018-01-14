@@ -51,6 +51,7 @@ class Main : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //TODO: Check availability of google play services
         database = FirebaseDatabase.getInstance()
 
         var myRef = database.getReference(getString(R.string.db_users) + userId)

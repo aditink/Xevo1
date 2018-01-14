@@ -11,6 +11,8 @@ import xevo.xevo1.enums.CaseType
 import xevo.xevo1.enums.Status
 import xevo.xevo1.enums.XevoSubject
 import java.util.HashMap
+import android.databinding.adapters.NumberPickerBindingAdapter.setValue
+
 
 
 /**
