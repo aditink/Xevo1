@@ -35,7 +35,8 @@ class Main : AppCompatActivity(),
         CaseListFragment.OnFragmentInteractionListener,
         ChooseQuestionFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener,
-        ConsultantQuestionList.OnFragmentInteractionListener {
+        ConsultantQuestionList.OnFragmentInteractionListener,
+        AnswerCategoryFragment.OnFragmentInteractionListener {
 
     private val TAG = "MainActivity"
     private var appBarExpanded = true // is the appbar expanded
@@ -170,7 +171,8 @@ class Main : AppCompatActivity(),
             }
 
             R.id.nav_answer_question -> {
-                setFragment(ConsultantQuestionList.newInstance(), true)
+//                setFragment(ConsultantQuestionList.newInstance(), true)
+                setFragment(AnswerCategoryFragment.newInstance(), true)
             }
 
             R.id.nav_register_as_consultant -> {

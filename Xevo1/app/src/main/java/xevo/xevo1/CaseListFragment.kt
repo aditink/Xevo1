@@ -53,7 +53,7 @@ class CaseListFragment : XevoFragment() {
 
         val user = FirebaseAuth.getInstance().currentUser!!
 
-        val v : View = inflater.inflate(R.layout.fragment_case_list, container, false)
+        val v: View = inflater.inflate(R.layout.fragment_case_list, container, false)
 
         if (database == null) {
             database = FirebaseDatabase.getInstance().getReference(
