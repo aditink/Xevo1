@@ -7,5 +7,6 @@ import android.net.Uri
  */
 data class CategoryData(
         val category: String,
-        val photoUrl: Uri?
+        val photoUri: Uri?,
+        val color: Int
 )

@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header.view.*
+import xevo.xevo1.Util.ResourceTransformation
 import java.util.*
 
 
@@ -80,7 +81,7 @@ class Main : AppCompatActivity(),
         if (user.photoUrl != null) {
             Glide.with(this).load(user.photoUrl).into(view.imageView)
         } else {
-            view.imageView.setImageURI(drawableToUri(R.drawable.ic_menu_camera))
+            view.imageView.setImageURI(ResourceTransformation.drawableToUri(resources, R.drawable.ic_menu_camera))
         }
 
         var isConsultant = true //get from firebase later
@@ -198,17 +199,6 @@ class Main : AppCompatActivity(),
 
     private fun onAddPressed() {
         setFragment(ChooseQuestionFragment.newInstance(), true)
-    }
-
-    /**
-     * Takes a drawable resource id and converts it
-     * to a URI.
-     */
-    private fun drawableToUri(drawableId: Int): Uri {
-        return Uri.parse("%s://%s/%s/%s".format(ContentResolver.SCHEME_ANDROID_RESOURCE,
-                resources.getResourcePackageName(drawableId),
-                resources.getResourceTypeName(drawableId),
-                resources.getResourceEntryName(drawableId)))
     }
 
     /**

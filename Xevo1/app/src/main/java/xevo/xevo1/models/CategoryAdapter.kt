@@ -1,13 +1,12 @@
 package xevo.xevo1.models
 
+import android.support.v4.content.res.ResourcesCompat.getColor
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.case_list_item.view.*
 import kotlinx.android.synthetic.main.category_card.view.*
 import xevo.xevo1.R
-import xevo.xevo1.enums.CaseType
 
 /**
  * Recycler Adapter class. Handles showing cases in the list view.
@@ -28,7 +27,14 @@ class CategoryAdapter(val items: List<CategoryData>, val listener: (CategoryData
      */
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: CategoryData, listener: (CategoryData) -> Unit) = with(itemView) {
+            if (item.photoUri == null) {
+                categoryImage.setImageResource(R.drawable.placeholder2)
+            } else {
+                categoryImage.setImageURI(item.photoUri)
+            }
             categoryTitle.text = item.category
+            countTextView.text = "11 new"
+            cardView.setCardBackgroundColor(item.color)
 
             setOnClickListener { listener(item) }
         }

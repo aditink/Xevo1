@@ -8,6 +8,11 @@
     <color name="primaryTextDark">#dd000000</color>
     <color name="secondaryTextDark">#89000000</color>
 
+    <color name="math">#ffaed581</color>
+    <color name="physics">#ff4fc3f7</color>
+    <color name="computerScience">#ffb39ddb</color>
+    <color name="catchAll">#ffffcc80</color>
+
     <!-- Old color scheme:
     <color name="colorPrimary">#903000</color>
     <color name="colorPrimaryDark">#702000</color>
