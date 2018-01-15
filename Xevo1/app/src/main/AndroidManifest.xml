@@ -67,7 +67,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".ReadQuestion" />
-        <activity android:name=".AnswerQuestionActivity" />
+        <activity
+            android:name=".AnswerQuestionActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".QuestionListActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <service
             android:name=".MyFirebaseMessagingService"

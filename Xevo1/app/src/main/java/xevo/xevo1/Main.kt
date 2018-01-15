@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.nav_header.*
 import android.content.Intent
 import android.net.Uri
+import android.support.v4.view.ViewCompat
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
@@ -84,11 +85,11 @@ class Main : AppCompatActivity(),
             view.imageView.setImageURI(ResourceTransformation.drawableToUri(resources, R.drawable.ic_menu_camera))
         }
 
-        var isConsultant = true //get from firebase later
+        var isConsultant = true // get from firebase later
         var menu : Menu = navView.menu
         if (isConsultant) {
             menu.setGroupVisible(R.id.is_consultant, true)
-            currentFragment = ConsultantQuestionList.newInstance()
+            currentFragment = AnswerCategoryFragment.newInstance()
         }
         else {
             currentFragment = CaseListFragment.newInstance()

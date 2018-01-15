@@ -4,6 +4,10 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+androidExtensions {
+    experimental = true
+}
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -46,6 +50,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.myhexaville:smart-image-picker:1.0'
 }
+
 
 
 

@@ -20,9 +20,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/category_image_height"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
+                android:clickable="false"
                 android:scaleType="centerCrop" />
 
+            <!--Make text more readable by overlaying a transparent gradient that gets darker at the bottom-->
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/category_image_height"

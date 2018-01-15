@@ -18,7 +18,6 @@ import java.util.*
 import com.google.firebase.database.GenericTypeIndicator
 import kotlin.collections.HashMap
 
-
 /**
  * A [XevoFragment] subclass.
  * Activities that contain this fragment must implement the
@@ -67,7 +66,7 @@ class CaseListFragment : XevoFragment() {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot?) {
-                var obj = dataSnapshot?.getValue(t)
+                val obj = dataSnapshot?.getValue(t)
                 if (obj != null) {
                     questionList = obj.values
                     loadList(v)
@@ -95,6 +94,7 @@ class CaseListFragment : XevoFragment() {
         val listItems: List<CaseData> = questionList.map { caseOverview : CaseOverview -> CaseData(caseOverview) }
         val adapter = CaseAdapter(listItems) { data:CaseData -> questionDetails(data) }
         v.recyclerView.adapter = adapter
+        Log.d(TAG, listItems.toString())
     }
 
     fun questionDetails(case : CaseData) {

@@ -1,6 +1,7 @@
 package xevo.xevo1
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
@@ -20,6 +21,7 @@ import xevo.xevo1.models.CategoryData
 import android.util.TypedValue
 import xevo.xevo1.Util.ResourceTransformation
 
+const val CATEGORY_DATA = "xevo.xevo1.CATEGORY_DATA"
 
 /**
  * A simple [Fragment] subclass.
@@ -32,13 +34,12 @@ import xevo.xevo1.Util.ResourceTransformation
 class AnswerCategoryFragment : XevoFragment() {
 
     private val TAG = "AnswerCategoryFragment"
+    private var mListener: OnFragmentInteractionListener? = null
     private var mContext: Context? = null
 
-    public override val title: Int = R.string.nav_case_list
+    public override val title: Int = R.string.nav_categories
     public override val fragmentTag: String = "answer_category"
     public override val expandable: Boolean = false
-
-    private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,27 +52,31 @@ class AnswerCategoryFragment : XevoFragment() {
         val v = inflater.inflate(R.layout.fragment_answer_category, container, false)
 
         v.categoryRecyclerView.layoutManager = GridLayoutManager(mContext, 2)
-        v.categoryRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(2), true))
+        v.categoryRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, ResourceTransformation.dpToPx(resources, 2), true))
         v.categoryRecyclerView.itemAnimator = DefaultItemAnimator()
 
         val testList: List<CategoryData> = List<CategoryData>(20) { id: Int ->
             when (id) {
                 0 -> CategoryData("Mathematics",
                         ResourceTransformation.drawableToUri(resources, R.drawable.test_header),
-                        getColor(resources, R.color.math, null))
+                        getColor(resources, R.color.math, null), "math/")
                 1 -> CategoryData("Physics",
                         ResourceTransformation.drawableToUri(resources, R.drawable.physics_header)
-                        , getColor(resources, R.color.physics, null))
+                        , getColor(resources, R.color.physics, null), "phys/")
                 2 -> CategoryData("Computer Science",
                         ResourceTransformation.drawableToUri(resources, R.drawable.test_header),
-                        getColor(resources, R.color.computerScience, null))
+                        getColor(resources, R.color.computerScience, null), "computer_science/")
                 else -> CategoryData("All",
                         null,
-                        getColor(resources, R.color.catchAll, null))
+                        getColor(resources, R.color.catchAll, null), "")
             }
         }
 
-        v.categoryRecyclerView.adapter = CategoryAdapter(testList, { item -> Log.d(TAG, item.category)})
+        v.categoryRecyclerView.adapter = CategoryAdapter(testList, { item ->
+            startActivity(Intent(mContext, QuestionListActivity::class.java).apply {
+                putExtra(CATEGORY_DATA, item)
+            })
+        })
 
         return v
     }
@@ -112,13 +117,6 @@ class AnswerCategoryFragment : XevoFragment() {
                 }
             }
         }
-    }
-
-    /**
-     * Converting dp to pixel
-     */
-    private fun dpToPx(dp: Int): Int {
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics))
     }
 
     /**

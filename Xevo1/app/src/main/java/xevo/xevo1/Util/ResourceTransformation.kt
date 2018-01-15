@@ -3,6 +3,7 @@ package xevo.xevo1.Util
 import android.content.ContentResolver
 import android.content.res.Resources
 import android.net.Uri
+import android.util.TypedValue
 
 /**
  * Created by samthomas on 1/14/18.
@@ -20,6 +21,13 @@ class ResourceTransformation() {
                     resources.getResourcePackageName(drawableId),
                     resources.getResourceTypeName(drawableId),
                     resources.getResourceEntryName(drawableId)))
+        }
+
+        /**
+         * Converting dp to pixel
+         */
+        public fun dpToPx(resources: Resources, dp: Int): Int {
+            return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics))
         }
     }
 }
