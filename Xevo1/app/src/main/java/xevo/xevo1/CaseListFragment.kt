@@ -40,8 +40,7 @@ class CaseListFragment : XevoFragment() {
     val userId = FirebaseAuth.getInstance().currentUser!!.uid
     var database : DatabaseReference? = null
     lateinit var questionList : MutableCollection<CaseOverview>
-    val t = object : GenericTypeIndicator<HashMap<String, CaseOverview>>() {
-    }
+    val t = object : GenericTypeIndicator<HashMap<String, CaseOverview>>() {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +59,7 @@ class CaseListFragment : XevoFragment() {
         }
         v.recyclerView.layoutManager = LinearLayoutManager(mContext)
 
-        var postListener : ValueEventListener = object : ValueEventListener {
+        val postListener : ValueEventListener = object : ValueEventListener {
             override fun onCancelled(databaseError : DatabaseError?) {
                 Log.w(TAG, "loadPost:onCancelled", databaseError?.toException())
             }
@@ -72,7 +71,7 @@ class CaseListFragment : XevoFragment() {
                     loadList(v)
                 }
             }
-        };
+        }
 
         database?.addValueEventListener(postListener);
 
@@ -94,7 +93,6 @@ class CaseListFragment : XevoFragment() {
         val listItems: List<CaseData> = questionList.map { caseOverview : CaseOverview -> CaseData(caseOverview) }
         val adapter = CaseAdapter(listItems) { data:CaseData -> questionDetails(data) }
         v.recyclerView.adapter = adapter
-        Log.d(TAG, listItems.toString())
     }
 
     fun questionDetails(case : CaseData) {

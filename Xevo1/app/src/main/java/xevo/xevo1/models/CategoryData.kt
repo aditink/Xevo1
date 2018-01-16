@@ -11,8 +11,8 @@ import kotlinx.android.parcel.Parcelize
 @SuppressLint("ParcelCreator")
 @Parcelize
 data class CategoryData(
-        val category: String,
-        val photoUri: Uri?,
-        val color: Int,
-        val dbString: String
+        val displayString: String = "",
+        val color: String = "",
+        val photoUri: Uri? = null,
+        var dbString: String = ""
 ) : Parcelable

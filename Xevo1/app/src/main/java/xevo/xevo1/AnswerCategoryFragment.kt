@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_case_list.view.*
 import xevo.xevo1.models.CategoryAdapter
 import xevo.xevo1.models.CategoryData
 import android.util.TypedValue
+import com.google.firebase.database.*
 import xevo.xevo1.Util.ResourceTransformation
 
 const val CATEGORY_DATA = "xevo.xevo1.CATEGORY_DATA"
@@ -41,6 +42,9 @@ class AnswerCategoryFragment : XevoFragment() {
     public override val fragmentTag: String = "answer_category"
     public override val expandable: Boolean = false
 
+    private var categoryList: MutableList<CategoryData> = mutableListOf()
+    var database : DatabaseReference? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -55,30 +59,39 @@ class AnswerCategoryFragment : XevoFragment() {
         v.categoryRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, ResourceTransformation.dpToPx(resources, 2), true))
         v.categoryRecyclerView.itemAnimator = DefaultItemAnimator()
 
-        val testList: List<CategoryData> = List<CategoryData>(20) { id: Int ->
-            when (id) {
-                0 -> CategoryData("Mathematics",
-                        ResourceTransformation.drawableToUri(resources, R.drawable.test_header),
-                        getColor(resources, R.color.math, null), "math/")
-                1 -> CategoryData("Physics",
-                        ResourceTransformation.drawableToUri(resources, R.drawable.physics_header)
-                        , getColor(resources, R.color.physics, null), "phys/")
-                2 -> CategoryData("Computer Science",
-                        ResourceTransformation.drawableToUri(resources, R.drawable.test_header),
-                        getColor(resources, R.color.computerScience, null), "computer_science/")
-                else -> CategoryData("All",
-                        null,
-                        getColor(resources, R.color.catchAll, null), "")
+        database = FirebaseDatabase.getInstance().reference
+
+        val dataListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot?) {
+                categoryList.clear()
+                dataSnapshot!!.children.mapNotNullTo(categoryList) {
+                    Log.d(TAG, it.toString())
+
+                    val data = it.getValue<CategoryData>(CategoryData::class.java)
+                    data?.dbString = it.key
+                    data
+                }
+                updateList(v)
+            }
+
+            override fun onCancelled(p0: DatabaseError?) {
             }
         }
 
-        v.categoryRecyclerView.adapter = CategoryAdapter(testList, { item ->
+        database!!.child("Subjects").addValueEventListener(dataListener)
+
+
+        return v
+    }
+
+    private fun updateList(view: View) {
+        val adapter = CategoryAdapter(categoryList, { item ->
             startActivity(Intent(mContext, QuestionListActivity::class.java).apply {
                 putExtra(CATEGORY_DATA, item)
             })
         })
-
-        return v
+        view.categoryRecyclerView.adapter = adapter
+        Log.d(TAG, categoryList.toString())
     }
 
     override fun onAttach(context: Context?) {

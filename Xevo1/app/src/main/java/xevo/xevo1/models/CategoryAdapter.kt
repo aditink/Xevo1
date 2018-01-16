@@ -1,5 +1,6 @@
 package xevo.xevo1.models
 
+import android.graphics.Color
 import android.support.v4.content.res.ResourcesCompat.getColor
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -32,9 +33,9 @@ class CategoryAdapter(val items: List<CategoryData>, val listener: (CategoryData
             } else {
                 categoryImage.setImageURI(item.photoUri)
             }
-            categoryTitle.text = item.category
+            categoryTitle.text = item.displayString
             countTextView.text = "11 new"
-            cardView.setCardBackgroundColor(item.color)
+            cardView.setCardBackgroundColor(Color.parseColor("#%s".format(item.color)))
 
             setOnClickListener { listener(item) }
         }

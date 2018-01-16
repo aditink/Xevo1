@@ -2,6 +2,7 @@ package xevo.xevo1
 
 import android.annotation.TargetApi
 import android.content.Context
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -35,10 +36,8 @@ class QuestionListActivity : AppCompatActivity(),
             finish()
         }
 
-        title = categoryData.category
-        questionListToolbar.setBackgroundColor(categoryData.color)
-
-        // load list as fragment
+        title = categoryData.displayString
+        questionListToolbar.setBackgroundColor(Color.parseColor("#%s".format(categoryData.color)))
 
         val databaseReference = if (categoryData.dbString != "") {
             FirebaseDatabase.getInstance().getReference(
@@ -49,6 +48,7 @@ class QuestionListActivity : AppCompatActivity(),
 
         val frag: XevoFragment = CaseListFragment.newInstance(ReadQuestion::class.java, databaseReference)
 
+        // load list as fragment
         val pendingRunnable = Runnable {
             supportFragmentManager!!.beginTransaction()
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
