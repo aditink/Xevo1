@@ -51,7 +51,7 @@
             android:maxLines="5"
             android:minLines="1"
             android:scrollbars="vertical"
-            android:text="This is what the question is about and blah blah blah blah blah question is about and blah blah blah blah blah question is about and blah blah blah blah blah"
+            android:text=""
             android:textAlignment="center"
             android:weightSum="5" />
 

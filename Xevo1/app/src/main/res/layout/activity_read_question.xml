@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/question_title"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:layout_marginVertical="@dimen/activity_vertical_margin"
-        android:text="This is where the details of the questions goes blah blah blah"
+        android:text=""
         app:layout_constraintVertical_bias="0.0" />
 
 
