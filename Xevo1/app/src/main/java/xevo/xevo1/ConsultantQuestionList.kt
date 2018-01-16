@@ -86,7 +86,7 @@ class ConsultantQuestionList : XevoFragment() {
         //var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
         updateCategorySpinner(categoryList)
         categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                 updateList(categorySpinner.selectedItem as XevoSubject)
             } // to close the onItemSelected
 
