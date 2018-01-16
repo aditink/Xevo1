@@ -29,7 +29,6 @@ class CaseAdapter(val items: List<CaseData>, val listener: (CaseData) -> Unit): 
         fun bind(item: CaseData, listener: (CaseData) -> Unit) = with(itemView) {
             caseListTitle.text = item.title
             caseListDescription.text = item.description
-            println(item)
             when (item.type) {
                 CaseType.QUICK_HIT -> caseListIcon.setImageResource(R.drawable.quick_mode_on_48)
                 CaseType.DEEP_DIVE -> caseListIcon.setImageResource(R.drawable.talk_48)

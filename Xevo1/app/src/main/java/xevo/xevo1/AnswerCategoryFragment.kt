@@ -42,6 +42,8 @@ class AnswerCategoryFragment : XevoFragment() {
     public override val fragmentTag: String = "answer_category"
     public override val expandable: Boolean = false
 
+    lateinit var categoryAll: CategoryData
+
     private var categoryList: MutableList<CategoryData> = mutableListOf()
     var database : DatabaseReference? = null
 
@@ -61,14 +63,16 @@ class AnswerCategoryFragment : XevoFragment() {
 
         database = FirebaseDatabase.getInstance().reference
 
+        categoryAll = CategoryData("All", resources.getString(R.string.category_all_color), 0, "")
+
         val dataListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot?) {
-                categoryList.clear()
+                categoryList.clear() // to remove duplicates
+                categoryAll.unanswered = 0
                 dataSnapshot!!.children.mapNotNullTo(categoryList) {
-                    Log.d(TAG, it.toString())
-
-                    val data = it.getValue<CategoryData>(CategoryData::class.java)
-                    data?.dbString = it.key
+                    val data = it.getValue<CategoryData>(CategoryData::class.java)!!
+                    categoryAll.unanswered += data.unanswered
+                    data.dbString = it.key
                     data
                 }
                 updateList(v)
@@ -78,14 +82,14 @@ class AnswerCategoryFragment : XevoFragment() {
             }
         }
 
-        database!!.child("Subjects").addValueEventListener(dataListener)
+        database!!.child(resources.getString(R.string.db_subjects)).addValueEventListener(dataListener)
 
 
         return v
     }
 
     private fun updateList(view: View) {
-        val adapter = CategoryAdapter(categoryList, { item ->
+        val adapter = CategoryAdapter(categoryList + categoryAll, { item ->
             startActivity(Intent(mContext, QuestionListActivity::class.java).apply {
                 putExtra(CATEGORY_DATA, item)
             })

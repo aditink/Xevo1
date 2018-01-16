@@ -1,12 +1,15 @@
 package xevo.xevo1.models
 
 import android.graphics.Color
-import android.support.v4.content.res.ResourcesCompat.getColor
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.firebase.ui.storage.images.FirebaseImageLoader
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.category_card.view.*
+import xevo.xevo1.GlideApp
 import xevo.xevo1.R
 
 /**
@@ -28,13 +31,15 @@ class CategoryAdapter(val items: List<CategoryData>, val listener: (CategoryData
      */
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: CategoryData, listener: (CategoryData) -> Unit) = with(itemView) {
-            if (item.photoUri == null) {
-                categoryImage.setImageResource(R.drawable.placeholder2)
+            if (item.photoUri != "") {
+                GlideApp.with(itemView.context)
+                        .load(FirebaseStorage.getInstance().reference.child(item.photoUri))
+                        .into(categoryImage)
             } else {
-                categoryImage.setImageURI(item.photoUri)
+                categoryImage.setImageResource(R.drawable.placeholder2)
             }
             categoryTitle.text = item.displayString
-            countTextView.text = "11 new"
+            countTextView.text = resources.getString(R.string.format_unanswered).format(item.unanswered)
             cardView.setCardBackgroundColor(Color.parseColor("#%s".format(item.color)))
 
             setOnClickListener { listener(item) }

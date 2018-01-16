@@ -2,8 +2,6 @@ package xevo.xevo1
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -17,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_talk_about_it.*
 import kotlinx.android.synthetic.main.content_talk_about_it.*
 import xevo.xevo1.enums.CaseType
 import xevo.xevo1.enums.XevoSubject
-import xevo.xevo1.models.AskQuestionActivity
 
 /**
  * Minimal Activity for Talk About It

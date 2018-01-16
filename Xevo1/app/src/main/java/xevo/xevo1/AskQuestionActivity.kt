@@ -1,4 +1,4 @@
-package xevo.xevo1.models
+package xevo.xevo1
 
 import android.content.Context
 import android.support.v7.app.AppCompatActivity

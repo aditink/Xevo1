@@ -13,6 +13,7 @@ import kotlinx.android.parcel.Parcelize
 data class CategoryData(
         val displayString: String = "",
         val color: String = "",
-        val photoUri: Uri? = null,
+        var unanswered: Int = 0,
+        val photoUri: String = "",
         var dbString: String = ""
 ) : Parcelable

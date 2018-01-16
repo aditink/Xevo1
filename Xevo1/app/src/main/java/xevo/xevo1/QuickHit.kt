@@ -10,10 +10,8 @@ import com.google.firebase.database.FirebaseDatabase
 
 import kotlinx.android.synthetic.main.activity_quick_hit.*
 import kotlinx.android.synthetic.main.content_quick_hit.*
-import xevo.xevo1.R.id.*
 import xevo.xevo1.enums.CaseType
 import xevo.xevo1.enums.XevoSubject
-import xevo.xevo1.models.AskQuestionActivity
 
 /**
  * Minimal Activity for Quick Hit
