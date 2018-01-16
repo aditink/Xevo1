@@ -49,6 +49,7 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:11.8.0'
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.myhexaville:smart-image-picker:1.0'
+    compile 'com.github.ivbaranov:materialfavoritebutton:0.1.4'
 }
 
 

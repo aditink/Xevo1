@@ -39,9 +39,14 @@ class QuestionListActivity : AppCompatActivity(),
         questionListToolbar.setBackgroundColor(categoryData.color)
 
         // load list as fragment
-        val databaseReference = FirebaseDatabase.getInstance().getReference(
-                "%s%s".format(getString(R.string.db_cases_by_subject), categoryData.dbString))
-        Log.d(TAG, "%s%s".format(getString(R.string.db_cases_by_subject), categoryData.dbString))
+
+        val databaseReference = if (categoryData.dbString != "") {
+            FirebaseDatabase.getInstance().getReference(
+                    "%s%s".format(getString(R.string.db_cases_by_subject), categoryData.dbString))
+        } else {
+            FirebaseDatabase.getInstance().getReference(getString(R.string.db_cases))
+        }
+
         val frag: XevoFragment = CaseListFragment.newInstance(ReadQuestion::class.java, databaseReference)
 
         val pendingRunnable = Runnable {
