@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.iid.FirebaseInstanceId
 
 import kotlinx.android.synthetic.main.activity_register.*
 import xevo.xevo1.Database.DatabaseModels.User
@@ -194,7 +195,8 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
     private fun addUserToDb() {
         var user : User = User("", email.text.toString(), false, first_name.text.toString(),
-                last_name.text.toString(), null, FirebaseAuth.getInstance().currentUser!!.uid)
+                last_name.text.toString(), null, FirebaseAuth.getInstance().currentUser!!.uid,
+                "")
         val ref : DatabaseReference = FirebaseDatabase.getInstance().getReference(
                 getString(R.string.db_users) + user.userId)
         ref.setValue(user)

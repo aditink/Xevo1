@@ -5,6 +5,7 @@ import android.net.Uri;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,6 +22,7 @@ public class User {
     private String lastName;
     private List<String> subjects;
     private String userId;
+    private String device; //Firebase device ID TODO: handle multiple devices for single user
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -34,6 +36,7 @@ public class User {
         lastName = "";
         subjects = new ArrayList<String>();
         userId = "";
+        device = "";
     }
 
     /**
@@ -42,7 +45,7 @@ public class User {
      * @param email : String
      */
     public User(String username, String email, boolean isConsultant, String firstName,
-                String lastName, List<String> subjects, String userId) {
+                String lastName, List<String> subjects, String userId, String device) {
         this.username = username;
         this.email = email;
         this.isConsultant = isConsultant;
@@ -50,6 +53,7 @@ public class User {
         this.lastName = lastName;
         this.subjects = subjects;
         this.userId = userId;
+        this.device = device;
     }
 
     /**
@@ -58,6 +62,10 @@ public class User {
      */
     public String getUsername() {
         return username;
+    }
+
+    public String getDevice() {
+        return device;
     }
 
     public String getUserId() {return userId; }
@@ -96,5 +104,9 @@ public class User {
 
     public List<String> getSubjects() {
         return subjects;
+    }
+
+    public void setDevice(String devices) {
+        this.device = device;
     }
 }

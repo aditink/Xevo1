@@ -100,7 +100,7 @@ class ConsultantQuestionList : XevoFragment() {
         adapter.setDropDownViewResource(R.layout.spinner_item);
         categorySpinner.setAdapter(adapter);
 
-        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+//        val userId = FirebaseAuth.getInstance().currentUser!!.uid
     }
 
     override fun onDetach() {

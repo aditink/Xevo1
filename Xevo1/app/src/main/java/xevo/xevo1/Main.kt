@@ -1,6 +1,7 @@
 package xevo.xevo1
 
 import android.content.ContentResolver
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.NavigationView
@@ -19,9 +20,15 @@ import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header.view.*
+import xevo.xevo1.R.id.appBarLayout
+import xevo.xevo1.R.id.collapse_toolbar
 import java.util.*
+import android.R.id.edit
+
+
 
 
 /**
@@ -56,6 +63,8 @@ class Main : AppCompatActivity(),
 
         var myRef = database.getReference(getString(R.string.db_users) + userId)
         //myRef.setValue(User())
+
+        refreshMessageToken()
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -196,6 +205,19 @@ class Main : AppCompatActivity(),
 
     private fun onAddPressed() {
         setFragment(ChooseQuestionFragment.newInstance(), true)
+    }
+
+    private fun refreshMessageToken() {
+        val pref = getSharedPreferences(getString(R.string.fcm), Context.MODE_PRIVATE)
+        val editor = pref.edit()
+        val token = pref.getString("fcm", null); // getting String
+        if (token != null) {
+            val ref = FirebaseDatabase.getInstance().getReference(
+                    getString(R.string.db_users) + userId + "/device")
+            ref.setValue(token)
+        }
+//        val intent = Intent(mContext, ProfessionalOpinion::class.java)
+//        startActivity(intent)
     }
 
     /**
