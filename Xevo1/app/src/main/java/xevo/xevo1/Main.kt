@@ -1,6 +1,7 @@
 package xevo.xevo1
 
 import android.content.ContentResolver
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.NavigationView
@@ -18,10 +19,16 @@ import android.net.Uri
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.app_bar_main.view.*
 import kotlinx.android.synthetic.main.nav_header.view.*
+import xevo.xevo1.R.id.appBarLayout
+import xevo.xevo1.R.id.collapse_toolbar
 import java.util.*
+import android.R.id.edit
+
+
 
 
 /**
@@ -40,14 +47,24 @@ class Main : AppCompatActivity(),
     private val TAG = "MainActivity"
     private var appBarExpanded = true // is the appbar expanded
     private var drawPlus = false // draw the plus in the toolbar
-    private var currentFragment: XevoFragment = CaseListFragment.newInstance() // fragment that is currently being shown
+    private lateinit var currentFragment: XevoFragment // fragment that is currently being shown
     private var fragmentStack: Stack<XevoFragment> = Stack() // keeps track of the back stack
     private lateinit var handler: Handler
     private lateinit var drawerLayout: DrawerLayout
+    lateinit var database : FirebaseDatabase
+    val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //TODO: Check availability of google play services
+        database = FirebaseDatabase.getInstance()
+
+        var myRef = database.getReference(getString(R.string.db_users) + userId)
+        //myRef.setValue(User())
+
+        refreshMessageToken()
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -81,6 +98,7 @@ class Main : AppCompatActivity(),
             currentFragment = ConsultantQuestionList.newInstance()
         }
         else {
+            currentFragment = CaseListFragment.newInstance()
             menu.setGroupVisible(R.id.is_not_consultant, true)
         }
 
@@ -189,6 +207,19 @@ class Main : AppCompatActivity(),
         setFragment(ChooseQuestionFragment.newInstance(), true)
     }
 
+    private fun refreshMessageToken() {
+        val pref = getSharedPreferences(getString(R.string.fcm), Context.MODE_PRIVATE)
+        val editor = pref.edit()
+        val token = pref.getString("fcm", null); // getting String
+        if (token != null) {
+            val ref = FirebaseDatabase.getInstance().getReference(
+                    getString(R.string.db_users) + userId + "/device")
+            ref.setValue(token)
+        }
+//        val intent = Intent(mContext, ProfessionalOpinion::class.java)
+//        startActivity(intent)
+    }
+
     /**
      * Takes a drawable resource id and converts it
      * to a URI.
@@ -209,11 +240,11 @@ class Main : AppCompatActivity(),
         drawerLayout.closeDrawers()
 
         // if frag is already being shown, don't do anything
-        for (f in supportFragmentManager.fragments) {
-            if (f.tag.equals(frag.fragmentTag)) {
-                return
-            }
-        }
+//        for (f in supportFragmentManager.fragments) {
+//            if (f.tag.equals(frag.fragmentTag)) {
+//                return
+//            }
+//        }
 
         // Open fragment with runnable to ensure that there is not
         // lag when switching views

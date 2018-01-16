@@ -11,11 +11,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_consultant_question_list.*
+import xevo.xevo1.enums.XevoSubject
 import xevo.xevo1.models.CaseData
+import java.util.*
 
 
 /**
@@ -40,6 +46,7 @@ class ConsultantQuestionList : XevoFragment() {
     val TAG : String = "ConsultantQuestions"
     private lateinit var handler: Handler
 
+    lateinit var databaseReference : DatabaseReference
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,16 +82,25 @@ class ConsultantQuestionList : XevoFragment() {
         handler = Handler()
         categorySpinner = category_spinner as Spinner
         //Eventually get from database
-        var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
+        var categoryList : List<XevoSubject> = XevoSubject.values().toList()
+        //var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
         updateCategorySpinner(categoryList)
+        categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
+                updateList(categorySpinner.selectedItem as XevoSubject)
+            } // to close the onItemSelected
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
+        }
     }
 
-    private fun updateCategorySpinner(categories : List<String>) {
+    private fun updateCategorySpinner(categories : List<XevoSubject>) {
         val adapter = ArrayAdapter(activity, R.layout.spinner_item, categories)
         adapter.setDropDownViewResource(R.layout.spinner_item);
         categorySpinner.setAdapter(adapter);
 
-        setFragment(CaseListFragment.newInstance(ReadQuestion::class.java))
+//        val userId = FirebaseAuth.getInstance().currentUser!!.uid
     }
 
     override fun onDetach() {
@@ -105,13 +121,26 @@ class ConsultantQuestionList : XevoFragment() {
     }
 
     /**
+     * Get new list of questions and display on subject change.
+     * Subject is the name of the subject in the database.
+     */
+    private fun updateList(item : XevoSubject) {
+        if (item != null) {
+            databaseReference = FirebaseDatabase.getInstance().getReference(
+                    getString(R.string.db_cases_by_subject) + item.dbString)
+            setFragment(CaseListFragment.newInstance(ReadQuestion::class.java, databaseReference))
+        }
+    }
+
+    /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
      *
      *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
+     * See the Android Training lesson [Communicating with Other Fragments]
+     * (http://developer.android.com/training/basics/fragments/communicating.html) for more information.
      */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

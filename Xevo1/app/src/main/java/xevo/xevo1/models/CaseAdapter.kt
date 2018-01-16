@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.case_list_item.view.*
 import xevo.xevo1.R
+import xevo.xevo1.enums.CaseType
 
 /**
  * Recycler Adapter class. Handles showing cases in the list view.
@@ -30,8 +31,8 @@ class CaseAdapter(val items: List<CaseData>, val listener: (CaseData) -> Unit): 
             caseListDescription.text = item.description
             when (item.type) {
                 CaseType.QUICK_HIT -> caseListIcon.setImageResource(R.drawable.quick_mode_on_48)
-                CaseType.TALK_ABOUT_IT -> caseListIcon.setImageResource(R.drawable.talk_48)
-                CaseType.PROFESSIONAL -> caseListIcon.setImageResource(R.drawable.businessman_48)
+                CaseType.DEEP_DIVE -> caseListIcon.setImageResource(R.drawable.talk_48)
+                CaseType.HEAVY_LIFT -> caseListIcon.setImageResource(R.drawable.businessman_48)
             }
 
             setOnClickListener { listener(item) }

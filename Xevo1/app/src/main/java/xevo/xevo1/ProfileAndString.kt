@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.text.method.ScrollingMovementMethod
 import kotlinx.android.synthetic.main.fragment_profile_and_string.*
-import xevo.xevo1.R.id.question_details_view
 
 
 /**
@@ -66,6 +65,13 @@ class ProfileAndString : Fragment() {
     override fun onDetach() {
         super.onDetach()
         mListener = null
+    }
+
+    /**
+     * Set text of textView in this fragment
+     */
+    public fun setText(text : String) {
+        question_details_profile_and_string.setText(text)
     }
 
     /**
