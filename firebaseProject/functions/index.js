@@ -87,3 +87,65 @@ exports.sendFollowerNotification = functions.database.ref('/followers/{followedU
   });
 });
 
+/**
+ * Triggers when a user gets a new answer and sends a notification.
+ *
+ * Consultant changes status in `/Cases/{caseid}/{status}` to ANSWERED.
+ * Client id is available at `/Cases/{caseid}/client`.
+ * Users save their device notification tokens to `/Users/client/device/{notificationToken}`.
+ */
+exports.sendAnswerNotification = functions.database.ref('/Cases/{caseId}/status').onUpdate(event => {
+    const caseId = event.params.caseId;
+    const newStatus = event.data.val();
+  // If un-follow we exit the function.
+  if (newStatus == "ANSWERED") {
+   // return console.log('User ', followerUid, 'un-followed user', followedUid);
+  
+  console.log('New case answered:', caseId);
+
+
+      const path = '/Cases/' + caseId + '/client';
+      console.log('path', path);
+      
+      
+      const getAskerIdPromise = admin.database().ref(path).once('value');
+  //   console.log('Client:', getAskerIdPromise)
+  // Get the list of device notification tokens.
+//  const getDeviceTokensPromise = admin.database().ref(`/users/${followedUid}/notificationTokens`).once('value');
+
+      // Get the follower profile.
+      const getFollowerProfilePromise = getAskerIdPromise.then(function(clientId) {
+	  console.log("Client id : ", clientId);
+	  
+	  const path = '/Users/${clientId}/device';
+	  return admin.database().ref(path).once('value');
+      });							     
+
+      return getFollowerProfilePromise.then(deviceId => {
+	  if (!deviceId) {
+	    return console.log('There is no device to send to.');
+	  }
+	  console.log('Send to device: ', deviceId);
+	  // Notification details.
+	  const payload = {
+	      notification: {
+		  title: 'You have a new answer!',
+		  body: `Your question has been answered.`
+//        icon: follower.photoURL
+	      }
+	  };
+	return admin.messaging().sendToDevice(deviceId, payload).then(function(response) {     
+    // See the MessagingDevicesResponse reference documentation for
+    // the contents of response.
+	    console.log("Successfully sent message:", response);
+	})
+	.catch(function(error) {
+	    console.log("Error sending message:", error);
+	});
+    });
+
+  }
+    console.log("Finished for status : ", newStatus);
+    return 'SUCCESS'
+});
+
