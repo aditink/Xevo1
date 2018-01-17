@@ -84,8 +84,8 @@ class AnswerCategoryFragment : XevoFragment() {
                     categoryAll.unanswered += data.unanswered
                     data.dbString = it.key
                     categoryAdapter.add(data)
-                    categoryAdapter.add(categoryAll)
                 }
+                categoryAdapter.add(categoryAll)
             }
 
             override fun onCancelled(p0: DatabaseError?) {

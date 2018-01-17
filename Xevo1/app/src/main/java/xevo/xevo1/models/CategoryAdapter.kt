@@ -27,7 +27,7 @@ class CategoryAdapter(val listener: (CategoryData) -> Unit,
             override fun compare(o1: CategoryData?, o2: CategoryData?): Int {
                 o1!!; o2!!
 
-                if (areItemsTheSame(o1, o2)) return 0;
+                if (areContentsTheSame(o1, o2)) return 0
 
                 if (o1.favorite == o2.favorite) {
                     return o1.displayString.compareTo(o2.displayString)
@@ -38,13 +38,15 @@ class CategoryAdapter(val listener: (CategoryData) -> Unit,
 
             // objects are actually equal
             override fun areContentsTheSame(oldItem: CategoryData?, newItem: CategoryData?): Boolean {
-                println("contents: " + (oldItem == newItem))
-                return oldItem == newItem
+                println("contents: " + (oldItem == newItem) + " %s:%d,%b, %s:%d,%b".format(newItem?.dbString, newItem?.unanswered, newItem?.favorite,
+                        oldItem?.dbString, oldItem?.unanswered, oldItem?.favorite))
+                oldItem!!; newItem!!
+                return oldItem.dbString == newItem.dbString && oldItem.unanswered == newItem.unanswered
             }
 
-            // objects are logicall equally (i.e ids are the same, but contents aren't)
+            // objects are logically equally (i.e ids are the same, but contents aren't)
             override fun areItemsTheSame(item1: CategoryData?, item2: CategoryData?): Boolean {
-                println("items: " + (item1?.dbString == item2?.dbString))
+                println("items: " + (item1?.dbString == item2?.dbString) + " %s:%d, %s:%d".format(item2?.dbString, item2?.unanswered, item1?.dbString, item1?.unanswered))
                 return item1?.dbString == item2?.dbString
             }
         })
@@ -60,7 +62,13 @@ class CategoryAdapter(val listener: (CategoryData) -> Unit,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(parent.inflate(R.layout.category_card))
 
     fun add(data: CategoryData) {
-        println("Add: " + data)
+        for (i in (0..sortedList.size()-1)) {
+            if (sortedList[i].dbString == data.dbString) {
+                data.favorite = sortedList[i].favorite
+                sortedList.updateItemAt(i, data)
+                return
+            }
+        }
         sortedList.add(data)
     }
 
@@ -68,6 +76,7 @@ class CategoryAdapter(val listener: (CategoryData) -> Unit,
         for (i in (0..sortedList.size()-1)) {
             if (sortedList[i].dbString == data.dbString) {
                 sortedList.updateItemAt(i, data)
+                break
             }
         }
     }
