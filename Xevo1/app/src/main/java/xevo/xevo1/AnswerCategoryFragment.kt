@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.res.ResourcesCompat.getColor
+import android.support.v7.util.SortedList
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -43,8 +44,7 @@ class AnswerCategoryFragment : XevoFragment() {
     public override val expandable: Boolean = false
 
     lateinit var categoryAll: CategoryData
-
-    private var categoryList: MutableList<CategoryData> = mutableListOf()
+    lateinit var categoryAdapter: CategoryAdapter
     var database : DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,19 +63,29 @@ class AnswerCategoryFragment : XevoFragment() {
 
         database = FirebaseDatabase.getInstance().reference
 
-        categoryAll = CategoryData("All", resources.getString(R.string.category_all_color), 0, "")
+        categoryAll = CategoryData("All", resources.getString(R.string.category_all_color), 0, false, "")
+
+        categoryAdapter = CategoryAdapter({ item ->
+            startActivity(Intent(mContext, QuestionListActivity::class.java).apply {
+                putExtra(CATEGORY_DATA, item)
+            })
+        }, { item, fav ->
+            item.favorite = fav
+            categoryAdapter.updateStar(item)
+        })
+        v.categoryRecyclerView.adapter = categoryAdapter
 
         val dataListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot?) {
-                categoryList.clear() // to remove duplicates
+
                 categoryAll.unanswered = 0
-                dataSnapshot!!.children.mapNotNullTo(categoryList) {
+                dataSnapshot!!.children.map {
                     val data = it.getValue<CategoryData>(CategoryData::class.java)!!
                     categoryAll.unanswered += data.unanswered
                     data.dbString = it.key
-                    data
+                    categoryAdapter.add(data)
+                    categoryAdapter.add(categoryAll)
                 }
-                updateList(v)
             }
 
             override fun onCancelled(p0: DatabaseError?) {
@@ -84,18 +94,7 @@ class AnswerCategoryFragment : XevoFragment() {
 
         database!!.child(resources.getString(R.string.db_subjects)).addValueEventListener(dataListener)
 
-
         return v
-    }
-
-    private fun updateList(view: View) {
-        val adapter = CategoryAdapter(categoryList + categoryAll, { item ->
-            startActivity(Intent(mContext, QuestionListActivity::class.java).apply {
-                putExtra(CATEGORY_DATA, item)
-            })
-        })
-        view.categoryRecyclerView.adapter = adapter
-        Log.d(TAG, categoryList.toString())
     }
 
     override fun onAttach(context: Context?) {
