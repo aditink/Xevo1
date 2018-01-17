@@ -43,7 +43,7 @@ class AnswerCategoryFragment : XevoFragment() {
     public override val fragmentTag: String = "answer_category"
     public override val expandable: Boolean = false
 
-    lateinit var categoryAll: CategoryData
+     var categoryAll: CategoryData = CategoryData("All", resources.getString(R.string.category_all_color), 0, false, "")
     lateinit var categoryAdapter: CategoryAdapter
     var database : DatabaseReference? = null
 
@@ -53,7 +53,6 @@ class AnswerCategoryFragment : XevoFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_answer_category, container, false)
 
@@ -62,8 +61,6 @@ class AnswerCategoryFragment : XevoFragment() {
         v.categoryRecyclerView.itemAnimator = DefaultItemAnimator()
 
         database = FirebaseDatabase.getInstance().reference
-
-        categoryAll = CategoryData("All", resources.getString(R.string.category_all_color), 0, false, "")
 
         categoryAdapter = CategoryAdapter({ item ->
             startActivity(Intent(mContext, QuestionListActivity::class.java).apply {
@@ -112,6 +109,9 @@ class AnswerCategoryFragment : XevoFragment() {
         mListener = null
     }
 
+    /**
+     * Class to calculate the spacing between Cards in the Grid.
+     */
     class GridSpacingItemDecoration(val spanCount: Int, val spacing: Int, val includeEdge: Boolean): RecyclerView.ItemDecoration() {
 
         override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {

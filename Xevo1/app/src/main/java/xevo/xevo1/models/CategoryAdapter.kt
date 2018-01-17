@@ -13,19 +13,19 @@ import xevo.xevo1.GlideApp
 import xevo.xevo1.R
 
 /**
- * Recycler Adapter class. Handles showing cases in the list view.
+ * Recycler Adapter class for the Category View.
  */
-class CategoryAdapter(val listener: (CategoryData) -> Unit,
-                      val starListener: (CategoryData, Boolean) -> Unit): RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
+class CategoryAdapter(private val listener: (CategoryData) -> Unit,
+                      private val starListener: (CategoryData, Boolean) -> Unit): RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
+    // Structure that holds the CategoryData
     private val sortedList: SortedList<CategoryData>
-    private val idMap: HashMap<String, CategoryData> = HashMap()
 
     init {
         sortedList = SortedList(CategoryData::class.java, object : SortedListAdapterCallback<CategoryData>(this) {
-            // compare favorite, then unanswered (maybe change later)
+            // sort by favorite, and then by alphabet
             override fun compare(o1: CategoryData?, o2: CategoryData?): Int {
-                o1!!; o2!!
+                o1!!; o2!! // non-null check
 
                 if (areContentsTheSame(o1, o2)) return 0
 
@@ -61,6 +61,11 @@ class CategoryAdapter(val listener: (CategoryData) -> Unit,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(parent.inflate(R.layout.category_card))
 
+    /**
+     * Adds data to the SortedList. There is a check to ensure
+     * that an item doesn't get added twice. If an item already
+     * exists, it is updated instead.
+     */
     fun add(data: CategoryData) {
         for (i in (0..sortedList.size()-1)) {
             if (sortedList[i].dbString == data.dbString) {
@@ -72,6 +77,9 @@ class CategoryAdapter(val listener: (CategoryData) -> Unit,
         sortedList.add(data)
     }
 
+    /**
+     * Update an item when it is favorited.
+     */
     fun updateStar(data: CategoryData) {
         for (i in (0..sortedList.size()-1)) {
             if (sortedList[i].dbString == data.dbString) {

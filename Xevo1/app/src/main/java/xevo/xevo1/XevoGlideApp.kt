@@ -10,7 +10,12 @@ import com.bumptech.glide.module.AppGlideModule
 import java.io.InputStream
 
 @GlideModule
-class XevoGlidApp : AppGlideModule() {
+class XevoGlideApp : AppGlideModule() {
+
+    /**
+     * Register a FirebaseImageLoader so that we can load images from Firebase into views
+     * with Glide.
+     */
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         // Register FirebaseImageLoader to handle StorageReference
         registry.append(StorageReference::class.java, InputStream::class.java, FirebaseImageLoader.Factory())

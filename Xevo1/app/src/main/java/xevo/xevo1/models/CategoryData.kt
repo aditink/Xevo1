@@ -5,6 +5,14 @@ import android.net.Uri
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Data class that holds data about Categories.
+ * The Parcelize annotation automagically turns
+ * this into a parcel which we can pass to Intents.
+ * The Suppression is there because without it
+ * AndroidStudio incorrectly thinks that there is an
+ * error there.
+ */
 @SuppressLint("ParcelCreator")
 @Parcelize
 data class CategoryData(
