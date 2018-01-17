@@ -18,7 +18,6 @@ import java.util.*
 import com.google.firebase.database.GenericTypeIndicator
 import kotlin.collections.HashMap
 
-
 /**
  * A [XevoFragment] subclass.
  * Activities that contain this fragment must implement the
@@ -41,8 +40,7 @@ class CaseListFragment : XevoFragment() {
     val userId = FirebaseAuth.getInstance().currentUser!!.uid
     var database : DatabaseReference? = null
     lateinit var questionList : MutableCollection<CaseOverview>
-    val t = object : GenericTypeIndicator<HashMap<String, CaseOverview>>() {
-    }
+    val t = object : GenericTypeIndicator<HashMap<String, CaseOverview>>() {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +51,7 @@ class CaseListFragment : XevoFragment() {
 
         val user = FirebaseAuth.getInstance().currentUser!!
 
-        val v : View = inflater.inflate(R.layout.fragment_case_list, container, false)
+        val v: View = inflater.inflate(R.layout.fragment_case_list, container, false)
 
         if (database == null) {
             database = FirebaseDatabase.getInstance().getReference(
@@ -61,19 +59,19 @@ class CaseListFragment : XevoFragment() {
         }
         v.recyclerView.layoutManager = LinearLayoutManager(mContext)
 
-        var postListener : ValueEventListener = object : ValueEventListener {
+        val postListener : ValueEventListener = object : ValueEventListener {
             override fun onCancelled(databaseError : DatabaseError?) {
                 Log.w(TAG, "loadPost:onCancelled", databaseError?.toException())
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot?) {
-                var obj = dataSnapshot?.getValue(t)
+                val obj = dataSnapshot?.getValue(t)
                 if (obj != null) {
                     questionList = obj.values
                     loadList(v)
                 }
             }
-        };
+        }
 
         database?.addValueEventListener(postListener);
 

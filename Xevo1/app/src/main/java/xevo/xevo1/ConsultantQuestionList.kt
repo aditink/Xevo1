@@ -58,7 +58,6 @@ class ConsultantQuestionList : XevoFragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_consultant_question_list, container, false)
-        handler = Handler()
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -125,11 +124,9 @@ class ConsultantQuestionList : XevoFragment() {
      * Subject is the name of the subject in the database.
      */
     private fun updateList(item : XevoSubject) {
-        if (item != null) {
-            databaseReference = FirebaseDatabase.getInstance().getReference(
-                    getString(R.string.db_cases_by_subject) + item.dbString)
-            setFragment(CaseListFragment.newInstance(ReadQuestion::class.java, databaseReference))
-        }
+        databaseReference = FirebaseDatabase.getInstance().getReference(
+                getString(R.string.db_cases_by_subject) + item.dbString)
+        setFragment(CaseListFragment.newInstance(ReadQuestion::class.java, databaseReference))
     }
 
     /**

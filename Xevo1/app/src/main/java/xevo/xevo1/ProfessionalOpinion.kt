@@ -1,7 +1,6 @@
 package xevo.xevo1
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
 
@@ -9,22 +8,13 @@ import kotlinx.android.synthetic.main.activity_professional_opinion.*
 import kotlinx.android.synthetic.main.content_professional_opinion.*
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ServerValue
-import xevo.xevo1.Database.DatabaseModels.CaseDetails
-import xevo.xevo1.Database.DatabaseModels.CaseOverview
 import xevo.xevo1.enums.CaseType
-import xevo.xevo1.enums.Status
 import xevo.xevo1.enums.XevoSubject
-import android.R.attr.key
 import android.content.Intent
-import android.databinding.DataBindingUtil.setContentView
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
-import xevo.xevo1.R.id.*
-import xevo.xevo1.models.AskQuestionActivity
-import java.util.*
 
 
 /**

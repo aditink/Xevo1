@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.nav_header.*
 import android.content.Intent
 import android.net.Uri
+import android.support.v4.view.ViewCompat
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
@@ -25,11 +26,9 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header.view.*
 import xevo.xevo1.R.id.appBarLayout
 import xevo.xevo1.R.id.collapse_toolbar
+import xevo.xevo1.Util.ResourceTransformation
 import java.util.*
 import android.R.id.edit
-
-
-
 
 /**
  * Main Activity. We go here after the login screen and this handles
@@ -42,7 +41,8 @@ class Main : AppCompatActivity(),
         CaseListFragment.OnFragmentInteractionListener,
         ChooseQuestionFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener,
-        ConsultantQuestionList.OnFragmentInteractionListener {
+        ConsultantQuestionList.OnFragmentInteractionListener,
+        AnswerCategoryFragment.OnFragmentInteractionListener {
 
     private val TAG = "MainActivity"
     private var appBarExpanded = true // is the appbar expanded
@@ -88,14 +88,14 @@ class Main : AppCompatActivity(),
         if (user.photoUrl != null) {
             Glide.with(this).load(user.photoUrl).into(view.imageView)
         } else {
-            view.imageView.setImageURI(drawableToUri(R.drawable.ic_menu_camera))
+            view.imageView.setImageURI(ResourceTransformation.drawableToUri(resources, R.drawable.ic_menu_camera))
         }
 
-        var isConsultant = true //get from firebase later
+        var isConsultant = true // get from firebase later
         var menu : Menu = navView.menu
         if (isConsultant) {
             menu.setGroupVisible(R.id.is_consultant, true)
-            currentFragment = ConsultantQuestionList.newInstance()
+            currentFragment = AnswerCategoryFragment.newInstance()
         }
         else {
             currentFragment = CaseListFragment.newInstance()
@@ -179,7 +179,8 @@ class Main : AppCompatActivity(),
             }
 
             R.id.nav_answer_question -> {
-                setFragment(ConsultantQuestionList.newInstance(), true)
+//                setFragment(ConsultantQuestionList.newInstance(), true)
+                setFragment(AnswerCategoryFragment.newInstance(), true)
             }
 
             R.id.nav_register_as_consultant -> {
@@ -218,17 +219,6 @@ class Main : AppCompatActivity(),
         }
 //        val intent = Intent(mContext, ProfessionalOpinion::class.java)
 //        startActivity(intent)
-    }
-
-    /**
-     * Takes a drawable resource id and converts it
-     * to a URI.
-     */
-    private fun drawableToUri(drawableId: Int): Uri {
-        return Uri.parse("%s://%s/%s/%s".format(ContentResolver.SCHEME_ANDROID_RESOURCE,
-                resources.getResourcePackageName(drawableId),
-                resources.getResourceTypeName(drawableId),
-                resources.getResourceEntryName(drawableId)))
     }
 
     /**
