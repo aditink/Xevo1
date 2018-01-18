@@ -29,6 +29,10 @@ import xevo.xevo1.R.id.collapse_toolbar
 import xevo.xevo1.Util.ResourceTransformation
 import java.util.*
 import android.R.id.edit
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Main Activity. We go here after the login screen and this handles
@@ -91,16 +95,16 @@ class Main : AppCompatActivity(),
             view.imageView.setImageURI(ResourceTransformation.drawableToUri(resources, R.drawable.ic_menu_camera))
         }
 
-        var isConsultant = true // get from firebase later
-        var menu : Menu = navView.menu
-        if (isConsultant) {
-            menu.setGroupVisible(R.id.is_consultant, true)
-            currentFragment = AnswerCategoryFragment.newInstance()
-        }
-        else {
-            currentFragment = CaseListFragment.newInstance()
-            menu.setGroupVisible(R.id.is_not_consultant, true)
-        }
+        updateIsConsultant(false)
+        myRef.child("isConsultant/").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot?) {
+                val isConsultant = dataSnapshot!!.getValue(Boolean::class.java)
+                if (isConsultant != null)
+                    updateIsConsultant(isConsultant)
+            }
+
+            override fun onCancelled(error: DatabaseError?) {}
+        })
 
         // fab listener
         newCaseButton.setOnClickListener { _ -> onAddPressed() }
@@ -112,6 +116,7 @@ class Main : AppCompatActivity(),
         }
 
         // load first fragment
+        currentFragment = CaseListFragment.newInstance()
         setFragment(currentFragment, true)
     }
 
@@ -219,6 +224,24 @@ class Main : AppCompatActivity(),
         }
 //        val intent = Intent(mContext, ProfessionalOpinion::class.java)
 //        startActivity(intent)
+    }
+
+    private fun updateIsConsultant(isConsultant: Boolean) {
+//        if (isConsultant) {
+//            nav_view.menu.setGroupVisible(R.id.is_consultant, true)
+//            nav_view.menu.setGroupVisible(R.id.is_not_consultant, false)
+////            currentFragment = AnswerCategoryFragment.newInstance()
+//        }
+//        else {
+////            currentFragment = CaseListFragment.newInstance()
+//            nav_view.menu.setGroupVisible(R.id.is_consultant, false)
+//            nav_view.menu.setGroupVisible(R.id.is_not_consultant, true)
+//        }
+
+        nav_view.menu.setGroupVisible(R.id.is_consultant, isConsultant)
+        nav_view.menu.setGroupVisible(R.id.is_not_consultant, !isConsultant)
+
+
     }
 
     /**
