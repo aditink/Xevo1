@@ -1,6 +1,8 @@
 package xevo.xevo1
 
 import android.annotation.TargetApi
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -21,6 +23,7 @@ class AdminActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
 
+
         // add close button
         setSupportActionBar(adminToolbar)
         @TargetApi(21)
@@ -29,10 +32,16 @@ class AdminActivity : AppCompatActivity() {
             finish()
         }
 
+        title = "Admin"
+
         adminRecycler.layoutManager = LinearLayoutManager(this)
 
         val database = FirebaseDatabase.getInstance().reference
-        applicationAdapter = ApplicationAdapter { item -> println(item) }
+        applicationAdapter = ApplicationAdapter { item ->
+            startActivityForResult(Intent(this, ApplicationViewActivity::class.java).apply {
+                putExtra(APPLICATION_DATA, item)
+            }, APPLICATION_VIEW_RETURN_ID)
+        }
 
         adminRecycler.adapter = applicationAdapter
 
@@ -48,5 +57,23 @@ class AdminActivity : AppCompatActivity() {
         }
 
         override fun onCancelled(error: DatabaseError?) {}
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode) {
+            APPLICATION_VIEW_RETURN_ID -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val item: ApplicationData = data!!.getParcelableExtra<ApplicationData>(APPLICATION_DATA)
+                    println(item.userId)
+                    applicationAdapter.remove(item)
+                }
+            }
+        }
+    }
+
+    companion object {
+        const val APPLICATION_DATA = "xevo.xevo1.APPLICATION_DATA"
+        const val APPLICATION_VIEW_RETURN_ID = 1
     }
 }

@@ -32,10 +32,7 @@ class ConsultantRegistrationActivity : AppCompatActivity() {
         consultantApplyButton.setOnClickListener(ConsultantApplyButtonClickListener(resources, cardNumberInput, this))
     }
 
-    override fun onBackPressed() {
-//        super.onBackPressed()
-        returnResult(Activity.RESULT_CANCELED)
-    }
+    override fun onBackPressed() = returnResult(Activity.RESULT_CANCELED)
 
     private fun returnResult(result: Int) {
         setResult(result, Intent())
