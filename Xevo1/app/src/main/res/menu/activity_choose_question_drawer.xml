@@ -12,10 +12,6 @@
             android:id="@+id/nav_question"
             android:icon="@drawable/ic_menu_send"
             android:title="@string/nav_question" />
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/nav_settings" />
     </group>
 
     <group
@@ -35,6 +31,24 @@
             android:id="@+id/nav_register_as_consultant"
             android:icon="@drawable/businessman_48"
             android:title="@string/nav_become_consultant" />
+    </group>
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/is_pending_consultant"
+        android:visible="false" >
+        <item
+            android:id="@+id/nav_pending_consultant"
+            android:icon="@drawable/businessman_48"
+            android:title="@string/nav_pending_consultant" />
+    </group>
+
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/nav_settings_group">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/nav_settings" />
     </group>
 
 

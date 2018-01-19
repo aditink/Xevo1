@@ -29,10 +29,12 @@ import xevo.xevo1.R.id.collapse_toolbar
 import xevo.xevo1.Util.ResourceTransformation
 import java.util.*
 import android.R.id.edit
+import android.app.Activity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
+import xevo.xevo1.enums.Consultant
 
 /**
  * Main Activity. We go here after the login screen and this handles
@@ -58,6 +60,8 @@ class Main : AppCompatActivity(),
     lateinit var database : FirebaseDatabase
     val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
+    private val ACTIVITY_CONSULTANT_APPLICATION = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -65,8 +69,7 @@ class Main : AppCompatActivity(),
         //TODO: Check availability of google play services
         database = FirebaseDatabase.getInstance()
 
-        var myRef = database.getReference(getString(R.string.db_users) + userId)
-        //myRef.setValue(User())
+        val myRef = database.reference
 
         refreshMessageToken()
 
@@ -95,22 +98,28 @@ class Main : AppCompatActivity(),
             view.imageView.setImageURI(ResourceTransformation.drawableToUri(resources, R.drawable.ic_menu_camera))
         }
 
-        updateIsConsultant(false)
-        myRef.child("isConsultant/").addValueEventListener(object : ValueEventListener {
+        updateIsConsultant(Consultant.NONE)
+        myRef.child("Users/%s/isConsultant/".format(userId)).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot?) {
-                val isConsultant = dataSnapshot!!.getValue(Boolean::class.java)
-                if (isConsultant != null)
-                    updateIsConsultant(isConsultant)
+                val isConsultant = dataSnapshot!!.getValue(Int::class.java)
+                if (isConsultant != null) {
+                    when(isConsultant) {
+                        0 -> updateIsConsultant(Consultant.NONE)
+                        1 -> updateIsConsultant(Consultant.PENDING)
+                        2 -> updateIsConsultant(Consultant.VERIFIED)
+                    }
+                }
             }
 
             override fun onCancelled(error: DatabaseError?) {}
         })
 
+
         // fab listener
         newCaseButton.setOnClickListener { _ -> onAddPressed() }
 
         // used to update the toolbar when the appbar is retracted
-        appBarLayout.addOnOffsetChangedListener { layout, verticalOffset ->
+        appBarLayout.addOnOffsetChangedListener { _, _ ->
             invalidateOptionsMenu()
             appBarExpanded = newCaseButton.visibility == View.VISIBLE
         }
@@ -184,16 +193,27 @@ class Main : AppCompatActivity(),
             }
 
             R.id.nav_answer_question -> {
-//                setFragment(ConsultantQuestionList.newInstance(), true)
                 setFragment(AnswerCategoryFragment.newInstance(), true)
             }
 
             R.id.nav_register_as_consultant -> {
-                //TODO create consultant registration form
+                startActivityForResult(Intent(this, ConsultantRegistrationActivity::class.java), ACTIVITY_CONSULTANT_APPLICATION)
             }
         }
 
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode) {
+            ACTIVITY_CONSULTANT_APPLICATION -> {
+                when(resultCode) {
+                    Activity.RESULT_OK -> updateIsConsultant(Consultant.PENDING)
+                    else -> updateIsConsultant(Consultant.NONE)
+                }
+            }
+        }
     }
 
     override fun onFragmentInteraction() {
@@ -226,7 +246,7 @@ class Main : AppCompatActivity(),
 //        startActivity(intent)
     }
 
-    private fun updateIsConsultant(isConsultant: Boolean) {
+    private fun updateIsConsultant(isConsultant: Consultant) {
 //        if (isConsultant) {
 //            nav_view.menu.setGroupVisible(R.id.is_consultant, true)
 //            nav_view.menu.setGroupVisible(R.id.is_not_consultant, false)
@@ -238,10 +258,23 @@ class Main : AppCompatActivity(),
 //            nav_view.menu.setGroupVisible(R.id.is_not_consultant, true)
 //        }
 
-        nav_view.menu.setGroupVisible(R.id.is_consultant, isConsultant)
-        nav_view.menu.setGroupVisible(R.id.is_not_consultant, !isConsultant)
-
-
+        when(isConsultant) {
+            Consultant.NONE -> {
+                nav_view.menu.setGroupVisible(R.id.is_consultant, false)
+                nav_view.menu.setGroupVisible(R.id.is_not_consultant, true)
+                nav_view.menu.setGroupVisible(R.id.is_pending_consultant, false)
+            }
+            Consultant.PENDING -> {
+                nav_view.menu.setGroupVisible(R.id.is_consultant, false)
+                nav_view.menu.setGroupVisible(R.id.is_not_consultant, false)
+                nav_view.menu.setGroupVisible(R.id.is_pending_consultant, true)
+            }
+            Consultant.VERIFIED -> {
+                nav_view.menu.setGroupVisible(R.id.is_consultant, true)
+                nav_view.menu.setGroupVisible(R.id.is_not_consultant, false)
+                nav_view.menu.setGroupVisible(R.id.is_pending_consultant, false)
+            }
+        }
     }
 
     /**
@@ -275,21 +308,5 @@ class Main : AppCompatActivity(),
         collapse_toolbar.title = getString(frag.title)
         appBarLayout.setExpanded(frag.expandable, true)
         drawPlus = frag.expandable
-    }
-
-    /**
-     * Calls the same method in [CaseListFragment] to
-     * handle choosing a profile picture. This currently
-     * causes a crash so this will probably need to be changed.
-     */
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        super.onActivityResult(requestCode, resultCode, data)
-        val fragments = supportFragmentManager.fragments
-        if (fragments != null) {
-            for (f in fragments) {
-                if (f is CaseListFragment)
-                    (f as? CaseListFragment)?.onActivityResult(requestCode, resultCode, data)
-            }
-        }
     }
 }

@@ -17,7 +17,7 @@ public class User {
 
     private String username; //insist on uniqueness and use in place of id?
     private String email;
-    private boolean isConsultant;
+    private int isConsultant;
     private String firstName;
     private String lastName;
     private List<String> subjects;
@@ -31,7 +31,7 @@ public class User {
     public User() {
         username = "";
         email = "";
-        isConsultant = false;
+        isConsultant = 0;
         firstName = "";
         lastName = "";
         subjects = new ArrayList<String>();
@@ -44,7 +44,7 @@ public class User {
      * @param username : String
      * @param email : String
      */
-    public User(String username, String email, boolean isConsultant, String firstName,
+    public User(String username, String email, int isConsultant, String firstName,
                 String lastName, List<String> subjects, String userId, String device) {
         this.username = username;
         this.email = email;
@@ -82,7 +82,7 @@ public class User {
      * Getter for isConsultant: required by Firebase
      * @return isConsultant : boolean
      */
-    public boolean getIsConsultant() {
+    public int getIsConsultant() {
         return isConsultant;
     }
 
