@@ -101,14 +101,9 @@ class Main : AppCompatActivity(),
         updateIsConsultant(Consultant.NONE)
         myRef.child("Users/%s/isConsultant/".format(userId)).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot?) {
-                val isConsultant = dataSnapshot!!.getValue(Int::class.java)
+                val isConsultant = dataSnapshot!!.getValue(Consultant::class.java)
                 if (isConsultant != null) {
-                    when(isConsultant) {
-                        0 -> updateIsConsultant(Consultant.NONE)
-                        1 -> updateIsConsultant(Consultant.PENDING)
-                        2 -> updateIsConsultant(Consultant.VERIFIED)
-                        3 -> updateIsConsultant(Consultant.ADMIN)
-                    }
+                    updateIsConsultant(isConsultant)
                 }
             }
 

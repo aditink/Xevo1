@@ -9,6 +9,7 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_application_view.*
 import kotlinx.android.synthetic.main.content_application_view.*
 import xevo.xevo1.AdminActivity.Companion.APPLICATION_DATA
+import xevo.xevo1.enums.Consultant
 import xevo.xevo1.models.ApplicationData
 
 class ApplicationViewActivity : AppCompatActivity() {
@@ -34,7 +35,7 @@ class ApplicationViewActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().reference
 
         approveApplicationButton.setOnClickListener { v ->
-            ref.child("Users/%s/isConsultant/".format(applicationData.userId)).setValue(2, { error, _ ->
+            ref.child("Users/%s/isConsultant/".format(applicationData.userId)).setValue(Consultant.VERIFIED, { error, _ ->
                 if (error == null) {
                     ref.child("PendingApplications/%s/".format(applicationData.userId)).removeValue()
                     returnResult(Activity.RESULT_OK)

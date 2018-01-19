@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_consultant_registration.*
 import kotlinx.android.synthetic.main.content_consultant_registration.*
+import xevo.xevo1.enums.Consultant
 import xevo.xevo1.models.ConsultantApplication
 
 class ConsultantRegistrationActivity : AppCompatActivity() {
@@ -45,6 +46,7 @@ class ConsultantRegistrationActivity : AppCompatActivity() {
             val ref = FirebaseDatabase.getInstance().reference
             ref.child(resources.getString(R.string.db_pending_app) + userId).setValue(ConsultantApplication(input.text.toString()), { error, dataRef ->
                 if (error != null) {
+                    //TODO: Deal with errors
                     println(error.code)
                     println(error.message)
                     activity.returnResult(Activity.RESULT_CANCELED)
@@ -53,7 +55,7 @@ class ConsultantRegistrationActivity : AppCompatActivity() {
                 }
             })
 
-            ref.child(resources.getString(R.string.db_users) + userId + "/isConsultant/").setValue(1)
+            ref.child(resources.getString(R.string.db_users) + userId + "/isConsultant/").setValue(Consultant.PENDING)
 
         }
 

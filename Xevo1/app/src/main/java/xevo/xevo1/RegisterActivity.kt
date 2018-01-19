@@ -33,6 +33,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 
 import kotlinx.android.synthetic.main.activity_register.*
 import xevo.xevo1.Database.DatabaseModels.User
+import xevo.xevo1.enums.Consultant
 
 /**
  * A login screen that offers login via email/password.
@@ -194,7 +195,7 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     }
 
     private fun addUserToDb() {
-        val user : User = User("", email.text.toString(), 0, first_name.text.toString(),
+        val user : User = User("", email.text.toString(), Consultant.NONE, first_name.text.toString(),
                 last_name.text.toString(), null, FirebaseAuth.getInstance().currentUser!!.uid,
                 "")
         val ref : DatabaseReference = FirebaseDatabase.getInstance().getReference(
