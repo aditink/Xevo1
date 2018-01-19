@@ -107,6 +107,7 @@ class Main : AppCompatActivity(),
                         0 -> updateIsConsultant(Consultant.NONE)
                         1 -> updateIsConsultant(Consultant.PENDING)
                         2 -> updateIsConsultant(Consultant.VERIFIED)
+                        3 -> updateIsConsultant(Consultant.ADMIN)
                     }
                 }
             }
@@ -199,6 +200,10 @@ class Main : AppCompatActivity(),
             R.id.nav_register_as_consultant -> {
                 startActivityForResult(Intent(this, ConsultantRegistrationActivity::class.java), ACTIVITY_CONSULTANT_APPLICATION)
             }
+
+            R.id.nav_admin_applications -> {
+                startActivity(Intent(this, AdminActivity::class.java))
+            }
         }
 
         return true
@@ -260,16 +265,25 @@ class Main : AppCompatActivity(),
 
         when(isConsultant) {
             Consultant.NONE -> {
+                nav_view.menu.setGroupVisible(R.id.is_admin, false)
                 nav_view.menu.setGroupVisible(R.id.is_consultant, false)
                 nav_view.menu.setGroupVisible(R.id.is_not_consultant, true)
                 nav_view.menu.setGroupVisible(R.id.is_pending_consultant, false)
             }
             Consultant.PENDING -> {
+                nav_view.menu.setGroupVisible(R.id.is_admin, false)
                 nav_view.menu.setGroupVisible(R.id.is_consultant, false)
                 nav_view.menu.setGroupVisible(R.id.is_not_consultant, false)
                 nav_view.menu.setGroupVisible(R.id.is_pending_consultant, true)
             }
             Consultant.VERIFIED -> {
+                nav_view.menu.setGroupVisible(R.id.is_admin, false)
+                nav_view.menu.setGroupVisible(R.id.is_consultant, true)
+                nav_view.menu.setGroupVisible(R.id.is_not_consultant, false)
+                nav_view.menu.setGroupVisible(R.id.is_pending_consultant, false)
+            }
+            Consultant.ADMIN -> {
+                nav_view.menu.setGroupVisible(R.id.is_admin, true)
                 nav_view.menu.setGroupVisible(R.id.is_consultant, true)
                 nav_view.menu.setGroupVisible(R.id.is_not_consultant, false)
                 nav_view.menu.setGroupVisible(R.id.is_pending_consultant, false)

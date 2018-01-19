@@ -44,6 +44,16 @@
 
     <group
         android:checkableBehavior="single"
+        android:id="@+id/is_admin"
+        android:visible="false">
+        <item
+            android:id="@+id/nav_admin_applications"
+            android:icon="@drawable/star_outline"
+            android:title="@string/nav_admin_applications" />
+    </group>
+
+    <group
+        android:checkableBehavior="single"
         android:id="@+id/nav_settings_group">
         <item
             android:id="@+id/nav_settings"
