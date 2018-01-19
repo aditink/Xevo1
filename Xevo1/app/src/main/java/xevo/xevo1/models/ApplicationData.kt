@@ -10,5 +10,8 @@ import kotlinx.android.parcel.Parcelize
 @SuppressLint("ParcelCreator")
 @Parcelize
 data class ApplicationData (
-        val userId: String = ""
+        val userId: String = "",
+        var firstName: String = "",
+        var lastName: String = "",
+        var email: String = ""
 ) : Parcelable

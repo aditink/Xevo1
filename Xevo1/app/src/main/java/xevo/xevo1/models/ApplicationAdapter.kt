@@ -6,6 +6,7 @@ import android.support.v7.widget.util.SortedListAdapterCallback
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.admin_application_item.view.*
 import xevo.xevo1.R
 
@@ -16,6 +17,7 @@ import xevo.xevo1.R
 class ApplicationAdapter(val listener: (ApplicationData) -> Unit) : RecyclerView.Adapter<ApplicationAdapter.ViewHolder>() {
 
     private val items : SortedList<ApplicationData>
+    private val ref : DatabaseReference
 
     init {
         items = SortedList(ApplicationData::class.java, object : SortedListAdapterCallback<ApplicationData>(this) {
@@ -34,6 +36,8 @@ class ApplicationAdapter(val listener: (ApplicationData) -> Unit) : RecyclerView
                 return item1.userId == item2.userId
             }
         })
+
+        ref = FirebaseDatabase.getInstance().reference
     }
 
     // Adding a method to ViewGroup
@@ -43,7 +47,7 @@ class ApplicationAdapter(val listener: (ApplicationData) -> Unit) : RecyclerView
 
     override fun getItemCount(): Int = items.size()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(parent.inflate(R.layout.admin_application_item))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(parent.inflate(R.layout.admin_application_item), ref)
 
     public fun add(data: ApplicationData) {
         println(data.userId)
@@ -57,12 +61,24 @@ class ApplicationAdapter(val listener: (ApplicationData) -> Unit) : RecyclerView
     /**
      * Holds the View for each item in the list.
      */
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, val ref: DatabaseReference) : RecyclerView.ViewHolder(itemView) {
         fun bind(data: ApplicationData, listener: (ApplicationData) -> Unit) {
 
-            itemView.adminApplicationName.text = data.userId
+            ref.child("Users/%s/".format(data.userId)).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot?) {
+                    dataSnapshot!!
+                    data.email = dataSnapshot.child("email").getValue(String::class.java)!!
+                    data.firstName = dataSnapshot.child("firstName").getValue(String::class.java)!!
+                    data.lastName = dataSnapshot.child("lastName").getValue(String::class.java)!!
 
-            itemView.setOnClickListener { listener(data) }
+                    itemView.adminApplicationName.text = "%s %s".format(data.firstName, data.lastName)
+                    itemView.adminApplicationEmail.text = data.email
+
+                    itemView.setOnClickListener { listener(data) }
+                }
+
+                override fun onCancelled(p0: DatabaseError?) {}
+            })
         }
     }
 

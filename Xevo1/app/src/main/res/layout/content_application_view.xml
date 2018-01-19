@@ -10,8 +10,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Name"
+        android:text="firstName lastName"
         android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/applicationViewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/applicationViewName"
+        android:layout_centerHorizontal="true"
+        android:text="email" />
 
     <Button
         android:id="@+id/approveApplicationButton"
@@ -20,4 +28,5 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Approve" />
+
 </RelativeLayout>

@@ -20,6 +20,8 @@ class ApplicationViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_application_view)
 
+        title = "Application"
+
         applicationData = intent.getParcelableExtra(APPLICATION_DATA)
 
         // add close button
@@ -30,7 +32,8 @@ class ApplicationViewActivity : AppCompatActivity() {
             returnResult(Activity.RESULT_CANCELED)
         }
 
-        applicationViewName.text = applicationData.userId
+        applicationViewName.text = "%s %s".format(applicationData.firstName, applicationData.lastName)
+        applicationViewEmail.text = applicationData.email
 
         val ref = FirebaseDatabase.getInstance().reference
 
