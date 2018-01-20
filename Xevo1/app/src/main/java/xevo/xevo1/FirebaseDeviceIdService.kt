@@ -24,34 +24,22 @@ import android.content.SharedPreferences
  * Created by aditi on 1/14/18.
  */
 
-class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
-    lateinit var userId: String
-
-//    override fun onCreate() {
-//        super.onCreate()
-//        onTokenRefresh()
-//    }
-//
-//    override fun onStart(intent: Intent?, startId: Int) {
-//        super.onStart(intent, startId)
-//        userId = intent!!.getStringExtra("userId")
-//        onTokenRefresh()
-//    }
+class FirebaseDeviceIdService : FirebaseInstanceIdService() {
+    var userId: String? = null
 
     /**
      * Called if InstanceID token is updated. This may occur if the security of
      * the previous token had been compromised. Note that this is called when the InstanceID token
      * is initially generated so this is where you would retrieve the token.
      */
-    // [START refresh_token]
     override fun onTokenRefresh() {
         // Get updated InstanceID token.
         val refreshedToken = FirebaseInstanceId.getInstance().token
         Log.d(TAG, "Refreshed token: " + refreshedToken!!)
 
-        // If you want to send messages to this application instance or
-        // manage this apps subscriptions on the server side, send the
-        // Instance ID token to your app server.
+        //Uploading token to shared preferences to retrieve from main
+        //This is done to account for multiple users using the same device
+        //Entry wiped on uninstall or datawipe, in which case new token generated anyway
         val sharedPreferences = application.getSharedPreferences(getString(R.string.fcm),
                 Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -60,22 +48,20 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
 
         sendRegistrationToServer(refreshedToken)
     }
-    // [END refresh_token]
 
     /**
-     * Persist token to third-party servers.
-     *
-     * Modify this method to associate the user's FCM InstanceID token with any server-side account
-     * maintained by your application.
-     *
+     * Uploads device token to database.
+     * Useful if user wiped data, signs in, but token not generated till after
+     * call for upload in main.
      * @param token The new token.
      */
     private fun sendRegistrationToServer(token: String?) {
-
-//        val ref = FirebaseDatabase.getInstance().getReference(
-//                getString(R.string.db_users) + userId + "/device")
-//        ref.setValue(token)
-        // TODO: Implement this method to send token to your app server.
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId!=null) {
+            val ref = FirebaseDatabase.getInstance().getReference(
+                    getString(R.string.db_users) + userId + "/device")
+            ref.setValue(token)
+        }
     }
 
     companion object {

@@ -16,12 +16,13 @@ import android.support.design.widget.CoordinatorLayout.Behavior.setTag
 import android.support.v4.app.NotificationCompat
 
 
-class MyFirebaseMessagingService : FirebaseMessagingService() {
+class NotificationService : FirebaseMessagingService() {
 
     private val TAG = "MyFirebaseMsgService"
 
     /**
-     * Called when message is received.
+     * Called when notification
+     * is received.
      *
      * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
      */
