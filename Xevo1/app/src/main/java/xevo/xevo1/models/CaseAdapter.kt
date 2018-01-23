@@ -35,7 +35,7 @@ class CaseAdapter(val items: List<CaseData>, val listener: (CaseData) -> Unit): 
                 CaseType.HEAVY_LIFT -> caseListIcon.setImageResource(R.drawable.businessman_48)
             }
 
-            setOnClickListener { listener(item) }
+            setOnClickListener { println(item); listener(item) }
         }
     }
 }
