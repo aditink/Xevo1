@@ -1,0 +1,17 @@
+[debug] [2018-01-23T01:17:55.641Z] ----------------------------------------------------------------------
+[debug] [2018-01-23T01:17:55.643Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy --only functions:sendAnswerNotification --project xevo1-3358a
+[debug] [2018-01-23T01:17:55.643Z] CLI Version:   3.16.0
+[debug] [2018-01-23T01:17:55.643Z] Platform:      darwin
+[debug] [2018-01-23T01:17:55.643Z] Node Version:  v8.9.3
+[debug] [2018-01-23T01:17:55.643Z] Time:          Mon Jan 22 2018 20:17:55 GMT-0500 (EST)
+[debug] [2018-01-23T01:17:55.643Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-01-23T01:17:55.654Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-01-23T01:17:55.655Z] > authorizing via signed-in user
+[debug] [2018-01-23T01:17:55.657Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/xevo1-3358a  
+  
+ Mon Jan 22 2018 20:17:55 GMT-0500 (EST)
+[debug] [2018-01-23T01:17:56.065Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-23T01:17:56.065Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/xevo1-3358a/tokens  
+  
+ Mon Jan 22 2018 20:17:56 GMT-0500 (EST)
