@@ -210,15 +210,14 @@ class Main : AppCompatActivity(),
 
     private fun refreshMessageToken() {
         val pref = getSharedPreferences(getString(R.string.fcm), Context.MODE_PRIVATE)
-        val editor = pref.edit()
         val token = pref.getString("fcm", null); // getting String
         if (token != null) {
             val ref = FirebaseDatabase.getInstance().getReference(
                     getString(R.string.db_users) + userId + "/device")
             ref.setValue(token)
         }
-//        val intent = Intent(mContext, ProfessionalOpinion::class.java)
-//        startActivity(intent)
+        // If token is null, then it is probably being generated right now,
+        // so FirebaseDeviceIdService will handle the upload.
     }
 
     /**
