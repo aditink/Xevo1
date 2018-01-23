@@ -23,8 +23,6 @@ import android.util.TypedValue
 import com.google.firebase.database.*
 import xevo.xevo1.Util.ResourceTransformation
 
-const val CATEGORY_DATA = "xevo.xevo1.CATEGORY_DATA"
-
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
@@ -147,6 +145,9 @@ class AnswerCategoryFragment : XevoFragment() {
     }
 
     companion object {
+
+        const val CATEGORY_DATA = "xevo.xevo1.CATEGORY_DATA"
+
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
