@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_question_list.*
+import xevo.xevo1.AnswerCategoryFragment.Companion.CATEGORY_DATA
 import xevo.xevo1.models.CategoryData
 
 class QuestionListActivity : AppCompatActivity(),

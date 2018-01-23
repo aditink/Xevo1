@@ -69,10 +69,20 @@
         <activity android:name=".ReadQuestion" />
         <activity
             android:name=".AnswerQuestionActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".QuestionListActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ConsultantRegistrationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AdminActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ApplicationViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
 
         <service
             android:name=".NotificationService"
