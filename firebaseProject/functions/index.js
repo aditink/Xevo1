@@ -63,6 +63,7 @@ exports.sendAnswerNotification = functions.database.ref('/Cases/{caseId}/status'
                         title: 'You have a new answer!',
 			//TODO limit size in case of too much data
                         body: `Your question "` + message + `" has been answered.`,
+			click_action: "com.xevo.AnsweReady_TARGET"
                         //TODO upload image uri in database. icon: question.photoURL if it exists, otherwise none
                     },
 		    data: {
