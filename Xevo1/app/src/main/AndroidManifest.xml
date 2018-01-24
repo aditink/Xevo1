@@ -83,7 +83,6 @@
             android:name=".ApplicationViewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-
         <service
             android:name=".NotificationService"
             android:enabled="true"
@@ -112,6 +111,12 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
         <!-- TODO Can set custom notification channel -->
+        <activity android:name=".AnswerReady">
+            <intent-filter>
+                <action android:name="com.xevo.AnsweReady_TARGET" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
