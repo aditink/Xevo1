@@ -98,7 +98,7 @@ class CaseListFragment : XevoFragment() {
     fun questionDetails(case : CaseData) {
         if (caseDetailClass != null) {
             val intent = Intent(mContext, caseDetailClass)
-            intent.putExtra("caseId", case.caseId)
+            intent.putExtra("caseId", case)
             startActivity(intent)
         }
     }

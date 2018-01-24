@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#B02000</color>
+    <color name="colorPrimary">#b02000</color>
     <color name="colorPrimaryDark">#301000</color>
     <color name="colorAccent">#B02000</color>
     <color name="colorBeige">#FBFBF1</color>
     <color name="colorLightBeige">#FEFEFC</color>
     <color name="primaryTextDark">#dd000000</color>
     <color name="secondaryTextDark">#89000000</color>
+    <color name="ripple">#80ffffff</color>
 
     <!-- Old color scheme:
     <color name="colorPrimary">#903000</color>

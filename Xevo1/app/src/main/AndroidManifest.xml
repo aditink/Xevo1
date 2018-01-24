@@ -66,13 +66,18 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".ReadQuestion" />
+        <activity
+            android:name=".ReadQuestion"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".QuestionListActivity"
+            android:label=""/>
         <activity
             android:name=".AnswerQuestionActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".QuestionListActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".ConsultantRegistrationActivity"
             android:theme="@style/AppTheme.NoActionBar" />

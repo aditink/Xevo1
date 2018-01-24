@@ -1,6 +1,9 @@
 package xevo.xevo1.models;
 
+import android.annotation.SuppressLint
 import android.net.Uri
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import xevo.xevo1.Database.DatabaseModels.CaseOverview
 import xevo.xevo1.enums.CaseType
 
@@ -9,14 +12,16 @@ import xevo.xevo1.enums.CaseType
  * for each type of case which means that all fields
  * aren't necessarily used for each individual case.
  */
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class CaseData(
         val type: CaseType,
         val title: String,
         val description: String,
         val difficulty: String,
         val photoUrl: Uri?,
-        val caseId: String //Unique question id
-) {
+        val caseId: String // Unique question id
+) : Parcelable {
     constructor(caseOverview: CaseOverview) : this(
             caseOverview.caseType,
             caseOverview.title,
