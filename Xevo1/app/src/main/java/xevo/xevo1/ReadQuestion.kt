@@ -70,7 +70,7 @@ class ReadQuestion : AppCompatActivity(),
     }
 
     fun updateUI() {
-        val intent = Intent(this, Main::class.java)
+//        val intent = Intent(this, Main::class.java)
         var headerFragment : ProfileAndString = supportFragmentManager.findFragmentById(
                 R.id.question_title) as ProfileAndString
         headerFragment.setText(caseDetails.title)

@@ -7,6 +7,8 @@
     <color name="colorLightBeige">#FEFEFC</color>
     <color name="primaryTextDark">#dd000000</color>
     <color name="secondaryTextDark">#89000000</color>
+    <color name="unclicked_link">#0645AD</color>
+    <color name="clicked_link">#0B0080</color>
 
     <!-- Old color scheme:
     <color name="colorPrimary">#903000</color>

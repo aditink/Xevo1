@@ -6,4 +6,57 @@
     android:layout_height="match_parent"
     tools:context="xevo.xevo1.AnswerReady">
 
+    <fragment
+        android:name="xevo.xevo1.ProfileAndString"
+        android:layout_width="match_parent"
+        android:id="@+id/question_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/content_below_title"
+        app:layout_constraintTop_toBottomOf="@+id/question_title">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin_content">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/question_details_text_view"
+            android:maxLines="4"
+            android:ellipsize="end" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Expand"
+            android:textColor="@color/unclicked_link"
+            android:visibility="gone"
+            android:id="@+id/expand_collapse_text_view"/>
+
+         <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/answer_display_text_view" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/download_pdf_text_view"
+            android:text="Download pdf"
+            android:textColor="@color/unclicked_link"
+            />
+
+    </LinearLayout>
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>
