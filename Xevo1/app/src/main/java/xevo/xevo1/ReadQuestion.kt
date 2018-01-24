@@ -1,20 +1,28 @@
 package xevo.xevo1
 
+import android.annotation.TargetApi
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_read_question.*
+import kotlinx.android.synthetic.main.content_read_question.*
 import xevo.xevo1.Database.DatabaseModels.CaseDetails
 import xevo.xevo1.enums.Status
 import xevo.xevo1.models.CaseData
 import java.util.HashMap
+import android.support.v4.app.NavUtils
+import android.view.Window
+
 
 class ReadQuestion : AppCompatActivity(),
     ProfileAndString.OnFragmentInteractionListener {
@@ -31,10 +39,13 @@ class ReadQuestion : AppCompatActivity(),
         setContentView(R.layout.activity_read_question)
         caseData = intent.getParcelableExtra<CaseData>("caseId")
 
+        setSupportActionBar(readQuestionToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         question_details.setMovementMethod(ScrollingMovementMethod())
 
         acceptButton = accept_button
-//        acceptButton.setOnClickListener() { view : View ->   onAccept() }
+        acceptButton.setOnClickListener() { view : View -> println("clicked!") }
 
         val headerFragment : ProfileAndString = supportFragmentManager.findFragmentById(
                 R.id.question_title) as ProfileAndString
@@ -58,6 +69,17 @@ class ReadQuestion : AppCompatActivity(),
 //            }
 //        }
 //        databaseReference.addListenerForSingleValueEvent(valueEventListener)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                Log.d(TAG, "hi")
+                NavUtils.navigateUpFromSameTask(this)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onFragmentInteraction(uri: Uri) {
