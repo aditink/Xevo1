@@ -61,11 +61,14 @@ exports.sendAnswerNotification = functions.database.ref('/Cases/{caseId}/status'
                 const payload = {
                     notification: {
                         title: 'You have a new answer!',
-                        //TODO get actual question title and stick in here.
-                        body: `Your question "` + message + `" has been answered.`
+			//TODO limit size in case of too much data
+                        body: `Your question "` + message + `" has been answered.`,
                         //TODO upload image uri in database. icon: question.photoURL if it exists, otherwise none
+                    },
+		    data: {
+			caseId: caseId
                     }
-                };
+		};
                 return admin.messaging().sendToDevice(deviceId, payload)
                     .then(function(response) {
 			console.log("Successfully sent message:", response);
