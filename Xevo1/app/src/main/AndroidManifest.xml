@@ -69,10 +69,10 @@
         <activity android:name=".ReadQuestion" />
         <activity
             android:name=".AnswerQuestionActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".QuestionListActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service
             android:name=".NotificationService"
@@ -102,6 +102,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
         <!-- TODO Can set custom notification channel -->
+        <activity android:name=".AnswerReady"></activity>
     </application>
 
 </manifest>

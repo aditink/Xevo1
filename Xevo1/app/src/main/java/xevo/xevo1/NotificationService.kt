@@ -24,6 +24,7 @@ class NotificationService : FirebaseMessagingService() {
 
     private val TAG = "MyFirebaseMsgService"
     private val FOLLOWER_CHANNEL = "FOLLOWER_CHANNEL"
+    private var caseId : String? = null
 
     /**
      * Called when notification
@@ -38,16 +39,15 @@ class NotificationService : FirebaseMessagingService() {
         // message, here is where that should be initiated.
         Log.d(TAG, "From: " + remoteMessage!!.from)
         Log.d(TAG, "Notification Message Body: " + remoteMessage.notification?.body!!)
+        caseId = remoteMessage.data?.get("caseId")
+        Log.d(TAG, "Notification Message caseId: " + caseId)
         sendNotification(remoteMessage)
-        val intent = Intent(this@NotificationService, Main::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.putExtra("message", remoteMessage.notification?.body!!)
-        startActivity(intent)
     }
 
     @TargetApi(Build.VERSION_CODES.O)
     private fun sendNotification(remoteMessage: RemoteMessage) {
-        val intent = Intent(this, Main::class.java)
+        val intent = Intent(this@NotificationService, AnswerReady::class.java)
+        intent.putExtra("caseId", caseId)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT)
