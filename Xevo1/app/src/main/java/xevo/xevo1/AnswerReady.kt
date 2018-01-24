@@ -7,6 +7,12 @@ import android.util.Log
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_answer_ready.*
 import xevo.xevo1.Database.DatabaseModels.CaseDetails
+import android.animation.ObjectAnimator
+import android.view.View
+import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_answer_ready.view.*
+import xevo.xevo1.R.id.question_details_text_view
+
 
 class AnswerReady : AppCompatActivity(),
         ProfileAndString.OnFragmentInteractionListener {
@@ -15,6 +21,8 @@ class AnswerReady : AppCompatActivity(),
     lateinit var databaseReference : DatabaseReference
     val TAG : String = "ANSWER_READY_ACTIVITY"
     lateinit var caseDetails : CaseDetails
+    lateinit var questionDetailsTextView : TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +32,28 @@ class AnswerReady : AppCompatActivity(),
 
         if(caseId != null) {
             getQuestionDetails(caseId!!)
+            questionDetailsTextView = question_details_text_view
+//            if (questionDetailsTextView.maxLines > 4) {
+                expand_collapse_text_view.visibility = View.VISIBLE
+//            }
+            expand_collapse_text_view.setOnClickListener(View.OnClickListener { collapseOrExpandTextView() })
         }
         //TODO handle the other case
     }
 
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun collapseOrExpandTextView() {
+        val collapsedMaxLines = 4
+        var questionDetailsTextView = question_details_text_view
+        if (questionDetailsTextView.getMaxLines() >= collapsedMaxLines) {
+            collapseTextView(questionDetailsTextView, collapsedMaxLines)
+        }
+        else {
+            expandTextView(questionDetailsTextView)
+        }
     }
 
     private fun getQuestionDetails(caseId : String) {
@@ -61,5 +85,15 @@ class AnswerReady : AppCompatActivity(),
         headerFragment.setText(caseDetails.title)
         question_details_text_view.setText(caseDetails.description)
         answer_display_text_view.setText(caseDetails.answer)
+    }
+
+    private fun expandTextView(tv: TextView) {
+        val animation = ObjectAnimator.ofInt(tv, "maxLines", tv.lineCount)
+        animation.setDuration(200).start()
+    }
+
+    private fun collapseTextView(tv: TextView, numLines: Int) {
+        val animation = ObjectAnimator.ofInt(tv, "maxLines", numLines)
+        animation.setDuration(200).start()
     }
 }
