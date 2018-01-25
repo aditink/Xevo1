@@ -5,58 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="xevo.xevo1.AnswerReady">
-
-    <fragment
-        android:name="xevo.xevo1.ProfileAndString"
-        android:layout_width="match_parent"
-        android:id="@+id/question_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:layout_height="wrap_content" />
-
-    <ScrollView
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/content_below_title"
-        app:layout_constraintTop_toBottomOf="@+id/question_title">
+        android:id="@+id/answer_ready_text_view"
+        style="@style/largeTitleStyle"
+        android:layout_weight="1"
+        android:text="@string/answer_ready"/>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v7.widget.AppCompatImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_margin_content">
+        android:layout_height="0dp"
+        android:id="@+id/xevo_logo_image_view"
+        android:src="@drawable/xevo_logo"
+        android:layout_weight="2"
+        app:layout_constraintTop_toBottomOf="@+id/answer_ready_text_view"/>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/question_details_text_view"
-            android:maxLines="4"
-            android:ellipsize="end" />
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/download_pdf_text_view"
+        android:text="Download pdf"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:clickable="true"
+        app:layout_constraintTop_toBottomOf="@+id/xevo_logo_image_view"
+        android:textColor="@color/unclicked_link"
+        />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Expand"
-            android:textColor="@color/unclicked_link"
-            android:visibility="gone"
-            android:id="@+id/expand_collapse_text_view"/>
-
-         <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/answer_display_text_view" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/download_pdf_text_view"
-            android:text="Download pdf"
-            android:textColor="@color/unclicked_link"
-            />
-
-    </LinearLayout>
-    </ScrollView>
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="View Answer"
+        style="@style/buttonStyle"
+        android:layout_gravity="center"
+        />
+</LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
