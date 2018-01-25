@@ -58,11 +58,17 @@
 
     <!-- Button style -->
     <style name="buttonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/button_size</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginBottom">16dp</item>
         <item name="android:fontFamily">@font/avenir_regular</item>
-        <item name="android:background">@color/colorLightBeige</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:foreground">@drawable/ripple_effect</item>
+        <item name="android:background">@drawable/profile_and_string_bg</item>
         <item name="android:gravity">center</item>
-        <item name="android:padding">@dimen/text_margin_large</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
 </resources>
