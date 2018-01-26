@@ -21,6 +21,7 @@ class QuestionListActivity : AppCompatActivity(),
         CaseListFragment.OnFragmentInteractionListener {
 
     private val TAG = "QuestionListActivity"
+    private lateinit var categoryString: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,8 @@ class QuestionListActivity : AppCompatActivity(),
 
         // get categoryData that this activity was started with
         val categoryData: CategoryData = intent.getParcelableExtra(CATEGORY_DATA)
+
+        categoryString = categoryData.dbString
 
         // add close button
         setSupportActionBar(questionListToolbar)
@@ -59,6 +62,7 @@ class QuestionListActivity : AppCompatActivity(),
         Handler().post(pendingRunnable)
     }
 
-    override fun onProfileImageUpdated() {
+    override fun getCategoryString(): String {
+        return categoryString
     }
 }

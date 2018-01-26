@@ -13,8 +13,6 @@ import android.util.Log
 import com.google.firebase.database.*
 import xevo.xevo1.Database.DatabaseModels.CaseOverview
 import xevo.xevo1.models.CaseAdapter
-import xevo.xevo1.models.CaseData
-import java.util.*
 import com.google.firebase.database.GenericTypeIndicator
 import kotlin.collections.HashMap
 
@@ -75,30 +73,21 @@ class CaseListFragment : XevoFragment() {
 
         database?.addValueEventListener(postListener);
 
-        // load list
-//        val listItems: List<CaseData> = List<CaseData>(20) { id: Int ->
-//            when (id) {
-//                0 -> CaseData(CaseType.QUICK_HIT, "What is the meaning of life?", "I need a better answer than '42'", "Super hard", null, caseId = Math.random().toInt())
-//                1 -> CaseData(CaseType.TALK_ABOUT_IT, "Talk About It", "Description", "Super hard", null, caseId = Math.random().toInt())
-//                else -> CaseData(CaseType.PROFESSIONAL, "Professional", "Description", "super easy", null, caseId = Math.random().toInt())
-//            }
-//        }
-
-
         return v
 
     }
 
     fun loadList(v : View) {
-        val listItems: List<CaseData> = questionList.map { caseOverview : CaseOverview -> CaseData(caseOverview) }
-        val adapter = CaseAdapter(listItems) { data:CaseData -> questionDetails(data) }
+        val listItems: List<CaseOverview> = questionList.toList()
+        val adapter = CaseAdapter(listItems) { data: CaseOverview -> questionDetails(data) }
         v.recyclerView.adapter = adapter
     }
 
-    fun questionDetails(case : CaseData) {
+    fun questionDetails(case : CaseOverview) {
         if (caseDetailClass != null) {
             val intent = Intent(mContext, caseDetailClass)
-            intent.putExtra("caseId", case.caseId)
+            intent.putExtra("caseId", case)
+            intent.putExtra("subjectId", mListener?.getCategoryString())
             startActivity(intent)
         }
     }
@@ -125,7 +114,7 @@ class CaseListFragment : XevoFragment() {
      * activity.
      */
     interface OnFragmentInteractionListener {
-        fun onProfileImageUpdated()
+        fun getCategoryString() : String
     }
 
     companion object {

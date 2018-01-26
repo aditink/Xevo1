@@ -80,24 +80,27 @@
                 android:fontFamily="@font/avenir_regular"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/register_button"
+            <!--
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/register"
-                android:layout_marginTop="16dp"
                 android:background="@color/colorLightBeige"
                 android:fontFamily="@font/avenir_regular"
-                android:textStyle="bold" />
+                android:textStyle="bold"-->
+
+            <Button
+                android:id="@+id/register_button"
+                android:text="@string/register"
+                style="@style/buttonStyle"
+
+                 />
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textSize="20sp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp" />
+                style="@style/buttonStyle"
+                 />
 
         </LinearLayout>
 

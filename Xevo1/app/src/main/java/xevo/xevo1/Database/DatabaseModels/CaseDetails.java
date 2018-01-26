@@ -1,8 +1,11 @@
 package xevo.xevo1.Database.DatabaseModels;
 
+//import android.annotation.SuppressLint
+//import android.os.Parcelable
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ServerValue;
 
+import kotlinx.android.parcel.Parcelize;
 import xevo.xevo1.enums.CaseType;
 import xevo.xevo1.enums.Status;
 import xevo.xevo1.enums.XevoSubject;
@@ -11,6 +14,20 @@ import xevo.xevo1.enums.XevoSubject;
  * Created by aditi on 1/7/18.
  */
 
+//@SuppressLint("ParcelCreator")
+//@Parcelize
+//public data class CaseDetails(
+////        val timeStamp: Object,
+//        val caseType: CaseType,
+//        val title: String,
+//        val description: String,
+//        val consultant: String,
+//        val client: String,
+//        val status: Status,
+//        val subject: XevoSubject,
+//        val answer: String,
+//        val caseId: String
+//) : Parcelable
 @IgnoreExtraProperties
 public class CaseDetails {
 

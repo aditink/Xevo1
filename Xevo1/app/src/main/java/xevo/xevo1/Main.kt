@@ -220,13 +220,11 @@ class Main : AppCompatActivity(),
     }
 
     /**
-     * Called from [CaseListFragment] when the user
-     * has changed their profile image. This is used
-     * to change the ProfileImage in the NavigationDrawer.
+     * Called from [CaseListFragment]. Needs to be implemnted.
      */
-    override fun onProfileImageUpdated() {
-        val user = FirebaseAuth.getInstance().currentUser!!
-        Glide.with(this).load(user.photoUrl).into(imageView)
+    //TODO: A real string should be returned here
+    override fun getCategoryString() : String {
+        return ""
     }
 
     private fun onAddPressed() {
