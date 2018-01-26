@@ -91,4 +91,7 @@
     <!--Category Strings-->
     <string name="format_unanswered">%d unanswered</string>
     <string name="category_all_color">ffffcc80</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

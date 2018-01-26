@@ -6,6 +6,7 @@
     <color name="colorBeige">#FFFFFF</color>
     <color name="colorLightBeige">#FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorTransparent">#00FFFFFF</color>
     <color name="colorGrey">#EAEAEA</color>
     <color name="colorDarkGrey">#AAAAAA</color>
     <color name="primaryTextDark">#dd000000</color>
