@@ -30,8 +30,9 @@ open class AskQuestionActivity : AppCompatActivity() {
                 "", userId, Status.UNANSWERED, SUBJECT, caseKey)
 
         //add to case_data_by_user and _by_subject
-        var caseOverview : CaseOverview = CaseOverview(TIMESTAMP, caseType, title, description, caseKey)
-
+//        var caseOverview : CaseOverview = CaseOverview(TIMESTAMP, caseType, title, description, caseKey)
+        var caseOverview : CaseOverview = CaseOverview(caseType, title, description, caseKey)
+//
         val childUpdates = HashMap<String, Object>()
         childUpdates.put(ctx.getString(R.string.db_cases)+caseKey, caseDetails as Object)
         childUpdates.put(ctx.getString(R.string.db_cases_by_subject) + SUBJECT.dbString + caseKey, caseOverview as Object)
