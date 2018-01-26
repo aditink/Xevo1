@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Xevo1</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_quick_hit">QuickHit</string>
-    <string name="title_activity_professional_opinion">ProfessionalOpinion</string>
-    <string name="title_activity_talk_about_it">TalkAboutIt</string>
+    <string name="title_activity_quick_hit">Quick Hit</string>
+    <string name="title_activity_professional_opinion">Heavy Lift</string>
+    <string name="title_activity_talk_about_it">Deep Dive</string>
     <string name="whats_up">What\'s Up?</string>
     <string name="short_description">Short Description</string>
     <string name="attach_photo">Attach Photo</string>
@@ -64,8 +64,8 @@
 
     <string name="question_fragment">Question</string>
     <string name="quick_hit">Quick Hit</string>
-    <string name="lets_talk_aboutit">Lets Talk About It</string>
-    <string name="professional_opinion">Professional Opinion</string>
+    <string name="lets_talk_aboutit">Deep Dive</string>
+    <string name="professional_opinion">Heavy Lift</string>
 
     <string name="title_activity_register">Register</string>
     <string name="title_activity_consultant_questions">ConsultantQuestions</string>
@@ -92,6 +92,4 @@
     <string name="format_unanswered">%d unanswered</string>
     <string name="category_all_color">ffffcc80</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

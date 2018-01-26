@@ -9,12 +9,11 @@
     <dimen name="text_margin_large">10dp</dimen>
     <dimen name="text_size_large">75dp</dimen>
     <dimen name="text_size_medium">30dp</dimen>
-    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
     <dimen name="activity_margin_content">24dp</dimen>
     <dimen name="appbar_header_height">144dp</dimen>
     <dimen name="card_margin">5dp</dimen>
     <dimen name="category_image_height">160dp</dimen>
-    <dimen name="center_of_screen">20dp</dimen>
     <!-- corresponds to wrap_content for text_size_medium -->
     <dimen name="button_size">48dp</dimen>
 </resources>
