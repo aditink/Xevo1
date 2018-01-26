@@ -10,6 +10,7 @@
     <string name="title_activity_login">Sign in</string>
     <string name="submit">Submit</string>
     <string name="what_makes_question_difficult">What makes this question difficult?</string>
+    <string name="answer_ready">Your answer is ready!</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -91,5 +92,5 @@
     <!--Category Strings-->
     <string name="format_unanswered">%d unanswered</string>
     <string name="category_all_color">ffffcc80</string>
-
+    <string name="title_activity_display_answer">DisplayAnswer</string>
 </resources>
