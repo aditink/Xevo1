@@ -7,6 +7,7 @@
     <color name="colorLightBeige">#FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGrey">#EAEAEA</color>
+    <color name="colorDarkGrey">#AAAAAA</color>
     <color name="primaryTextDark">#dd000000</color>
     <color name="secondaryTextDark">#89000000</color>
     <color name="ripple">#80ffffff</color>

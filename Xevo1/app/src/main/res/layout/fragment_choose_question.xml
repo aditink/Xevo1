@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightBeige"
+    android:background="@color/colorWhite"
     tools:context="xevo.xevo1.ChooseQuestionFragment">
 
     <android.support.constraint.ConstraintLayout
@@ -16,32 +16,66 @@
 
         <Button
             android:id="@+id/quick_hit_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/whiteButtonStyle"
             android:layout_weight="1"
-            android:background="@color/colorBeige"
-            android:fontFamily="@font/avenir_regular"
             android:text="@string/quick_hit" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_weight="2"
+                android:background="@color/colorWhite" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_weight="1"
+                android:background="@color/colorDarkGrey" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_weight="2"
+                android:background="@color/colorWhite" />
+
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/talk_about_it_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/whiteButtonStyle"
             android:layout_weight="1"
-            android:background="@color/colorLightBeige"
-            android:fontFamily="@font/avenir_regular"
             android:text="@string/lets_talk_aboutit" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_weight="2"
+                android:background="@color/colorWhite" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_weight="1"
+                android:background="@color/colorDarkGrey" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_weight="2"
+                android:background="@color/colorWhite" />
+
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/professional_opinion_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/whiteButtonStyle"
             android:layout_weight="1"
-            android:background="@color/colorBeige"
-            android:fontFamily="@font/avenir_regular"
             android:text="@string/professional_opinion" />
 
     </LinearLayout>
