@@ -106,7 +106,7 @@ class AnswerQuestionActivity : AppCompatActivity() {
         val childUpdates = HashMap<String, Object>()
 
         childUpdates.put(getString(R.string.db_cases) + caseId, caseDetails as Object)
-        var caseOverview: CaseOverview = CaseOverview(caseDetails)
+        var caseOverview: CaseOverview = CaseOverview(caseDetails as CaseDetails)
         childUpdates.put(getString(R.string.db_answers) + caseDetails!!.consultant + "/" + caseId,
                 caseOverview as Object)
 
