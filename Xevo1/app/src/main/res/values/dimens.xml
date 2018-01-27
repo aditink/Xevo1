@@ -12,8 +12,9 @@
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="activity_margin_content">24dp</dimen>
     <dimen name="appbar_header_height">144dp</dimen>
+    <dimen name="button_text_size">20sp</dimen>
     <dimen name="card_margin">4dp</dimen>
     <dimen name="category_image_height">160dp</dimen>
-    <!-- corresponds to wrap_content for text_size_medium -->
     <dimen name="button_size">48dp</dimen>
+
 </resources>
