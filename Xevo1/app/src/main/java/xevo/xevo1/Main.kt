@@ -24,16 +24,18 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header.view.*
-import xevo.xevo1.R.id.appBarLayout
-import xevo.xevo1.R.id.collapse_toolbar
 import xevo.xevo1.Util.ResourceTransformation
 import java.util.*
 import android.R.id.edit
 import android.app.Activity
+import android.support.v4.app.ActivityCompat.invalidateOptionsMenu
+import android.support.v4.app.ActivityCompat.startActivityForResult
+import android.support.v4.content.ContextCompat.startActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
+import xevo.xevo1.R.id.*
 import xevo.xevo1.enums.Consultant
 
 /**

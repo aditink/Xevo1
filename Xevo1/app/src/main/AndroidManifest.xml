@@ -68,16 +68,16 @@
         </activity>
         <activity
             android:name=".ReadQuestion"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:label=""
             android:parentActivityName=".QuestionListActivity"
-            android:label=""/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AnswerQuestionActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".QuestionListActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ConsultantRegistrationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -119,9 +119,11 @@
         <activity android:name=".AnswerReady">
             <intent-filter>
                 <action android:name="com.xevo.AnsweReady_TARGET" />
-                <category android:name="android.intent.category.DEFAULT"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".DisplayCase"></activity>
     </application>
 
 </manifest>
