@@ -16,9 +16,9 @@ class AnswerReady : AppCompatActivity() {
     }
     private fun displayAnswer(caseId : String?) {
         if (caseId != null) {
-            val intent = Intent(this, ReadQuestion::class.java) //Actually want to open seperate display answer class
+            val intent = Intent(this, DisplayCase::class.java)
             intent.putExtra("caseId", caseId)
-            startActivity(intent) 
+            startActivity(intent)
         }
     }
 }
