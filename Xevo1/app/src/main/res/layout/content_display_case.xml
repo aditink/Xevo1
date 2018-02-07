@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="xevo.xevo1.ReadQuestion">
+
+    <fragment
+        android:id="@+id/question_title"
+        android:name="xevo.xevo1.ProfileAndString"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--android:layout_height="80dp"-->
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/question_details"
+        style="@style/TextAppearance.AppCompat.Small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/question_title"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:padding="@dimen/text_margin"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:scrollbars="vertical"
+        android:textAlignment="center" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/answer"
+        style="@style/TextAppearance.AppCompat.Small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/question_details"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:padding="@dimen/text_margin"
+        android:scrollbars="vertical"
+        android:textAlignment="center" />
+
+
+    <!--<FrameLayout-->
+    <!--android:id="@+id/accept_button"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginBottom="16dp"-->
+    <!--android:foreground="?attr/selectableItemBackground"-->
+    <!--android:elevation="2dp">-->
+
+    <!--<Button-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:textAlignment="center"-->
+    <!--android:fontFamily="@font/avenir_regular"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:background="@drawable/profile_and_string_bg"-->
+    <!--android:text="Accept"/>-->
+    <!--</FrameLayout>-->
+
+
+</RelativeLayout>
