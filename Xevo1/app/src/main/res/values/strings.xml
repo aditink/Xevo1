@@ -10,7 +10,7 @@
     <string name="title_activity_login">Sign in</string>
     <string name="submit">Submit</string>
     <string name="what_makes_question_difficult">What makes this question difficult?</string>
-    <string name="answer_ready">Your answer is ready!</string>
+    <string name="answer_ready">Your recommendation is ready!</string>
     <string name="title_activity_display_answer">Display Answer</string>
     <string name="download_pdf"><u>Download PDF</u></string>
 
