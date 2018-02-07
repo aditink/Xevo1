@@ -1,7 +1,9 @@
 package xevo.xevo1
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_answer_ready.*
 
 class AnswerReady : AppCompatActivity() {
 
@@ -10,5 +12,13 @@ class AnswerReady : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_answer_ready)
         caseId = intent.getStringExtra("caseId")
+        xevo_logo_image_view.setOnClickListener() {view -> displayAnswer(caseId) }
+    }
+    private fun displayAnswer(caseId : String?) {
+        if (caseId != null) {
+            val intent = Intent(this, ReadQuestion::class.java) //Actually want to open seperate display answer class
+            intent.putExtra("caseId", caseId)
+            startActivity(intent) 
+        }
     }
 }
