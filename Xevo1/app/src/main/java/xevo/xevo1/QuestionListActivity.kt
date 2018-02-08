@@ -34,14 +34,8 @@ class QuestionListActivity : AppCompatActivity(),
 
         // add close button
         setSupportActionBar(questionListToolbar)
-        @TargetApi(21)
-        questionListToolbar.navigationIcon = getDrawable(R.drawable.ic_close_white_24dp)
-        questionListToolbar.setNavigationOnClickListener { _ ->
-            finish()
-        }
-
-        title = categoryData.displayString
-        questionListToolbar.setBackgroundColor(Color.parseColor("#%s".format(categoryData.color)))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        questionListTitle.text = categoryData.displayString
 
         val databaseReference = if (categoryData.dbString != "") {
             FirebaseDatabase.getInstance().getReference(

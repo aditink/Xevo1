@@ -75,15 +75,14 @@ class Main : AppCompatActivity(),
 
         refreshMessageToken()
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(mainToolbar)
 
         handler = Handler()
 
         drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         val navView = findViewById<NavigationView>(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                this, drawerLayout, mainToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -114,13 +113,7 @@ class Main : AppCompatActivity(),
 
 
         // fab listener
-        newCaseButton.setOnClickListener { _ -> onAddPressed() }
-
-        // used to update the toolbar when the appbar is retracted
-        appBarLayout.addOnOffsetChangedListener { _, _ ->
-            invalidateOptionsMenu()
-            appBarExpanded = newCaseButton.visibility == View.VISIBLE
-        }
+//        newCaseButton.setOnClickListener { _ -> onAddPressed() }
 
         // load first fragment
         currentFragment = CaseListFragment.newInstance()
@@ -313,8 +306,7 @@ class Main : AppCompatActivity(),
         handler.post(pendingRunnable)
 
         // change the activity title to match the fragment title
-        collapse_toolbar.title = getString(frag.title)
-        appBarLayout.setExpanded(frag.expandable, true)
+        titleTextView.text = getString(frag.title)
         drawPlus = frag.expandable
     }
 }

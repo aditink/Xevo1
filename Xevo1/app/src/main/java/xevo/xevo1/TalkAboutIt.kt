@@ -33,7 +33,10 @@ class TalkAboutIt : AskQuestionActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_talk_about_it)
-        setSupportActionBar(toolbar)
+
+        setSupportActionBar(talkToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        talkTitle.text = getString(R.string.title_activity_talk_about_it)
 
         whatsUp = whatsupEditText
         shortDescription = shortDescEditText

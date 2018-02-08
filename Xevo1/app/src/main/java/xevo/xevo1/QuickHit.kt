@@ -30,7 +30,10 @@ class QuickHit : AskQuestionActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quick_hit)
-        setSupportActionBar(toolbar)
+
+        setSupportActionBar(quickHitToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        quickHitTitle.text = getString(R.string.title_activity_quick_hit)
 
         whatsUp = whatsupEditText
         shortDescription = shortDescEditText

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Xevo1</string>
+    <string name="app_name">Xevo</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_quick_hit">Quick Hit</string>
     <string name="title_activity_professional_opinion">Heavy Lift</string>

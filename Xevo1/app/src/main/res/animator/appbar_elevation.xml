@@ -5,7 +5,8 @@
     <item>
         <objectAnimator
             android:propertyName="elevation"
-            android:valueTo="@dimen/design_appbar_elevation"
             android:valueType="floatType" />
     </item>
 </selector>
+
+    <!--android:valueTo="@dimen/design_appbar_elevation"-->
