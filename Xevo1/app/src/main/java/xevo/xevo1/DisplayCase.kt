@@ -13,7 +13,6 @@ class DisplayCase : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_case)
         intent.getStringExtra("caseId")
-
     }
 
     override fun onFragmentInteraction(uri: Uri) {
