@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Xevo1</string>
+    <string name="xevo">xevo</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_quick_hit">Quick Hit</string>
     <string name="title_activity_professional_opinion">Heavy Lift</string>
@@ -27,7 +28,7 @@
         completions."
     </string>
     <string name="title_activity_choose_question">ChooseQuestion</string>
-    <string name="register">register new account</string>
+    <string name="register">Sign up with Email</string>
     <string name="error_invalid_credentials">Invalid credentials. Login failed</string>
     <string name="error_user_already_exists">A user with this email address already exists</string>
 

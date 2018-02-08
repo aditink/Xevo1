@@ -58,8 +58,9 @@
 
     <!-- Button style -->
     <style name="buttonStyle">
+        <item name="android:textSize">@dimen/text_size_medium_small</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">@dimen/button_size</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_marginBottom">16dp</item>
