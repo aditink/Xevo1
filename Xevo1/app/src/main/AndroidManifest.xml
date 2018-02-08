@@ -29,19 +29,23 @@
         </activity>
         <activity
             android:name=".Main"
-            android:label="@string/app_name"
+            android:label=""
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".QuickHit"
-            android:label="@string/title_activity_quick_hit"
+            android:label=""
+            android:parentActivityName=".Main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProfessionalOpinion"
-            android:label="@string/title_activity_professional_opinion"
+            android:label=""
+            android:parentActivityName=".Main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TalkAboutIt"
-            android:label="@string/title_activity_talk_about_it"
+            android:label=""
+            android:parentActivityName=".Main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RegisterActivity"
@@ -78,7 +82,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".QuestionListActivity"
+            android:label=""
             android:launchMode="singleTop"
+            android:parentActivityName=".Main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ConsultantRegistrationActivity"

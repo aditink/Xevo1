@@ -34,7 +34,10 @@ class ProfessionalOpinion : AskQuestionActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_professional_opinion)
-        setSupportActionBar(toolbar)
+
+        setSupportActionBar(heavyLiftToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        heavyLiftTitle.text = getString(R.string.title_activity_professional_opinion)
 
         whatsUp = whatsupEditText
         shortDescription = shortDescEditText
