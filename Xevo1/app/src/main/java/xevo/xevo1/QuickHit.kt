@@ -47,8 +47,9 @@ class QuickHit : AskQuestionActivity() {
         submitButton.setOnClickListener({view : View ->
             createCase(whatsUp.text.toString(), shortDescription.text.toString(), ref,
                     CASE_TYPE, userId, categorySpinner.selectedItem as XevoSubject, this)
-            //go back home
-            val intent = Intent(this, Main::class.java)
+
+            //go to answer submitted screen. if back pressed, this shouldn't appear.
+            val intent = Intent(this, QuestionSubmitted::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)

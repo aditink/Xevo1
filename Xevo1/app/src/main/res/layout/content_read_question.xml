@@ -28,7 +28,7 @@
         android:textSize="@dimen/text_size_small"
         android:textColor="@color/primaryTextDark"
         android:fontFamily="@font/avenir_regular"
-        android:lineSpacingExtra="@dimen/text_size_small"
+        android:lineSpacingExtra="@dimen/text_size_very_small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/question_title"

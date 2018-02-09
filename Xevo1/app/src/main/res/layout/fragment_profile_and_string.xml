@@ -49,7 +49,8 @@
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:textSize="@dimen/text_size_medium"
+        android:textSize="@dimen/text_size_medium_small"
+        android:lineSpacingExtra="@dimen/text_size_very_small"
         android:weightSum="5" />
 
     <!-- Add a line at end if it looks good in actual color scheme -->
