@@ -1,5 +1,11 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="false">
-    <item android:drawable="@drawable/xevo_logo" android:duration="200" />
-    <item android:drawable="@drawable/xevo_glowing_logo" android:duration="200" />
+    <item android:drawable="@drawable/x_2_glow" android:duration="200" />
+    <item android:drawable="@drawable/x_3_glow" android:duration="200" />
+    <item android:drawable="@drawable/x_4_glow" android:duration="200" />
+    <item android:drawable="@drawable/x_5_glow" android:duration="200" />
+    <item android:drawable="@drawable/x_5_glow" android:duration="200" />
+    <item android:drawable="@drawable/x_4_glow" android:duration="200" />
+    <item android:drawable="@drawable/x_3_glow" android:duration="200" />
+    <item android:drawable="@drawable/x_2_glow" android:duration="200" />
 </animation-list>
