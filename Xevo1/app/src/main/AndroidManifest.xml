@@ -49,8 +49,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RegisterActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_register" />
+            android:label="@string/title_activity_register"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -131,7 +131,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".DisplayCase"></activity>
+        <activity android:name=".DisplayCase" />
+        <activity android:name=".QuestionSubmitted"></activity>
     </application>
 
 </manifest>
