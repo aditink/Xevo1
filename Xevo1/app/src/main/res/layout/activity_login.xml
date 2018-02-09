@@ -35,9 +35,9 @@
 
             <ImageView
                 android:layout_width="match_parent"
+                android:id="@+id/xevo_logo_image_view"
                 android:layout_height="0dp"
-                android:layout_weight="4"
-                android:src="@drawable/xevo_glowing_logo"/>
+                android:layout_weight="4" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -117,7 +117,7 @@
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login_button"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_size_medium_small"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

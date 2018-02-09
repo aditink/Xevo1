@@ -22,6 +22,7 @@ import android.widget.TextView
 
 import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.util.Log
 import android.widget.Toast
 import com.facebook.*
@@ -43,6 +44,9 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+
+
         mAuth = FirebaseAuth.getInstance()
         val currentUser = mAuth.currentUser
         if (currentUser != null) {
@@ -96,6 +100,11 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         mAuth = FirebaseAuth.getInstance()
         val currentUser = mAuth.currentUser
         updateUI(currentUser)
+        xevo_logo_image_view.setBackgroundResource(R.drawable.animated_logo)
+        val LogoAnimation : AnimationDrawable? = xevo_logo_image_view.background as AnimationDrawable?
+        if (LogoAnimation != null) {
+            LogoAnimation.start()
+        }
     }
 
     private fun populateAutoComplete() {
