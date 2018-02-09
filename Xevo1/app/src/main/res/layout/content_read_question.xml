@@ -25,7 +25,10 @@
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/question_details"
-        style="@style/TextAppearance.AppCompat.Small"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/primaryTextDark"
+        android:fontFamily="@font/avenir_regular"
+        android:lineSpacingExtra="@dimen/text_size_small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/question_title"

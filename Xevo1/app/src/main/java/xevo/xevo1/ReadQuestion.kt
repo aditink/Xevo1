@@ -32,7 +32,7 @@ class ReadQuestion : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_read_question)
-        caseData = intent.getParcelableExtra<CaseOverview>("caseId")
+        caseData = intent.getParcelableExtra<CaseOverview>("caseOverview")
         subjectDbString = intent.getStringExtra("subjectId")
 
         setSupportActionBar(readQuestionToolbar)
