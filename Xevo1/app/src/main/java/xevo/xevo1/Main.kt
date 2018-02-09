@@ -116,7 +116,9 @@ class Main : AppCompatActivity(),
 //        newCaseButton.setOnClickListener { _ -> onAddPressed() }
 
         // load first fragment
-        currentFragment = CaseListFragment.newInstance()
+        val databaseReference = FirebaseDatabase.getInstance().getReference(
+                getString(R.string.db_questions) + userId)
+        currentFragment = CaseListFragment.newInstance(DisplayCase::class.java, databaseReference)
         setFragment(currentFragment, true)
     }
 
@@ -172,7 +174,10 @@ class Main : AppCompatActivity(),
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_profile -> {
-                setFragment(CaseListFragment.newInstance(), true)
+                val databaseReference = FirebaseDatabase.getInstance().getReference(
+                        getString(R.string.db_questions) + userId)
+                currentFragment = CaseListFragment.newInstance(DisplayCase::class.java, databaseReference)
+                setFragment(currentFragment, true)
             }
 
             R.id.nav_question -> {
