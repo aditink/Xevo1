@@ -41,17 +41,12 @@ class ExpertiseFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_expertise, container, false)
 
-        //Find the +1 button
-        mPlusOneButton = view.findViewById<View>(R.id.plus_one_button) as PlusOneButton
-
         return view
     }
 
     override fun onResume() {
         super.onResume()
 
-        // Refresh the state of the +1 button each time the activity receives focus.
-        mPlusOneButton!!.initialize(PLUS_ONE_URL, PLUS_ONE_REQUEST_CODE)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -106,11 +101,9 @@ class ExpertiseFragment : Fragment() {
          * @return A new instance of fragment ExpertiseFragment.
          */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String, param2: String): ExpertiseFragment {
+        fun newInstance(): ExpertiseFragment {
             val fragment = ExpertiseFragment()
             val args = Bundle()
-            args.putString(ARG_PARAM1, param1)
-            args.putString(ARG_PARAM2, param2)
             fragment.arguments = args
             return fragment
         }
