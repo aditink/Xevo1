@@ -193,7 +193,7 @@ class Main : AppCompatActivity(),
             }
 
             R.id.nav_register_as_consultant -> {
-                startActivityForResult(Intent(this, ConsultantRegistrationActivity::class.java), ACTIVITY_CONSULTANT_APPLICATION)
+                startActivityForResult(Intent(this, RegisterConsultant::class.java), ACTIVITY_CONSULTANT_APPLICATION)
             }
 
             R.id.nav_admin_applications -> {
