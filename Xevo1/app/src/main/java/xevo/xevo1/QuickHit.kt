@@ -22,7 +22,7 @@ class QuickHit : AskQuestionActivity() {
     //TODO replace with subject selection system
     val userId = FirebaseAuth.getInstance().currentUser!!.uid
     lateinit var whatsUp : EditText
-    lateinit var shortDescription : EditText
+//    lateinit var shortDescription : EditText
     lateinit var submitButton : Button
     lateinit var categorySpinner : Spinner
     private val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -36,7 +36,6 @@ class QuickHit : AskQuestionActivity() {
         quickHitTitle.text = getString(R.string.title_activity_quick_hit)
 
         whatsUp = whatsupEditText
-        shortDescription = shortDescEditText
         submitButton = buttonSubmit
         categorySpinner = category_spinner as Spinner
 
@@ -45,7 +44,7 @@ class QuickHit : AskQuestionActivity() {
         updateCategorySpinner(categoryList)
 
         submitButton.setOnClickListener({view : View ->
-            createCase(whatsUp.text.toString(), shortDescription.text.toString(), ref,
+            createCase(whatsUp.text.toString(), shortDescEditText.text.toString(), ref,
                     CASE_TYPE, userId, categorySpinner.selectedItem as XevoSubject, this)
 
             //go to answer submitted screen. if back pressed, this shouldn't appear.

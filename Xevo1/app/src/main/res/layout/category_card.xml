@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/card_margin"
+        app:cardCornerRadius="20dp"
         android:elevation="3dp">
 
         <RelativeLayout
@@ -68,8 +69,6 @@
                 app:mfb_color="white"
                 app:mfb_rotation_angle="0"
                 app:mfb_rotation_duration="0" />
-
-
 
         </RelativeLayout>
 

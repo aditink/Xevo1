@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:transitionGroup="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -15,21 +16,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.04136253" />
 
-    <TextView
-        android:id="@+id/nav_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/avenir_regular"
-        android:text="@string/whats_up"
-        android:textColor="@android:color/black"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <android.support.constraint.Guideline
         android:id="@+id/rightGuideline"
         android:layout_width="wrap_content"
@@ -37,150 +23,208 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
 
-    <TextView
-        android:id="@+id/shortDescriptionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/avenir_regular"
-        android:text="@string/short_description"
-        android:textColor="@android:color/black"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/whatsupEditText" />
+    <!--<TextView-->
+        <!--android:id="@+id/nav_email"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="32dp"-->
+        <!--android:fontFamily="@font/avenir_regular"-->
+        <!--android:text="@string/whats_up"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="20sp"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
 
-    <Button
-        android:id="@+id/buttonSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/colorLightBeige"
-        android:fontFamily="@font/avenir_regular"
-        android:text="@string/submit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline" />
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/input_layout_whatsup"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--&gt;-->
 
-    <EditText
-        android:id="@+id/shortDescEditText"
+        <!--<EditText-->
+            <!--android:id="@+id/whatsupEditText"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:ems="10"-->
+            <!--android:hint="@string/whats_up"-->
+            <!--android:inputType="textMultiLine"-->
+            <!--android:maxLines="3" />-->
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/whatsupEditTextWrapper"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:maxLines="3"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/outline"
+        app:panelBackgroundColor="@color/textBox"
+        app:labelText="@string/whats_up"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/whatsupEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top" />
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <!--<TextView-->
+        <!--android:id="@+id/shortDescriptionTextView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="32dp"-->
+        <!--android:fontFamily="@font/avenir_regular"-->
+        <!--android:text="@string/short_description"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="20sp"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/whatsupEditText" />-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/shortDescEditText"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:background="@drawable/text_field"-->
+        <!--android:ems="10"-->
+        <!--android:hint="@string/short_description"-->
+        <!--android:inputType="textMultiLine"-->
+        <!--android:gravity="top"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/input_layout_whatsup"/>-->
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/shortDescEditTextWrapper"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/outline"
+        app:panelBackgroundColor="@color/textBox"
+        app:labelText="@string/short_description"
+        app:endIcon="@drawable/ic_menu_camera"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/whatsupEditTextWrapper">
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/shortDescEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top" />
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <!--<TextView-->
+        <!--android:id="@+id/shortDescOptTextView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:fontFamily="@font/avenir_regular"-->
+        <!--android:text="@string/optional"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/input_layout_description" />-->
+
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:id="@+id/attachPhotoLayout"-->
+        <!--style="@style/Base.Widget.AppCompat.Button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/shortDescEditTextWrapper">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/attachPhotoTextView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:fontFamily="@font/avenir_regular"-->
+            <!--android:text="@string/attach_photo"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="18sp"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/attachPhotoOptTextView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="28dp"-->
+            <!--android:fontFamily="@font/avenir_regular"-->
+            <!--android:text="@string/optional"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/attachPhotoTextView"-->
+            <!--app:layout_constraintVertical_bias="0.904" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/attachPhotoButtonImage"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/attachPhotoTextView"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:srcCompat="@android:drawable/ic_menu_camera" />-->
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/outline"
+        android:padding="4dp"
         app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/shortDescOptTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/shortDescEditTextWrapper">
 
-    <TextView
-        android:id="@+id/shortDescOptTextView"
+        <Spinner
+            android:id="@+id/category_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/buttonSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/avenir_regular"
-        android:text="@string/optional"
+        android:text="@string/submit"
+        android:textSize="@dimen/text_size_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/shortDescriptionTextView" />
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/attachPhotoLayout"
-        style="@style/Base.Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/shortDescEditText">
-
-        <TextView
-            android:id="@+id/attachPhotoTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/avenir_regular"
-            android:text="@string/attach_photo"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/attachPhotoOptTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:fontFamily="@font/avenir_regular"
-            android:text="@string/optional"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/attachPhotoTextView"
-            app:layout_constraintVertical_bias="0.904" />
-
-        <ImageView
-            android:id="@+id/attachPhotoButtonImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/attachPhotoTextView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
-    </android.support.constraint.ConstraintLayout>
-
-    <EditText
-        android:id="@+id/whatsupEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:maxLines="3"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/nav_email" />
-
-    <TextView
-        android:id="@+id/select_subject_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:textSize="28sp"
-        android:fontFamily="@font/avenir_regular"
-        android:text="@string/select_subject"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="32dp"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/attachPhotoLayout" />
-
-
-    <android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/category_spinner"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/leftGuideline"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/select_subject_text_view"
-        android:layout_margin="@dimen/text_margin">
-    </android.support.v7.widget.AppCompatSpinner>
-
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline" />
 
 </android.support.constraint.ConstraintLayout>

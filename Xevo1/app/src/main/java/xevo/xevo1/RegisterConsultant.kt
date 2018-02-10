@@ -17,6 +17,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
+import com.bumptech.glide.load.resource.drawable.DrawableDecoderCompat.getDrawable
 import kotlinx.android.synthetic.main.activity_consultant_registration.*
 
 import kotlinx.android.synthetic.main.activity_register_consultant.*
