@@ -15,6 +15,14 @@
     <string name="question_submitted">Your question has been submitted!</string>
     <string name="title_activity_display_answer">Display Answer</string>
     <string name="download_pdf"><u>Download PDF</u></string>
+    <string name="expertise">Expertise</string>
+    <string name="expertise_name">Expertise name</string>
+    <string name="motivation">Motivation</string>
+    <string name="upload_resume">Upload Resume</string>
+    <string name="upload_additional_document">Upload an Additional Document</string>
+    <string name="terms_conditions">I agree to the terms and conditions</string>
+    <string name="authenticity">Authenticity agreement</string>
+    
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

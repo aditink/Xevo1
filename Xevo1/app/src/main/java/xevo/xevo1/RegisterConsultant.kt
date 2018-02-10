@@ -3,6 +3,7 @@ package xevo.xevo1
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 
@@ -24,7 +25,8 @@ import kotlinx.android.synthetic.main.activity_register_consultant.*
 import kotlinx.android.synthetic.main.fragment_register_consultant.*
 import kotlinx.android.synthetic.main.fragment_register_consultant.view.*
 
-class RegisterConsultant : AppCompatActivity() {
+class RegisterConsultant : AppCompatActivity(),
+    ExpertiseFragment.OnFragmentInteractionListener {
 
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
@@ -91,7 +93,7 @@ class RegisterConsultant : AppCompatActivity() {
         override fun getItem(position: Int): Fragment {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1)
+            return ExpertiseFragment.newInstance() //position + 1)
         }
 
         override fun getCount(): Int {
@@ -131,5 +133,9 @@ class RegisterConsultant : AppCompatActivity() {
                 return fragment
             }
         }
+    }
+
+    override fun onFragmentInteraction(uri: Uri) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

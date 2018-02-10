@@ -2,13 +2,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context=".ExpertiseFragment">
 
-    <com.google.android.gms.plus.PlusOneButton xmlns:plus="http://schemas.android.com/apk/lib/com.google.android.gms.plus"
-        android:id="@+id/plus_one_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        plus:annotation="inline"
-        plus:size="standard" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_height="wrap_content">
 
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            style="@style/largeTitleStyle"
+            android:layout_height="wrap_content"
+            android:text="@string/expertise"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/normalTextStyle"
+            android:text="@string/expertise_name"/>
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/normalTextStyle" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/normalTextStyle"
+            android:text="@string/motivation"/>
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            style="@style/normalTextStyle" />
+        <!-- TODO: make editText lined.
+        https://stackoverflow.com/questions/27226302/edittext-with-lines-like-notepad-android -->
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/text_margin"
+            android:elevation="0dp"
+            style="@style/normalTextStyle"
+            android:background="@color/colorWhite"
+            android:textColor="@color/primaryTextDark"
+            android:text="@string/upload_resume"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_width="match_parent"
+            style="@style/normalTextStyle"
+            android:background="@color/colorWhite"
+            android:elevation="0dp"
+            android:textColor="@color/primaryTextDark"
+            android:text="@string/upload_additional_document"
+            android:layout_height="wrap_content" />
+
+ <!-- checkboxes -->
+        <android.support.v7.widget.AppCompatCheckBox
+            android:layout_marginTop="@dimen/text_margin"
+            android:layout_width="match_parent"
+            style="@style/normalTextStyle"
+            android:layout_height="wrap_content"
+            android:text="@string/terms_conditions"/>
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/normalTextStyle"
+            android:text="@string/authenticity" />
+        <Button
+            style="@style/buttonStyle"
+            android:text="@string/submit" />
+
+    </LinearLayout>
+    </ScrollView>
 </FrameLayout>
