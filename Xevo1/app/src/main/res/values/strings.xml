@@ -6,7 +6,7 @@
     <string name="title_activity_professional_opinion">Heavy Lift</string>
     <string name="title_activity_talk_about_it">Deep Dive</string>
     <string name="whats_up">What\'s Up?</string>
-    <string name="short_description">Short Description</string>
+    <string name="short_description">Short Description (optional)</string>
     <string name="attach_photo">Attach Photo</string>
     <string name="title_activity_login">Sign in</string>
     <string name="submit">Submit</string>
