@@ -2,85 +2,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
     tools:context=".ExpertiseFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.AppCompatTextView
+        <LinearLayout
             android:layout_width="match_parent"
-            style="@style/largeTitleStyle"
-            android:layout_height="wrap_content"
-            android:text="@string/expertise"/>
+            android:orientation="vertical"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_height="wrap_content">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/normalTextStyle"
-            android:text="@string/expertise_name"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                style="@style/largeTitleStyle"
+                android:layout_height="wrap_content"
+                android:text="@string/expertise"/>
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/normalTextStyle" />
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/normalTextStyle"
+                android:text="@string/expertise_name"/>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/normalTextStyle"
-            android:text="@string/motivation"/>
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/normalTextStyle" />
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            style="@style/normalTextStyle" />
-        <!-- TODO: make editText lined.
-        https://stackoverflow.com/questions/27226302/edittext-with-lines-like-notepad-android -->
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/normalTextStyle"
+                android:text="@string/motivation"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/text_margin"
-            android:elevation="0dp"
-            style="@style/normalTextStyle"
-            android:background="@color/colorWhite"
-            android:textColor="@color/primaryTextDark"
-            android:text="@string/upload_resume"
-            android:layout_height="wrap_content" />
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                style="@style/normalTextStyle" />
+            <!-- TODO: make editText lined.
+            https://stackoverflow.com/questions/27226302/edittext-with-lines-like-notepad-android -->
 
-        <Button
-            android:layout_width="match_parent"
-            style="@style/normalTextStyle"
-            android:background="@color/colorWhite"
-            android:elevation="0dp"
-            android:textColor="@color/primaryTextDark"
-            android:text="@string/upload_additional_document"
-            android:layout_height="wrap_content" />
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/text_margin"
+                android:gravity="center"
+                style="@style/normalTextStyle"
+                android:textColor="@color/primaryTextDark"
+                android:text="@string/upload_resume"
+                android:layout_height="wrap_content" />
 
- <!-- checkboxes -->
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_marginTop="@dimen/text_margin"
-            android:layout_width="match_parent"
-            style="@style/normalTextStyle"
-            android:layout_height="wrap_content"
-            android:text="@string/terms_conditions"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                style="@style/normalTextStyle"
+                android:gravity="center"
+                android:textColor="@color/primaryTextDark"
+                android:text="@string/upload_additional_document"
+                android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/normalTextStyle"
-            android:text="@string/authenticity" />
-        <Button
-            style="@style/buttonStyle"
-            android:text="@string/submit" />
+     <!-- checkboxes -->
+            <android.support.v7.widget.AppCompatCheckBox
+                android:layout_marginTop="@dimen/text_margin"
+                android:layout_width="match_parent"
+                style="@style/normalTextStyle"
+                android:layout_height="wrap_content"
+                android:text="@string/terms_conditions"/>
 
-    </LinearLayout>
+            <android.support.v7.widget.AppCompatCheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/normalTextStyle"
+                android:text="@string/authenticity" />
+
+        </LinearLayout>
     </ScrollView>
 </FrameLayout>

@@ -142,7 +142,8 @@
         <activity android:name=".QuestionSubmitted" />
         <activity
             android:name=".RegisterConsultant"
-            android:label="@string/title_activity_register_consultant"
+            android:parentActivityName=".Main"
+            android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
