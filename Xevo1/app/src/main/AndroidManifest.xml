@@ -132,7 +132,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".DisplayCase" />
-        <activity android:name=".QuestionSubmitted"></activity>
+        <activity android:name=".QuestionSubmitted" />
+        <activity
+            android:name=".demo"
+            android:label="@string/title_activity_demo"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RegisterConsultant"
+            android:label="@string/title_activity_register_consultant"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -16,7 +16,7 @@
             android:id="@+id/consultantRegistrationToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/colorWhite"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:titleTextColor="@android:color/white">
 

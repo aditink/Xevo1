@@ -96,5 +96,8 @@
     <!--Category Strings-->
     <string name="format_unanswered">%d unanswered</string>
     <string name="category_all_color">ffffcc80</string>
+    <string name="title_activity_demo">demo</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_register_consultant">RegisterConsultant</string>
 
 </resources>
