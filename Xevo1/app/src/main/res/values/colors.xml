@@ -9,7 +9,7 @@
     <color name="colorGrey">#EAEAEA</color>
     <color name="colorGreyRipple">#42EAEAEA</color>
     <color name="colorDarkGrey">#AAAAAA</color>
-    <color name="primaryTextDark">#dd000000</color>
+    <color name="primaryTextDark">#ee000000</color>
     <color name="secondaryTextDark">#89000000</color>
     <color name="ripple">#80ffffff</color>
     <color name="unclicked_link">#0645AD</color>

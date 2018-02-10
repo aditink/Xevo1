@@ -16,37 +16,38 @@
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <!--android:layout_height="80dp"-->
 
-
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/question_details"
-        style="@style/TextAppearance.AppCompat.Small"
+        android:background="@color/colorGrey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/question_title"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:layout_marginVertical="@dimen/activity_vertical_margin"
         android:padding="@dimen/text_margin"
-        android:maxLines="3"
+        android:textSize="@dimen/text_size_medium_small"
+        android:maxLines="2"
         android:ellipsize="end"
         android:scrollbars="vertical"
+        android:layout_below="@+id/question_title"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:textAlignment="center" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/answer"
-        style="@style/TextAppearance.AppCompat.Small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/primaryTextDark"
+        android:fontFamily="@font/avenir_regular"
         android:layout_below="@+id/question_details"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:layout_marginVertical="@dimen/activity_vertical_margin"
         android:padding="@dimen/text_margin"
         android:scrollbars="vertical"
+        android:lineSpacingExtra="@dimen/text_size_very_small"
         android:textAlignment="center" />
 
 
