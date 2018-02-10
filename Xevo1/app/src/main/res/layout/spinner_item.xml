@@ -6,6 +6,6 @@
     android:fontFamily="@font/avenir_regular"
     android:layout_margin="@dimen/text_margin"
     android:padding="@dimen/text_margin"
-    android:background="@color/colorBeige"
+    android:background="@android:color/transparent"
     android:textAlignment="center">
 </TextView>

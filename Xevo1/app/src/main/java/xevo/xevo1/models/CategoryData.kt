@@ -22,4 +22,8 @@ data class CategoryData(
         var favorite: Boolean = false,
         val photoUri: String = "",
         var dbString: String = ""
-) : Parcelable
+) : Parcelable {
+    override fun toString(): String {
+        return displayString
+    }
+}

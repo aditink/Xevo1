@@ -124,22 +124,26 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
         <!-- TODO Can set custom notification channel -->
-        <activity android:name=".AnswerReady">
+        <activity
+            android:name=".AnswerReady"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.xevo.AnsweReady_TARGET" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".DisplayCase" />
+        <activity
+            android:name=".DisplayCase"
+            android:label=""
+            android:parentActivityName=".Main"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".QuestionSubmitted" />
         <activity
-            android:name=".demo"
-            android:label="@string/title_activity_demo"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".RegisterConsultant"
-            android:label="@string/title_activity_register_consultant"
+            android:parentActivityName=".Main"
+            android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

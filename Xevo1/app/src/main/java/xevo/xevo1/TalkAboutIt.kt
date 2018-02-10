@@ -47,16 +47,16 @@ class TalkAboutIt : AskQuestionActivity() {
         //var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
         updateCategorySpinner(categoryList)
 
-        submitButton.setOnClickListener({view : View ->
-            createCase(whatsUp.text.toString(), shortDescription.text.toString(), ref,
-                    CASE_TYPE, userId, categorySpinner.selectedItem as XevoSubject, this)
-            //go back home
-            val intent = Intent(this, QuestionSubmitted::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            finish()
-        })
+//        submitButton.setOnClickListener({view : View ->
+//            createCase(whatsUp.text.toString(), shortDescription.text.toString(), ref,
+//                    CASE_TYPE, userId, categorySpinner.selectedItem as XevoSubject, this)
+//            //go back home
+//            val intent = Intent(this, QuestionSubmitted::class.java)
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                    or Intent.FLAG_ACTIVITY_NEW_TASK)
+//            startActivity(intent)
+//            finish()
+//        })
     }
 
     private fun updateCategorySpinner(categories : List<XevoSubject>) {
