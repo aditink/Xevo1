@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 import kotlinx.android.synthetic.main.activity_quick_hit.*
 import kotlinx.android.synthetic.main.content_quick_hit.*
 import xevo.xevo1.enums.CaseType
 import xevo.xevo1.enums.XevoSubject
+import xevo.xevo1.models.CategoryData
 
 /**
  * Minimal Activity for Quick Hit
@@ -21,11 +21,8 @@ class QuickHit : AskQuestionActivity() {
     val CASE_TYPE : CaseType = CaseType.QUICK_HIT
     //TODO replace with subject selection system
     val userId = FirebaseAuth.getInstance().currentUser!!.uid
-    lateinit var whatsUp : EditText
-//    lateinit var shortDescription : EditText
-    lateinit var submitButton : Button
-    lateinit var categorySpinner : Spinner
-    private val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference();
+    private val database: DatabaseReference = FirebaseDatabase.getInstance().reference;
+    private lateinit var categoryAdapter : ArrayAdapter<CategoryData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,17 +32,17 @@ class QuickHit : AskQuestionActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         quickHitTitle.text = getString(R.string.title_activity_quick_hit)
 
-        whatsUp = whatsupEditText
-        submitButton = buttonSubmit
-        categorySpinner = category_spinner as Spinner
+        categoryAdapter = ArrayAdapter(this, R.layout.spinner_item)
+        categoryAdapter.setDropDownViewResource(R.layout.spinner_item)
+        category_spinner.adapter = categoryAdapter
 
-        var categoryList : List<XevoSubject> = XevoSubject.values().toList()
+//        var categoryList : List<XevoSubject> = XevoSubject.values().toList()
         //var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
-        updateCategorySpinner(categoryList)
+//        updateCategorySpinner(categoryList)
 
-        submitButton.setOnClickListener({view : View ->
-            createCase(whatsUp.text.toString(), shortDescEditText.text.toString(), ref,
-                    CASE_TYPE, userId, categorySpinner.selectedItem as XevoSubject, this)
+        buttonSubmit.setOnClickListener({view : View ->
+            createCase(whatsupEditText.text.toString(), shortDescEditText.text.toString(), database,
+                    CASE_TYPE, userId, category_spinner.selectedItem as CategoryData, this)
 
             //go to answer submitted screen. if back pressed, this shouldn't appear.
             val intent = Intent(this, QuestionSubmitted::class.java)
@@ -54,11 +51,27 @@ class QuickHit : AskQuestionActivity() {
             startActivity(intent)
             finish()
         })
+
+        val dataListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot?) {
+
+                dataSnapshot!!.children.map {
+                    val data = it.getValue<CategoryData>(CategoryData::class.java)!!
+                    data.dbString = it.key
+                    categoryAdapter.add(data)
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError?) {
+            }
+        }
+
+        database.child(resources.getString(R.string.db_subjects)).addListenerForSingleValueEvent(dataListener)
     }
 
-    private fun updateCategorySpinner(categories : List<XevoSubject>) {
-        val adapter = ArrayAdapter(this, R.layout.spinner_item, categories)
-        adapter.setDropDownViewResource(R.layout.spinner_item);
-        categorySpinner.setAdapter(adapter);
-    }
+//    private fun updateCategorySpinner(categories : List<XevoSubject>) {
+//        val adapter = ArrayAdapter(this, R.layout.spinner_item, categories)
+//        adapter.setDropDownViewResource(R.layout.spinner_item);
+//        category_spinner.adapter = adapter;
+//    }
 }
