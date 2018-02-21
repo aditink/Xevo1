@@ -42,8 +42,9 @@
     <string name="error_user_already_exists">A user with this email address already exists</string>
 
     <!-- Facebook login -->
-    <string name="facebook_app_id">387972564985103</string>
-    <string name="fb_login_protocol_scheme">fb387972564985103</string>
+    <string name="facebook_app_id">155034941926044</string>
+    <string name="fb_login_protocol_scheme">fb155034941926044</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
