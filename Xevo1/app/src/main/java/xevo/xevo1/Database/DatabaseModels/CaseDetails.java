@@ -9,6 +9,7 @@ import kotlinx.android.parcel.Parcelize;
 import xevo.xevo1.enums.CaseType;
 import xevo.xevo1.enums.Status;
 import xevo.xevo1.enums.XevoSubject;
+import xevo.xevo1.models.CategoryData;
 
 /**
  * Created by aditi on 1/7/18.
@@ -38,7 +39,7 @@ public class CaseDetails {
     private String consultant;
     private String client;
     private Status status;
-    private XevoSubject subject;
+    private String subject;
     private String answer;
     private String caseId;
 
@@ -54,14 +55,14 @@ public class CaseDetails {
         consultant = "";
         client = "";
         status = Status.UNANSWERED;
-        subject = XevoSubject.COMPUTER_SCIENCE;
+        subject = "";
         answer = "";
         caseId = "";
     }
 
     public CaseDetails(Object timeStamp, CaseType caseType, String title,
                        String description, String consultant, String client,
-                       Status status, XevoSubject subject, String caseId) {
+                       Status status, String subject, String caseId) {
         this.timeStamp = timeStamp;
         this.caseType = caseType;
         this.title = title;
@@ -76,7 +77,7 @@ public class CaseDetails {
 
     public CaseDetails(Object timeStamp, CaseType caseType, String title,
                        String description, String consultant, String client,
-                       Status status, XevoSubject subject, String answer, String caseId) {
+                       Status status, String subject, String answer, String caseId) {
         this.timeStamp = timeStamp;
         this.caseType = caseType;
         this.title = title;
@@ -121,7 +122,7 @@ public class CaseDetails {
         return answer;
     }
 
-    public XevoSubject getSubject() {
+    public String getSubject() {
         return subject;
     }
 
@@ -137,7 +138,7 @@ public class CaseDetails {
         this.status = status;
     }
 
-    public void setSubject(XevoSubject subject) {
+    public void setSubject(String subject) {
         this.subject = subject;
     }
 

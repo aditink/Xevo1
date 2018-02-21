@@ -1,64 +1,82 @@
 package xevo.xevo1
 
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 import kotlinx.android.synthetic.main.activity_quick_hit.*
 import kotlinx.android.synthetic.main.content_quick_hit.*
 import xevo.xevo1.enums.CaseType
-import xevo.xevo1.enums.XevoSubject
+import xevo.xevo1.models.CategoryData
 
 /**
  * Minimal Activity for Quick Hit
  */
 class QuickHit : AskQuestionActivity() {
 
-    val CASE_TYPE : CaseType = CaseType.QUICK_HIT
     //TODO replace with subject selection system
     val userId = FirebaseAuth.getInstance().currentUser!!.uid
-    lateinit var whatsUp : EditText
-//    lateinit var shortDescription : EditText
-    lateinit var submitButton : Button
-    lateinit var categorySpinner : Spinner
-    private val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference();
+    private val database: DatabaseReference = FirebaseDatabase.getInstance().reference;
+    private lateinit var categoryAdapter : ArrayAdapter<CategoryData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quick_hit)
 
+        val caseType = intent.getSerializableExtra("questionType") as CaseType
+
         setSupportActionBar(quickHitToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         quickHitTitle.text = getString(R.string.title_activity_quick_hit)
 
-        whatsUp = whatsupEditText
-        submitButton = buttonSubmit
-        categorySpinner = category_spinner as Spinner
+        categoryAdapter = ArrayAdapter(this, R.layout.spinner_item)
+        categoryAdapter.setDropDownViewResource(R.layout.spinner_item)
+        category_spinner.adapter = categoryAdapter
 
-        var categoryList : List<XevoSubject> = XevoSubject.values().toList()
-        //var categoryList : List<String> =  arrayListOf<String>("category1", "category2", "category3")
-        updateCategorySpinner(categoryList)
+        when (caseType) {
+            CaseType.QUICK_HIT -> {
+                difficultWrapper.visibility = View.GONE
+//                shortDescEditTextWrapper.layoutParams.height = R.dimen.quick_hit_size
+            }
+            CaseType.DEEP_DIVE, CaseType.HEAVY_LIFT -> {
 
-        submitButton.setOnClickListener({view : View ->
-            createCase(whatsUp.text.toString(), shortDescEditText.text.toString(), ref,
-                    CASE_TYPE, userId, categorySpinner.selectedItem as XevoSubject, this)
+            }
+        }
 
-            //go to answer submitted screen. if back pressed, this shouldn't appear.
-            val intent = Intent(this, QuestionSubmitted::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            finish()
+        buttonSubmit.setOnClickListener({view : View ->
+            val selectedItem = category_spinner.selectedItem as CategoryData
+            if (selectedItem.dbString != "") {
+                createCase(whatsupEditText.text.toString(), shortDescEditText.text.toString(), database,
+                        caseType, userId, selectedItem, this)
+
+                // go to answer submitted screen. if back pressed, this shouldn't appear.
+                val intent = Intent(this, QuestionSubmitted::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
+            }
         })
-    }
 
-    private fun updateCategorySpinner(categories : List<XevoSubject>) {
-        val adapter = ArrayAdapter(this, R.layout.spinner_item, categories)
-        adapter.setDropDownViewResource(R.layout.spinner_item);
-        categorySpinner.setAdapter(adapter);
+        val dataListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot?) {
+
+                categoryAdapter.add(CategoryData("Choose Category", "", 0, false, ""))
+                dataSnapshot!!.children.map {
+                    val data = it.getValue<CategoryData>(CategoryData::class.java)!!
+                    data.dbString = it.key
+                    categoryAdapter.add(data)
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError?) {
+            }
+        }
+
+        database.child(resources.getString(R.string.db_subjects)).addListenerForSingleValueEvent(dataListener)
     }
 }

@@ -45,11 +45,12 @@ class RegisterConsultant : AppCompatActivity(),
         val toolbar = findViewById<android.support.v7.widget.Toolbar>(R.id.consultantRegistrationToolbar)
         // add close button
         setSupportActionBar(toolbar)
-        @TargetApi(21)
-        toolbar.navigationIcon = getDrawable(R.drawable.ic_close_white_24dp)
-        toolbar.setNavigationOnClickListener { _ ->
-            returnResult(Activity.RESULT_CANCELED)
-        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        @TargetApi(21)
+//        toolbar.navigationIcon = getDrawable(R.drawable.ic_close_white_24dp)
+//        toolbar.setNavigationOnClickListener { _ ->
+//            returnResult(Activity.RESULT_CANCELED)
+//        }
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
         // Set up the ViewPager with the sections adapter.

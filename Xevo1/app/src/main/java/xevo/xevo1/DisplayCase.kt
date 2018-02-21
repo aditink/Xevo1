@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.content_display_case.*
 import xevo.xevo1.Database.DatabaseModels.CaseDetails
 import android.text.method.ScrollingMovementMethod
 import android.view.View
+import kotlinx.android.synthetic.main.activity_display_case.*
 import xevo.xevo1.enums.Status
 
 
@@ -25,6 +26,10 @@ class DisplayCase : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_case)
+
+        setSupportActionBar(displayCaseToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         caseId = intent.getStringExtra("caseId")
         if(caseId != null)
             getCaseDetails(caseId as String)
@@ -74,6 +79,6 @@ class DisplayCase : AppCompatActivity(),
                 }
             }
         }
-        databaseReference.addValueEventListener(valueEventListener)
+        databaseReference.addListenerForSingleValueEvent(valueEventListener)
     }
 }

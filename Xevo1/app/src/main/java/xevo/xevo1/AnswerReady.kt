@@ -11,6 +11,9 @@ class AnswerReady : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_answer_ready)
+
+        setSupportActionBar(answerReadyToolbar)
+
         caseId = intent.getStringExtra("caseId")
         xevo_logo_image_view.setOnClickListener() {view -> displayAnswer(caseId) }
     }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_choose_question.view.*
+import xevo.xevo1.enums.CaseType
 
 
 /**
@@ -39,18 +40,21 @@ class ChooseQuestionFragment : XevoFragment() {
         val quickHitButton = v.quick_hit_button
         quickHitButton.setOnClickListener {
             val intent = Intent(mContext, QuickHit::class.java)
+            intent.putExtra("questionType", CaseType.QUICK_HIT)
             startActivity(intent)
         }
 
         val talkAboutItButton = v.talk_about_it_button
         talkAboutItButton.setOnClickListener {
-            val intent = Intent(mContext, TalkAboutIt::class.java)
+            val intent = Intent(mContext, QuickHit::class.java)
+            intent.putExtra("questionType", CaseType.DEEP_DIVE)
             startActivity(intent)
         }
 
         val professionalOpinionButton = v.professional_opinion_button
         professionalOpinionButton.setOnClickListener {
-            val intent = Intent(mContext, ProfessionalOpinion::class.java)
+            val intent = Intent(mContext, QuickHit::class.java)
+            intent.putExtra("questionType", CaseType.HEAVY_LIFT)
             startActivity(intent)
         }
 

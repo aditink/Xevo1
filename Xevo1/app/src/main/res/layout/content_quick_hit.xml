@@ -23,46 +23,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
 
-    <!--<TextView-->
-        <!--android:id="@+id/nav_email"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="32dp"-->
-        <!--android:fontFamily="@font/avenir_regular"-->
-        <!--android:text="@string/whats_up"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:textSize="20sp"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--<android.support.design.widget.TextInputLayout-->
-        <!--android:id="@+id/input_layout_whatsup"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--&gt;-->
-
-        <!--<EditText-->
-            <!--android:id="@+id/whatsupEditText"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginEnd="8dp"-->
-            <!--android:layout_marginStart="8dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:ems="10"-->
-            <!--android:hint="@string/whats_up"-->
-            <!--android:inputType="textMultiLine"-->
-            <!--android:maxLines="3" />-->
-    <!--</android.support.design.widget.TextInputLayout>-->
-
     <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
         android:id="@+id/whatsupEditTextWrapper"
         android:layout_width="0dp"
@@ -83,43 +43,10 @@
 
     </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
-    <!--<TextView-->
-        <!--android:id="@+id/shortDescriptionTextView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="32dp"-->
-        <!--android:fontFamily="@font/avenir_regular"-->
-        <!--android:text="@string/short_description"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:textSize="20sp"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/whatsupEditText" />-->
-
-    <!--<EditText-->
-        <!--android:id="@+id/shortDescEditText"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="200dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:background="@drawable/text_field"-->
-        <!--android:ems="10"-->
-        <!--android:hint="@string/short_description"-->
-        <!--android:inputType="textMultiLine"-->
-        <!--android:gravity="top"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/input_layout_whatsup"/>-->
-
     <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
         android:id="@+id/shortDescEditTextWrapper"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/outline"
         app:panelBackgroundColor="@color/textBox"
@@ -137,63 +64,25 @@
 
     </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
-    <!--<TextView-->
-        <!--android:id="@+id/shortDescOptTextView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:fontFamily="@font/avenir_regular"-->
-        <!--android:text="@string/optional"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/rightGuideline"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/input_layout_description" />-->
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/difficultWrapper"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/outline"
+        app:panelBackgroundColor="@color/textBox"
+        app:labelText="@string/what_makes_question_difficult"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/shortDescEditTextWrapper">
 
-    <!--<android.support.constraint.ConstraintLayout-->
-        <!--android:id="@+id/attachPhotoLayout"-->
-        <!--style="@style/Base.Widget.AppCompat.Button"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--app:layout_constraintStart_toStartOf="@+id/leftGuideline"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/shortDescEditTextWrapper">-->
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/difficult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/attachPhotoTextView"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginStart="8dp"-->
-            <!--android:fontFamily="@font/avenir_regular"-->
-            <!--android:text="@string/attach_photo"-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="18sp"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/attachPhotoOptTextView"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginStart="28dp"-->
-            <!--android:fontFamily="@font/avenir_regular"-->
-            <!--android:text="@string/optional"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/attachPhotoTextView"-->
-            <!--app:layout_constraintVertical_bias="0.904" />-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/attachPhotoButtonImage"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginStart="8dp"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintStart_toEndOf="@+id/attachPhotoTextView"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:srcCompat="@android:drawable/ic_menu_camera" />-->
-    <!--</android.support.constraint.ConstraintLayout>-->
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -204,7 +93,7 @@
         app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/shortDescEditTextWrapper">
+        app:layout_constraintTop_toBottomOf="@+id/difficultWrapper">
 
         <Spinner
             android:id="@+id/category_spinner"
