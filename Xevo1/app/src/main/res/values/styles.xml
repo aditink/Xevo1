@@ -89,6 +89,22 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="chooseQuestionButtonSubtitleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">@dimen/text_size_medium_small</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:fontFamily">@font/avenir_regular</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:gravity">bottom|center</item>
+        <item name="android:layout_marginBottom">@dimen/activity_margin_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+
     <style name="largeTitleStyle">
         <item name="android:fontFamily">@font/avenir_regular</item>
         <item name="android:gravity">center</item>

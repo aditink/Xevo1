@@ -78,8 +78,11 @@
 
     <string name="question_fragment">Question</string>
     <string name="quick_hit">Quick Hit</string>
+    <string name="quick_hit_price">$2</string>
     <string name="lets_talk_aboutit">Deep Dive</string>
+    <string name="lets_talk_aboutit_price">$5</string>
     <string name="professional_opinion">Heavy Lift</string>
+    <string name="professional_opinion_price">$10</string>
 
     <string name="title_activity_register">Register</string>
     <string name="title_activity_consultant_questions">ConsultantQuestions</string>

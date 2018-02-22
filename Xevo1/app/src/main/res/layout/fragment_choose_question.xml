@@ -11,93 +11,26 @@
         android:background="@color/colorWhite"
     android:layout_height="match_parent">
 
-        <!--
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        android:orientation="vertical" >
-
-        <Button
-            android:id="@+id/quick_hit_button"
-            style="@style/whiteButtonStyle"
-            android:layout_weight="1"
-            android:text="@string/quick_hit" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:background="@color/colorWhite"
-            android:layout_margin="0dp"
-            android:layout_height="wrap_content">
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="@color/colorWhite" />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dip"
-                android:layout_weight="2"
-                android:background="@color/colorDarkGrey" />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="@color/colorWhite" />
-
-        </LinearLayout>
-
-
-        <Button
-            android:id="@+id/talk_about_it_button"
-            style="@style/whiteButtonStyle"
-            android:layout_weight="1"
-            android:text="@string/lets_talk_aboutit" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dip"
-                android:layout_weight="1"
-                android:background="@color/colorWhite" />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dip"
-                android:layout_weight="2"
-                android:background="@color/colorDarkGrey" />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dip"
-                android:layout_weight="1"
-                android:background="@color/colorWhite" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/professional_opinion_button"
-            style="@style/whiteButtonStyle"
-            android:layout_weight="1"
-            android:text="@string/professional_opinion" />
-
-    </LinearLayout>
-    -->
         <android.support.constraint.Guideline
             android:id="@+id/guideline_horizontal_33"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.33" />
+            app:layout_constraintGuide_percent="0.3" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline_horizontal_67"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.67" />
+            app:layout_constraintGuide_percent="0.6" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_horizontal_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline_left"
@@ -124,6 +57,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/quick_hit_button_price"
+            style="@style/chooseQuestionButtonSubtitleStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/quick_hit_price"
+            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/talk_about_it_button"
@@ -137,6 +80,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/talk_about_it_button_price"
+            style="@style/chooseQuestionButtonSubtitleStyle"
+            android:background="#00FFFFFF"
+            android:text="@string/lets_talk_aboutit_price"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_33"
+            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_67"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+
 
         <Button
             android:id="@+id/professional_opinion_button"
@@ -145,7 +102,17 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/talk_about_it_button"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/professional_opinion_button_price"
+            style="@style/chooseQuestionButtonSubtitleStyle"
+            android:text="@string/professional_opinion_price"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/talk_about_it_button"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_end"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
