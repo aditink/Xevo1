@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.google.android.gms.plus.PlusOneButton
+import kotlinx.android.synthetic.main.activity_register_consultant.*
 
 /**
  * A fragment with a Google +1 button.
@@ -35,6 +36,8 @@ class ExpertiseFragment : Fragment() {
             mParam2 = arguments!!.getString(ARG_PARAM2)
         }
     }
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

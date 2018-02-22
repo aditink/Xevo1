@@ -37,6 +37,7 @@ class RegisterConsultant : AppCompatActivity(),
      * [android.support.v4.app.FragmentStatePagerAdapter].
      */
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+    private var numPages = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,13 @@ class RegisterConsultant : AppCompatActivity(),
         // Set up the ViewPager with the sections adapter.
         container.adapter = mSectionsPagerAdapter
 
+        fab.setOnClickListener { view -> addExpertise() }
+
+    }
+
+    private fun addExpertise() {
+        mSectionsPagerAdapter?.instantiateItem(container, ++numPages)
+        mSectionsPagerAdapter?.notifyDataSetChanged()
     }
 
     override fun onBackPressed() = returnResult(Activity.RESULT_CANCELED)
@@ -85,6 +93,7 @@ class RegisterConsultant : AppCompatActivity(),
     }
 
 
+
     /**
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -96,10 +105,10 @@ class RegisterConsultant : AppCompatActivity(),
             // Return a PlaceholderFragment (defined as a static inner class below).
             return ExpertiseFragment.newInstance() //position + 1)
         }
-
+        
         override fun getCount(): Int {
             // Show 3 total pages.
-            return 3
+            return numPages
         }
     }
 
