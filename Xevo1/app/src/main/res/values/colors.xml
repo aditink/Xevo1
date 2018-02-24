@@ -15,6 +15,7 @@
     <color name="unclicked_link">#0645AD</color>
     <color name="clicked_link">#0B0080</color>
     <color name="textBox">#40ffffff</color>
+    <color name="transparent">#00000000</color>
 
     <!-- Old color scheme:
     <color name="colorPrimary">#903000</color>

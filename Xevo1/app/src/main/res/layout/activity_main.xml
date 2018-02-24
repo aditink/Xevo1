@@ -20,10 +20,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/colorBeige"
-        app:itemIconTint="@color/colorPrimary"
-        app:itemTextColor="@color/colorPrimary"
+        app:itemIconTint="@color/transparent"
+        app:itemTextColor="@color/primaryTextDark"
         app:itemBackground="@color/colorBeige"
-        android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/activity_choose_question_drawer"
         app:itemTextAppearance="@style/spinnerItemStyle"/>
