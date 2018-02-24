@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -64,6 +65,7 @@ class RegisterConsultant : AppCompatActivity(),
     private fun addExpertise() {
         mSectionsPagerAdapter?.instantiateItem(container, ++numPages)
         mSectionsPagerAdapter?.notifyDataSetChanged()
+//        mSectionsPagerAdapter?.finishUpdate(container)
     }
 
     override fun onBackPressed() = returnResult(Activity.RESULT_CANCELED)
@@ -103,11 +105,19 @@ class RegisterConsultant : AppCompatActivity(),
         override fun getItem(position: Int): Fragment {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return ExpertiseFragment.newInstance() //position + 1)
+            if (position == (0)) {
+                return ExpertiseFragment.newInstance(true)
+            }
+            return ExpertiseFragment.newInstance(false) //position + 1)
         }
-        
+
+//        fun getItem(position: Int, isLast : Boolean): Fragment {
+//            // getItem is called to instantiate the fragment for the given page.
+//            return ExpertiseFragment.newInstance(isLast) //position + 1)
+//        }
+
         override fun getCount(): Int {
-            // Show 3 total pages.
+            // Total pages.
             return numPages
         }
     }

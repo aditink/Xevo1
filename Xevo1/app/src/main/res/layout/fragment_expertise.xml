@@ -15,9 +15,10 @@
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
+                android:id="@+id/textView"
                 style="@style/largeTitleStyle"
                 android:layout_height="wrap_content"
-                android:text="@string/expertise"/>
+                android:text="@string/expertise" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -75,6 +76,12 @@
                 android:layout_height="wrap_content"
                 style="@style/normalTextStyle"
                 android:text="@string/authenticity" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/buttonSubmit"
+                style="@style/buttonStyle"
+                android:visibility="gone"
+                android:text="@string/submit"/>
 
         </LinearLayout>
     </ScrollView>

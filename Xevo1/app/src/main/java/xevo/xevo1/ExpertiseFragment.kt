@@ -10,6 +10,9 @@ import android.view.ViewGroup
 
 import com.google.android.gms.plus.PlusOneButton
 import kotlinx.android.synthetic.main.activity_register_consultant.*
+import kotlinx.android.synthetic.main.fragment_expertise.*
+import xevo.xevo1.R.id.buttonSubmit
+import xevo.xevo1.R.id.textView
 
 /**
  * A fragment with a Google +1 button.
@@ -23,7 +26,7 @@ class ExpertiseFragment : Fragment() {
     // The URL to +1.  Must be a valid URL.
     private val PLUS_ONE_URL = "http://developer.android.com"
     // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
+    public var isLast: Boolean = false
     private var mParam2: String? = null
     private var mPlusOneButton: PlusOneButton? = null
 
@@ -31,10 +34,10 @@ class ExpertiseFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments!!.getString(ARG_PARAM1)
-            mParam2 = arguments!!.getString(ARG_PARAM2)
-        }
+//        if (arguments != null) {
+//            isLast = arguments!!.getBoolean(ARG_PARAM1)
+//            mParam2 = arguments!!.getString(ARG_PARAM2)
+//        }
     }
 
 
@@ -43,13 +46,27 @@ class ExpertiseFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_expertise, container, false)
+        fixSubmitButton()
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
+        fixSubmitButton()
+    }
 
+    /**
+     * Checks if submit button should be visible or not and adjusts visibility accordingly.
+     */
+    public fun fixSubmitButton() {
+        textView?.setText(isLast.toString())
+        if (isLast) {
+            buttonSubmit?.visibility = View.VISIBLE
+        }
+        else {
+            buttonSubmit?.visibility = View.GONE
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -63,6 +80,7 @@ class ExpertiseFragment : Fragment() {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             mListener = context
+            fixSubmitButton()
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
@@ -110,6 +128,24 @@ class ExpertiseFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment ExpertiseFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        fun newInstance(isLast : Boolean): ExpertiseFragment {
+            val fragment = ExpertiseFragment()
+            val args = Bundle()
+            fragment.isLast = isLast
+            fragment.arguments = args
+            return fragment
+        }
+
     }
 
 }// Required empty public constructor
