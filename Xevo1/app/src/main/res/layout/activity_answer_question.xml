@@ -32,10 +32,17 @@
 
     <Button
         android:id="@+id/submit_answer_button"
-        android:layout_width="match_parent"
+        style="@style/buttonStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:padding="10dp"
         android:text="@string/submit"
-        style="@style/buttonStyle" />
+        android:textSize="@dimen/text_size_medium_small"
+        android:theme="@style/buttonStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

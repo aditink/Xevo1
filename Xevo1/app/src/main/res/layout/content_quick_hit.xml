@@ -111,9 +111,19 @@
         android:layout_marginStart="8dp"
         android:fontFamily="@font/avenir_regular"
         android:text="@string/submit"
-        android:textSize="@dimen/text_size_medium"
+        android:textSize="@dimen/text_size_medium_small"
+        android:theme="@style/buttonStyle"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline" />
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+
+        android:textColor="@android:color/white"
+        android:foreground="@drawable/ripple_effect"
+        android:background="@drawable/profile_and_string_bg"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textAllCaps="false"
+        />h
 
 </android.support.constraint.ConstraintLayout>

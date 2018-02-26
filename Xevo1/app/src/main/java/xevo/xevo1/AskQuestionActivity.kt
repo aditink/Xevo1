@@ -25,17 +25,17 @@ open class AskQuestionActivity : AppCompatActivity() {
         val TIMESTAMP = ServerValue.TIMESTAMP
         val caseKey = ref.child(ctx.getString(R.string.db_cases)).push().key
 
-        //to add to case table
+        // to add to case table
         val caseDetails : CaseDetails = CaseDetails(TIMESTAMP, caseType, title, description,
                 "", userId, Status.UNANSWERED, category.dbString, caseKey)
 
-        //add to case_data_by_user and _by_subject
+        // add to case_data_by_user and _by_subject
 //        var caseOverview : CaseOverview = CaseOverview(TIMESTAMP, caseType, title, description, caseKey)
         val caseOverview : CaseOverview = CaseOverview(caseType, title, description, caseKey)
 //
         val childUpdates = HashMap<String, Object>()
         childUpdates.put(ctx.getString(R.string.db_cases)+caseKey, caseDetails as Object)
-        childUpdates.put(ctx.getString(R.string.db_cases_by_subject) + category.dbString + caseKey, caseOverview as Object)
+        childUpdates.put(ctx.getString(R.string.db_cases_by_subject) + category.dbString + "/" + caseKey, caseOverview as Object)
         childUpdates.put(ctx.getString(R.string.db_questions) + userId + "/" + caseKey, caseOverview as Object)
 
         ref.updateChildren(childUpdates as Map<String, Any>)
