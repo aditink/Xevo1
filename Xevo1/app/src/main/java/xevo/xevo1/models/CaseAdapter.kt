@@ -31,10 +31,10 @@ class CaseAdapter(val items: List<CaseOverview>, val listener: (CaseOverview) ->
             caseListTitle.text = item.title
             caseListDescription.text = item.description
             when (item.caseType) {
-                CaseType.QUICK_HIT -> caseListIcon.setImageResource(R.drawable.quick_mode_on_48)
-                CaseType.DEEP_DIVE -> caseListIcon.setImageResource(R.drawable.talk_48)
-                CaseType.HEAVY_LIFT -> caseListIcon.setImageResource(R.drawable.businessman_48)
-                else -> caseListIcon.setImageResource(R.drawable.quick_mode_on_48)
+//                CaseType.QUICK_HIT -> caseListIcon.setImageResource(R.drawable.quick_mode_on_48)
+//                CaseType.DEEP_DIVE -> caseListIcon.setImageResource(R.drawable.talk_48)
+//                CaseType.HEAVY_LIFT -> caseListIcon.setImageResource(R.drawable.businessman_48)
+//                else -> caseListIcon.setImageResource(R.drawable.quick_mode_on_48)
             }
 
             setOnClickListener { println(item); listener(item) }

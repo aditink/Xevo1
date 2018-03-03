@@ -19,19 +19,18 @@
     android:layout_marginVertical="@dimen/card_margin"
     tools:ignore="UnusedAttribute">
 
-    <ImageView
-        android:id="@+id/caseListIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:transitionName="case_list_icon"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+    <!--<ImageView-->
+        <!--android:id="@+id/caseListIcon"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:transitionName="case_list_icon"-->
+        <!--app:srcCompat="@mipmap/ic_launcher_round" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toEndOf="@+id/caseListIcon"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:layout_marginStart="16dp">

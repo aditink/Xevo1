@@ -13,7 +13,7 @@
     <dimen name="text_size_medium_small">20sp</dimen>
     <dimen name="text_size_small">17sp</dimen>
     <dimen name="text_size_very_small">10sp</dimen>
-    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_elevation">0dp</dimen>
     <dimen name="activity_margin_content">24dp</dimen>
     <dimen name="appbar_header_height">144dp</dimen>
     <dimen name="button_text_size">22sp</dimen>
