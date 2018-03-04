@@ -9,8 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/card_margin"
-        app:cardCornerRadius="20dp"
-        android:elevation="3dp">
+        android:foreground="@drawable/white_button_bg"
+        app:cardCornerRadius="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -18,36 +18,40 @@
 
             <ImageView
                 android:id="@+id/categoryImage"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/category_image_width"
                 android:layout_height="@dimen/category_image_height"
+                android:layout_margin="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="false"
-                android:scaleType="centerCrop" />
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerInside" />
 
             <!--Make text more readable by overlaying a transparent gradient that gets darker at the bottom-->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/category_image_height"
-                app:srcCompat="@drawable/scrim"/>
+            <!--<ImageView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/category_image_height"-->
+                <!--app:srcCompat="@drawable/scrim"/>-->
 
             <TextView
                 android:id="@+id/categoryTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/linearText"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="0dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:textColor="@android:color/white"
-                android:textSize="24sp" />
+                android:textColor="@color/primaryTextDark"
+                android:fontFamily="@font/avenir_regular"
+                android:gravity="center"
+                android:layout_below="@id/categoryImage"
+                android:textSize="@dimen/text_size_small" />
 
             <LinearLayout
                 android:id="@+id/linearText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_below="@id/categoryImage">
+                android:layout_below="@id/categoryTitle">
 
                 <TextView
                     android:id="@+id/countTextView"
@@ -57,6 +61,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:gravity="center"
                     android:textSize="12sp"/>
                 
             </LinearLayout>
@@ -66,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:mfb_animate_unfavorite="true"
-                app:mfb_color="white"
+                app:mfb_color="black"
                 app:mfb_rotation_angle="0"
                 app:mfb_rotation_duration="0" />
 

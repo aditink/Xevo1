@@ -102,7 +102,7 @@ class CategoryAdapter(private val listener: (CategoryData) -> Unit,
             }
             categoryTitle.text = item.displayString
             countTextView.text = resources.getString(R.string.format_unanswered).format(item.unanswered)
-            cardView.setCardBackgroundColor(Color.parseColor("#%s".format(item.color)))
+//            cardView.setCardBackgroundColor(Color.parseColor("#%s".format(item.color)))
 
             setOnClickListener { listener(item) }
             favoriteButton.setOnClickListener { _ -> starListener(item, !item.favorite)}
