@@ -2,57 +2,65 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/profile_and_string_bg"
-    android:elevation="2dp">
+    android:padding="@dimen/activity_margin_content">
+    <!--android:elevation="2dp"-->
 
-    <LinearLayout
-        android:id="@+id/profile_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:orientation="vertical"
-        android:weightSum="14">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGrey" />
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_weight="3"
-            android:src="@drawable/ic_account_white_48dp"
-            app:civ_border_color="@android:color/white"
-            app:civ_border_width="2dp" />
+    <!--<LinearLayout-->
+        <!--android:id="@+id/profile_layout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="@dimen/activity_horizontal_margin"-->
+        <!--android:layout_marginStart="@dimen/activity_horizontal_margin"-->
+        <!--android:orientation="vertical"-->
+        <!--android:weightSum="14">-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="11"
-            android:fontFamily="@font/avenir_regular"
-            android:text="username"
-            android:textAlignment="center"
-            android:textColor="@android:color/white" />
+        <!--<de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/profile_image"-->
+            <!--android:layout_width="96dp"-->
+            <!--android:layout_height="96dp"-->
+            <!--android:layout_weight="3"-->
+            <!--android:src="@drawable/ic_account_white_48dp"-->
+            <!--app:civ_border_color="@android:color/white"-->
+            <!--app:civ_border_width="2dp" />-->
 
-    </LinearLayout>
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="11"-->
+            <!--android:fontFamily="@font/avenir_regular"-->
+            <!--android:text="username"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="@android:color/white" />-->
 
+    <!--</LinearLayout>-->
+
+    <!--android:layout_toEndOf="@id/profile_layout"-->
     <!-- These weights set by fibonacci sequence, so hopefully golden ratio -->
     <TextView
         android:id="@+id/question_details_profile_and_string"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@id/profile_layout"
         android:fontFamily="@font/avenir_regular"
         android:gravity="center"
         android:minLines="1"
         android:scrollbars="vertical"
         android:text=""
         android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_size_medium_small"
-        android:lineSpacingExtra="@dimen/text_size_very_small"
-        android:weightSum="5" />
+        android:maxLines="3"
+        style="@style/largeTitleStyle" />
 
     <!-- Add a line at end if it looks good in actual color scheme -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGrey"
+        android:layout_below="@+id/question_details_profile_and_string"/>
 
 </RelativeLayout>
