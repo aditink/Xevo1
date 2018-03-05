@@ -13,10 +13,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:transitionName="parent_view"
-    android:background="@drawable/white_button_bg"
     android:elevation="@dimen/card_elevation"
-    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-    android:layout_marginVertical="@dimen/card_margin"
     tools:ignore="UnusedAttribute">
 
     <!--<ImageView-->
@@ -33,7 +30,7 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:layout_marginStart="16dp">
+        android:layout_marginHorizontal="@dimen/activity_margin_content" >
 
         <TextView
             android:id="@+id/caseListTitle"
@@ -42,6 +39,7 @@
             android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="@color/primaryTextDark"
             android:textSize="16sp"
+            android:layout_marginHorizontal="5dp"
             android:transitionName="text_layanan"
             tools:text="string/item_title" />
 
@@ -54,8 +52,15 @@
             android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="@color/secondaryTextDark"
             android:textSize="14sp"
+            android:layout_marginHorizontal="5dp"
             android:transitionName="text_dokter"
             tools:text="string/item_desc" />
+
+        <View
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDarkGrey" />
 
     </LinearLayout>
 

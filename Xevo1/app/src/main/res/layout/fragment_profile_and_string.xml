@@ -49,11 +49,11 @@
         android:gravity="center"
         android:minLines="1"
         android:scrollbars="vertical"
-        android:text="This si a cat in a hat"
+        android:text=""
         android:textAlignment="center"
         android:maxLines="3"
         android:lineSpacingExtra="5sp"
-        style="@style/largeTitleStyle" />
+        style="@style/mediumTitleStyle" />
 
     <!-- Add a line at end if it looks good in actual color scheme -->
 

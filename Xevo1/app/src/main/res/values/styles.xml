@@ -114,6 +114,15 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="mediumTitleStyle">
+        <item name="android:fontFamily">@font/avenir_regular</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/text_margin_large</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="normalTextStyle">
         <item name="android:fontFamily">@font/avenir_regular</item>
         <item name="android:padding">@dimen/text_margin_large</item>
