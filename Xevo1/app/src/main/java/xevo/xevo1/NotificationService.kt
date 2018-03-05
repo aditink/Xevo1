@@ -60,14 +60,15 @@ class NotificationService : FirebaseMessagingService() {
                     "Follower Notification Channel",
                     NotificationManager.IMPORTANCE_DEFAULT)
 
-// Configure the channel's initial settings
+            // Configure the channel's initial settings
             followersChannel.lightColor = Color.GREEN
             followersChannel.vibrationPattern = longArrayOf(100, 100)
 
-// Submit the notification channel object to the notification manager
+            // Submit the notification channel object to the notification manager
             notificationManager.createNotificationChannel(followersChannel)
 
             val notificationBuilder = NotificationCompat.Builder(this, FOLLOWER_CHANNEL)
+                    .setContentTitle("Recommendation is ready!")
                     .setContentText(remoteMessage.notification?.body)
                     .setAutoCancel(true)
                     .setSmallIcon(R.drawable.xevo_logo)
@@ -78,6 +79,7 @@ class NotificationService : FirebaseMessagingService() {
         }
         else {
             val notificationBuilder = NotificationCompat.Builder(this)
+                    .setContentTitle("Recommendation is ready!")
                     .setContentText(remoteMessage.notification?.body)
                     .setAutoCancel(true)
                     .setSmallIcon(R.drawable.xevo_logo)
