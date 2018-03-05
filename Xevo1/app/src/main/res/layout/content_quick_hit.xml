@@ -124,6 +124,6 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:textAllCaps="false"
-        />h
+        />
 
 </android.support.constraint.ConstraintLayout>
