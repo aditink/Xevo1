@@ -18,4 +18,14 @@ public enum CaseType {
     public int getCaseTypeIndex() {
         return this.caseTypeIndex;
     }
+
+    @Override
+    public String toString() {
+        switch(this) {
+            case QUICK_HIT: return "Quick Hit";
+            case DEEP_DIVE: return "Deep Dive";
+            case HEAVY_LIFT: return "Heavy Lift";
+            default: throw new IllegalArgumentException();
+        }
+    }
 }

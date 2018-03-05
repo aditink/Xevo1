@@ -46,6 +46,7 @@ class ReadQuestion : AppCompatActivity(),
         val headerFragment : ProfileAndString = supportFragmentManager.findFragmentById(
                 R.id.question_title) as ProfileAndString
         headerFragment.setText(caseData.title)
+        question_type.setText(caseData.caseType.toString())
         question_details.setText(caseData.description)
 
         println("Subject Db String" + subjectDbString)
