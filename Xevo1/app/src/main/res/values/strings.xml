@@ -22,7 +22,7 @@
     <string name="upload_additional_document">Upload an Additional Document</string>
     <string name="terms_conditions">I agree to the terms and conditions</string>
     <string name="authenticity">Authenticity agreement</string>
-    
+
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

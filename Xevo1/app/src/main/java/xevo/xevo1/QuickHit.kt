@@ -1,7 +1,5 @@
 package xevo.xevo1
 
-import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -54,11 +52,12 @@ class QuickHit : AskQuestionActivity() {
                         caseType, userId, selectedItem, this)
 
                 // go to answer submitted screen. if back pressed, this shouldn't appear.
-                val intent = Intent(this, QuestionSubmitted::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-                finish()
+//                val intent = Intent(this, QuestionSubmitted::class.java)
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                        or Intent.FLAG_ACTIVITY_NEW_TASK)
+//                startActivity(intent)
+//                finish()
+                openPayment(2)
             }
         })
 

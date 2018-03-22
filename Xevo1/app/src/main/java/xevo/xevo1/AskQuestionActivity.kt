@@ -1,17 +1,16 @@
 package xevo.xevo1
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ServerValue
 import xevo.xevo1.Database.DatabaseModels.CaseDetails
 import xevo.xevo1.Database.DatabaseModels.CaseOverview
-import xevo.xevo1.R
 import xevo.xevo1.enums.CaseType
 import xevo.xevo1.enums.Status
-import xevo.xevo1.enums.XevoSubject
 import java.util.HashMap
-import android.databinding.adapters.NumberPickerBindingAdapter.setValue
+import xevo.xevo1.Payment.PaymentPage
 import xevo.xevo1.models.CategoryData
 
 
@@ -39,5 +38,11 @@ open class AskQuestionActivity : AppCompatActivity() {
         childUpdates.put(ctx.getString(R.string.db_questions) + userId + "/" + caseKey, caseOverview as Object)
 
         ref.updateChildren(childUpdates as Map<String, Any>)
+    }
+
+    fun openPayment(amount: Int) {
+        val intent = Intent(this, PaymentPage::class.java)
+        startActivity(intent)
+        finish()
     }
 }
