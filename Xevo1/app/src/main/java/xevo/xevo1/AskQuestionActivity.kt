@@ -42,6 +42,7 @@ open class AskQuestionActivity : AppCompatActivity() {
 
     fun openPayment(amount: Int) {
         val intent = Intent(this, PaymentPage::class.java)
+        intent.putExtra("Amount", amount)
         startActivity(intent)
         finish()
     }

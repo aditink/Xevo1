@@ -10,11 +10,14 @@ import android.webkit.WebView
 
 class PaymentPage : AppCompatActivity() {
 
+    private var amount = 0;
+    private var default = 5;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment_page)
         val myWebView = findViewById<View>(R.id.webview) as WebView
         myWebView.loadUrl("http://www.example.com")
-
+        amount = intent.getIntExtra("Amount", default)
     }
 }
