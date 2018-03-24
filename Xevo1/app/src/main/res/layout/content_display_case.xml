@@ -49,6 +49,15 @@
         android:lineSpacingExtra="@dimen/text_size_very_small"
         android:textAlignment="textStart" />
 
+    <Button
+        android:id="@+id/rateButton"
+        style="@style/buttonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:text="@string/rate" />
+
 
     <!--<FrameLayout-->
     <!--android:id="@+id/accept_button"-->

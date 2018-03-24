@@ -42,6 +42,7 @@ public class CaseDetails {
     private String subject;
     private String answer;
     private String caseId;
+    private Boolean isRated;
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -58,6 +59,7 @@ public class CaseDetails {
         subject = "";
         answer = "";
         caseId = "";
+        isRated = false;
     }
 
     public CaseDetails(Object timeStamp, CaseType caseType, String title,
@@ -73,6 +75,7 @@ public class CaseDetails {
         this.subject = subject;
         this.answer = "";
         this.caseId = caseId;
+        this.isRated = false;
     }
 
     public CaseDetails(Object timeStamp, CaseType caseType, String title,
@@ -130,6 +133,10 @@ public class CaseDetails {
         return caseId;
     }
 
+    public Boolean getRated() {
+        return isRated;
+    }
+
     public void setConsultant(String consultant) {
         this.consultant = consultant;
     }
@@ -170,4 +177,7 @@ public class CaseDetails {
         this.answer = answer;
     }
 
+    public void setRated(Boolean rated) {
+        isRated = rated;
+    }
 }
