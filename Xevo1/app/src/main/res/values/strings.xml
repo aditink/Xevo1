@@ -91,6 +91,9 @@
 
     <string name="prompt_answer">Enter Answer</string>
 
+    <!-- Rejection flow strings -->
+    <string name="rate_case">How would you rate this answer?</string>
+
     <!-- Database strings -->
     <string name="db_users">Users/</string>
     <string name="db_cases">Cases/</string>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="xevo.xevo1.Rejection.CaseRating">
+
+    <TextView
+        android:id="@+id/rate_case_title"
+        style="@style/largeTitleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rate_case"
+        android:layout_margin="@dimen/activity_margin_content"
+        android:layout_centerHorizontal="true" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rate_case_title"
+        android:layout_margin="@dimen/text_margin_large"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        style="@style/buttonStyle"
+        android:text="@string/submit"
+        android:layout_centerHorizontal="true"/>
+
+</android.widget.RelativeLayout>
