@@ -1,6 +1,7 @@
 package xevo.xevo1.Rejection
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_case_rating.*
 import xevo.xevo1.Database.DatabaseModels.CaseDetails
 import xevo.xevo1.Database.DatabaseModels.CaseOverview
+import xevo.xevo1.QuestionSubmitted
 import xevo.xevo1.R
 import xevo.xevo1.databaseFunctions
 import xevo.xevo1.enums.CaseType
@@ -22,6 +24,7 @@ class CaseRating : AppCompatActivity() {
     lateinit var rating_bar : RatingBar
     lateinit var submit_button : Button
     lateinit var caseId : String
+    var rating = 0.0F
 //    var old_rating : Float = 0.0F
     val TAG = "Rating screen"
 
@@ -40,10 +43,19 @@ class CaseRating : AppCompatActivity() {
 
     private fun submit() {
         val ref = FirebaseDatabase.getInstance().getReference()
-        updateCase_float(getStars(), ref, caseId, "rating")
+        rating = getStars()
+        updateCase_float(rating, ref, caseId, "rating")
         updateCase_bool(true, ref, caseId, "isRated")
-        Log.d(TAG, getStars().toString())
-        Log.d(TAG, caseId)
+        if (rating < 3.0F) {
+            val intent = Intent(this, RejectionForm::class.java)
+            intent.putExtra("caseId", caseId)
+            startActivity(intent)
+            finish()
+
+        }
+        else
+            //TODO: Add a thank you for rating! screen
+            finish()
     }
 
     fun updateCase_float(value : Float, ref : DatabaseReference, caseId : String, field : String) {

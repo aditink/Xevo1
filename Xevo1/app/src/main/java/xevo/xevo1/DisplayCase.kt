@@ -111,6 +111,6 @@ class DisplayCase : AppCompatActivity(),
                 }
             }
         }
-        databaseReference.addListenerForSingleValueEvent(valueEventListener)
+        databaseReference.addValueEventListener(valueEventListener)
     }
 }

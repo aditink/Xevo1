@@ -44,6 +44,7 @@ public class CaseDetails {
     private String caseId;
     private Boolean isRated;
     private Float rating;
+    private String rejectionExplanation;
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -79,6 +80,7 @@ public class CaseDetails {
         this.caseId = caseId;
         this.isRated = false;
         this.rating = 0.0F;
+        this.rejectionExplanation = "";
     }
 
     public CaseDetails(Object timeStamp, CaseType caseType, String title,
@@ -144,6 +146,10 @@ public class CaseDetails {
         return rating;
     }
 
+    public String getRejectionExplanation() {
+        return rejectionExplanation;
+    }
+
     public void setConsultant(String consultant) {
         this.consultant = consultant;
     }
@@ -190,5 +196,9 @@ public class CaseDetails {
 
     public void setRating(Float rating) {
         this.rating = rating;
+    }
+
+    public void setRejectionExplanation(String rejectionExplanation) {
+        this.rejectionExplanation = rejectionExplanation;
     }
 }
