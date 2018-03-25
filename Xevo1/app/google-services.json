@@ -42,6 +42,13 @@
             {
               "client_id": "654288468653-82h8ngv0kvlia47qsniml09lek2vabsu.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "654288468653-snl18uh6ttrteqoifdmgjj0rm0v3cnh6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.Xevo"
+              }
             }
           ]
         },

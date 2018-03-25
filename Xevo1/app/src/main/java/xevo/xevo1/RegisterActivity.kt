@@ -197,7 +197,7 @@ class RegisterActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     private fun addUserToDb() {
         val user : User = User("", email.text.toString(), Consultant.NONE, first_name.text.toString(),
                 last_name.text.toString(), null, FirebaseAuth.getInstance().currentUser!!.uid,
-                "")
+                "", 0f)
         val ref : DatabaseReference = FirebaseDatabase.getInstance().getReference(
                 getString(R.string.db_users) + user.userId)
         ref.setValue(user)

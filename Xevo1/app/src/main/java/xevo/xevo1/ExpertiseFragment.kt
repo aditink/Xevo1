@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import com.google.android.gms.plus.PlusOneButton
+// import com.google.android.gms.plus.PlusOneButton
 import kotlinx.android.synthetic.main.activity_register_consultant.*
 
 /**
@@ -25,7 +25,7 @@ class ExpertiseFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
     private var mParam2: String? = null
-    private var mPlusOneButton: PlusOneButton? = null
+    // private var mPlusOneButton: PlusOneButton? = null
 
     private var mListener: OnFragmentInteractionListener? = null
 
