@@ -16,6 +16,7 @@ import xevo.xevo1.enums.Status
 import android.content.DialogInterface
 import android.nfc.Tag
 import android.support.v7.app.AlertDialog
+import xevo.xevo1.R.id.*
 
 
 class DisplayCase : AppCompatActivity(),
@@ -25,6 +26,7 @@ class DisplayCase : AppCompatActivity(),
     lateinit var databaseReference : DatabaseReference
     val TAG = "DISPLAY_CASE"
     lateinit var caseDetails : CaseDetails
+    lateinit var consultantId : String
     var isRated : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +56,7 @@ class DisplayCase : AppCompatActivity(),
     private fun openRatingScreen() {
         val intent = Intent(this, CaseRating::class.java)
         intent.putExtra("caseId", caseId)
+        intent.putExtra("consultantId", consultantId)
         startActivity(intent)
     }
 
@@ -77,8 +80,6 @@ class DisplayCase : AppCompatActivity(),
                 R.id.question_title) as ProfileAndString
         headerFragment.setText(caseDetails.title)
         question_details.setText(caseDetails.description)
-        Log.d(TAG, caseDetails.isRated.toString())
-        Log.d(TAG, isRated.toString())
         if (caseDetails.status == Status.ANSWERED) {
             answer.setText(caseDetails.answer)
             question_details.setMovementMethod(ScrollingMovementMethod())
@@ -113,6 +114,7 @@ class DisplayCase : AppCompatActivity(),
                 if (obj!= null) {
                     caseDetails = obj
                     isRated = caseDetails.isRated
+                    consultantId = caseDetails.consultant
                     updateUI(caseDetails)
                 }
             }

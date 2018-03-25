@@ -8,6 +8,8 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_rejection_form.*
 import xevo.xevo1.QuestionSubmitted
 import xevo.xevo1.R
+import xevo.xevo1.R.id.rejection_explanation_edittext
+import xevo.xevo1.R.id.submit_button
 
 class RejectionForm : AppCompatActivity() {
 
