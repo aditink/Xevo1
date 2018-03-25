@@ -43,6 +43,7 @@ public class CaseDetails {
     private String answer;
     private String caseId;
     private Boolean isRated;
+    private Float rating;
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -60,6 +61,7 @@ public class CaseDetails {
         answer = "";
         caseId = "";
         isRated = false;
+        rating = 0.0F;
     }
 
     public CaseDetails(Object timeStamp, CaseType caseType, String title,
@@ -76,6 +78,7 @@ public class CaseDetails {
         this.answer = "";
         this.caseId = caseId;
         this.isRated = false;
+        this.rating = 0.0F;
     }
 
     public CaseDetails(Object timeStamp, CaseType caseType, String title,
@@ -137,6 +140,10 @@ public class CaseDetails {
         return isRated;
     }
 
+    public Float getRating() {
+        return rating;
+    }
+
     public void setConsultant(String consultant) {
         this.consultant = consultant;
     }
@@ -179,5 +186,9 @@ public class CaseDetails {
 
     public void setRated(Boolean rated) {
         isRated = rated;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
     }
 }

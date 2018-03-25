@@ -58,6 +58,7 @@ class DisplayCase : AppCompatActivity(),
         startActivity(intent)
     }
 
+    //TODO: also make this work for the back button on the toolbar
     override fun onBackPressed() {
         AlertDialog.Builder(this)
                 .setIcon(R.drawable.xevo_logo)
