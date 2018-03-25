@@ -3,25 +3,19 @@ package xevo.xevo1
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.res.ResourcesCompat.getColor
-import android.support.v7.util.SortedList
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_answer_category.view.*
-import kotlinx.android.synthetic.main.fragment_case_list.view.*
 import xevo.xevo1.models.CategoryAdapter
 import xevo.xevo1.models.CategoryData
-import android.util.TypedValue
 import com.google.firebase.database.*
-import xevo.xevo1.Util.ResourceTransformation
+import xevo.xevo1.util.ResourceTransformation
 
 /**
  * A simple [Fragment] subclass.

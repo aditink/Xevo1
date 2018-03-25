@@ -2,18 +2,16 @@ package xevo.xevo1
 
 import android.content.Intent
 import android.net.Uri
-import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.EditText
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.content_display_case.*
 import xevo.xevo1.Database.DatabaseModels.CaseDetails
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import kotlinx.android.synthetic.main.activity_display_case.*
-import xevo.xevo1.Rejection.CaseRating
+import xevo.xevo1.rejection.CaseRating
 import xevo.xevo1.enums.Status
 import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
@@ -60,13 +58,16 @@ class DisplayCase : AppCompatActivity(),
 
     //TODO: also make this work for the back button on the toolbar
     override fun onBackPressed() {
-        AlertDialog.Builder(this)
-                .setIcon(R.drawable.xevo_logo)
-                .setTitle("Exit without rating")
-                .setMessage(R.string.rate_exit_warning)
-                .setPositiveButton("Leave anyway", DialogInterface.OnClickListener { dialog, which -> finish() })
-                .setNegativeButton("Go back", null)
-                .show()
+        if (caseDetails.status == Status.ANSWERED && !isRated) {
+            AlertDialog.Builder(this)
+                    .setIcon(R.drawable.xevo_logo)
+                    .setTitle("Exit without rating")
+                    .setMessage(R.string.rate_exit_warning)
+                    .setPositiveButton("Leave anyway", DialogInterface.OnClickListener { dialog, which -> finish() })
+                    .setNegativeButton("Go back", null)
+                    .show()
+        }
+        super.onBackPressed()
     }
 
 
@@ -79,17 +80,19 @@ class DisplayCase : AppCompatActivity(),
             answer.setText(caseDetails.answer)
             question_details.setMovementMethod(ScrollingMovementMethod())
             answer.movementMethod = ScrollingMovementMethod()
+
+            if (!isRated) {
+                rateButton.visibility = View.VISIBLE
+            }
+            else {
+                rateButton.visibility = View.GONE
+            }
         }
         else {
             question_details.visibility = View.GONE
             answer.setText(caseDetails.description)
             answer.movementMethod = ScrollingMovementMethod()
-        }
 
-        if (!isRated) {
-            rateButton.visibility = View.VISIBLE
-        }
-        else {
             rateButton.visibility = View.GONE
         }
     }

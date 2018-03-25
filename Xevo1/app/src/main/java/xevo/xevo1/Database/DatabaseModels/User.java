@@ -25,6 +25,7 @@ public class User {
     private List<String> subjects;
     private String userId;
     private String device; //Firebase device ID TODO: handle multiple devices for single user
+    private float rating;
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -39,6 +40,7 @@ public class User {
         subjects = new ArrayList<String>();
         userId = "";
         device = "";
+        rating = 0;
     }
 
     /**
@@ -47,7 +49,7 @@ public class User {
      * @param email : String
      */
     public User(String username, String email, Consultant isConsultant, String firstName,
-                String lastName, List<String> subjects, String userId, String device) {
+                String lastName, List<String> subjects, String userId, String device, float rating) {
         this.username = username;
         this.email = email;
         this.isConsultant = isConsultant;
@@ -56,6 +58,7 @@ public class User {
         this.subjects = subjects;
         this.userId = userId;
         this.device = device;
+        this.rating = rating;
     }
 
     /**
@@ -111,4 +114,7 @@ public class User {
     public void setDevice(String devices) {
         this.device = device;
     }
+
+    public float getRating() { return this.rating; }
+    public void setRating(float r) { this.rating = r; }
 }

@@ -145,10 +145,10 @@
             android:label=""
             android:parentActivityName=".Main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Util.PaymentPage" />
+        <activity android:name=".util.PaymentPage" />
         <activity android:name=".Payment.PaymentPage" />
-        <activity android:name=".Util.RatingScreen" />
-        <activity android:name=".Rejection.CaseRating"></activity>
+        <activity android:name=".util.RatingScreen" />
+        <activity android:name=".rejection.CaseRating"></activity>
     </application>
 
 </manifest>
