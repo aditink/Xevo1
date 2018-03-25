@@ -146,7 +146,9 @@
             android:parentActivityName=".Main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Util.PaymentPage" />
-        <activity android:name=".Payment.PaymentPage"></activity>
+        <activity android:name=".Payment.PaymentPage" />
+        <activity android:name=".Util.RatingScreen" />
+        <activity android:name=".Rejection.CaseRating"></activity>
     </application>
 
 </manifest>

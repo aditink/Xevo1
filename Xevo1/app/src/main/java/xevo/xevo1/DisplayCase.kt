@@ -1,5 +1,6 @@
 package xevo.xevo1
 
+import android.content.Intent
 import android.net.Uri
 import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
@@ -12,7 +13,10 @@ import xevo.xevo1.Database.DatabaseModels.CaseDetails
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import kotlinx.android.synthetic.main.activity_display_case.*
+import xevo.xevo1.Rejection.CaseRating
 import xevo.xevo1.enums.Status
+import android.content.DialogInterface
+import android.support.v7.app.AlertDialog
 
 
 class DisplayCase : AppCompatActivity(),
@@ -22,6 +26,7 @@ class DisplayCase : AppCompatActivity(),
     lateinit var databaseReference : DatabaseReference
     val TAG = "DISPLAY_CASE"
     lateinit var caseDetails : CaseDetails
+    var isRated : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +44,31 @@ class DisplayCase : AppCompatActivity(),
                     R.id.question_title) as ProfileAndString
             headerFragment.setText("Oops! Something went wrong...")
         }
+
+        rateButton.setOnClickListener({view -> openRatingScreen()})
     }
 
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    private fun openRatingScreen() {
+        val intent = Intent(this, CaseRating::class.java)
+        intent.putExtra("caseId", caseId)
+        startActivity(intent)
+    }
+
+    //TODO: also make this work for the back button on the toolbar
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+                .setIcon(R.drawable.xevo_logo)
+                .setTitle("Exit without rating")
+                .setMessage(R.string.rate_exit_warning)
+                .setPositiveButton("Leave anyway", DialogInterface.OnClickListener { dialog, which -> finish() })
+                .setNegativeButton("Go back", null)
+                .show()
+    }
+
 
     fun updateUI(caseDetails : CaseDetails) {
         val headerFragment : ProfileAndString = supportFragmentManager.findFragmentById(
@@ -60,6 +85,13 @@ class DisplayCase : AppCompatActivity(),
             answer.setText(caseDetails.description)
             answer.movementMethod = ScrollingMovementMethod()
         }
+
+        if (!isRated) {
+            rateButton.visibility = View.VISIBLE
+        }
+        else {
+            rateButton.visibility = View.GONE
+        }
     }
 
     fun getCaseDetails(caseId: String) {
@@ -74,7 +106,7 @@ class DisplayCase : AppCompatActivity(),
                 var obj = dataSnapshot?.getValue(CaseDetails::class.java)
                 if (obj!= null) {
                     caseDetails = obj
-//                    question_details.setText(caseDetails.description)
+                    isRated = caseDetails.rated
                     updateUI(caseDetails)
                 }
             }
