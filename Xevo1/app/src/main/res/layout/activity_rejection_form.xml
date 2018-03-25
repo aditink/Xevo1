@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_margin_content"
+    tools:context="xevo.xevo1.Rejection.RejectionForm">
+
+    <!--<android.support.v7.widget.AppCompatTextView-->
+        <!--android:id="@+id/rejection_form_title"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--style="@style/largeTitleStyle"-->
+        <!--android:text="@string/rejection_form_title"/>-->
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/enter_explanantion_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/mediumTitleStyle"
+        android:text="@string/explain_rejection"/>
+        <!--android:layout_below="@+id/rejection_form_title"/>-->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/submit_button"
+        style="@style/buttonStyle"
+        android:text="@string/submit"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/rejection_explanation_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/submit_button"
+        android:layout_below="@+id/enter_explanantion_textview"
+        android:gravity="start"/>
+
+
+</android.widget.RelativeLayout>

@@ -95,6 +95,9 @@
     <string name="rate_case">How would you rate this answer?</string>
     <string name="rate">Rate</string>
     <string name="rate_exit_warning">Please help us improve by rating this answer. If you wish to leave anyway, we will assume you were completely satisfied. You can still come back and rate at any time.</string>
+    <string name="rejection_form_title">Reject answer</string>
+    <string name="explain_rejection">What makes this answer unsatisfactory?</string>
+    <string name="rejection_what_happens_next">Your case will be put up for review. We will get back to you soon with either a new answer or an explanation of why this answer is alright!</string>
 
     <!-- Database strings -->
     <string name="db_users">Users/</string>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xevo.xevo1.rejection.CaseRating">
+    tools:context="xevo.xevo1.Rejection.CaseRating">
 
     <TextView
         android:id="@+id/rate_case_title"

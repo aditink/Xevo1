@@ -11,7 +11,7 @@ import xevo.xevo1.Database.DatabaseModels.CaseDetails
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import kotlinx.android.synthetic.main.activity_display_case.*
-import xevo.xevo1.rejection.CaseRating
+import xevo.xevo1.Rejection.CaseRating
 import xevo.xevo1.enums.Status
 import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
@@ -114,6 +114,6 @@ class DisplayCase : AppCompatActivity(),
                 }
             }
         }
-        databaseReference.addListenerForSingleValueEvent(valueEventListener)
+        databaseReference.addValueEventListener(valueEventListener)
     }
 }
