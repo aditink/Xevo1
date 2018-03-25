@@ -50,12 +50,11 @@ class CaseRating : AppCompatActivity() {
             val intent = Intent(this, RejectionForm::class.java)
             intent.putExtra("caseId", caseId)
             startActivity(intent)
-            finish()
-
         }
-        else
+        else {
             //TODO: Add a thank you for rating! screen
-            finish()
+        }
+        finish()
     }
 
     fun updateCase_float(value : Float, ref : DatabaseReference, caseId : String, field : String) {
