@@ -138,7 +138,7 @@ public class CaseDetails {
         return caseId;
     }
 
-    public Boolean getRated() {
+    public Boolean getIsRated() {
         return isRated;
     }
 
@@ -190,7 +190,7 @@ public class CaseDetails {
         this.answer = answer;
     }
 
-    public void setRated(Boolean rated) {
+    public void setIsRated(Boolean rated) {
         isRated = rated;
     }
 

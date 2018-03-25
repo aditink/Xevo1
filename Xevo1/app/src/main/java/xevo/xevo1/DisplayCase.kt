@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_display_case.*
 import xevo.xevo1.Rejection.CaseRating
 import xevo.xevo1.enums.Status
 import android.content.DialogInterface
+import android.nfc.Tag
 import android.support.v7.app.AlertDialog
 
 
@@ -75,6 +76,8 @@ class DisplayCase : AppCompatActivity(),
                 R.id.question_title) as ProfileAndString
         headerFragment.setText(caseDetails.title)
         question_details.setText(caseDetails.description)
+        Log.d(TAG, caseDetails.isRated.toString())
+        Log.d(TAG, isRated.toString())
         if (caseDetails.status == Status.ANSWERED) {
             answer.setText(caseDetails.answer)
             question_details.setMovementMethod(ScrollingMovementMethod())
@@ -106,7 +109,7 @@ class DisplayCase : AppCompatActivity(),
                 var obj = dataSnapshot?.getValue(CaseDetails::class.java)
                 if (obj!= null) {
                     caseDetails = obj
-                    isRated = caseDetails.rated
+                    isRated = caseDetails.isRated
                     updateUI(caseDetails)
                 }
             }
