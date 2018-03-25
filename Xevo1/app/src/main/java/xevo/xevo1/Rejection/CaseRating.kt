@@ -47,9 +47,9 @@ class CaseRating : AppCompatActivity() {
     }
 
     fun updateCase_float(value : Float, ref : DatabaseReference, caseId : String, field : String) {
-        ref.child(R.string.db_cases.toString()).child(caseId).child(field).setValue(value)
+        ref.child(this.getString(R.string.db_cases)).child(caseId).child(field).setValue(value)
     }
     fun updateCase_bool(value : Boolean, ref : DatabaseReference, caseId : String, field : String) {
-        ref.child(R.string.db_cases.toString()).child(caseId).child(field).setValue(value)
+        ref.child(this.getString(R.string.db_cases)).child(caseId).child(field).setValue(value)
     }
 }
