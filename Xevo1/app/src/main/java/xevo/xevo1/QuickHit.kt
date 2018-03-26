@@ -1,5 +1,6 @@
 package xevo.xevo1
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -10,6 +11,8 @@ import kotlinx.android.synthetic.main.activity_quick_hit.*
 import kotlinx.android.synthetic.main.content_quick_hit.*
 import xevo.xevo1.enums.CaseType
 import xevo.xevo1.models.CategoryData
+import android.content.DialogInterface
+import android.support.v7.app.AlertDialog
 
 /**
  * Minimal Activity for Quick Hit
@@ -33,7 +36,10 @@ class QuickHit : AskQuestionActivity() {
 
         categoryAdapter = ArrayAdapter(this, R.layout.spinner_item)
         categoryAdapter.setDropDownViewResource(R.layout.spinner_item)
-        category_spinner.adapter = categoryAdapter
+        val categoryMap = hashMapOf<String, CategoryData>()
+        autoComplete.setAdapter(categoryAdapter)
+        autoComplete.threshold = 0
+        //category_spinner.adapter = categoryAdapter
 
         when (caseType) {
             CaseType.QUICK_HIT -> {
@@ -46,28 +52,39 @@ class QuickHit : AskQuestionActivity() {
         }
 
         buttonSubmit.setOnClickListener({view : View ->
-            val selectedItem = category_spinner.selectedItem as CategoryData
-            if (selectedItem.dbString != "") {
-                createCase(whatsupEditText.text.toString(), shortDescEditText.text.toString(), database,
+            val autoCompleteText = autoComplete.text.toString()
+            if (categoryMap.contains<String, CategoryData>(autoCompleteText)) {
+                val selectedItem = categoryMap[autoCompleteText]!!
+                if (selectedItem.dbString != "") {
+                    createCase(whatsupEditText.text.toString(), shortDescEditText.text.toString(), database,
                         caseType, userId, selectedItem, this)
 
-                // go to answer submitted screen. if back pressed, this shouldn't appear.
-//                val intent = Intent(this, QuestionSubmitted::class.java)
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                        or Intent.FLAG_ACTIVITY_NEW_TASK)
-//                startActivity(intent)
-//                finish()
-                openPayment(2)
+                // Go to answer submitted screen. if back pressed, this shouldn't appear.
+                val intent = Intent(this, QuestionSubmitted::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
+//                openPayment(2)
+                }
+                           } else {
+                AlertDialog.Builder(this)
+                        .setIcon(R.drawable.xevo_logo)
+                        .setTitle("Invalid Category")
+                        .setMessage("This category does not exist. Please choose a different category.")
+                        .setPositiveButton("Ok", DialogInterface.OnClickListener { dialog, which -> {} })
+                        .show()
             }
         })
 
         val dataListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot?) {
 
-                categoryAdapter.add(CategoryData("Choose Category", "", 0, false, ""))
+//                categoryAdapter.add(CategoryData("Choose Category", "", 0, false, ""))
                 dataSnapshot!!.children.map {
                     val data = it.getValue<CategoryData>(CategoryData::class.java)!!
                     data.dbString = it.key
+                    categoryMap[data.displayString] = data
                     categoryAdapter.add(data)
                 }
             }

@@ -45,7 +45,7 @@ class CaseRating : AppCompatActivity() {
     }
 
     private fun getStars() : Float {
-        return rating_bar?.rating
+        return rating_bar.rating
     }
 
     private fun submit() {
