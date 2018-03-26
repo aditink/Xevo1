@@ -18,6 +18,7 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.design.widget.CoordinatorLayout.Behavior.setTag
 import android.support.v4.app.NotificationCompat
+import xevo.xevo1.Rejection.EvaluateRejection
 
 
 class NotificationService : FirebaseMessagingService() {
@@ -46,7 +47,10 @@ class NotificationService : FirebaseMessagingService() {
 
     @TargetApi(Build.VERSION_CODES.O)
     private fun sendNotification(remoteMessage: RemoteMessage) {
-        val intent = Intent(this@NotificationService, AnswerReady::class.java)
+        var intent = Intent(this@NotificationService, AnswerReady::class.java)
+        if (remoteMessage.notification?.clickAction == "com.xevo.EvaluateRejection_TARGET") {
+            intent = Intent(this@NotificationService, EvaluateRejection::class.java)
+        }
         intent.putExtra("caseId", caseId)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,

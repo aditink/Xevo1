@@ -149,7 +149,7 @@
         <activity android:name=".Rejection.CaseRating" />
         <activity android:name=".Rejection.RejectionForm" />
         <activity android:name=".Rejection.ThankYouForRejection" />
-        <activity android:name=".Rejection.evaluate_rejection">
+        <activity android:name=".Rejection.EvaluateRejection">
         <intent-filter>
             <action android:name="com.xevo.EvaluateRejection_TARGET" />
 
