@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rejection_explanation_title"/>
     <RadioGroup
-        android:id="@+id/agree_with_rejection"
+        android:id="@+id/agree_with_rejection_group"
         android:layout_marginHorizontal="@dimen/activity_margin_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

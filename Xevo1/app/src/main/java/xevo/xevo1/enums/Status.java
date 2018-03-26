@@ -7,5 +7,6 @@ package xevo.xevo1.enums;
 public enum Status {
     UNANSWERED,
     BEING_ANSWERED,
-    ANSWERED
+    ANSWERED,
+    REJECTED
 }
