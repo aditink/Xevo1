@@ -86,7 +86,7 @@ exports.sendAnswerNotification = functions.database.ref('/Cases/{caseId}/status'
 
 
 /**
- * Triggers when a user gets a new answer and sends a notification.
+ * Triggers when a case is rated.
  *
  * Consultant changes status in `/Cases/{caseid}/{status}` to ANSWERED.
  * Client id is available at `/Cases/{caseid}/client`.
