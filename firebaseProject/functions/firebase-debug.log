@@ -1,0 +1,66 @@
+[debug] [2018-03-26T19:05:47.819Z] ----------------------------------------------------------------------
+[debug] [2018-03-26T19:05:47.821Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy --only functions --project xevo1-3358a
+[debug] [2018-03-26T19:05:47.821Z] CLI Version:   3.16.0
+[debug] [2018-03-26T19:05:47.821Z] Platform:      darwin
+[debug] [2018-03-26T19:05:47.821Z] Node Version:  v8.9.3
+[debug] [2018-03-26T19:05:47.822Z] Time:          Mon Mar 26 2018 15:05:47 GMT-0400 (EDT)
+[debug] [2018-03-26T19:05:47.822Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-03-26T19:05:47.834Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-03-26T19:05:47.834Z] > authorizing via signed-in user
+[debug] [2018-03-26T19:05:47.835Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-03-26T19:05:47.836Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/3ZvhTgCuiXz0CX-Q56so2meo5iSU5ltja7PjMeqY68A',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Mon Mar 26 2018 15:05:47 GMT-0400 (EDT)
+[debug] [2018-03-26T19:05:47.991Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-26T19:05:48.005Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/xevo1-3358a  
+  
+ Mon Mar 26 2018 15:05:48 GMT-0400 (EDT)
+[debug] [2018-03-26T19:05:48.372Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-26T19:05:48.373Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/xevo1-3358a/tokens  
+  
+ Mon Mar 26 2018 15:05:48 GMT-0400 (EDT)
+[debug] [2018-03-26T19:05:48.818Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'xevo1-3358a'...
+[info] 
+[info] i  deploying functions
+[debug] [2018-03-26T19:05:49.084Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase serve --only functions",
+    "shell": "firebase experimental:functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "~5.4.2",
+    "firebase-functions": "^0.7.1"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2018-03-26T19:05:49.087Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/xevo1-3358a?view=CONSUMER_VIEW  
+  
+ Mon Mar 26 2018 15:05:49 GMT-0400 (EDT)
+[debug] [2018-03-26T19:05:49.088Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/xevo1-3358a?view=CONSUMER_VIEW  
+  
+ Mon Mar 26 2018 15:05:49 GMT-0400 (EDT)
+[debug] [2018-03-26T19:05:49.701Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-26T19:05:49.866Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2018-03-26T19:05:49.868Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/xevo1-3358a  
+  
+ Mon Mar 26 2018 15:05:49 GMT-0400 (EDT)
+[debug] [2018-03-26T19:05:49.868Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/xevo1-3358a/apiKeys  
+  
+ Mon Mar 26 2018 15:05:49 GMT-0400 (EDT)
+[debug] [2018-03-26T19:05:50.144Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-26T19:05:50.299Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...

@@ -148,7 +148,14 @@
         <activity android:name=".Payment.PaymentPage" />
         <activity android:name=".Rejection.CaseRating" />
         <activity android:name=".Rejection.RejectionForm" />
-        <activity android:name=".Rejection.ThankYouForRejection"></activity>
+        <activity android:name=".Rejection.ThankYouForRejection" />
+        <activity android:name=".Rejection.evaluate_rejection">
+        <intent-filter>
+            <action android:name="com.xevo.EvaluateRejection_TARGET" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
     </application>
 
 </manifest>

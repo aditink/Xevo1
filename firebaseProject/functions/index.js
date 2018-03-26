@@ -86,11 +86,11 @@ exports.sendAnswerNotification = functions.database.ref('/Cases/{caseId}/status'
 
 
 /**
- * Triggers when a user gets a new answer and sends a notification.
+ * Triggers when a case is rated.
  *
- * Consultant changes status in `/Cases/{caseid}/{status}` to ANSWERED.
- * Client id is available at `/Cases/{caseid}/client`.
- * Users save their device notification tokens to `/Users/client/device/{notificationToken}`.
+ * Client changes status in `/Cases/{caseid}/{rating}`
+ * Consultant id is available at `/Cases/{caseid}/consultant`.
+ * Consultants save their device notification tokens to `/Users/consultant/device/{notificationToken}`.
  */
 exports.sendRejectionNotification = functions.database.ref('/Cases/{caseId}/rating').onUpdate(event => {
     const caseId = event.params.caseId;
@@ -118,7 +118,7 @@ exports.sendRejectionNotification = functions.database.ref('/Cases/{caseId}/rati
 				title: 'Answer rejected',
 				//TODO limit size in case of too much data
 				body: `Your answer to "` + message + `" has been rejected.`,
-				click_action: "com.xevo.AnsweReady_TARGET"
+				click_action: "com.xevo.EvaluateRejection_TARGET"
 				//TODO upload image uri in database. icon: question.photoURL if it exists, otherwise none
 			    },
 			    data: {
