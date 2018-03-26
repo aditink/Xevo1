@@ -28,6 +28,7 @@ class DisplayCase : AppCompatActivity(),
     val TAG = "DISPLAY_CASE"
     lateinit var caseDetails : CaseDetails
     var isRated : Boolean = false
+    lateinit var consultantId : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,18 +57,21 @@ class DisplayCase : AppCompatActivity(),
     private fun openRatingScreen() {
         val intent = Intent(this, CaseRating::class.java)
         intent.putExtra("caseId", caseId)
+        intent.putExtra("consultantId", consultantId)
         startActivity(intent)
     }
 
     //TODO: also make this work for the back button on the toolbar
     override fun onBackPressed() {
-        AlertDialog.Builder(this)
-                .setIcon(R.drawable.xevo_logo)
-                .setTitle("Exit without rating")
-                .setMessage(R.string.rate_exit_warning)
-                .setPositiveButton("Leave anyway", DialogInterface.OnClickListener { dialog, which -> finish() })
-                .setNegativeButton("Go back", null)
-                .show()
+        if (!isRated) {
+            AlertDialog.Builder(this)
+                    .setIcon(R.drawable.xevo_logo)
+                    .setTitle("Exit without rating")
+                    .setMessage(R.string.rate_exit_warning)
+                    .setPositiveButton("Leave anyway", DialogInterface.OnClickListener { dialog, which -> finish() })
+                    .setNegativeButton("Go back", null)
+                    .show()
+        }
     }
 
 
@@ -110,6 +114,7 @@ class DisplayCase : AppCompatActivity(),
                 if (obj!= null) {
                     caseDetails = obj
                     isRated = caseDetails.isRated
+                    consultantId = caseDetails.consultant
                     updateUI(caseDetails)
                 }
             }
