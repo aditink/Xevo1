@@ -48,8 +48,10 @@ class NotificationService : FirebaseMessagingService() {
     @TargetApi(Build.VERSION_CODES.O)
     private fun sendNotification(remoteMessage: RemoteMessage) {
         var intent = Intent(this@NotificationService, AnswerReady::class.java)
+        var title = "Recommendation is ready!"
         if (remoteMessage.notification?.clickAction == "com.xevo.EvaluateRejection_TARGET") {
             intent = Intent(this@NotificationService, EvaluateRejection::class.java)
+            title = "Answer rejected"
         }
         intent.putExtra("caseId", caseId)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -72,7 +74,7 @@ class NotificationService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(followersChannel)
 
             val notificationBuilder = NotificationCompat.Builder(this, FOLLOWER_CHANNEL)
-                    .setContentTitle("Recommendation is ready!")
+                    .setContentTitle(title)
                     .setContentText(remoteMessage.notification?.body)
                     .setAutoCancel(true)
                     .setSmallIcon(R.drawable.xevo_logo)
@@ -83,7 +85,7 @@ class NotificationService : FirebaseMessagingService() {
         }
         else {
             val notificationBuilder = NotificationCompat.Builder(this)
-                    .setContentTitle("Recommendation is ready!")
+                    .setContentTitle(title)
                     .setContentText(remoteMessage.notification?.body)
                     .setAutoCancel(true)
                     .setSmallIcon(R.drawable.xevo_logo)

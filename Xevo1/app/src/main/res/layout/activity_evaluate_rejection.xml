@@ -47,7 +47,7 @@
         android:layout_height="match_parent"
         android:gravity="start"
         android:layout_above="@+id/submit_button"
-        android:layout_below="@+id/agree_with_rejection"/>
+        android:layout_below="@+id/agree_with_rejection_group"/>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/submit_button"

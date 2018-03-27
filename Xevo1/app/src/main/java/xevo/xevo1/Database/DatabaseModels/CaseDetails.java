@@ -47,6 +47,7 @@ public class CaseDetails {
     private String rejectionExplanation;
     private String moderatorReaction;
     private String originalConsultantReaction;
+    private boolean wasRejected;
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -83,6 +84,7 @@ public class CaseDetails {
         this.isRated = false;
         this.rating = 0.0F;
         this.rejectionExplanation = "";
+        wasRejected = false;
     }
 
     public CaseDetails(Object timeStamp, CaseType caseType, String title,
@@ -160,6 +162,10 @@ public class CaseDetails {
         return originalConsultantReaction;
     }
 
+    public boolean getWasRejected() {
+        return wasRejected;
+    }
+
     public void setConsultant(String consultant) {
         this.consultant = consultant;
     }
@@ -218,5 +224,9 @@ public class CaseDetails {
 
     public void setOriginalConsultantReaction(String originalConsultantReaction) {
         this.originalConsultantReaction = originalConsultantReaction;
+    }
+
+    public void setWasRejected(boolean wasRejected) {
+        this.wasRejected = wasRejected;
     }
 }

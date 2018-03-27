@@ -53,6 +53,8 @@ class CaseRating : AppCompatActivity() {
         rating = getStars()
         updateCase_float(rating, ref, caseId, "rating")
         updateCase_bool(true, ref, caseId, "isRated")
+        updateCase_bool(true, ref, caseId, "wasRejected")
+        updateCase(Status.REJECTED, ref, caseId, "status")
         updateRating()
         if (rating < 3.0F) {
             val intent = Intent(this, RejectionForm::class.java)
@@ -71,6 +73,9 @@ class CaseRating : AppCompatActivity() {
     }
     fun updateCase_bool(value : Boolean, ref : DatabaseReference, caseId : String, field : String) {
         ref.child(this.getString(R.string.db_cases)).child(caseId).child(field).setValue(value)
+    }
+    fun updateCase(newValue: Any, ref: DatabaseReference, caseId: String, field: String) {
+        ref.child(this.getString(R.string.db_cases)).child(caseId).child(field).setValue(newValue)
     }
 
     /**

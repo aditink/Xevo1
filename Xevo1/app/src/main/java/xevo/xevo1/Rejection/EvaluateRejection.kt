@@ -1,5 +1,6 @@
 package xevo.xevo1.Rejection
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +8,10 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_evaluate_rejection.*
+import xevo.xevo1.AnswerQuestionActivity
 import xevo.xevo1.Database.DatabaseModels.CaseDetails
+import xevo.xevo1.Database.DatabaseModels.CaseOverview
+import xevo.xevo1.QuestionSubmitted
 import xevo.xevo1.R
 import xevo.xevo1.enums.Status
 
@@ -33,24 +37,46 @@ class EvaluateRejection : AppCompatActivity() {
     }
 
     private fun submit() {
-        updateCase(Status.REJECTED, databaseReference, caseId, "status")
-        if (userId.equals(caseDetails.consultant)) {
-            updateCase(rejection_review_comments.text, databaseReference, caseId, "originalConsultantReaction")
+        val isOriginalConsultant = userId.equals(caseDetails.consultant)
+        if (isOriginalConsultant) {
+            updateCase(rejection_review_comments.text.toString(), databaseReference, caseId, "originalConsultantReaction")
         }
         else {
-            updateCase(rejection_review_comments.text, databaseReference, caseId, "moderatorReaction")
+            updateCase(rejection_review_comments.text.toString(), databaseReference, caseId, "moderatorReaction")
         }
         var choice = agree_with_rejection_group.checkedRadioButtonId
         if (choice == -1) {
             //TODO : warning to select option
         }
         else {
-            
+            Log.d(TAG, choice.toString())
+            if (choice == R.id.rejection_agree) {
+                val intent = Intent(this, AnswerQuestionActivity::class.java)
+                intent.putExtra("caseId", caseId)
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                        or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
+            }
+            else {
+                if (isOriginalConsultant) {
+                    updateSubject(CaseOverview(caseDetails), databaseReference)
+                }
+                else {
+                    //Notify user that their rejection was not deemed acceptable.
+                    updateCase(Status.ANSWERED, databaseReference, caseId, "status")
+                    finish()
+                }
+            }
         }
     }
 
     fun updateCase(newValue: Any, ref: DatabaseReference, caseId: String, field: String) {
         ref.child(this.getString(R.string.db_cases)).child(caseId).child(field).setValue(newValue)
+    }
+
+    fun updateSubject(caseOverview : CaseOverview, ref: DatabaseReference) {
+        ref.child(this.getString(R.string.db_cases_by_subject)).child(caseDetails.subject).child(caseDetails.caseId).setValue(caseOverview)
     }
 
     fun getCaseDetails(caseId: String) {
