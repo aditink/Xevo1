@@ -8,6 +8,7 @@ import xevo.xevo1.Database.DatabaseModels.CaseDetails
 import xevo.xevo1.Database.DatabaseModels.CaseOverview
 import xevo.xevo1.Database.DatabaseModels.User
 import xevo.xevo1.R
+import xevo.xevo1.Util.XevoActivity
 import xevo.xevo1.enums.CaseType
 import xevo.xevo1.enums.Status
 import xevo.xevo1.models.CategoryData
@@ -16,7 +17,7 @@ import java.util.HashMap
 /**
  * Created by aditi on 4/1/18.
  */
-abstract class DatabaseInteractor : AppCompatActivity() {
+abstract class DatabaseInteractor : XevoActivity() {
 
     abstract val TAG : String
 
