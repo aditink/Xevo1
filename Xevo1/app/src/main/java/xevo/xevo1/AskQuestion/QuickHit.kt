@@ -1,4 +1,4 @@
-package xevo.xevo1
+package xevo.xevo1.AskQuestion
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +13,8 @@ import xevo.xevo1.enums.CaseType
 import xevo.xevo1.models.CategoryData
 import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
+import xevo.xevo1.QuestionSubmitted
+import xevo.xevo1.R
 
 /**
  * Minimal Activity for Quick Hit

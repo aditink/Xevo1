@@ -1,4 +1,4 @@
-package xevo.xevo1
+package xevo.xevo1.AskQuestion
 
 import android.os.Bundle
 import android.widget.EditText
@@ -10,11 +10,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import xevo.xevo1.enums.CaseType
 import xevo.xevo1.enums.XevoSubject
-import android.content.Intent
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import xevo.xevo1.R
 
 
 /**

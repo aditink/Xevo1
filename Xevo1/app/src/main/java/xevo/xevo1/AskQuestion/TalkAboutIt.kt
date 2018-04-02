@@ -1,8 +1,6 @@
-package xevo.xevo1
+package xevo.xevo1.AskQuestion
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -13,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 import kotlinx.android.synthetic.main.activity_talk_about_it.*
 import kotlinx.android.synthetic.main.content_talk_about_it.*
+import xevo.xevo1.R
 import xevo.xevo1.enums.CaseType
 import xevo.xevo1.enums.XevoSubject
 

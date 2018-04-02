@@ -1,4 +1,4 @@
-package xevo.xevo1
+package xevo.xevo1.AskQuestion
 
 import android.content.Context
 import android.content.Intent
@@ -11,6 +11,7 @@ import xevo.xevo1.enums.CaseType
 import xevo.xevo1.enums.Status
 import java.util.HashMap
 import xevo.xevo1.Payment.PaymentPage
+import xevo.xevo1.R
 import xevo.xevo1.models.CategoryData
 
 

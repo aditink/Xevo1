@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_choose_question.view.*
+import xevo.xevo1.AskQuestion.QuickHit
 import xevo.xevo1.enums.CaseType
 
 

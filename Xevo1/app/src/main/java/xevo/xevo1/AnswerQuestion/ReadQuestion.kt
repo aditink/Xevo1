@@ -1,4 +1,4 @@
-package xevo.xevo1
+package xevo.xevo1.AnswerQuestion
 
 import android.content.Intent
 import android.net.Uri
@@ -12,15 +12,17 @@ import android.widget.Button
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_read_question.*
 import kotlinx.android.synthetic.main.content_read_question.*
-import xevo.xevo1.Database.DatabaseModels.CaseDetails
 import xevo.xevo1.enums.Status
 import java.util.HashMap
 import android.support.v4.app.NavUtils
+import xevo.xevo1.AnswerQuestionActivity
 import xevo.xevo1.Database.DatabaseModels.CaseOverview
+import xevo.xevo1.ProfileAndString
+import xevo.xevo1.R
 
 
 class ReadQuestion : AppCompatActivity(),
-    ProfileAndString.OnFragmentInteractionListener {
+        ProfileAndString.OnFragmentInteractionListener {
 
     val TAG : String = "Read Question"
 //    var caseId : String? = null

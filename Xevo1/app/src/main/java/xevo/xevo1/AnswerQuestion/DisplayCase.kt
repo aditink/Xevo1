@@ -1,12 +1,10 @@
-package xevo.xevo1
+package xevo.xevo1.AnswerQuestion
 
 import android.content.Intent
 import android.net.Uri
-import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.EditText
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.content_display_case.*
 import xevo.xevo1.Database.DatabaseModels.CaseDetails
@@ -16,12 +14,13 @@ import kotlinx.android.synthetic.main.activity_display_case.*
 import xevo.xevo1.Rejection.CaseRating
 import xevo.xevo1.enums.Status
 import android.content.DialogInterface
-import android.nfc.Tag
 import android.support.v7.app.AlertDialog
+import xevo.xevo1.ProfileAndString
+import xevo.xevo1.R
 
 
 class DisplayCase : AppCompatActivity(),
-    ProfileAndString.OnFragmentInteractionListener {
+        ProfileAndString.OnFragmentInteractionListener {
 
     var caseId : String? = null;
     lateinit var databaseReference : DatabaseReference

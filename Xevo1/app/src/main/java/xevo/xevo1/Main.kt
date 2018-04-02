@@ -1,6 +1,5 @@
 package xevo.xevo1
 
-import android.content.ContentResolver
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -9,33 +8,23 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.nav_header.*
 import android.content.Intent
-import android.net.Uri
-import android.support.v4.view.ViewCompat
 import android.util.Log
-import android.view.View
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header.view.*
 import xevo.xevo1.Util.ResourceTransformation
 import java.util.*
-import android.R.id.edit
 import android.app.Activity
-import android.support.v4.app.ActivityCompat.invalidateOptionsMenu
-import android.support.v4.app.ActivityCompat.startActivityForResult
-import android.support.v4.content.ContextCompat.startActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
-import xevo.xevo1.R.id.*
+import xevo.xevo1.AnswerQuestion.DisplayCase
 import xevo.xevo1.enums.Consultant
 
 /**

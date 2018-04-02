@@ -1,20 +1,12 @@
 package xevo.xevo1
 
-import android.annotation.TargetApi
-import android.content.Context
-import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.os.PersistableBundle
-import android.util.AttributeSet
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_question_list.*
 import xevo.xevo1.AnswerCategoryFragment.Companion.CATEGORY_DATA
+import xevo.xevo1.AnswerQuestion.ReadQuestion
 import xevo.xevo1.models.CategoryData
 
 class QuestionListActivity : AppCompatActivity(),

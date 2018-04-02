@@ -1,23 +1,20 @@
-package xevo.xevo1
+package xevo.xevo1.Services
 
 import android.annotation.TargetApi
 import android.app.NotificationChannel
-import android.app.Service
 import android.content.Intent
-import android.os.IBinder
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import android.content.Context.NOTIFICATION_SERVICE
 import android.app.NotificationManager
 import android.media.RingtoneManager
 import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.support.annotation.RequiresApi
-import android.support.design.widget.CoordinatorLayout.Behavior.setTag
 import android.support.v4.app.NotificationCompat
+import xevo.xevo1.AnswerReady
+import xevo.xevo1.R
 import xevo.xevo1.Rejection.EvaluateRejection
 
 

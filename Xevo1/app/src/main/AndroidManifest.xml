@@ -33,17 +33,17 @@
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".QuickHit"
+            android:name=".AskQuestion.QuickHit"
             android:label=""
             android:parentActivityName=".Main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ProfessionalOpinion"
+            android:name=".AskQuestion.ProfessionalOpinion"
             android:label=""
             android:parentActivityName=".Main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".TalkAboutIt"
+            android:name=".AskQuestion.TalkAboutIt"
             android:label=""
             android:parentActivityName=".Main"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -73,7 +73,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ReadQuestion"
+            android:name=".AnswerQuestion.ReadQuestion"
             android:label=""
             android:parentActivityName=".QuestionListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -97,14 +97,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <service
-            android:name=".NotificationService"
+            android:name=".Services.NotificationService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".FirebaseDeviceIdService">
+        <service android:name=".Services.FirebaseDeviceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -135,7 +135,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DisplayCase"
+            android:name=".AnswerQuestion.DisplayCase"
             android:label=""
             android:parentActivityName=".Main"
             android:theme="@style/AppTheme.NoActionBar" />
