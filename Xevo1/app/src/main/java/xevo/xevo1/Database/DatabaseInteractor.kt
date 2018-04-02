@@ -1,4 +1,4 @@
-package xevo.xevo1.Util
+package xevo.xevo1.Database
 
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
@@ -22,6 +22,8 @@ abstract class DatabaseInteractor : AppCompatActivity() {
 
     //consultant from getConsultantData stored here
     var consultant : User? = null
+    //caseDetails from getCaseDetails stored here
+    var caseDetails : CaseDetails? = null
 
     //Uploading functions
 
@@ -124,7 +126,7 @@ abstract class DatabaseInteractor : AppCompatActivity() {
     //Getting data
 
     /**
-     * get consultant by consultant id
+     * Get consultant by consultant id
      */
     fun getConsultantData(ref : DatabaseReference, consultantId: String) {
         val consultant_ref = getConsultantRef(ref, consultantId)
@@ -141,5 +143,26 @@ abstract class DatabaseInteractor : AppCompatActivity() {
             }
         }
         consultant_ref.addListenerForSingleValueEvent(valueEventListener)
+    }
+
+    /**
+     * Get caseDetails by case id.
+     */
+    fun getCaseDetails(ref : DatabaseReference, caseId: String) {
+        val databaseReference = FirebaseDatabase.getInstance().getReference(
+                    getString(R.string.db_cases) + caseId)
+            var valueEventListener : ValueEventListener = object : ValueEventListener {
+                override fun onCancelled(databaseError: DatabaseError?) {
+                    Log.w(TAG, "loadPost:onCancelled", databaseError?.toException())
+                }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot?) {
+                    var obj = dataSnapshot?.getValue(CaseDetails::class.java)
+                    if (obj!= null) {
+                        caseDetails = obj
+                    }
+                }
+            }
+        databaseReference.addValueEventListener(valueEventListener)
     }
 }

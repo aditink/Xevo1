@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.content_read_question.*
 import xevo.xevo1.enums.Status
 import java.util.HashMap
 import android.support.v4.app.NavUtils
-import xevo.xevo1.AnswerQuestionActivity
 import xevo.xevo1.Database.DatabaseModels.CaseOverview
 import xevo.xevo1.ProfileAndString
 import xevo.xevo1.R

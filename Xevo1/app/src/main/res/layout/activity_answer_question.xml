@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBeige"
-    tools:context="xevo.xevo1.AnswerQuestionActivity">
+    tools:context="xevo.xevo1.AnswerQuestion.AnswerQuestionActivity">
 
     <TextView
         android:id="@+id/clock_text_view"

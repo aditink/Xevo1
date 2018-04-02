@@ -4,14 +4,12 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_evaluate_rejection.*
-import xevo.xevo1.AnswerQuestionActivity
+import xevo.xevo1.AnswerQuestion.AnswerQuestionActivity
 import xevo.xevo1.Database.DatabaseModels.CaseDetails
 import xevo.xevo1.Database.DatabaseModels.CaseOverview
-import xevo.xevo1.QuestionSubmitted
 import xevo.xevo1.R
 import xevo.xevo1.enums.Status
 

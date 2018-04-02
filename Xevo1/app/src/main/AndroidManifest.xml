@@ -78,7 +78,7 @@
             android:parentActivityName=".QuestionListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AnswerQuestionActivity"
+            android:name=".AnswerQuestion.AnswerQuestionActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".QuestionListActivity"
@@ -135,7 +135,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AnswerQuestion.DisplayCase"
+            android:name=".DisplayCase"
             android:label=""
             android:parentActivityName=".Main"
             android:theme="@style/AppTheme.NoActionBar" />

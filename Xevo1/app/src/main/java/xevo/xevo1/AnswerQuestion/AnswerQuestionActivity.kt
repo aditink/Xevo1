@@ -1,9 +1,8 @@
-package xevo.xevo1
+package xevo.xevo1.AnswerQuestion
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.databinding.adapters.TextViewBindingAdapter.setText
 import android.os.CountDownTimer
 import android.support.design.widget.TextInputEditText
 import android.util.Log
@@ -14,6 +13,8 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_answer_question.*
 import xevo.xevo1.Database.DatabaseModels.CaseDetails
 import xevo.xevo1.Database.DatabaseModels.CaseOverview
+import xevo.xevo1.Main
+import xevo.xevo1.R
 import xevo.xevo1.enums.Status
 import java.util.HashMap
 

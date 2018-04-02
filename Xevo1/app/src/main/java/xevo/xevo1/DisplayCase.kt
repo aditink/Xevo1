@@ -1,4 +1,4 @@
-package xevo.xevo1.AnswerQuestion
+package xevo.xevo1
 
 import android.content.Intent
 import android.net.Uri
@@ -15,8 +15,6 @@ import xevo.xevo1.Rejection.CaseRating
 import xevo.xevo1.enums.Status
 import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
-import xevo.xevo1.ProfileAndString
-import xevo.xevo1.R
 
 
 class DisplayCase : AppCompatActivity(),
@@ -75,28 +73,29 @@ class DisplayCase : AppCompatActivity(),
 
 
     fun updateUI(caseDetails : CaseDetails) {
-        val headerFragment : ProfileAndString = supportFragmentManager.findFragmentById(
-                R.id.question_title) as ProfileAndString
-        headerFragment.setText(caseDetails.title)
-        question_details.setText(caseDetails.description)
-        Log.d(TAG, caseDetails.isRated.toString())
-        Log.d(TAG, isRated.toString())
-        if (caseDetails.status == Status.ANSWERED) {
-            answer.setText(caseDetails.answer)
-            question_details.setMovementMethod(ScrollingMovementMethod())
-            answer.movementMethod = ScrollingMovementMethod()
-        }
-        else {
-            question_details.visibility = View.GONE
-            answer.setText(caseDetails.description)
-            answer.movementMethod = ScrollingMovementMethod()
-        }
+        //only update if fragment screen is current screen
+        if (supportFragmentManager.findFragmentById(R.id.question_title) != null) {
+            val headerFragment: ProfileAndString = supportFragmentManager.findFragmentById(
+                    R.id.question_title) as ProfileAndString
+            headerFragment.setText(caseDetails.title)
+            question_details.setText(caseDetails.description)
+            Log.d(TAG, caseDetails.isRated.toString())
+            Log.d(TAG, isRated.toString())
+            if (caseDetails.status == Status.ANSWERED) {
+                answer.setText(caseDetails.answer)
+                question_details.setMovementMethod(ScrollingMovementMethod())
+                answer.movementMethod = ScrollingMovementMethod()
+            } else {
+                question_details.visibility = View.GONE
+                answer.setText(caseDetails.description)
+                answer.movementMethod = ScrollingMovementMethod()
+            }
 
-        if (!isRated) {
-            rateButton.visibility = View.VISIBLE
-        }
-        else {
-            rateButton.visibility = View.GONE
+            if (!isRated) {
+                rateButton.visibility = View.VISIBLE
+            } else {
+                rateButton.visibility = View.GONE
+            }
         }
     }
 
