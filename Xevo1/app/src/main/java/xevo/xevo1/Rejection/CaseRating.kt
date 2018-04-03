@@ -62,11 +62,6 @@ class CaseRating : DatabaseInteractor() {
                             Extra("caseId", caseId), Extra("consultantId", consultantId)
                     ))
                 }
-//                val intent = Intent(this, RejectionForm::class.java)
-//                intent.putExtra("caseId", caseId)
-//                intent.putExtra("consultantId", consultantId)
-//                startActivity(intent)
-//                updateCase_bool(true, ref, caseId, "wasRejected")
             }
         }
         else {

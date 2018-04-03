@@ -27,7 +27,6 @@ class AnswerQuestionActivity : DatabaseInteractor() {
     lateinit var caseId : String
     lateinit var answerEditText : TextInputEditText
     val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference()
-//    var caseDetails : CaseDetails? = null
 
     override val TAG = "AnswerQuestionActivity"
     val userId = FirebaseAuth.getInstance().currentUser!!.uid
