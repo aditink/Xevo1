@@ -150,12 +150,14 @@
         <activity android:name=".Rejection.RejectionForm" />
         <activity android:name=".Rejection.ThankYouForRejection" />
         <activity android:name=".Rejection.EvaluateRejection">
-        <intent-filter>
-            <action android:name="com.xevo.EvaluateRejection_TARGET" />
+            <intent-filter>
+                <action android:name="com.xevo.EvaluateRejection_TARGET" />
 
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+        <activity android:name=".Rejection.Apology" />
+        <activity android:name=".Rejection.ThankYouForRating"></activity>
     </application>
 
 </manifest>

@@ -75,6 +75,14 @@ abstract class DatabaseInteractor : XevoActivity() {
     }
 
     /**
+     * Add case to unanswered cases under CasesBySubject table
+     */
+    fun addCaseToSubject(caseDetails: CaseDetails, ref : DatabaseReference) {
+        ref.child(getString(R.string.db_cases_by_subject)).child(caseDetails.subject).
+                child(caseDetails.caseId).setValue(CaseOverview(caseDetails))
+    }
+
+    /**
      * Update float field in case caseId to value. ref is root of DB.
      */
     fun updateCase_float(value : Float, ref : DatabaseReference, caseId : String, field : String) {

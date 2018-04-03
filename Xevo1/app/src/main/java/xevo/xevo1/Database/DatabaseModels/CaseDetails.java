@@ -49,6 +49,7 @@ public class CaseDetails {
     private String moderatorReaction;
     private String originalConsultantReaction;
     private boolean wasRejected;
+    private float oldRating;
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -94,7 +95,7 @@ public class CaseDetails {
                        Status status, String subject, String answer,
                        String caseId, boolean isRated, float rating,
                        String rejectionExplanation, String oldAnswer,
-                       boolean wasRejected) {
+                       boolean wasRejected, float oldRating) {
         this.timeStamp = timeStamp;
         this.caseType = caseType;
         this.title = title;
@@ -110,6 +111,7 @@ public class CaseDetails {
         this.rejectionExplanation = rejectionExplanation;
         this.oldAnswer = oldAnswer;
         this.wasRejected = wasRejected;
+        this.oldRating = oldRating;
     }
 
     public CaseDetails(Object timeStamp, CaseType caseType, String title,
@@ -191,7 +193,7 @@ public class CaseDetails {
         return oldAnswer;
     }
 
-    public boolean wasRejected() {
+    public boolean getWasRejected() {
         return wasRejected;
     }
 

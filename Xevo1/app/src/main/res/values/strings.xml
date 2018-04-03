@@ -102,6 +102,8 @@
     <string name="rejection_agree">I agree that this question can be improved and will rewrite a new answer to improve it</string>
     <string name="rejection_disagree">I think this answer was good and that the rejection was unjustified</string>
     <string name="rejection_comment_hint">Enter any further comments here</string>
+    <string name="apology">We are sorry that you are dissatisfied with your answer</string>
+    <string name="thank_you_for_rating">Thanks you for rating this case</string>
 
     <!-- Database strings -->
     <string name="db_users">Users/</string>

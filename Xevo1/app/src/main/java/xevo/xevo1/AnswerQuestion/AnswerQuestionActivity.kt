@@ -61,7 +61,7 @@ class AnswerQuestionActivity : DatabaseInteractor() {
         submit_answer_button.setOnClickListener { view : View ->
             submit_clicked = true
             if (caseDetails != null) {
-                if (caseDetails?.wasRejected()!!) {
+                if (caseDetails?.wasRejected!!) {
                     uploadAnswer(caseDetails!!, userId, caseId, databaseReference,
                             answer_edit_text.text.toString(), Status.REANSWERED,
                             oldAnswer = caseDetails?.answer!!)
