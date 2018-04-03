@@ -108,6 +108,14 @@ abstract class DatabaseInteractor : XevoActivity() {
     }
 
     /**
+     * Update Subject table with caseDetails
+     */
+    fun updateSubject(caseOverview : CaseOverview, ref: DatabaseReference, caseDetails: CaseDetails) {
+        ref.child(this.getString(R.string.db_cases_by_subject)).child(caseDetails.subject)
+                .child(caseDetails.caseId).setValue(caseOverview)
+    }
+
+    /**
      * Update rating of consultant consultant with additional andwer rated at rating.
      */
     fun updateRating(consultant: User, ref : DatabaseReference, rating : Float) {
@@ -161,9 +169,15 @@ abstract class DatabaseInteractor : XevoActivity() {
                     var obj = dataSnapshot?.getValue(CaseDetails::class.java)
                     if (obj!= null) {
                         caseDetails = obj
+                        updateUiWithCaseDetails()
                     }
                 }
             }
         databaseReference.addValueEventListener(valueEventListener)
     }
+
+    /**
+     * Override in child class with all updates to UI based on update in caseDetails.
+     */
+    open fun updateUiWithCaseDetails() {}
 }

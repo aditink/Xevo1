@@ -46,7 +46,7 @@ exports.sendAnswerNotification = functions.database.ref('/Cases/{caseId}/status'
     const caseId = event.params.caseId;
     const newStatus = event.data.val();
     // If it is an answer, send notification
-    if (newStatus == "ANSWERED") {
+    if (newStatus == "ANSWERED" || newStatus == "REANSWERED" || newStatus == "REJECTION_REJECTED") {
         console.log('New case answered:', caseId); 
         var getAskerIdPromise = event.data.ref.parent.child('client').once('value')
         var getQuestionTitlePromise = event.data.ref.parent.child('title').once('value')	
@@ -58,11 +58,15 @@ exports.sendAnswerNotification = functions.database.ref('/Cases/{caseId}/status'
             getDeviceTokensPromise.then(function(response) {
 		const deviceId = extractString(response);
 		console.log("deviceId : ", deviceId);
+		var body = `Your question "` + message + `" has been answered.`;
+		if (newStatus == "REJECTION_REJECTED") {
+		    body = `Your question "` + message + `" has been addressed.`;
+		}
                 const payload = {
                     notification: {
                         title: 'You have a new answer!',
 			//TODO limit size in case of too much data
-                        body: `Your question "` + message + `" has been answered.`,
+                        body: body,
 			click_action: "com.xevo.AnsweReady_TARGET"
                         //TODO upload image uri in database. icon: question.photoURL if it exists, otherwise none
                     },
@@ -80,6 +84,53 @@ exports.sendAnswerNotification = functions.database.ref('/Cases/{caseId}/status'
             });
         });
     }
+    else if (newStatus == "REJECTED") {
+	var rating_promise = event.data.ref.parent.child('rating').once('value').then(function(response) {
+	    rating = extract(response);
+	    console.log('rating : ', rating);
+	    if (rating < 3) {
+		console.log('Case rated poorly : ', caseId); 
+		var getConsultantIdPromise = event.data.ref.parent.child('consultant').once('value')	    
+		var getQuestionTitlePromise = event.data.ref.parent.child('title').once('value')	
+        
+		Promise.all([getConsultantIdPromise, getQuestionTitlePromise]).then(function(response) {	    
+		    const consultantId = extractString(response[0]);
+		    const message = extractString(response[1]);
+		    const getConsultantRatingPromise = admin.database().ref(`/Users/${consultantId}/rating`).once('value');
+		    getConsultantRatingPromise.then(function(response) {
+			const consultantRating = extract(response);
+			console.log("consultant rating : ", consultantRating.toString());
+			if (consultantRating > 4) {
+			    const getDeviceTokensPromise = admin.database().ref(`/Users/${consultantId}/device`).once('value');
+			    getDeviceTokensPromise.then(function(response) {
+				const deviceId = extractString(response);
+				console.log("deviceId : ", deviceId);
+				const payload = {
+				    notification: {
+					title: 'Answer rejected',
+					//TODO limit size in case of too much data
+					body: `Your answer to "` + message + `" has been rejected.`,
+					click_action: "com.xevo.EvaluateRejection_TARGET"
+					//TODO upload image uri in database. icon: question.photoURL if it exists, otherwise none
+				    },
+				    data: {
+					caseId: caseId
+				    }
+				};
+				return admin.messaging().sendToDevice(deviceId, payload)
+				    .then(function(response) {
+					console.log("Successfully sent message:", response);
+				    })
+				    .catch(function(error) {
+					console.log("Error sending message:", error);
+				    });
+			    });
+			}
+		    });
+		});
+	    }
+	});
+    }
     console.log("Finished for status : ", newStatus);
     return 'SUCCESS'
 });
@@ -92,51 +143,51 @@ exports.sendAnswerNotification = functions.database.ref('/Cases/{caseId}/status'
  * Consultant id is available at `/Cases/{caseid}/consultant`.
  * Consultants save their device notification tokens to `/Users/consultant/device/{notificationToken}`.
  */
-exports.sendRejectionNotification = functions.database.ref('/Cases/{caseId}/rating').onUpdate(event => {
-    const caseId = event.params.caseId;
-    const rating = event.data.val();
-    // If it is less than 3, send notification
-    if (rating < 3) {
-        console.log('Case rated poorly : ', caseId); 
-        var getConsultantIdPromise = event.data.ref.parent.child('consultant').once('value')	    
-        var getQuestionTitlePromise = event.data.ref.parent.child('title').once('value')	
+// exports.sendRejectionNotification = functions.database.ref('/Cases/{caseId}/rating').onUpdate(event => {
+//     const caseId = event.params.caseId;
+//     const rating = event.data.val();
+//     // If it is less than 3, send notification
+//     if (rating < 3) {
+//         console.log('Case rated poorly : ', caseId); 
+//         var getConsultantIdPromise = event.data.ref.parent.child('consultant').once('value')	    
+//         var getQuestionTitlePromise = event.data.ref.parent.child('title').once('value')	
         
-	Promise.all([getConsultantIdPromise, getQuestionTitlePromise]).then(function(response) {	    
-            const consultantId = extractString(response[0]);
-            const message = extractString(response[1]);
-            const getConsultantRatingPromise = admin.database().ref(`/Users/${consultantId}/rating`).once('value');
-	    getConsultantRatingPromise.then(function(response) {
-		const consultantRating = extract(response);
-		console.log("consultant rating : ", consultantRating.toString());
-		if (consultantRating > 4) {
-		    const getDeviceTokensPromise = admin.database().ref(`/Users/${consultantId}/device`).once('value');
-		    getDeviceTokensPromise.then(function(response) {
-			const deviceId = extractString(response);
-			console.log("deviceId : ", deviceId);
-			const payload = {
-			    notification: {
-				title: 'Answer rejected',
-				//TODO limit size in case of too much data
-				body: `Your answer to "` + message + `" has been rejected.`,
-				click_action: "com.xevo.EvaluateRejection_TARGET"
-				//TODO upload image uri in database. icon: question.photoURL if it exists, otherwise none
-			    },
-			    data: {
-				caseId: caseId
-			    }
-			};
-			return admin.messaging().sendToDevice(deviceId, payload)
-			    .then(function(response) {
-				console.log("Successfully sent message:", response);
-			    })
-			    .catch(function(error) {
-				console.log("Error sending message:", error);
-			    });
-		    });
-		}
-	    });
-        });
-    }
-    console.log("Finished");
-    return 'SUCCESS'
-});
+// 	Promise.all([getConsultantIdPromise, getQuestionTitlePromise]).then(function(response) {	    
+//             const consultantId = extractString(response[0]);
+//             const message = extractString(response[1]);
+//             const getConsultantRatingPromise = admin.database().ref(`/Users/${consultantId}/rating`).once('value');
+// 	    getConsultantRatingPromise.then(function(response) {
+// 		const consultantRating = extract(response);
+// 		console.log("consultant rating : ", consultantRating.toString());
+// 		if (consultantRating > 4) {
+// 		    const getDeviceTokensPromise = admin.database().ref(`/Users/${consultantId}/device`).once('value');
+// 		    getDeviceTokensPromise.then(function(response) {
+// 			const deviceId = extractString(response);
+// 			console.log("deviceId : ", deviceId);
+// 			const payload = {
+// 			    notification: {
+// 				title: 'Answer rejected',
+// 				//TODO limit size in case of too much data
+// 				body: `Your answer to "` + message + `" has been rejected.`,
+// 				click_action: "com.xevo.EvaluateRejection_TARGET"
+// 				//TODO upload image uri in database. icon: question.photoURL if it exists, otherwise none
+// 			    },
+// 			    data: {
+// 				caseId: caseId
+// 			    }
+// 			};
+// 			return admin.messaging().sendToDevice(deviceId, payload)
+// 			    .then(function(response) {
+// 				console.log("Successfully sent message:", response);
+// 			    })
+// 			    .catch(function(error) {
+// 				console.log("Error sending message:", error);
+// 			    });
+// 		    });
+// 		}
+// 	    });
+//         });
+//     }
+//     console.log("Finished");
+//     return 'SUCCESS'
+// });

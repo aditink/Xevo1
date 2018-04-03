@@ -41,6 +41,7 @@ public class CaseDetails {
     private Status status;
     private String subject;
     private String answer;
+    private String oldAnswer;
     private String caseId;
     private Boolean isRated;
     private Float rating;
@@ -84,6 +85,7 @@ public class CaseDetails {
         this.isRated = false;
         this.rating = 0.0F;
         this.rejectionExplanation = "";
+        this.oldAnswer = "";
         wasRejected = false;
     }
 
@@ -162,7 +164,11 @@ public class CaseDetails {
         return originalConsultantReaction;
     }
 
-    public boolean getWasRejected() {
+    public String getOldAnswer() {
+        return oldAnswer;
+    }
+
+    public boolean wasRejected() {
         return wasRejected;
     }
 
@@ -224,6 +230,10 @@ public class CaseDetails {
 
     public void setOriginalConsultantReaction(String originalConsultantReaction) {
         this.originalConsultantReaction = originalConsultantReaction;
+    }
+
+    public void setOldAnswer(String oldAnswer) {
+        this.oldAnswer = oldAnswer;
     }
 
     public void setWasRejected(boolean wasRejected) {

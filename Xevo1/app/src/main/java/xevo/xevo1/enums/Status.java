@@ -8,5 +8,7 @@ public enum Status {
     UNANSWERED,
     BEING_ANSWERED,
     ANSWERED,
-    REJECTED
+    REJECTED,
+    REANSWERED,
+    REJECTION_REJECTED
 }

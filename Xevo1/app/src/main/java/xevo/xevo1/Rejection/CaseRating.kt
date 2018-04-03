@@ -41,7 +41,6 @@ class CaseRating : DatabaseInteractor() {
         updateCase_float(rating, ref, caseId, "rating")
         updateCase_bool(true, ref, caseId, "isRated")
         updateCase_bool(true, ref, caseId, "wasRejected")
-        updateCase_value(Status.REJECTED, ref, caseId, "status")
         consultant?.let { updateRating(it, ref, rating) }
         if (rating < 3.0F) {
             val intent = Intent(this, RejectionForm::class.java)
