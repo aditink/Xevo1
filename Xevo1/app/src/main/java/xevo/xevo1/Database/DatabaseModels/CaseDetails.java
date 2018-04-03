@@ -91,6 +91,29 @@ public class CaseDetails {
 
     public CaseDetails(Object timeStamp, CaseType caseType, String title,
                        String description, String consultant, String client,
+                       Status status, String subject, String answer,
+                       String caseId, boolean isRated, float rating,
+                       String rejectionExplanation, String oldAnswer,
+                       boolean wasRejected) {
+        this.timeStamp = timeStamp;
+        this.caseType = caseType;
+        this.title = title;
+        this.description = description;
+        this.consultant = consultant;
+        this.client = client;
+        this.status = status;
+        this.subject = subject;
+        this.answer = answer;
+        this.caseId = caseId;
+        this.isRated = isRated;
+        this.rating = rating;
+        this.rejectionExplanation = rejectionExplanation;
+        this.oldAnswer = oldAnswer;
+        this.wasRejected = wasRejected;
+    }
+
+    public CaseDetails(Object timeStamp, CaseType caseType, String title,
+                       String description, String consultant, String client,
                        Status status, String subject, String answer, String caseId) {
         this.timeStamp = timeStamp;
         this.caseType = caseType;

@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_answer_question.*
+import xevo.xevo1.Database.DatabaseInteractor
 import xevo.xevo1.Database.DatabaseModels.CaseDetails
 import xevo.xevo1.Database.DatabaseModels.CaseOverview
 import xevo.xevo1.Main
@@ -19,15 +20,16 @@ import xevo.xevo1.enums.Status
 import java.util.HashMap
 
 
-class AnswerQuestionActivity : AppCompatActivity() {
+class AnswerQuestionActivity : DatabaseInteractor() {
 
     lateinit var countDownTimer : CountDownTimer
     lateinit var clock : TextView
     lateinit var caseId : String
     lateinit var answerEditText : TextInputEditText
-    var caseDetails : CaseDetails? = null
+    val databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference()
+//    var caseDetails : CaseDetails? = null
 
-    val TAG = "AnswerQuestionActivity"
+    override val TAG = "AnswerQuestionActivity"
     val userId = FirebaseAuth.getInstance().currentUser!!.uid
     var database : DatabaseReference = FirebaseDatabase.getInstance().getReference()
     var submit_clicked = false
@@ -40,24 +42,7 @@ class AnswerQuestionActivity : AppCompatActivity() {
         answerEditText = answer_edit_text
         clock = clock_text_view
 
-        var valueEventListener : ValueEventListener = object : ValueEventListener {
-            override fun onCancelled(databaseError: DatabaseError?) {
-                Log.w(TAG, "loadPost:onCancelled", databaseError?.toException())
-            }
-
-            override fun onDataChange(dataSnapshot: DataSnapshot?) {
-                var obj = dataSnapshot?.getValue(CaseDetails::class.java)
-                if (obj!= null) {
-                    caseDetails = obj
-                    if (submit_clicked) {
-                        uploadAnswer()
-                    }
-                }
-            }
-        }
-        var databaseReference : DatabaseReference = FirebaseDatabase.getInstance().getReference(
-                getString(R.string.db_cases) + caseId)
-        databaseReference.addListenerForSingleValueEvent(valueEventListener)
+        getCaseDetails(databaseReference, caseId)
 
         countDownTimer = object : CountDownTimer(1800000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -76,12 +61,16 @@ class AnswerQuestionActivity : AppCompatActivity() {
         submit_answer_button.setOnClickListener { view : View ->
             submit_clicked = true
             if (caseDetails != null) {
-                uploadAnswer()
-                val intent = Intent(this, Main::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-                finish()
+                if (caseDetails?.wasRejected()!!) {
+                    uploadAnswer(caseDetails!!, userId, caseId, databaseReference,
+                            answer_edit_text.text.toString(), Status.REANSWERED,
+                            oldAnswer = caseDetails?.answer!!)
+                }
+                else {
+                    uploadAnswer(caseDetails!!, userId, caseId, databaseReference,
+                            answer_edit_text.text.toString())
+                }
+                startNewActivity(Main::class.java, 2)
             }
         }
     }
@@ -94,23 +83,5 @@ class AnswerQuestionActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         cancelTimer()
-    }
-
-    /**
-     * Do all database updates necessary when question is answered
-     */
-    fun uploadAnswer() {
-        caseDetails!!.status = Status.ANSWERED
-        caseDetails!!.answer = answer_edit_text.text.toString()
-        caseDetails!!.consultant = userId
-
-        val childUpdates = HashMap<String, Object>()
-
-        childUpdates.put(getString(R.string.db_cases) + caseId, caseDetails as Object)
-        var caseOverview: CaseOverview = CaseOverview(caseDetails as CaseDetails)
-        childUpdates.put(getString(R.string.db_answers) + caseDetails!!.consultant + "/" + caseId,
-                caseOverview as Object)
-
-        database.updateChildren(childUpdates as Map<String, Any>)
     }
 }

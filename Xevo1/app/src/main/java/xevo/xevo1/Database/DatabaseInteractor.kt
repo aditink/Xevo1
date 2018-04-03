@@ -33,10 +33,12 @@ abstract class DatabaseInteractor : XevoActivity() {
      */
     fun uploadAnswer(caseDetails : CaseDetails, consultant : String, caseId : String,
                      database: DatabaseReference, answer : String,
-                     newStatus: Status = Status.ANSWERED) {
+                     newStatus: Status = Status.ANSWERED, oldAnswer : String = "") {
         caseDetails!!.status = newStatus
         caseDetails!!.answer = answer
         caseDetails!!.consultant = consultant
+        caseDetails!!.oldAnswer = oldAnswer
+        caseDetails!!.isRated = false
 
         val childUpdates = HashMap<String, Object>()
 
