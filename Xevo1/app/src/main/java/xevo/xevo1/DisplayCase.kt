@@ -81,21 +81,22 @@ class DisplayCase : AppCompatActivity(),
             question_details.setText(caseDetails.description)
             Log.d(TAG, caseDetails.isRated.toString())
             Log.d(TAG, isRated.toString())
-            if (caseDetails.status == Status.ANSWERED) {
+            if (caseDetails.status != Status.BEING_ANSWERED || caseDetails.status != Status.UNANSWERED) {
                 answer.setText(caseDetails.answer)
                 question_details.setMovementMethod(ScrollingMovementMethod())
                 answer.movementMethod = ScrollingMovementMethod()
+                if (!isRated) {
+                    rateButton.visibility = View.VISIBLE
+                } else {
+                    rateButton.visibility = View.GONE
+                }
             } else {
                 question_details.visibility = View.GONE
                 answer.setText(caseDetails.description)
                 answer.movementMethod = ScrollingMovementMethod()
-            }
-
-            if (!isRated) {
-                rateButton.visibility = View.VISIBLE
-            } else {
                 rateButton.visibility = View.GONE
             }
+
         }
     }
 

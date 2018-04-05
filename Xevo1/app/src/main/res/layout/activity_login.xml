@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/colorBeige"
-    tools:context="xevo.xevo1.LoginActivity">
+    tools:context="xevo.xevo1.Login.LoginActivity">
 
     <!-- Login progress -->
     <ProgressBar

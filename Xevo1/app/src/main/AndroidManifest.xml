@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".Login.LoginActivity"
             android:label="Xevo"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -55,7 +55,6 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -72,6 +71,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".AnswerQuestion.ReadQuestion"
             android:label=""
@@ -157,7 +157,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Rejection.Apology" />
-        <activity android:name=".Rejection.ThankYouForRating"></activity>
+        <activity android:name=".Rejection.ThankYouForRating" />
+        <activity android:name=".Rejection.RejectionDisplay"></activity>
     </application>
 
 </manifest>

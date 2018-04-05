@@ -1,4 +1,4 @@
-package xevo.xevo1
+package xevo.xevo1.Login
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -29,6 +29,9 @@ import com.facebook.login.LoginResult
 import com.google.firebase.auth.*
 
 import kotlinx.android.synthetic.main.activity_login.*
+import xevo.xevo1.Main
+import xevo.xevo1.R
+import xevo.xevo1.RegisterActivity
 import java.util.*
 
 /**
