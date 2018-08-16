@@ -3,21 +3,29 @@ package xevo.xevo1
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
+import android.databinding.DataBindingUtil.setContentView
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Button
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_admin.*
 import kotlinx.android.synthetic.main.content_admin.*
+import xevo.xevo1.Database.DatabaseInteractor
+import xevo.xevo1.R.id.adminRecycler
+import xevo.xevo1.R.id.adminToolbar
 import xevo.xevo1.models.ApplicationAdapter
 import xevo.xevo1.models.ApplicationData
 
-class AdminActivity : AppCompatActivity() {
+class AdminActivity : DatabaseInteractor() {
 
     lateinit var applicationAdapter: ApplicationAdapter
+    override val TAG = "AdminActivity"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +54,9 @@ class AdminActivity : AppCompatActivity() {
         adminRecycler.adapter = applicationAdapter
 
         database!!.child(getString(R.string.db_pending_app)).addValueEventListener(dataListener)
+
+        // add delete all data button
+        deleteAllButton.setOnClickListener( { view -> deleteAllData() });
     }
 
     val dataListener = object : ValueEventListener {

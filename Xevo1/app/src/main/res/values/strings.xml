@@ -23,6 +23,8 @@
     <string name="terms_conditions">I agree to the terms and conditions</string>
     <string name="authenticity">Authenticity agreement</string>
 
+    <!-- Admin side related strings -->
+    <string name="delete_all_string">Delete All</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

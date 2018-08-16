@@ -26,16 +26,16 @@ abstract class DatabaseInteractor : XevoActivity() {
     //caseDetails from getCaseDetails stored here
     var caseDetails : CaseDetails? = null
 
-    var tableNames : List<String> = listOf(
-            getString(R.string.db_cases_by_subject),
-            getString(R.string.db_cases),
-            getString(R.string.db_subjects),
-            getString(R.string.db_users),
-            getString(R.string.db_answers),
-            getString(R.string.db_questions),
-            getString(R.string.db_cases_by_users),
-            getString(R.string.db_pending_app)
-            )
+//    var tableNames : List<String> = listOf(
+//            getString(R.string.db_cases_by_subject),
+//            getString(R.string.db_cases),
+//            getString(R.string.db_subjects),
+//            getString(R.string.db_users),
+//            getString(R.string.db_answers),
+//            getString(R.string.db_questions),
+//            getString(R.string.db_cases_by_users),
+//            getString(R.string.db_pending_app)
+//            )
 
     //Uploading functions
 
@@ -203,7 +203,21 @@ abstract class DatabaseInteractor : XevoActivity() {
     fun deleteAllData() {
         val databaseReference = FirebaseDatabase.getInstance().getReference();
         //Overwrite with blank collections.
-        val childUpdates = HashMap<String, Object>()
+        Log.d(TAG, "deleteAll called")
+
+        var tableNames : List<String> = listOf(
+                getString(R.string.db_cases_by_subject),
+                getString(R.string.db_cases),
+                getString(R.string.db_subjects),
+                getString(R.string.db_users),
+                getString(R.string.db_answers),
+                getString(R.string.db_questions),
+                getString(R.string.db_cases_by_users),
+                getString(R.string.db_pending_app)
+        )
+
+        //TODO do in batch with
+        //val childUpdates = HashMap<String, Object>()
 
         for (table : String in  tableNames) {
             databaseReference.child(table).setValue(null);
