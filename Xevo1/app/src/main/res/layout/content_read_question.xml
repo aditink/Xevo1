@@ -52,6 +52,14 @@
         android:textAlignment="textStart" />
 
     <Button
+        android:layout_above="@+id/accept_button"
+        style="@style/buttonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/accept_button"
+        android:text="@string/rejection" />
+
+    <Button
         android:theme="@style/buttonStyle"
         android:id="@+id/accept_button"
         android:layout_width="wrap_content"

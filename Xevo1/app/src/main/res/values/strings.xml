@@ -23,6 +23,8 @@
     <string name="terms_conditions">I agree to the terms and conditions</string>
     <string name="authenticity">Authenticity agreement</string>
 
+    <!-- Admin side related strings -->
+    <string name="delete_all_string">Delete All</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -94,6 +96,7 @@
     <!-- Rejection flow strings -->
     <string name="rate_case">How would you rate this answer?</string>
     <string name="rate">Rate</string>
+    <string name="rejection">Rejection</string>
     <string name="rate_exit_warning">Please help us improve by rating this answer. If you wish to leave anyway, we will assume you were completely satisfied. You can still come back and rate at any time.</string>
     <string name="rejection_form_title">Reject answer</string>
     <string name="explain_rejection">What makes this answer unsatisfactory?</string>
@@ -104,6 +107,7 @@
     <string name="rejection_comment_hint">Enter any further comments here</string>
     <string name="apology">We are sorry that you are dissatisfied with your answer</string>
     <string name="thank_you_for_rating">Thanks you for rating this case</string>
+    <string name="rejection_reason">This answer rejected because...</string>
 
     <!-- Database strings -->
     <string name="db_users">Users/</string>
